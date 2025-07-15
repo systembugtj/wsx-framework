@@ -15,20 +15,24 @@ at validateBinaryVersion (/home/runner/work/wsx-framework/wsx-framework/node_mod
 - pnpm couldn't resolve the version conflict in CI environment
 
 ### Solution Applied
-1. **Updated examples package** esbuild version to `^0.25.0`
+1. **Updated examples package** esbuild version to `0.25.6`
 2. **Added esbuild as root dependency** for version consistency across monorepo
-3. **Updated vite-plugin peer dependency** to require `esbuild >= 0.25.0`
-4. **Cleaned and reinstalled** to resolve version conflicts
+3. **Added pnpm overrides** to force all esbuild to same version
+4. **Made esbuild external** in vite-plugin build to prevent bundling
+5. **Added esbuild as peer dependency** in vite-plugin
+6. **Regenerated lockfile** to remove old esbuild versions
 
 ### Files Changed
-- `packages/examples/package.json` - Updated esbuild to `^0.25.0`
-- `package.json` - Added `esbuild: ^0.25.0` as dev dependency
-- `packages/vite-plugin/package.json` - Updated peer dependency
+- `packages/examples/package.json` - Updated esbuild to `0.25.6`
+- `package.json` - Added `esbuild: 0.25.6` as dev dependency + pnpm overrides
+- `packages/vite-plugin/package.json` - Made esbuild external in build + peer dependency
+- `pnpm-lock.yaml` - Regenerated to remove conflicting versions
 
 ### Prevention
-- Root-level esbuild dependency ensures version consistency
-- All packages now use esbuild 0.25.6
-- Peer dependency updated to prevent future conflicts
+- **pnpm overrides** ensures all packages use same esbuild version
+- **External esbuild** prevents bundling issues in vite-plugin
+- **Peer dependency** documents esbuild requirement
+- All packages now use esbuild 0.25.6 consistently
 
 ## Status Check Names for GitHub Rulesets
 

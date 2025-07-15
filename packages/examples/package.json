@@ -15,13 +15,13 @@
         "@systembug/wsx-core": "workspace:*"
     },
     "devDependencies": {
-        "@systembug/wsx-vite-plugin": "workspace:*",
         "@systembug/wsx-eslint-plugin": "workspace:*",
+        "@systembug/wsx-vite-plugin": "workspace:*",
         "@typescript-eslint/eslint-plugin": "^6.0.0",
         "@typescript-eslint/parser": "^6.0.0",
         "eslint": "^8.0.0",
-        "vite": "^5.0.0",
         "typescript": "^5.0.0",
-        "esbuild": "^0.25.0"
+        "vite": "^5.0.0",
+        "esbuild": "0.25.6"
     }
 }
