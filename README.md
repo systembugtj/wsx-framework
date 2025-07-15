@@ -1,5 +1,11 @@
 # WSX Framework (@systembug)
 
+[![npm version](https://badge.fury.io/js/@systembug%2Fwsx-core.svg)](https://badge.fury.io/js/@systembug%2Fwsx-core)
+[![npm downloads](https://img.shields.io/npm/dm/@systembug/wsx-core.svg)](https://www.npmjs.com/package/@systembug/wsx-core)
+[![CI Status](https://github.com/systembugtj/wsx-framework/workflows/CI/badge.svg)](https://github.com/systembugtj/wsx-framework/actions)
+[![Coverage Status](https://codecov.io/gh/systembugtj/wsx-framework/branch/main/graph/badge.svg)](https://codecov.io/gh/systembugtj/wsx-framework)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 A modern Web Components framework with JSX syntax and TypeScript support, published under the `@systembug` organization.
 
 ## Features
@@ -16,9 +22,27 @@ A modern Web Components framework with JSX syntax and TypeScript support, publis
 ## Packages
 
 ### Published Packages
-- **@systembug/wsx-core** - Core framework with WebComponent base class, JSX factory, logger, and utilities
-- **@systembug/wsx-vite-plugin** - Vite integration for .wsx files (auto-injects JSX factory)
-- **@systembug/wsx-eslint-plugin** - ESLint rules for WSX components
+
+#### @systembug/wsx-core
+[![npm version](https://badge.fury.io/js/@systembug%2Fwsx-core.svg)](https://badge.fury.io/js/@systembug%2Fwsx-core)
+[![npm downloads](https://img.shields.io/npm/dm/@systembug/wsx-core.svg)](https://www.npmjs.com/package/@systembug/wsx-core)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/@systembug/wsx-core.svg)](https://bundlephobia.com/result?p=@systembug/wsx-core)
+
+Core framework with WebComponent base class, JSX factory, logger, and utilities
+
+#### @systembug/wsx-vite-plugin
+[![npm version](https://badge.fury.io/js/@systembug%2Fwsx-vite-plugin.svg)](https://badge.fury.io/js/@systembug%2Fwsx-vite-plugin)
+[![npm downloads](https://img.shields.io/npm/dm/@systembug/wsx-vite-plugin.svg)](https://www.npmjs.com/package/@systembug/wsx-vite-plugin)
+[![vite compatibility](https://img.shields.io/badge/vite-%3E%3D4.0.0-blueviolet.svg)](https://vitejs.dev/)
+
+Vite integration for .wsx files (auto-injects JSX factory)
+
+#### @systembug/wsx-eslint-plugin
+[![npm version](https://badge.fury.io/js/@systembug%2Fwsx-eslint-plugin.svg)](https://badge.fury.io/js/@systembug%2Fwsx-eslint-plugin)
+[![npm downloads](https://img.shields.io/npm/dm/@systembug/wsx-eslint-plugin.svg)](https://www.npmjs.com/package/@systembug/wsx-eslint-plugin)
+[![eslint compatibility](https://img.shields.io/badge/eslint-%3E%3D8.0.0-orange.svg)](https://eslint.org/)
+
+ESLint rules for WSX components
 
 ### Development Package
 - **@systembug/wsx-examples** - Interactive showcase application with example components
