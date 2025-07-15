@@ -3,76 +3,80 @@
  * Tests the plugin as a whole and its configuration
  */
 
-import { ESLint } from 'eslint';
-import wsxPlugin from '../src/index';
+import { ESLint } from "eslint";
+import wsxPlugin from "../src/index";
 
-describe('WSX ESLint Plugin Integration', () => {
-  let eslint: ESLint;
+describe("WSX ESLint Plugin Integration", () => {
+    let eslint: ESLint;
 
-  beforeEach(() => {
-    eslint = new ESLint({
-      useEslintrc: false,
-      baseConfig: {
-        parser: '@typescript-eslint/parser',
-        parserOptions: {
-          ecmaVersion: 2020,
-          sourceType: 'module',
-          ecmaFeatures: {
-            jsx: true,
-          },
-        },
-        plugins: ['wsx'],
-        rules: {
-          'wsx/render-method-required': 'error',
-          'wsx/no-react-imports': 'error',
-          'wsx/web-component-naming': 'warn',
-        },
-      },
-      plugins: {
-        wsx: wsxPlugin,
-      },
-    });
-  });
-
-  describe('Plugin Structure', () => {
-    test('exports correct plugin structure', () => {
-      expect(wsxPlugin).toHaveProperty('meta');
-      expect(wsxPlugin).toHaveProperty('rules');
-      expect(wsxPlugin).toHaveProperty('configs');
-
-      expect(wsxPlugin.meta).toEqual({
-        name: 'wsx-eslint-plugin',
-        version: '1.0.0',
-      });
+    beforeEach(() => {
+        eslint = new ESLint({
+            useEslintrc: false,
+            baseConfig: {
+                parser: "@typescript-eslint/parser",
+                parserOptions: {
+                    ecmaVersion: 2020,
+                    sourceType: "module",
+                    ecmaFeatures: {
+                        jsx: true,
+                    },
+                },
+                plugins: ["wsx"],
+                rules: {
+                    "wsx/render-method-required": "error",
+                    "wsx/no-react-imports": "error",
+                    "wsx/web-component-naming": "warn",
+                },
+            },
+            plugins: {
+                wsx: wsxPlugin,
+            },
+        });
     });
 
-    test('exports all expected rules', () => {
-      const expectedRules = ['render-method-required', 'no-react-imports', 'web-component-naming'];
+    describe("Plugin Structure", () => {
+        test("exports correct plugin structure", () => {
+            expect(wsxPlugin).toHaveProperty("meta");
+            expect(wsxPlugin).toHaveProperty("rules");
+            expect(wsxPlugin).toHaveProperty("configs");
 
-      expect(Object.keys(wsxPlugin.rules)).toEqual(expectedRules);
+            expect(wsxPlugin.meta).toEqual({
+                name: "wsx-eslint-plugin",
+                version: "1.0.0",
+            });
+        });
 
-      expectedRules.forEach((ruleName) => {
-        const rule = wsxPlugin.rules[ruleName];
-        expect(rule).toHaveProperty('meta');
-        expect(rule).toHaveProperty('create');
-        expect(typeof rule.create).toBe('function');
-      });
+        test("exports all expected rules", () => {
+            const expectedRules = [
+                "render-method-required",
+                "no-react-imports",
+                "web-component-naming",
+            ];
+
+            expect(Object.keys(wsxPlugin.rules)).toEqual(expectedRules);
+
+            expectedRules.forEach((ruleName) => {
+                const rule = wsxPlugin.rules[ruleName];
+                expect(rule).toHaveProperty("meta");
+                expect(rule).toHaveProperty("create");
+                expect(typeof rule.create).toBe("function");
+            });
+        });
+
+        test("exports recommended config", () => {
+            expect(wsxPlugin.configs).toHaveProperty("recommended");
+            const config = wsxPlugin.configs.recommended;
+
+            expect(config).toHaveProperty("rules");
+            expect(config.rules).toHaveProperty("wsx/render-method-required");
+            expect(config.rules).toHaveProperty("wsx/no-react-imports");
+            expect(config.rules).toHaveProperty("wsx/web-component-naming");
+        });
     });
 
-    test('exports recommended config', () => {
-      expect(wsxPlugin.configs).toHaveProperty('recommended');
-      const config = wsxPlugin.configs.recommended;
-
-      expect(config).toHaveProperty('rules');
-      expect(config.rules).toHaveProperty('wsx/render-method-required');
-      expect(config.rules).toHaveProperty('wsx/no-react-imports');
-      expect(config.rules).toHaveProperty('wsx/web-component-naming');
-    });
-  });
-
-  describe('Real World Code Analysis', () => {
-    test('validates correct WSX component', async () => {
-      const code = `
+    describe("Real World Code Analysis", () => {
+        test("validates correct WSX component", async () => {
+            const code = `
         import { WebComponent, autoRegister } from '@systembug/wsx-core';
 
         @autoRegister({ tagName: 'my-component' })
@@ -83,12 +87,12 @@ describe('WSX ESLint Plugin Integration', () => {
         }
       `;
 
-      const results = await eslint.lintText(code, { filePath: 'test.wsx' });
-      expect(results[0].messages).toHaveLength(0);
-    });
+            const results = await eslint.lintText(code, { filePath: "test.wsx" });
+            expect(results[0].messages).toHaveLength(0);
+        });
 
-    test('catches missing render method', async () => {
-      const code = `
+        test("catches missing render method", async () => {
+            const code = `
         import { WebComponent, autoRegister } from '@systembug/wsx-core';
 
         @autoRegister({ tagName: 'broken-component' })
@@ -99,14 +103,14 @@ describe('WSX ESLint Plugin Integration', () => {
         }
       `;
 
-      const results = await eslint.lintText(code, { filePath: 'test.wsx' });
-      expect(results[0].messages).toHaveLength(1);
-      expect(results[0].messages[0].ruleId).toBe('wsx/render-method-required');
-      expect(results[0].messages[0].severity).toBe(2); // error
-    });
+            const results = await eslint.lintText(code, { filePath: "test.wsx" });
+            expect(results[0].messages).toHaveLength(1);
+            expect(results[0].messages[0].ruleId).toBe("wsx/render-method-required");
+            expect(results[0].messages[0].severity).toBe(2); // error
+        });
 
-    test('catches React imports', async () => {
-      const code = `
+        test("catches React imports", async () => {
+            const code = `
         import React from 'react';
         import { WebComponent, autoRegister } from '@systembug/wsx-core';
 
@@ -118,14 +122,14 @@ describe('WSX ESLint Plugin Integration', () => {
         }
       `;
 
-      const results = await eslint.lintText(code, { filePath: 'test.wsx' });
-      expect(results[0].messages).toHaveLength(1);
-      expect(results[0].messages[0].ruleId).toBe('wsx/no-react-imports');
-      expect(results[0].messages[0].severity).toBe(2); // error
-    });
+            const results = await eslint.lintText(code, { filePath: "test.wsx" });
+            expect(results[0].messages).toHaveLength(1);
+            expect(results[0].messages[0].ruleId).toBe("wsx/no-react-imports");
+            expect(results[0].messages[0].severity).toBe(2); // error
+        });
 
-    test('catches invalid tag names', async () => {
-      const code = `
+        test("catches invalid tag names", async () => {
+            const code = `
         import { WebComponent, autoRegister } from '@systembug/wsx-core';
 
         @autoRegister({ tagName: 'button' })
@@ -136,14 +140,14 @@ describe('WSX ESLint Plugin Integration', () => {
         }
       `;
 
-      const results = await eslint.lintText(code, { filePath: 'test.wsx' });
-      expect(results[0].messages).toHaveLength(1);
-      expect(results[0].messages[0].ruleId).toBe('wsx/web-component-naming');
-      expect(results[0].messages[0].severity).toBe(1); // warning
-    });
+            const results = await eslint.lintText(code, { filePath: "test.wsx" });
+            expect(results[0].messages).toHaveLength(1);
+            expect(results[0].messages[0].ruleId).toBe("wsx/web-component-naming");
+            expect(results[0].messages[0].severity).toBe(1); // warning
+        });
 
-    test('handles complex real-world component', async () => {
-      const code = `
+        test("handles complex real-world component", async () => {
+            const code = `
         import { WebComponent, autoRegister, createLogger } from '@systembug/wsx-core';
 
         const logger = createLogger('ComplexComponent');
@@ -211,26 +215,26 @@ describe('WSX ESLint Plugin Integration', () => {
         }
       `;
 
-      const results = await eslint.lintText(code, { filePath: 'complex.wsx' });
-      expect(results[0].messages).toHaveLength(0);
+            const results = await eslint.lintText(code, { filePath: "complex.wsx" });
+            expect(results[0].messages).toHaveLength(0);
+        });
     });
-  });
 
-  describe('File Type Handling', () => {
-    test('ignores non-WSX files', async () => {
-      const code = `
+    describe("File Type Handling", () => {
+        test("ignores non-WSX files", async () => {
+            const code = `
         // This is a regular TypeScript file
         export class RegularClass {
           // No render method needed
         }
       `;
 
-      const results = await eslint.lintText(code, { filePath: 'regular.ts' });
-      expect(results[0].messages).toHaveLength(0);
-    });
+            const results = await eslint.lintText(code, { filePath: "regular.ts" });
+            expect(results[0].messages).toHaveLength(0);
+        });
 
-    test('handles .wsx files specifically', async () => {
-      const code = `
+        test("handles .wsx files specifically", async () => {
+            const code = `
         import { WebComponent } from '@systembug/wsx-core';
 
         export class WSXComponent extends WebComponent {
@@ -238,9 +242,9 @@ describe('WSX ESLint Plugin Integration', () => {
         }
       `;
 
-      const results = await eslint.lintText(code, { filePath: 'component.wsx' });
-      expect(results[0].messages).toHaveLength(1);
-      expect(results[0].messages[0].ruleId).toBe('wsx/render-method-required');
+            const results = await eslint.lintText(code, { filePath: "component.wsx" });
+            expect(results[0].messages).toHaveLength(1);
+            expect(results[0].messages[0].ruleId).toBe("wsx/render-method-required");
+        });
     });
-  });
 });

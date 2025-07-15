@@ -9,8 +9,8 @@
  * Auto-registration options for web components
  */
 export interface AutoRegistrationOptions {
-  tagName?: string; // Custom tag name, if not provided, derives from class name
-  prefix?: string; // Prefix for tag name (e.g., "my-" -> "my-component")
+    tagName?: string; // Custom tag name, if not provided, derives from class name
+    prefix?: string; // Prefix for tag name (e.g., "my-" -> "my-component")
 }
 
 /**
@@ -36,15 +36,15 @@ export interface AutoRegistrationOptions {
  * ```
  */
 export function autoRegister(options: AutoRegistrationOptions = {}) {
-  return function <T extends CustomElementConstructor>(constructor: T): T {
-    const tagName = options.tagName || deriveTagName(constructor.name, options.prefix);
+    return function <T extends CustomElementConstructor>(constructor: T): T {
+        const tagName = options.tagName || deriveTagName(constructor.name, options.prefix);
 
-    if (!customElements.get(tagName)) {
-      customElements.define(tagName, constructor);
-    }
+        if (!customElements.get(tagName)) {
+            customElements.define(tagName, constructor);
+        }
 
-    return constructor;
-  };
+        return constructor;
+    };
 }
 
 /**
@@ -62,14 +62,14 @@ export function autoRegister(options: AutoRegistrationOptions = {}) {
  * ```
  */
 export function registerComponent<T extends CustomElementConstructor>(
-  constructor: T,
-  options: AutoRegistrationOptions = {}
+    constructor: T,
+    options: AutoRegistrationOptions = {}
 ): void {
-  const tagName = options.tagName || deriveTagName(constructor.name, options.prefix);
+    const tagName = options.tagName || deriveTagName(constructor.name, options.prefix);
 
-  if (!customElements.get(tagName)) {
-    customElements.define(tagName, constructor);
-  }
+    if (!customElements.get(tagName)) {
+        customElements.define(tagName, constructor);
+    }
 }
 
 /**
@@ -90,15 +90,15 @@ export function registerComponent<T extends CustomElementConstructor>(
  * ```
  */
 function deriveTagName(className: string, prefix?: string): string {
-  // Convert PascalCase to kebab-case
-  let kebabCase = className.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+    // Convert PascalCase to kebab-case
+    let kebabCase = className.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
 
-  // Ensure the tag name contains at least one hyphen (custom element requirement)
-  if (!kebabCase.includes('-')) {
-    kebabCase = `${kebabCase}-component`;
-  }
+    // Ensure the tag name contains at least one hyphen (custom element requirement)
+    if (!kebabCase.includes("-")) {
+        kebabCase = `${kebabCase}-component`;
+    }
 
-  return prefix ? `${prefix}${kebabCase}` : kebabCase;
+    return prefix ? `${prefix}${kebabCase}` : kebabCase;
 }
 
 /**
@@ -116,14 +116,14 @@ function deriveTagName(className: string, prefix?: string): string {
  * ```
  */
 export function registerAll(
-  components: Record<string, CustomElementConstructor>,
-  options: AutoRegistrationOptions = {}
+    components: Record<string, CustomElementConstructor>,
+    options: AutoRegistrationOptions = {}
 ): void {
-  Object.values(components).forEach((component) => {
-    if (typeof component === 'function' && component.prototype instanceof HTMLElement) {
-      registerComponent(component, options);
-    }
-  });
+    Object.values(components).forEach((component) => {
+        if (typeof component === "function" && component.prototype instanceof HTMLElement) {
+            registerComponent(component, options);
+        }
+    });
 }
 
 /**
@@ -133,7 +133,7 @@ export function registerAll(
  * @returns True if the component is registered
  */
 export function isRegistered(tagName: string): boolean {
-  return !!customElements.get(tagName);
+    return !!customElements.get(tagName);
 }
 
 /**
@@ -145,5 +145,5 @@ export function isRegistered(tagName: string): boolean {
  * @returns The generated tag name
  */
 export function getTagName(className: string, options: AutoRegistrationOptions = {}): string {
-  return options.tagName || deriveTagName(className, options.prefix);
+    return options.tagName || deriveTagName(className, options.prefix);
 }

@@ -1,1 +1,1 @@
-module.exports = 'mock-css-string';
+module.exports = "mock-css-string";

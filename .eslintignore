@@ -3,7 +3,7 @@ dist/
 build/
 coverage/
 
-# Dependencies  
+# Dependencies
 node_modules/
 .pnpm-store/
 

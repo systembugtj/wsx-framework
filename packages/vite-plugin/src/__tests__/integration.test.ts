@@ -3,68 +3,74 @@
  * Tests the plugin configuration and API integration
  */
 
-import { describe, test, expect } from '@jest/globals';
-import { vitePluginWSX } from '../vite-plugin-wsx';
+import { describe, test, expect } from "@jest/globals";
+import { vitePluginWSX } from "../vite-plugin-wsx";
 
 // Mock plugin context for testing
 interface MockPluginContext {
-  parse: () => Record<string, unknown>;
+    parse: () => Record<string, unknown>;
 }
 
-describe('WSX Vite Plugin Integration', () => {
-  describe('Plugin Configuration', () => {
-    test('creates valid Vite plugin structure', () => {
-      const plugin = vitePluginWSX();
+describe("WSX Vite Plugin Integration", () => {
+    describe("Plugin Configuration", () => {
+        test("creates valid Vite plugin structure", () => {
+            const plugin = vitePluginWSX();
 
-      expect(plugin).toBeDefined();
-      expect(plugin.name).toBe('vite-plugin-wsx');
-      expect(plugin.enforce).toBe('pre');
-      expect(typeof plugin.load).toBe('function');
-      expect(typeof plugin.transform).toBe('function');
-      expect(typeof plugin.buildStart).toBe('function');
+            expect(plugin).toBeDefined();
+            expect(plugin.name).toBe("vite-plugin-wsx");
+            expect(plugin.enforce).toBe("pre");
+            expect(typeof plugin.load).toBe("function");
+            expect(typeof plugin.transform).toBe("function");
+            expect(typeof plugin.buildStart).toBe("function");
+        });
+
+        test("accepts and uses custom options", () => {
+            const customOptions = {
+                jsxFactory: "customH",
+                jsxFragment: "CustomFragment",
+                debug: true,
+                extensions: [".custom"],
+            };
+
+            const plugin = vitePluginWSX(customOptions);
+
+            expect(plugin.name).toBe("vite-plugin-wsx");
+            expect(plugin.enforce).toBe("pre");
+        });
+
+        test("uses default options when none provided", () => {
+            const plugin = vitePluginWSX();
+
+            expect(plugin.name).toBe("vite-plugin-wsx");
+            expect(plugin.enforce).toBe("pre");
+        });
     });
 
-    test('accepts and uses custom options', () => {
-      const customOptions = {
-        jsxFactory: 'customH',
-        jsxFragment: 'CustomFragment',
-        debug: true,
-        extensions: ['.custom'],
-      };
+    describe("Plugin API Integration", () => {
+        test("load hook handles .wsx files", () => {
+            const plugin = vitePluginWSX();
 
-      const plugin = vitePluginWSX(customOptions);
+            const loadResult = plugin.load?.call(
+                { parse: () => ({}) } as MockPluginContext,
+                "test.wsx"
+            );
+            expect(loadResult).toBeNull(); // Should let Vite continue processing
+        });
 
-      expect(plugin.name).toBe('vite-plugin-wsx');
-      expect(plugin.enforce).toBe('pre');
-    });
+        test("load hook ignores non-.wsx files", () => {
+            const plugin = vitePluginWSX();
 
-    test('uses default options when none provided', () => {
-      const plugin = vitePluginWSX();
+            const loadResult = plugin.load?.call(
+                { parse: () => ({}) } as MockPluginContext,
+                "test.tsx"
+            );
+            expect(loadResult).toBeNull();
+        });
 
-      expect(plugin.name).toBe('vite-plugin-wsx');
-      expect(plugin.enforce).toBe('pre');
-    });
-  });
+        test("transform hook processes .wsx files", async () => {
+            const plugin = vitePluginWSX();
 
-  describe('Plugin API Integration', () => {
-    test('load hook handles .wsx files', () => {
-      const plugin = vitePluginWSX();
-
-      const loadResult = plugin.load?.call({ parse: () => ({}) } as MockPluginContext, 'test.wsx');
-      expect(loadResult).toBeNull(); // Should let Vite continue processing
-    });
-
-    test('load hook ignores non-.wsx files', () => {
-      const plugin = vitePluginWSX();
-
-      const loadResult = plugin.load?.call({ parse: () => ({}) } as MockPluginContext, 'test.tsx');
-      expect(loadResult).toBeNull();
-    });
-
-    test('transform hook processes .wsx files', async () => {
-      const plugin = vitePluginWSX();
-
-      const code = `
+            const code = `
         import { WebComponent, autoRegister } from '@systembug/wsx-core';
 
         @autoRegister()
@@ -75,54 +81,54 @@ describe('WSX Vite Plugin Integration', () => {
         }
       `;
 
-      const result = await plugin.transform?.call(
-        { parse: () => ({}) } as MockPluginContext,
-        code,
-        'test.wsx'
-      );
+            const result = await plugin.transform?.call(
+                { parse: () => ({}) } as MockPluginContext,
+                code,
+                "test.wsx"
+            );
 
-      expect(result).toBeDefined();
-      expect(typeof result).toBe('object');
-      if (typeof result === 'object' && result !== null) {
-        expect(result.code).toBeDefined();
-        expect(typeof result.code).toBe('string');
-      }
-    });
+            expect(result).toBeDefined();
+            expect(typeof result).toBe("object");
+            if (typeof result === "object" && result !== null) {
+                expect(result.code).toBeDefined();
+                expect(typeof result.code).toBe("string");
+            }
+        });
 
-    test('transform hook ignores non-.wsx files', async () => {
-      const plugin = vitePluginWSX();
+        test("transform hook ignores non-.wsx files", async () => {
+            const plugin = vitePluginWSX();
 
-      const code = `
+            const code = `
         import React from 'react';
         export const Component = () => <div>React component</div>;
       `;
 
-      const result = await plugin.transform?.call(
-        { parse: () => ({}) } as MockPluginContext,
-        code,
-        'test.tsx'
-      );
+            const result = await plugin.transform?.call(
+                { parse: () => ({}) } as MockPluginContext,
+                code,
+                "test.tsx"
+            );
 
-      expect(result).toBeNull();
+            expect(result).toBeNull();
+        });
+
+        test("buildStart hook executes without errors", () => {
+            const plugin = vitePluginWSX();
+
+            expect(() => {
+                plugin.buildStart?.call({} as Record<string, unknown>, {});
+            }).not.toThrow();
+        });
     });
 
-    test('buildStart hook executes without errors', () => {
-      const plugin = vitePluginWSX();
+    describe("Plugin Options Integration", () => {
+        test("custom JSX factory is used in transformation", async () => {
+            const plugin = vitePluginWSX({
+                jsxFactory: "customH",
+                jsxFragment: "CustomFragment",
+            });
 
-      expect(() => {
-        plugin.buildStart?.call({} as Record<string, unknown>, {});
-      }).not.toThrow();
-    });
-  });
-
-  describe('Plugin Options Integration', () => {
-    test('custom JSX factory is used in transformation', async () => {
-      const plugin = vitePluginWSX({
-        jsxFactory: 'customH',
-        jsxFragment: 'CustomFragment',
-      });
-
-      const code = `
+            const code = `
         import { WebComponent, autoRegister } from '@systembug/wsx-core';
 
         @autoRegister()
@@ -133,75 +139,79 @@ describe('WSX Vite Plugin Integration', () => {
         }
       `;
 
-      const result = await plugin.transform?.call(
-        { parse: () => ({}) } as MockPluginContext,
-        code,
-        'test.wsx'
-      );
+            const result = await plugin.transform?.call(
+                { parse: () => ({}) } as MockPluginContext,
+                code,
+                "test.wsx"
+            );
 
-      expect(result).toBeDefined();
-      if (typeof result === 'object' && result !== null) {
-        expect(result.code).toContain('customH');
-        expect(result.code).toContain('import { customH');
-      }
+            expect(result).toBeDefined();
+            if (typeof result === "object" && result !== null) {
+                expect(result.code).toContain("customH");
+                expect(result.code).toContain("import { customH");
+            }
+        });
+
+        test("custom extensions are recognized", () => {
+            const plugin = vitePluginWSX({
+                extensions: [".custom"],
+            });
+
+            const loadResult = plugin.load?.call(
+                { parse: () => ({}) } as MockPluginContext,
+                "test.custom"
+            );
+            expect(loadResult).toBeNull(); // Should process custom extension
+
+            const loadResultWSX = plugin.load?.call(
+                { parse: () => ({}) } as MockPluginContext,
+                "test.wsx"
+            );
+            expect(loadResultWSX).toBeNull(); // Should not process .wsx with custom extensions
+        });
+
+        test("debug mode logs are controlled by option", () => {
+            const debugPlugin = vitePluginWSX({ debug: true });
+            const normalPlugin = vitePluginWSX({ debug: false });
+
+            expect(debugPlugin.name).toBe("vite-plugin-wsx");
+            expect(normalPlugin.name).toBe("vite-plugin-wsx");
+        });
     });
 
-    test('custom extensions are recognized', () => {
-      const plugin = vitePluginWSX({
-        extensions: ['.custom'],
-      });
+    describe("Error Handling Integration", () => {
+        test("handles invalid code gracefully", async () => {
+            const plugin = vitePluginWSX();
 
-      const loadResult = plugin.load?.call(
-        { parse: () => ({}) } as MockPluginContext,
-        'test.custom'
-      );
-      expect(loadResult).toBeNull(); // Should process custom extension
+            const invalidCode = "this is not valid typescript <<<>>>";
 
-      const loadResultWSX = plugin.load?.call(
-        { parse: () => ({}) } as MockPluginContext,
-        'test.wsx'
-      );
-      expect(loadResultWSX).toBeNull(); // Should not process .wsx with custom extensions
-    });
+            await expect(
+                plugin.transform?.call(
+                    { parse: () => ({}) } as MockPluginContext,
+                    invalidCode,
+                    "test.wsx"
+                )
+            ).rejects.toThrow();
+        });
 
-    test('debug mode logs are controlled by option', () => {
-      const debugPlugin = vitePluginWSX({ debug: true });
-      const normalPlugin = vitePluginWSX({ debug: false });
+        test("handles empty code", async () => {
+            const plugin = vitePluginWSX();
 
-      expect(debugPlugin.name).toBe('vite-plugin-wsx');
-      expect(normalPlugin.name).toBe('vite-plugin-wsx');
-    });
-  });
+            const emptyCode = "";
 
-  describe('Error Handling Integration', () => {
-    test('handles invalid code gracefully', async () => {
-      const plugin = vitePluginWSX();
+            const result = await plugin.transform?.call(
+                { parse: () => ({}) } as MockPluginContext,
+                emptyCode,
+                "test.wsx"
+            );
 
-      const invalidCode = 'this is not valid typescript <<<>>>';
+            expect(result).toBeDefined();
+        });
 
-      await expect(
-        plugin.transform?.call({ parse: () => ({}) } as MockPluginContext, invalidCode, 'test.wsx')
-      ).rejects.toThrow();
-    });
+        test("handles code without JSX", async () => {
+            const plugin = vitePluginWSX();
 
-    test('handles empty code', async () => {
-      const plugin = vitePluginWSX();
-
-      const emptyCode = '';
-
-      const result = await plugin.transform?.call(
-        { parse: () => ({}) } as MockPluginContext,
-        emptyCode,
-        'test.wsx'
-      );
-
-      expect(result).toBeDefined();
-    });
-
-    test('handles code without JSX', async () => {
-      const plugin = vitePluginWSX();
-
-      const codeWithoutJSX = `
+            const codeWithoutJSX = `
         import { WebComponent, autoRegister } from '@systembug/wsx-core';
 
         @autoRegister()
@@ -214,16 +224,16 @@ describe('WSX Vite Plugin Integration', () => {
         }
       `;
 
-      const result = await plugin.transform?.call(
-        { parse: () => ({}) } as MockPluginContext,
-        codeWithoutJSX,
-        'test.wsx'
-      );
+            const result = await plugin.transform?.call(
+                { parse: () => ({}) } as MockPluginContext,
+                codeWithoutJSX,
+                "test.wsx"
+            );
 
-      expect(result).toBeDefined();
-      if (typeof result === 'object' && result !== null) {
-        expect(result.code).toBeDefined();
-      }
+            expect(result).toBeDefined();
+            if (typeof result === "object" && result !== null) {
+                expect(result.code).toBeDefined();
+            }
+        });
     });
-  });
 });
