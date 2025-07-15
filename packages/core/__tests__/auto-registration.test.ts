@@ -78,7 +78,7 @@ describe('Auto Registration', () => {
 
       // Second registration with same tag name should not override
       @autoRegister({ tagName: 'no-duplicate-test' })
-      class SecondComponent extends WebComponent {
+      class _SecondComponent extends WebComponent {
         render(): HTMLElement {
           return h('div', {}, 'Second');
         }

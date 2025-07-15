@@ -1,0 +1,345 @@
+/**
+ * XyButton WSX Component - 迁移自xy-button.js
+ *
+ * 特性：
+ * - 支持多种按钮类型：primary、danger、flat、dashed
+ * - 支持disabled、loading、toggle状态
+ * - 支持icon显示和href链接
+ * - 波纹点击效果
+ * - 完整的样式系统和主题变量
+ */
+
+import { WebComponent, autoRegister } from '@systembug/wsx-core';
+import styles from './XyButton.css?inline';
+
+export interface XyButtonConfig {
+  disabled?: boolean;
+  icon?: string;
+  loading?: boolean;
+  href?: string;
+  htmltype?: string;
+  target?: string;
+  rel?: string;
+  download?: string;
+  toggle?: boolean;
+  checked?: boolean;
+  type?: 'primary' | 'danger' | 'flat' | 'dashed' | 'text';
+  shape?: 'circle';
+  block?: boolean;
+}
+
+@autoRegister({ tagName: 'xy-button' })
+export default class XyButton extends WebComponent {
+  // 状态属性
+  private disabled: boolean = false;
+  private loading: boolean = false;
+  private toggle: boolean = false;
+  private checked: boolean = false;
+  private icon: string | null = null;
+  private href: string | null = null;
+  private htmltype: string | null = null;
+  private target: string = '_blank';
+  private rel: string | null = null;
+  private download: string | null = null;
+  private type: string = 'flat';
+  // DOM引用
+  private btnElement?: HTMLButtonElement | HTMLAnchorElement;
+  private iconElement?: HTMLElement;
+  private loadingElement?: HTMLElement;
+
+  static get observedAttributes(): string[] {
+    return [
+      'disabled',
+      'icon',
+      'loading',
+      'href',
+      'htmltype',
+      'target',
+      'rel',
+      'download',
+      'toggle',
+      'checked',
+      'type',
+      'shape',
+      'block',
+    ];
+  }
+
+  constructor(config: XyButtonConfig = {}) {
+    super({
+      styles,
+      styleName: 'xy-button',
+      ...config,
+    });
+
+    // 初始化配置
+    this.disabled = config.disabled || false;
+    this.loading = config.loading || false;
+    this.toggle = config.toggle || false;
+    this.checked = config.checked || false;
+    this.icon = config.icon || null;
+    this.href = config.href || null;
+    this.htmltype = config.htmltype || null;
+    this.target = config.target || '_blank';
+    this.rel = config.rel || null;
+    this.download = config.download || null;
+    this.type = config.type || 'flat';
+  }
+
+  render(): HTMLElement {
+    const isLink = !!this.href;
+
+    const linkElement = (
+      <a
+        href={this.href}
+        target={this.target}
+        rel={this.rel || undefined}
+        download={this.download || undefined}
+        className="btn"
+        onMouseDown={this.handleMouseDown}
+        onKeyDown={this.handleKeyDown}
+        ref={(el: HTMLAnchorElement) => {
+          this.btnElement = el;
+        }}
+      >
+        {this.renderContent()}
+      </a>
+    );
+
+    const buttonElement = (
+      <button
+        type={this.htmltype || 'button'}
+        disabled={this.disabled}
+        className="btn"
+        onMouseDown={this.handleMouseDown}
+        onKeyDown={this.handleKeyDown}
+        ref={(el: HTMLButtonElement) => {
+          this.btnElement = el;
+        }}
+      >
+        {this.renderContent()}
+      </button>
+    );
+
+    return <div className="xy-button-container">{isLink ? linkElement : buttonElement}</div>;
+  }
+
+  private renderContent(): (HTMLElement | string)[] {
+    const content: (HTMLElement | string)[] = [];
+
+    // 渲染loading状态
+    if (this.loading) {
+      content.push(
+        <div
+          className="loading"
+          ref={(el: HTMLElement) => {
+            this.loadingElement = el;
+          }}
+        >
+          Loading...
+        </div>
+      );
+    }
+
+    // 渲染icon
+    if (!this.loading && this.icon && this.icon !== 'null') {
+      content.push(
+        <div
+          className="icon"
+          data-icon={this.icon}
+          ref={(el: HTMLElement) => {
+            this.iconElement = el;
+          }}
+        >
+          {this.icon}
+        </div>
+      );
+    }
+
+    // 渲染slot内容
+    content.push(<slot />);
+
+    return content;
+  }
+
+  /**
+   * 处理鼠标按下事件 - 波纹效果
+   */
+  private handleMouseDown = (event: MouseEvent): void => {
+    if (this.disabled) return;
+
+    const rect = this.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    this.style.setProperty('--x', `${x}px`);
+    this.style.setProperty('--y', `${y}px`);
+  };
+
+  /**
+   * 处理键盘事件
+   */
+  private handleKeyDown = (event: KeyboardEvent): void => {
+    if (event.keyCode === 13) {
+      // Enter
+      event.stopPropagation();
+    }
+  };
+
+  /**
+   * 处理点击事件
+   */
+  private handleClick = (): void => {
+    if (this.toggle && !this.disabled) {
+      this.checked = !this.checked;
+      if (this.checked) {
+        this.setAttr('checked', '');
+      } else {
+        this.removeAttr('checked');
+      }
+    }
+  };
+
+  /**
+   * 组件连接到DOM后的初始化
+   */
+  protected onConnected(): void {
+    this.addEventListener('click', this.handleClick);
+  }
+
+  /**
+   * 组件从DOM断开时的清理
+   */
+  protected onDisconnected(): void {
+    this.removeEventListener('click', this.handleClick);
+  }
+
+  /**
+   * 属性变化处理
+   */
+  protected onAttributeChanged(
+    name: string,
+    oldValue: string | null,
+    newValue: string | null
+  ): void {
+    switch (name) {
+      case 'disabled':
+        this.disabled = newValue !== null;
+        this.updateButtonState();
+        break;
+      case 'loading':
+        this.loading = newValue !== null;
+        this.updateButtonState();
+        this.rerender();
+        break;
+      case 'icon':
+        this.icon = newValue;
+        this.rerender();
+        break;
+      case 'href':
+        this.href = newValue;
+        this.rerender();
+        break;
+      case 'htmltype':
+        this.htmltype = newValue;
+        this.updateButtonState();
+        break;
+      case 'target':
+        this.target = newValue || '_blank';
+        break;
+      case 'rel':
+        this.rel = newValue;
+        break;
+      case 'download':
+        this.download = newValue;
+        break;
+      case 'toggle':
+        this.toggle = newValue !== null;
+        break;
+      case 'checked':
+        this.checked = newValue !== null;
+        break;
+    }
+  }
+
+  /**
+   * 更新按钮状态
+   */
+  private updateButtonState(): void {
+    if (!this.btnElement) return;
+
+    if (this.disabled || this.loading) {
+      this.btnElement.setAttribute('disabled', 'disabled');
+      if (this.href && this.btnElement instanceof HTMLAnchorElement) {
+        this.btnElement.removeAttribute('href');
+      }
+    } else {
+      this.btnElement.removeAttribute('disabled');
+      if (this.href && this.btnElement instanceof HTMLAnchorElement) {
+        this.btnElement.href = this.href;
+      }
+    }
+
+    if (this.htmltype && this.btnElement instanceof HTMLButtonElement) {
+      this.btnElement.type = this.htmltype;
+    }
+  }
+
+  /**
+   * 公共API：聚焦按钮
+   */
+  public focus(): void {
+    this.btnElement?.focus();
+  }
+
+  /**
+   * 公共API：获取/设置属性
+   */
+  public get isDisabled(): boolean {
+    return this.disabled;
+  }
+
+  public set isDisabled(value: boolean) {
+    if (value) {
+      this.setAttr('disabled', '');
+    } else {
+      this.removeAttr('disabled');
+    }
+  }
+
+  public get isLoading(): boolean {
+    return this.loading;
+  }
+
+  public set isLoading(value: boolean) {
+    if (value) {
+      this.setAttr('loading', '');
+    } else {
+      this.removeAttr('loading');
+    }
+  }
+
+  public get isChecked(): boolean {
+    return this.checked;
+  }
+
+  public set isChecked(value: boolean) {
+    if (value) {
+      this.setAttr('checked', '');
+    } else {
+      this.removeAttr('checked');
+    }
+  }
+
+  public get buttonIcon(): string | null {
+    return this.icon;
+  }
+
+  public set buttonIcon(value: string | null) {
+    if (value) {
+      this.setAttr('icon', value);
+    } else {
+      this.removeAttr('icon');
+    }
+  }
+}

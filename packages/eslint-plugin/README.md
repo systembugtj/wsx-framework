@@ -89,7 +89,6 @@ import { useState } from "react";
 
 ✅ **正确示例**:
 ```typescript
-import { h } from "../base/jsx-factory";
 ```
 
 ### `wsx/valid-jsx-pragma`
@@ -108,7 +107,6 @@ class MyComponent extends WebComponent {
 
 ✅ **正确示例**:
 ```typescript
-import { h } from "../base/jsx-factory";
 
 class MyComponent extends WebComponent {
     render() {

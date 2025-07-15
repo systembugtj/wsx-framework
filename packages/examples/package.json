@@ -10,8 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@systembug/wsx-core": "workspace:*",
-    "@systembug/wsx-components": "workspace:*"
+    "@systembug/wsx-core": "workspace:*"
   },
   "devDependencies": {
     "@systembug/wsx-vite-plugin": "workspace:*",

@@ -11,6 +11,7 @@
 
 // JSX命名空间声明 - 原生版本
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
       // 标准HTML元素
@@ -86,7 +87,7 @@ export type JSXChildren =
  * @returns DOM元素
  */
 export function h(
-  tag: string | Function,
+  tag: string | ((...args: unknown[]) => HTMLElement),
   props: Record<string, unknown> | null = {},
   ...children: JSXChildren[]
 ): HTMLElement {

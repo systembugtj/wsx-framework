@@ -16,7 +16,8 @@
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
-    }
+    },
+    "extraFileExtensions": [".wsx"]
   },
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
@@ -36,8 +37,25 @@
   "overrides": [
     {
       "files": ["*.wsx"],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "ecmaFeatures": {
+          "jsx": true
+        },
+        "extraFileExtensions": [".wsx"]
+      },
+      "env": {
+        "browser": true,
+        "es2021": true
+      },
+      "globals": {
+        "NodeListOf": "readonly"
+      },
       "rules": {
-        "@typescript-eslint/no-unused-vars": "warn"
+        "@typescript-eslint/no-unused-vars": "warn",
+        "prettier/prettier": "off"
       }
     },
     {

@@ -37,26 +37,11 @@ export interface WSXPluginOptions {
 }
 
 /**
- * 计算到 jsx-factory 的相对路径
+ * 获取 JSX 工厂函数的导入路径
  */
-function getRelativePathToJSXFactory(filePath: string): string {
-  const isInBase = filePath.includes('/base/');
-  const isInComponents = filePath.includes('/components/');
-  const isInPlugin = filePath.includes('/plugin/');
-  const isInTextColorTool = filePath.includes('/TextColorTool/');
-
-  if (isInBase) {
-    return './jsx-factory';
-  } else if (isInComponents) {
-    return '../base/jsx-factory';
-  } else if (isInPlugin) {
-    return '../base/jsx-factory';
-  } else if (isInTextColorTool) {
-    return '../base/jsx-factory';
-  } else {
-    // 默认从 editorjs-tools 下的任何工具
-    return './base/jsx-factory';
-  }
+function getJSXFactoryImportPath(_options: WSXPluginOptions): string {
+  // 使用 @systembug/wsx-core 包中的 JSX 工厂
+  return '@systembug/wsx-core';
 }
 
 /**
@@ -105,16 +90,20 @@ export function vitePluginWSX(options: WSXPluginOptions = {}): Plugin {
 
       let transformedCode = code;
 
-      // 1. 自动注入必要的导入
-      const hasJSXFactoryImport =
-        code.includes('from "../base/jsx-factory"') ||
-        code.includes('from "./jsx-factory"') ||
-        code.includes('from "../jsx-factory"');
+      // 1. 检查是否已经有JSX工厂导入
+      const hasWSXCoreImport = code.includes('from "@systembug/wsx-core"');
+      const hasJSXInImport =
+        hasWSXCoreImport &&
+        (code.includes(`, ${jsxFactory}`) ||
+          code.includes(`{ ${jsxFactory}`) ||
+          code.includes(`, ${jsxFragment}`) ||
+          code.includes(`{ ${jsxFragment}`));
 
-      if (!hasJSXFactoryImport && (code.includes('<') || code.includes('Fragment'))) {
-        // 计算相对路径到 jsx-factory
-        const relativePath = getRelativePathToJSXFactory(id);
-        const importStatement = `import { ${jsxFactory}, ${jsxFragment} } from "${relativePath}";\n`;
+      // 如果有JSX语法但没有JSX工厂导入，则需要注入
+      if ((code.includes('<') || code.includes('Fragment')) && !hasJSXInImport) {
+        // 使用标准的包导入
+        const importPath = getJSXFactoryImportPath(options);
+        const importStatement = `import { ${jsxFactory}, ${jsxFragment} } from "${importPath}";\n`;
         transformedCode = importStatement + transformedCode;
 
         if (debug) {
