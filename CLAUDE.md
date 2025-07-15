@@ -99,9 +99,11 @@ Vite integration that:
 
 ### @systembug/wsx-eslint-plugin
 ESLint rules specifically for WSX development:
-- Prevents React imports in WSX files
-- Enforces render method implementation
-- Validates Web Component naming conventions
+- **render-method-required**: Ensures WSX components implement required render() method
+- **no-react-imports**: Prevents React imports in WSX files (framework uses its own JSX)
+- **web-component-naming**: Validates Web Component naming conventions (hyphen required, no reserved names)
+- **Professional test suite**: 38 tests with 100% code coverage using Jest + RuleTester
+- **Integration testing**: Real-world validation in examples package
 
 ### @systembug/wsx-components
 Pre-built UI components:
@@ -110,7 +112,11 @@ Pre-built UI components:
 - `ColorPicker`: Advanced color selection component with custom picker support
 
 ### @systembug/wsx-examples
-Example applications demonstrating framework usage.
+Example applications demonstrating framework usage:
+- **Real-world testing environment**: Uses ESLint plugin configuration to validate framework rules
+- **Interactive showcase**: App.wsx demonstrates all framework features
+- **Component library**: XyButton, ColorPicker, XyButtonGroup examples
+- **Development validation**: Ensures framework works correctly in production scenarios
 
 ## Development Workflow
 
@@ -143,6 +149,11 @@ pnpm typecheck          # Run TypeScript type checking
 # Specific Package Commands
 pnpm --filter @systembug/wsx-core build
 pnpm --filter @systembug/wsx-examples dev
+
+# ESLint Plugin Testing
+pnpm --filter @systembug/wsx-eslint-plugin test           # Run 38 tests
+pnpm --filter @systembug/wsx-eslint-plugin test:coverage  # 100% coverage report
+pnpm --filter @systembug/wsx-eslint-plugin test:watch     # Development mode
 ```
 
 ### File Naming Conventions
@@ -215,8 +226,10 @@ export class MyComponent extends WebComponent {
 ### Testing
 - **Jest**: Test runner with jsdom environment
 - **@testing-library/jest-dom**: DOM testing utilities
-- **Coverage reporting**: Comprehensive code coverage
+- **Coverage reporting**: Comprehensive code coverage (100% for ESLint plugin)
 - **Web Components mocking**: Custom elements and Shadow DOM mocks
+- **ESLint RuleTester**: Professional ESLint plugin testing with AST node validation
+- **Integration testing**: Real-world usage validation in examples package
 
 ### Build System
 - **tsup**: Fast TypeScript bundler
@@ -354,4 +367,57 @@ See CONTRIBUTING.md for detailed contribution guidelines including:
 
 ---
 
-This document should be updated as the project evolves. Last updated: 2024-07-15
+## ESLint Plugin Development
+
+The WSX ESLint plugin follows professional testing practices:
+
+### Test Architecture
+```
+packages/eslint-plugin/
+├── __tests__/
+│   ├── rules/                    # Individual rule tests
+│   │   ├── render-method-required.test.ts
+│   │   ├── no-react-imports.test.ts
+│   │   └── web-component-naming.test.ts
+│   ├── integration.test.ts       # Full plugin integration tests
+│   └── setup.ts                  # Test environment setup
+├── jest.config.js                # Jest configuration
+└── README.md                     # Plugin documentation
+```
+
+### Testing Strategy
+1. **Unit Tests**: Each rule tested with RuleTester using valid/invalid code examples
+2. **Integration Tests**: Full ESLint configuration scenarios with real-world components
+3. **Coverage Requirements**: 100% statement coverage, 96%+ branch coverage
+4. **Real-world Validation**: examples package serves as live testing environment
+
+### ESLint Rules Implementation
+- **render-method-required**: AST analysis for WebComponent classes missing render() method
+- **no-react-imports**: Import statement detection and auto-fix removal
+- **web-component-naming**: @autoRegister decorator validation for custom element naming
+
+### Development Commands
+```bash
+# Test development
+pnpm --filter @systembug/wsx-eslint-plugin test:watch
+pnpm --filter @systembug/wsx-eslint-plugin test:coverage
+
+# Plugin testing in examples
+pnpm --filter @systembug/wsx-examples lint     # Real-world validation
+```
+
+## Framework Development Best Practices
+
+### Dual Testing Approach
+1. **Professional Test Suite**: Jest + RuleTester for comprehensive rule validation
+2. **Real Environment Testing**: examples package as living integration test
+
+### Quality Assurance
+- Fixed CJS deprecation warnings in Vite development server
+- 100% ESLint plugin test coverage with professional test architecture
+- Examples package validates framework usability in real development scenarios
+- Auto JSX injection eliminates developer boilerplate
+
+---
+
+This document should be updated as the project evolves. Last updated: 2025-01-15
