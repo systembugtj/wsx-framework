@@ -29,7 +29,7 @@
       "@systembug/wsx-eslint-plugin": ["./packages/eslint-plugin/src"]
     }
   },
-  "include": ["packages/*/src/**/*"],
+  "include": ["packages/*/src/**/*", "packages/vite-plugin/test/setup.ts"],
   "exclude": ["node_modules", "dist", "**/*.test.*"],
   "references": [
     { "path": "./packages/core" },

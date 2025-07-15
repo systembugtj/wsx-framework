@@ -12,7 +12,9 @@
   },
   "files": [
     "dist",
-    "src"
+    "src",
+    "!**/__tests__",
+    "!**/test"
   ],
   "scripts": {
     "build": "tsup src/index.ts --format cjs --dts",

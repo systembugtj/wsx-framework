@@ -93,9 +93,11 @@ The core framework package containing:
 ### @systembug/wsx-vite-plugin
 Vite integration that:
 - Processes .wsx files as TypeScript with JSX
-- Injects proper JSX pragma for WSX components
-- Handles CSS inline imports
+- Auto-injects JSX factory imports (h, Fragment) when missing
+- Handles CSS inline imports  
 - Provides hot reload support
+- **Professional test suite**: Unit tests and integration tests with Vite build scenarios
+- **Comprehensive coverage**: Tests transformation, error handling, HMR, and performance
 
 ### @systembug/wsx-eslint-plugin
 ESLint rules specifically for WSX development:
@@ -154,6 +156,11 @@ pnpm --filter @systembug/wsx-examples dev
 pnpm --filter @systembug/wsx-eslint-plugin test           # Run 38 tests
 pnpm --filter @systembug/wsx-eslint-plugin test:coverage  # 100% coverage report
 pnpm --filter @systembug/wsx-eslint-plugin test:watch     # Development mode
+
+# Vite Plugin Testing
+pnpm --filter @systembug/wsx-vite-plugin test             # Run plugin tests
+pnpm --filter @systembug/wsx-vite-plugin test:coverage    # Coverage report
+pnpm --filter @systembug/wsx-vite-plugin test:watch       # Development mode
 ```
 
 ### File Naming Conventions
@@ -398,12 +405,17 @@ packages/eslint-plugin/
 
 ### Development Commands
 ```bash
-# Test development
+# ESLint Plugin Test Development
 pnpm --filter @systembug/wsx-eslint-plugin test:watch
 pnpm --filter @systembug/wsx-eslint-plugin test:coverage
 
-# Plugin testing in examples
-pnpm --filter @systembug/wsx-examples lint     # Real-world validation
+# Vite Plugin Test Development  
+pnpm --filter @systembug/wsx-vite-plugin test:watch
+pnpm --filter @systembug/wsx-vite-plugin test:coverage
+
+# Real-world validation
+pnpm --filter @systembug/wsx-examples lint     # ESLint plugin validation
+pnpm --filter @systembug/wsx-examples dev      # Vite plugin validation
 ```
 
 ## Framework Development Best Practices
@@ -412,9 +424,28 @@ pnpm --filter @systembug/wsx-examples lint     # Real-world validation
 1. **Professional Test Suite**: Jest + RuleTester for comprehensive rule validation
 2. **Real Environment Testing**: examples package as living integration test
 
+### Test File Organization
+- **`__tests__/`**: Test files associated with source files (excluded from npm publish)
+- **`test/`**: Test configuration and setup files (excluded from npm publish)
+- **Pattern**: `src/__tests__/component.test.ts` tests `src/component.ts`
+
+### Publishing Configuration
+All packages properly exclude test files from npm publish:
+```json
+{
+  "files": [
+    "dist",
+    "src", 
+    "!**/__tests__",
+    "!**/test"
+  ]
+}
+```
+
 ### Quality Assurance
 - Fixed CJS deprecation warnings in Vite development server
 - 100% ESLint plugin test coverage with professional test architecture
+- Comprehensive Vite plugin testing with unit and integration tests
 - Examples package validates framework usability in real development scenarios
 - Auto JSX injection eliminates developer boilerplate
 

@@ -6,6 +6,6 @@
     "composite": false,
     "tsBuildInfoFile": null
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "test/setup.ts"],
   "exclude": ["dist", "**/*.test.*"]
 }
