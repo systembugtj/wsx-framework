@@ -1,0 +1,123 @@
+/**
+ * XyButtonGroup WSX Component - 迁移自xy-button.js
+ *
+ * 用于将多个xy-button组合成一个按钮组，
+ * 提供统一的样式和布局管理
+ */
+
+import { WebComponent, autoRegister } from "@systembug/wsx-core";
+import styles from "./XyButtonGroup.css?inline";
+
+export interface XyButtonGroupConfig {
+    disabled?: boolean;
+}
+
+@autoRegister({ tagName: "xy-button-group" })
+export default class XyButtonGroup extends WebComponent {
+    private disabled: boolean = false;
+
+    static get observedAttributes(): string[] {
+        return ["disabled"];
+    }
+
+    constructor(config: XyButtonGroupConfig = {}) {
+        super({
+            styles,
+            styleName: "xy-button-group",
+            ...config,
+        });
+
+        this.disabled = config.disabled || false;
+    }
+
+    render(): HTMLElement {
+        return (
+            <div className="button-group-container">
+                <slot />
+            </div>
+        );
+    }
+
+    /**
+     * 属性变化处理
+     */
+    protected onAttributeChanged(
+        name: string,
+        oldValue: string | null,
+        newValue: string | null,
+    ): void {
+        switch (name) {
+            case "disabled":
+                this.disabled = newValue !== null;
+                this.updateChildrenDisabledState();
+                break;
+        }
+    }
+
+    /**
+     * 组件连接到DOM后的初始化
+     */
+    protected onConnected(): void {
+        // 初始化时设置子按钮的disabled状态
+        this.updateChildrenDisabledState();
+    }
+
+    /**
+     * 更新所有子按钮的disabled状态
+     */
+    private updateChildrenDisabledState(): void {
+        if (!this.disabled) return;
+
+        // 获取所有xy-button子元素
+        const buttons = this.querySelectorAll("xy-button");
+        buttons.forEach((button: Element) => {
+            if (this.disabled) {
+                button.setAttribute("disabled", "");
+            } else {
+                button.removeAttribute("disabled");
+            }
+        });
+    }
+
+    /**
+     * 公共API：获取/设置disabled状态
+     */
+    public get isDisabled(): boolean {
+        return this.disabled;
+    }
+
+    public set isDisabled(value: boolean) {
+        if (value) {
+            this.setAttr("disabled", "");
+        } else {
+            this.removeAttr("disabled");
+        }
+    }
+
+    /**
+     * 公共API：获取组内的所有按钮
+     */
+    public getButtons(): NodeListOf<Element> {
+        return this.querySelectorAll("xy-button");
+    }
+
+    /**
+     * 公共API：启用所有按钮
+     */
+    public enableAll(): void {
+        const buttons = this.getButtons();
+        buttons.forEach((button: Element) => {
+            button.removeAttribute("disabled");
+        });
+    }
+
+    /**
+     * 公共API：禁用所有按钮
+     */
+    public disableAll(): void {
+        const buttons = this.getButtons();
+        buttons.forEach((button: Element) => {
+            button.setAttribute("disabled", "");
+        });
+    }
+}

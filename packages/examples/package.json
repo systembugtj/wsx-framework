@@ -1,0 +1,23 @@
+{
+  "name": "@systembug/wsx-examples",
+  "version": "1.0.0",
+  "description": "Example applications using WSX Framework",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@systembug/wsx-core": "workspace:*",
+    "@systembug/wsx-components": "workspace:*"
+  },
+  "devDependencies": {
+    "@systembug/wsx-vite-plugin": "workspace:*",
+    "@systembug/wsx-eslint-plugin": "workspace:*",
+    "vite": "^5.0.0",
+    "typescript": "^5.0.0",
+    "esbuild": "^0.21.0"
+  }
+}

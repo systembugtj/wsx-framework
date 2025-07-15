@@ -1,0 +1,44 @@
+{
+  "name": "@systembug/wsx-eslint-plugin",
+  "version": "1.0.0",
+  "description": "ESLint plugin for WSX Framework",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs --dts",
+    "dev": "tsup src/index.ts --format cjs --dts --watch",
+    "test": "jest",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "eslint",
+    "plugin",
+    "wsx",
+    "web-components"
+  ],
+  "dependencies": {
+    "@systembug/wsx-core": "workspace:*"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^1.0.0",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/utils": "^6.0.0",
+    "@types/eslint": "^8.0.0"
+  },
+  "peerDependencies": {
+    "eslint": ">=8.0.0"
+  }
+}

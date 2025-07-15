@@ -1,0 +1,60 @@
+{
+  "name": "@systembug/wsx-framework",
+  "version": "1.0.0",
+  "description": "A modern Web Components framework with JSX syntax and TypeScript support",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "packageManager": "pnpm@8.15.0",
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.wsx",
+    "lint:fix": "eslint . --ext .ts,.tsx,.js,.jsx,.wsx --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "typecheck": "tsc --noEmit",
+    "dev": "pnpm -r --parallel dev",
+    "clean": "pnpm -r clean && rm -rf node_modules",
+    "prepare": "husky install",
+    "precommit": "lint-staged"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.5.1",
+    "husky": "^8.0.3",
+    "jest": "^30.0.4",
+    "jest-environment-jsdom": "^30.0.4",
+    "jsdom": "^23.2.0",
+    "lint-staged": "^15.5.2",
+    "prettier": "^3.0.0",
+    "ts-jest": "^29.4.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/systembug/wsx-framework.git"
+  },
+  "keywords": [
+    "web-components",
+    "jsx",
+    "typescript",
+    "framework",
+    "custom-elements"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
