@@ -43,8 +43,12 @@ Thank you for your interest in contributing to WSX Framework! This document prov
 
 2. **Development Commands**
    ```bash
-   # Start development with watch mode
+   # Start development with watch mode (all packages)
    pnpm dev
+
+   # Run the examples showcase application
+   pnpm --filter @systembug/wsx-examples dev
+   # This starts a local server at http://localhost:5173
 
    # Run tests continuously
    pnpm test:watch
@@ -53,6 +57,30 @@ Thank you for your interest in contributing to WSX Framework! This document prov
    pnpm lint
    pnpm typecheck
    ```
+
+### Running Examples
+
+The examples package contains a comprehensive showcase of WSX Framework features:
+
+```bash
+# Start the examples development server
+cd packages/examples
+pnpm dev
+
+# Or from the root directory
+pnpm --filter @systembug/wsx-examples dev
+
+# Build the examples for production
+pnpm --filter @systembug/wsx-examples build
+```
+
+The examples showcase includes:
+- Interactive component demos (XyButton, ColorPicker, XyButtonGroup)
+- Framework feature explanations
+- Live code examples and documentation
+- Mobile-responsive design
+
+Visit `http://localhost:5173` to see the interactive examples.
 
 3. **Before Committing**
    ```bash

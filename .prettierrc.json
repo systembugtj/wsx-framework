@@ -9,6 +9,14 @@
   "endOfLine": "lf",
   "bracketSpacing": true,
   "jsxSingleQuote": false,
-  "jsxBracketSameLine": false,
-  "proseWrap": "preserve"
+  "bracketSameLine": false,
+  "proseWrap": "preserve",
+  "overrides": [
+    {
+      "files": "*.wsx",
+      "options": {
+        "parser": "typescript"
+      }
+    }
+  ]
 }
