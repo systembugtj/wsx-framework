@@ -6,7 +6,7 @@ export type PluginType = 'text' | 'marker';
 /**
  * 节流函数类型定义
  */
-export type ThrottleFunction<T extends any[]> = (...args: T) => void;
+export type ThrottleFunction<T extends unknown[]> = (...args: T) => void;
 
 const TEXT_COLOR_CACHE = 'editor-js-text-color-cache';
 
@@ -87,7 +87,7 @@ export function getCustomColorCache(pluginType: PluginType): string | null {
  * @param delay 延迟时间（毫秒）
  * @returns 节流后的函数
  */
-export function throttle<T extends any[]>(
+export function throttle<T extends unknown[]>(
   fn: ThrottleFunction<T>,
   delay: number
 ): (...args: T) => void {

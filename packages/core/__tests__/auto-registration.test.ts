@@ -4,9 +4,9 @@
  */
 
 import { describe, it, expect, afterEach } from '@jest/globals';
-import { WebComponent } from '../WebComponent';
-import { autoRegister, registerComponent } from '../auto-register';
-import { h } from '../jsx-factory';
+import { WebComponent } from '../src/web-component';
+import { autoRegister, registerComponent } from '../src/auto-register';
+import { h } from '../src/jsx-factory';
 
 describe('Auto Registration', () => {
   // Keep track of registered components for cleanup

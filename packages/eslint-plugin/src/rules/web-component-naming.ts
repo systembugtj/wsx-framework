@@ -47,7 +47,7 @@ export const webComponentNaming: WSXRuleModule = {
     ]);
 
     return {
-      Decorator(node: any) {
+      Decorator(node: import('estree').Decorator) {
         if (
           node.expression.type === 'CallExpression' &&
           node.expression.callee.type === 'Identifier' &&
@@ -56,7 +56,7 @@ export const webComponentNaming: WSXRuleModule = {
           const args = node.expression.arguments;
           if (args.length > 0 && args[0].type === 'ObjectExpression') {
             const tagNameProp = args[0].properties.find(
-              (prop: any) =>
+              (prop: import('estree').Property) =>
                 prop.type === 'Property' &&
                 prop.key.type === 'Identifier' &&
                 prop.key.name === 'tagName'

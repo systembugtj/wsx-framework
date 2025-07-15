@@ -125,14 +125,16 @@ export abstract class WebComponent extends HTMLElement {
    * 重新渲染组件
    */
   protected rerender(): void {
-    // 保存当前的 adopted stylesheets
-    const adoptedStyleSheets = this.shadowRoot.adoptedStyleSheets;
+    // 保存当前的 adopted stylesheets (jsdom may not support this)
+    const adoptedStyleSheets = this.shadowRoot.adoptedStyleSheets || [];
 
     // 清空现有内容但保留样式
     this.shadowRoot.innerHTML = '';
 
     // 恢复 adopted stylesheets (避免重新应用样式)
-    this.shadowRoot.adoptedStyleSheets = adoptedStyleSheets;
+    if (this.shadowRoot.adoptedStyleSheets) {
+      this.shadowRoot.adoptedStyleSheets = adoptedStyleSheets;
+    }
 
     // 只有在没有 adopted stylesheets 时才重新应用样式
     if (adoptedStyleSheets.length === 0 && this.config.styles) {

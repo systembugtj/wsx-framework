@@ -4,12 +4,12 @@
  */
 
 import { describe, it, expect, beforeEach, afterEach, jest } from '@jest/globals';
-import { WebComponent, type WebComponentConfig } from '../WebComponent';
-import { h } from '../jsx-factory';
-import { StyleManager } from '../styles/StyleManager';
+import { WebComponent, type WebComponentConfig } from '../src/web-component';
+import { h } from '../src/jsx-factory';
+import { StyleManager } from '../src/styles/style-manager';
 
 // Mock StyleManager
-jest.mock('../styles/StyleManager', () => ({
+jest.mock('../src/styles/style-manager', () => ({
   StyleManager: {
     applyStyles: jest.fn(),
   },
@@ -18,7 +18,7 @@ jest.mock('../styles/StyleManager', () => ({
 // Test implementation of WebComponent
 class TestComponent extends WebComponent {
   public renderCallCount = 0;
-  public lastRenderData: any = null;
+  public lastRenderData: unknown = null;
   private _shouldError = false;
 
   static override get observedAttributes(): string[] {

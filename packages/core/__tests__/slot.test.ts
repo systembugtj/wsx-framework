@@ -3,9 +3,9 @@
  * 验证 WSX 框架的 slot 支持和功能
  */
 
-import { WebComponent } from '../WebComponent';
-import { autoRegister } from '../auto-register';
-import { h } from '../jsx-factory';
+import { WebComponent } from '../src/web-component';
+import { autoRegister } from '../src/auto-register';
+import { h } from '../src/jsx-factory';
 
 // 测试用的 Slot 组件
 @autoRegister({ tagName: 'test-slot-component' })

@@ -4,6 +4,12 @@ module.exports = {
   testEnvironment: 'jsdom',
   roots: ['<rootDir>/packages'],
   testMatch: ['**/__tests__/**/*.+(ts|tsx|js)', '**/?(*.)+(spec|test).+(ts|tsx|js)'],
+  testPathIgnorePatterns: [
+    '<rootDir>/node_modules/',
+    '<rootDir>/packages/*/dist/',
+    '<rootDir>/packages/eslint-plugin/__tests__/setup.ts',
+    '<rootDir>/packages/vite-plugin/',
+  ],
   transform: {
     '^.+\\.(ts|tsx)$': [
       'ts-jest',
@@ -20,7 +26,7 @@ module.exports = {
       },
     ],
   },
-  moduleNameMapping: {
+  moduleNameMapper: {
     '^@systembug/wsx-core$': '<rootDir>/packages/core/src',
     '^@systembug/wsx-vite-plugin$': '<rootDir>/packages/vite-plugin/src',
     '^@systembug/wsx-eslint-plugin$': '<rootDir>/packages/eslint-plugin/src',

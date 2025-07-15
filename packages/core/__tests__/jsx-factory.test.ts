@@ -4,7 +4,7 @@
  */
 
 import { describe, it, expect, jest } from '@jest/globals';
-import { h, Fragment } from '../jsx-factory';
+import { h, Fragment, JSXChildren } from '../src/jsx-factory';
 
 describe('JSX Factory (h function)', () => {
   describe('Basic Element Creation', () => {
@@ -257,14 +257,14 @@ describe('JSX Factory (h function)', () => {
 
   describe('Component Functions', () => {
     it('should handle component functions', () => {
-      const Button = (props: any, children: any[]) => {
+      const Button = (props: Record<string, unknown>, children: unknown[]) => {
         return h(
           'button',
           {
             className: `btn ${props.variant || 'primary'}`,
             onClick: props.onClick,
           },
-          children
+          children as JSXChildren[]
         );
       };
 
