@@ -200,6 +200,3 @@ export function Fragment(_props: unknown, children: JSXChildren[]): DocumentFrag
 
   return fragment;
 }
-
-// 默认导出JSX工厂函数
-export default h;

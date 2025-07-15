@@ -93,12 +93,20 @@ export function vitePluginWSX(options: WSXPluginOptions = {}): Plugin {
 
       // 1. 检查是否已经有JSX工厂导入
       const hasWSXCoreImport = code.includes('from "@systembug/wsx-core"');
+      // 更精确的检测：使用正则表达式检查 JSX 工厂函数是否在导入中
       const hasJSXInImport =
         hasWSXCoreImport &&
-        (code.includes(`, ${jsxFactory}`) ||
-          code.includes(`{ ${jsxFactory}`) ||
-          code.includes(`, ${jsxFragment}`) ||
-          code.includes(`{ ${jsxFragment}`));
+        (new RegExp(`[{,]\\s*${jsxFactory}\\s*[},]`).test(code) ||
+          new RegExp(`[{,]\\s*${jsxFragment}\\s*[},]`).test(code));
+
+      // 调试信息
+      if (debug) {
+        console.log(`[WSX Plugin] Checking JSX imports for: ${id}`);
+        console.log(`  - hasWSXCoreImport: ${hasWSXCoreImport}`);
+        console.log(`  - hasJSXInImport: ${hasJSXInImport}`);
+        console.log(`  - has < character: ${code.includes('<')}`);
+        console.log(`  - has Fragment: ${code.includes('Fragment')}`);
+      }
 
       // 如果有JSX语法但没有JSX工厂导入，则需要注入
       if ((code.includes('<') || code.includes('Fragment')) && !hasJSXInImport) {

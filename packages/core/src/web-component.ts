@@ -8,7 +8,7 @@
  * - 完全通用，不依赖任何特定框架
  */
 
-import h, { type JSXChildren } from './jsx-factory';
+import { h, type JSXChildren } from './jsx-factory';
 import { StyleManager } from './styles/style-manager';
 
 /**
