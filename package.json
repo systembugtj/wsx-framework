@@ -17,7 +17,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,wsx,json,css,md}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,wsx,json,css,md}\"",
     "typecheck": "tsc --noEmit",
-    "dev": "pnpm -r --parallel dev",
+    "dev": "pnpm --filter @systembug/wsx-examples dev",
     "clean": "pnpm -r clean && rm -rf node_modules",
     "prepare": "husky install",
     "precommit": "lint-staged"

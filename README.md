@@ -15,11 +15,13 @@ A modern Web Components framework with JSX syntax and TypeScript support, publis
 
 ## Packages
 
+### Published Packages
 - **@systembug/wsx-core** - Core framework with WebComponent base class, JSX factory, logger, and utilities
-- **@systembug/wsx-vite-plugin** - Vite integration for .wsx files
+- **@systembug/wsx-vite-plugin** - Vite integration for .wsx files (auto-injects JSX factory)
 - **@systembug/wsx-eslint-plugin** - ESLint rules for WSX components
-- **@systembug/wsx-components** - Pre-built UI components (XyButton, ColorPicker, etc.)
-- **@systembug/wsx-examples** - Example applications and demos
+
+### Development Package
+- **@systembug/wsx-examples** - Interactive showcase application with example components
 
 ## Quick Start
 
@@ -49,7 +51,8 @@ import styles from './MyComponent.css?inline';
 
 const logger = createLogger('MyComponent');
 
-@autoRegister()
+// No need to import h or Fragment - Vite plugin auto-injects them!
+@autoRegister("my-component")
 export class MyComponent extends WebComponent {
   constructor() {
     super({ styles });
@@ -66,6 +69,12 @@ export class MyComponent extends WebComponent {
   }
 }
 ```
+
+### Key Features
+- **Auto JSX Injection**: The Vite plugin automatically injects `h` and `Fragment` imports
+- **Clean Imports**: Focus on your component logic, not boilerplate
+- **TypeScript Support**: Full IntelliSense and type safety
+- **CSS Encapsulation**: Import CSS with `?inline` for Shadow DOM styling
 
 ## Usage in HTML
 

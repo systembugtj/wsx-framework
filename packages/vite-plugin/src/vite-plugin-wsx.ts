@@ -9,6 +9,7 @@
  */
 
 import type { Plugin } from 'vite';
+import { transform } from 'esbuild';
 
 export interface WSXPluginOptions {
   /**
@@ -115,7 +116,6 @@ export function vitePluginWSX(options: WSXPluginOptions = {}): Plugin {
       // JSX transformation will be handled by esbuild with our custom config
 
       // 3. 使用 esbuild 进行 JSX 转换
-      const { transform } = await import('esbuild');
 
       try {
         const result = await transform(transformedCode, {
