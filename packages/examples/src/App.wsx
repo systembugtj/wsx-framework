@@ -5,20 +5,20 @@
  * using WSX Framework with TypeScript and JSX syntax.
  */
 
-import { WebComponent, autoRegister, createLogger } from '@systembug/wsx-core';
-import './components/XyButton.wsx';
-import './components/XyButtonGroup.wsx';
-import './components/ColorPicker.wsx';
+import { WebComponent, autoRegister, createLogger } from "@systembug/wsx-core";
+import "./components/XyButton.wsx";
+import "./components/XyButtonGroup.wsx";
+import "./components/ColorPicker.wsx";
 
-const logger = createLogger('App');
+const logger = createLogger("App");
 
-@autoRegister({ tagName: 'wsx-app' })
+@autoRegister({ tagName: "wsx-app" })
 export default class App extends WebComponent {
-  private currentSection: string = 'overview';
+    private currentSection: string = "overview";
 
-  constructor() {
-    super({
-      styles: `
+    constructor() {
+        super({
+            styles: `
                 :host {
                     display: block;
                     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -169,96 +169,99 @@ export default class App extends WebComponent {
                     }
                 }
             `,
-      styleName: 'wsx-app',
-    });
+            styleName: "wsx-app",
+        });
 
-    logger.info('WSX App initialized');
-  }
+        logger.info("WSX App initialized");
+    }
 
-  render(): HTMLElement {
-    return (
-      <div className="app-container">
-        {this.renderHeader()}
-        {this.renderNavigation()}
-        {this.renderContent()}
-      </div>
-    );
-  }
+    render(): HTMLElement {
+        return (
+            <div className="app-container">
+                {this.renderHeader()}
+                {this.renderNavigation()}
+                {this.renderContent()}
+            </div>
+        );
+    }
 
-  private renderHeader(): HTMLElement {
-    return (
-      <header className="header">
-        <h1>WSX Framework</h1>
-        <p>Web Components with JSX Syntax & TypeScript Support</p>
-      </header>
-    );
-  }
+    private renderHeader(): HTMLElement {
+        return (
+            <header className="header">
+                <h1>WSX Framework</h1>
+                <p>Web Components with JSX Syntax & TypeScript Support</p>
+            </header>
+        );
+    }
 
-  private renderNavigation(): HTMLElement {
-    const sections = [
-      { id: 'overview', label: 'Overview' },
-      { id: 'components', label: 'Components' },
-      { id: 'features', label: 'Features' },
-      { id: 'examples', label: 'Examples' },
-    ];
+    private renderNavigation(): HTMLElement {
+        const sections = [
+            { id: "overview", label: "Overview" },
+            { id: "components", label: "Components" },
+            { id: "features", label: "Features" },
+            { id: "examples", label: "Examples" },
+        ];
 
-    return (
-      <nav className="navigation">
-        {sections.map((section) => (
-          <xy-button
-            key={section.id}
-            type={this.currentSection === section.id ? 'primary' : 'flat'}
-            onClick={() => this.switchSection(section.id)}
-          >
-            {section.label}
-          </xy-button>
-        ))}
-      </nav>
-    );
-  }
+        return (
+            <nav className="navigation">
+                {sections.map((section) => (
+                    <xy-button
+                        key={section.id}
+                        type={this.currentSection === section.id ? "primary" : "flat"}
+                        onClick={() => this.switchSection(section.id)}
+                    >
+                        {section.label}
+                    </xy-button>
+                ))}
+            </nav>
+        );
+    }
 
-  private renderContent(): HTMLElement {
-    const sections = {
-      overview: this.renderOverview(),
-      components: this.renderComponents(),
-      features: this.renderFeatures(),
-      examples: this.renderExamples(),
-    };
+    private renderContent(): HTMLElement {
+        const sections = {
+            overview: this.renderOverview(),
+            components: this.renderComponents(),
+            features: this.renderFeatures(),
+            examples: this.renderExamples(),
+        };
 
-    return <main>{sections[this.currentSection as keyof typeof sections]}</main>;
-  }
+        return <main>{sections[this.currentSection as keyof typeof sections]}</main>;
+    }
 
-  private renderOverview(): HTMLElement {
-    return (
-      <section className="section">
-        <h2>Welcome to WSX Framework</h2>
-        <p>
-          WSX Framework is a modern Web Components framework that provides JSX syntax and TypeScript
-          support for building native web components. It offers zero React dependency while
-          maintaining familiar development patterns.
-        </p>
+    private renderOverview(): HTMLElement {
+        return (
+            <section className="section">
+                <h2>Welcome to WSX Framework</h2>
+                <p>
+                    WSX Framework is a modern Web Components framework that provides JSX syntax and
+                    TypeScript support for building native web components. It offers zero React
+                    dependency while maintaining familiar development patterns.
+                </p>
 
-        <div className="features-list">
-          <div className="feature-card">
-            <h4>🚀 Zero Dependencies</h4>
-            <p>No React or other framework dependencies. Pure native Web Components.</p>
-          </div>
-          <div className="feature-card">
-            <h4>⚡ TypeScript First</h4>
-            <p>Full TypeScript support with excellent IntelliSense and type safety.</p>
-          </div>
-          <div className="feature-card">
-            <h4>🎨 JSX Syntax</h4>
-            <p>Write components using familiar JSX syntax with custom factory implementation.</p>
-          </div>
-          <div className="feature-card">
-            <h4>📦 Shadow DOM</h4>
-            <p>Isolated styling with Shadow DOM encapsulation and CSS-in-JS support.</p>
-          </div>
-        </div>
+                <div className="features-list">
+                    <div className="feature-card">
+                        <h4>🚀 Zero Dependencies</h4>
+                        <p>No React or other framework dependencies. Pure native Web Components.</p>
+                    </div>
+                    <div className="feature-card">
+                        <h4>⚡ TypeScript First</h4>
+                        <p>Full TypeScript support with excellent IntelliSense and type safety.</p>
+                    </div>
+                    <div className="feature-card">
+                        <h4>🎨 JSX Syntax</h4>
+                        <p>
+                            Write components using familiar JSX syntax with custom factory
+                            implementation.
+                        </p>
+                    </div>
+                    <div className="feature-card">
+                        <h4>📦 Shadow DOM</h4>
+                        <p>Isolated styling with Shadow DOM encapsulation and CSS-in-JS support.</p>
+                    </div>
+                </div>
 
-        <div className="code-example">
-          {`import { WebComponent, autoRegister } from '@systembug/wsx-core';
+                <div className="code-example">
+                    {`import { WebComponent, autoRegister } from '@systembug/wsx-core';
 
 @autoRegister()
 export class MyButton extends WebComponent {
@@ -270,103 +273,108 @@ export class MyButton extends WebComponent {
     console.log('Button clicked!');
   };
 }`}
-        </div>
-      </section>
-    );
-  }
+                </div>
+            </section>
+        );
+    }
 
-  private renderComponents(): HTMLElement {
-    return (
-      <section className="section">
-        <h2>Component Showcase</h2>
-        <p>Explore the example components built with WSX Framework:</p>
+    private renderComponents(): HTMLElement {
+        return (
+            <section className="section">
+                <h2>Component Showcase</h2>
+                <p>Explore the example components built with WSX Framework:</p>
 
-        <div className="demo-grid">
-          <div className="demo-item">
-            <h3>XyButton Component</h3>
-            <p>Feature-rich button with multiple styles and states:</p>
-            <div className="button-showcase">
-              <xy-button>Default</xy-button>
-              <xy-button type="primary">Primary</xy-button>
-              <xy-button type="danger">Danger</xy-button>
-              <xy-button disabled>Disabled</xy-button>
-              <xy-button loading>Loading</xy-button>
-            </div>
-          </div>
+                <div className="demo-grid">
+                    <div className="demo-item">
+                        <h3>XyButton Component</h3>
+                        <p>Feature-rich button with multiple styles and states:</p>
+                        <div className="button-showcase">
+                            <xy-button>Default</xy-button>
+                            <xy-button type="primary">Primary</xy-button>
+                            <xy-button type="danger">Danger</xy-button>
+                            <xy-button disabled>Disabled</xy-button>
+                            <xy-button loading>Loading</xy-button>
+                        </div>
+                    </div>
 
-          <div className="demo-item">
-            <h3>ColorPicker Component</h3>
-            <p>Interactive color picker with custom color support:</p>
-            <color-picker></color-picker>
-          </div>
+                    <div className="demo-item">
+                        <h3>ColorPicker Component</h3>
+                        <p>Interactive color picker with custom color support:</p>
+                        <color-picker></color-picker>
+                    </div>
 
-          <div className="demo-item">
-            <h3>Button Group</h3>
-            <p>Group buttons with shared state management:</p>
-            <xy-button-group>
-              <xy-button>First</xy-button>
-              <xy-button>Second</xy-button>
-              <xy-button>Third</xy-button>
-            </xy-button-group>
-          </div>
-        </div>
-      </section>
-    );
-  }
+                    <div className="demo-item">
+                        <h3>Button Group</h3>
+                        <p>Group buttons with shared state management:</p>
+                        <xy-button-group>
+                            <xy-button>First</xy-button>
+                            <xy-button>Second</xy-button>
+                            <xy-button>Third</xy-button>
+                        </xy-button-group>
+                    </div>
+                </div>
+            </section>
+        );
+    }
 
-  private renderFeatures(): HTMLElement {
-    return (
-      <section className="section">
-        <h2>Framework Features</h2>
+    private renderFeatures(): HTMLElement {
+        return (
+            <section className="section">
+                <h2>Framework Features</h2>
 
-        <div className="demo-grid">
-          <div className="demo-item">
-            <h3>Auto-Registration</h3>
-            <p>
-              Components automatically register themselves when imported using the @autoRegister
-              decorator.
-            </p>
-            <div className="code-example">
-              {`@autoRegister({ tagName: 'my-component' })
+                <div className="demo-grid">
+                    <div className="demo-item">
+                        <h3>Auto-Registration</h3>
+                        <p>
+                            Components automatically register themselves when imported using the
+                            @autoRegister decorator.
+                        </p>
+                        <div className="code-example">
+                            {`@autoRegister({ tagName: 'my-component' })
 export class MyComponent extends WebComponent {
   // Component automatically available as <my-component>
 }`}
-            </div>
-          </div>
+                        </div>
+                    </div>
 
-          <div className="demo-item">
-            <h3>Event System</h3>
-            <p>Standard DOM events and custom events work seamlessly with WSX components.</p>
-            <div className="code-example">
-              {`// Standard events
+                    <div className="demo-item">
+                        <h3>Event System</h3>
+                        <p>
+                            Standard DOM events and custom events work seamlessly with WSX
+                            components.
+                        </p>
+                        <div className="code-example">
+                            {`// Standard events
 <button onClick={this.handleClick}>Click me</button>
 
 // Custom events
 this.dispatchEvent(new CustomEvent('colorchange', {
   detail: { color: '#ff0000' }
 }));`}
-            </div>
-          </div>
+                        </div>
+                    </div>
 
-          <div className="demo-item">
-            <h3>CSS Encapsulation</h3>
-            <p>Scoped styles using Constructable StyleSheets prevent CSS conflicts.</p>
-            <div className="code-example">
-              {`import styles from './MyComponent.css?inline';
+                    <div className="demo-item">
+                        <h3>CSS Encapsulation</h3>
+                        <p>Scoped styles using Constructable StyleSheets prevent CSS conflicts.</p>
+                        <div className="code-example">
+                            {`import styles from './MyComponent.css?inline';
 
 export class MyComponent extends WebComponent {
   constructor() {
     super({ styles });
   }
 }`}
-            </div>
-          </div>
+                        </div>
+                    </div>
 
-          <div className="demo-item">
-            <h3>Lifecycle Methods</h3>
-            <p>Standard Web Component lifecycle with TypeScript-friendly method names.</p>
-            <div className="code-example">
-              {`protected onConnected(): void {
+                    <div className="demo-item">
+                        <h3>Lifecycle Methods</h3>
+                        <p>
+                            Standard Web Component lifecycle with TypeScript-friendly method names.
+                        </p>
+                        <div className="code-example">
+                            {`protected onConnected(): void {
   // Component mounted
 }
 
@@ -377,109 +385,110 @@ protected onDisconnected(): void {
 protected onAttributeChanged(name: string, oldValue: string, newValue: string): void {
   // Attribute changed
 }`}
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  }
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
+    }
 
-  private renderExamples(): HTMLElement {
-    return (
-      <section className="section">
-        <h2>Interactive Examples</h2>
+    private renderExamples(): HTMLElement {
+        return (
+            <section className="section">
+                <h2>Interactive Examples</h2>
 
-        <div className="interactive-demo">
-          <h3>Click Counter Demo</h3>
-          <p>This demonstrates dynamic state management and event handling:</p>
-          <xy-button id="counter-btn" type="primary">
-            Click Count: 0
-          </xy-button>
-          <div id="counter-output" className="demo-output">
-            Button has been clicked!
-          </div>
-        </div>
+                <div className="interactive-demo">
+                    <h3>Click Counter Demo</h3>
+                    <p>This demonstrates dynamic state management and event handling:</p>
+                    <xy-button id="counter-btn" type="primary">
+                        Click Count: 0
+                    </xy-button>
+                    <div id="counter-output" className="demo-output">
+                        Button has been clicked!
+                    </div>
+                </div>
 
-        <div className="interactive-demo">
-          <h3>Color Change Demo</h3>
-          <p>Pick a color to see live component interaction:</p>
-          <color-picker id="demo-picker"></color-picker>
-          <div
-            id="color-display"
-            style="width: 100px; height: 100px; border: 2px solid #ccc; border-radius: 8px; margin: 10px auto; background: #ffffff;"
-          ></div>
-        </div>
+                <div className="interactive-demo">
+                    <h3>Color Change Demo</h3>
+                    <p>Pick a color to see live component interaction:</p>
+                    <color-picker id="demo-picker"></color-picker>
+                    <div
+                        id="color-display"
+                        style="width: 100px; height: 100px; border: 2px solid #ccc; border-radius: 8px; margin: 10px auto; background: #ffffff;"
+                    ></div>
+                </div>
 
-        <div className="demo-item">
-          <h3>Source Code</h3>
-          <p>
-            All example components are located in <code>packages/examples/src/components/</code>:
-          </p>
-          <ul>
-            <li>
-              <strong>XyButton.wsx</strong> - Feature-rich button component
-            </li>
-            <li>
-              <strong>ColorPicker.wsx</strong> - Interactive color picker
-            </li>
-            <li>
-              <strong>XyButtonGroup.wsx</strong> - Button grouping container
-            </li>
-            <li>
-              <strong>App.wsx</strong> - This showcase application
-            </li>
-          </ul>
-          <p>
-            Each <code>.wsx</code> file demonstrates the framework's capabilities and serves as a
-            template for your own components.
-          </p>
-        </div>
-      </section>
-    );
-  }
+                <div className="demo-item">
+                    <h3>Source Code</h3>
+                    <p>
+                        All example components are located in{" "}
+                        <code>packages/examples/src/components/</code>:
+                    </p>
+                    <ul>
+                        <li>
+                            <strong>XyButton.wsx</strong> - Feature-rich button component
+                        </li>
+                        <li>
+                            <strong>ColorPicker.wsx</strong> - Interactive color picker
+                        </li>
+                        <li>
+                            <strong>XyButtonGroup.wsx</strong> - Button grouping container
+                        </li>
+                        <li>
+                            <strong>App.wsx</strong> - This showcase application
+                        </li>
+                    </ul>
+                    <p>
+                        Each <code>.wsx</code> file demonstrates the framework's capabilities and
+                        serves as a template for your own components.
+                    </p>
+                </div>
+            </section>
+        );
+    }
 
-  private switchSection(sectionId: string): void {
-    this.currentSection = sectionId;
-    this.rerender();
-    logger.debug(`Switched to section: ${sectionId}`);
-  }
+    private switchSection(sectionId: string): void {
+        this.currentSection = sectionId;
+        this.rerender();
+        logger.debug(`Switched to section: ${sectionId}`);
+    }
 
-  private setupInteractivity(): void {
-    // Counter demo
-    const counterBtn = this.querySelector('#counter-btn');
-    const counterOutput = this.querySelector('#counter-output');
-    let clickCount = 0;
+    private setupInteractivity(): void {
+        // Counter demo
+        const counterBtn = this.querySelector("#counter-btn");
+        const counterOutput = this.querySelector("#counter-output");
+        let clickCount = 0;
 
-    counterBtn?.addEventListener('click', () => {
-      clickCount++;
-      if (counterBtn.textContent) {
-        counterBtn.textContent = `Click Count: ${clickCount}`;
-      }
-      if (counterOutput) {
-        counterOutput.textContent = `Button clicked ${clickCount} time${clickCount !== 1 ? 's' : ''}!`;
-        counterOutput.style.display = 'block';
-      }
-    });
+        counterBtn?.addEventListener("click", () => {
+            clickCount++;
+            if (counterBtn.textContent) {
+                counterBtn.textContent = `Click Count: ${clickCount}`;
+            }
+            if (counterOutput) {
+                counterOutput.textContent = `Button clicked ${clickCount} time${clickCount !== 1 ? "s" : ""}!`;
+                counterOutput.style.display = "block";
+            }
+        });
 
-    // Color picker demo
-    const colorPicker = this.querySelector('#demo-picker');
-    const colorDisplay = this.querySelector('#color-display') as HTMLElement;
+        // Color picker demo
+        const colorPicker = this.querySelector("#demo-picker");
+        const colorDisplay = this.querySelector("#color-display") as HTMLElement;
 
-    colorPicker?.addEventListener('colorchange', (event: Event) => {
-      const customEvent = event as CustomEvent;
-      if (colorDisplay && customEvent.detail?.color) {
-        colorDisplay.style.backgroundColor = customEvent.detail.color;
-      }
-    });
-  }
+        colorPicker?.addEventListener("colorchange", (event: Event) => {
+            const customEvent = event as CustomEvent;
+            if (colorDisplay && customEvent.detail?.color) {
+                colorDisplay.style.backgroundColor = customEvent.detail.color;
+            }
+        });
+    }
 
-  protected onConnected(): void {
-    // Setup interactivity after component is connected
-    setTimeout(() => this.setupInteractivity(), 100);
-    logger.info('WSX App connected to DOM');
-  }
+    protected onConnected(): void {
+        // Setup interactivity after component is connected
+        setTimeout(() => this.setupInteractivity(), 100);
+        logger.info("WSX App connected to DOM");
+    }
 
-  protected onDisconnected(): void {
-    logger.info('WSX App disconnected from DOM');
-  }
+    protected onDisconnected(): void {
+        logger.info("WSX App disconnected from DOM");
+    }
 }

@@ -2,187 +2,187 @@
 
 /* 主容器 */
 .color-section {
-  display: inline-block;
-  position: relative;
+    display: inline-block;
+    position: relative;
 }
 
 /* 弹出容器 */
 .color-popover {
-  display: inline-block;
-  position: relative;
-  overflow: visible;
+    display: inline-block;
+    position: relative;
+    overflow: visible;
 }
 
 /* 颜色按钮 */
 .color-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  border: 1px solid #e1e5e9;
-  border-radius: 3px;
-  background: var(--theme-color, #000);
-  color: transparent;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #e1e5e9;
+    border-radius: 3px;
+    background: var(--theme-color, #000);
+    color: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
 }
 
 .color-btn:hover:not(.disabled) {
-  border-color: #3f51b5;
-  box-shadow: 0 2px 8px rgba(63, 81, 181, 0.3);
+    border-color: #3f51b5;
+    box-shadow: 0 2px 8px rgba(63, 81, 181, 0.3);
 }
 
 .color-btn.disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .color-indicator {
-  font-size: 12px;
-  line-height: 1;
-  user-select: none;
+    font-size: 12px;
+    line-height: 1;
+    user-select: none;
 }
 
 /* 颜色面板 */
 .color-panel {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 10000;
-  background: #fff;
-  border: 1px solid #e1e5e9;
-  border-radius: 6px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  padding: 8px;
-  margin-top: 4px;
-  box-sizing: border-box;
-  transform-origin: top left;
-  animation: colorPanelShow 0.2s ease-out;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 10000;
+    background: #fff;
+    border: 1px solid #e1e5e9;
+    border-radius: 6px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    padding: 8px;
+    margin-top: 4px;
+    box-sizing: border-box;
+    transform-origin: top left;
+    animation: colorPanelShow 0.2s ease-out;
 }
 
 @keyframes colorPanelShow {
-  from {
-    opacity: 0;
-    transform: scale(0.9) translateY(-4px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-4px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
 
 /* 颜色网格 */
 .color-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 4px;
-  min-width: 160px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 4px;
+    min-width: 160px;
 }
 
 /* 颜色立方体 */
 .color-cube {
-  width: 20px;
-  height: 20px;
-  border: 1px solid #e1e5e9;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-sizing: border-box;
-  background-color: var(--cube-color, #000);
+    width: 20px;
+    height: 20px;
+    border: 1px solid #e1e5e9;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    background-color: var(--cube-color, #000);
 }
 
 .color-cube:hover {
-  border-color: #3f51b5;
-  transform: scale(1.1);
-  box-shadow: 0 2px 8px rgba(63, 81, 181, 0.4);
-  z-index: 1;
+    border-color: #3f51b5;
+    transform: scale(1.1);
+    box-shadow: 0 2px 8px rgba(63, 81, 181, 0.4);
+    z-index: 1;
 }
 
 .color-cube:active {
-  transform: scale(0.95);
+    transform: scale(0.95);
 }
 
 /* 自定义颜色选择器 */
 .color-cube.custom-picker {
-  background: linear-gradient(
-    45deg,
-    #ff0000 0%,
-    #ff8000 14%,
-    #ffff00 28%,
-    #80ff00 42%,
-    #00ff00 57%,
-    #00ff80 71%,
-    #00ffff 85%,
-    #0080ff 100%
-  );
-  position: relative;
+    background: linear-gradient(
+        45deg,
+        #ff0000 0%,
+        #ff8000 14%,
+        #ffff00 28%,
+        #80ff00 42%,
+        #00ff00 57%,
+        #00ff80 71%,
+        #00ffff 85%,
+        #0080ff 100%
+    );
+    position: relative;
 }
 
 .color-cube.custom-picker::after {
-  content: '+';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #fff;
-  font-size: 12px;
-  font-weight: bold;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
-  pointer-events: none;
+    content: "+";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+    pointer-events: none;
 }
 
 /* 主机元素状态 */
 :host([disabled]) .color-btn {
-  opacity: 0.5;
-  cursor: not-allowed;
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 :host([open]) .color-panel {
-  display: block;
+    display: block;
 }
 
 :host(:not([open])) .color-panel {
-  display: none;
+    display: none;
 }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
-  .color-panel {
-    position: fixed;
-    top: auto;
-    left: 50%;
-    bottom: 10px;
-    transform: translateX(-50%);
-    width: 90vw;
-    max-width: 300px;
-  }
+    .color-panel {
+        position: fixed;
+        top: auto;
+        left: 50%;
+        bottom: 10px;
+        transform: translateX(-50%);
+        width: 90vw;
+        max-width: 300px;
+    }
 
-  .color-grid {
-    grid-template-columns: repeat(8, 1fr);
-    gap: 6px;
-  }
+    .color-grid {
+        grid-template-columns: repeat(8, 1fr);
+        gap: 6px;
+    }
 
-  .color-cube {
-    width: 24px;
-    height: 24px;
-  }
+    .color-cube {
+        width: 24px;
+        height: 24px;
+    }
 }
 
 /* 深色模式支持 */
 @media (prefers-color-scheme: dark) {
-  .color-panel {
-    background: #2d2d2d;
-    border-color: #404040;
-    color: #fff;
-  }
+    .color-panel {
+        background: #2d2d2d;
+        border-color: #404040;
+        color: #fff;
+    }
 
-  .color-btn {
-    border-color: #404040;
-  }
+    .color-btn {
+        border-color: #404040;
+    }
 
-  .color-cube {
-    border-color: #404040;
-  }
+    .color-cube {
+        border-color: #404040;
+    }
 }
