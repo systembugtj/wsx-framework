@@ -34,7 +34,7 @@ export const renderMethodRequired: WSXRuleModule = {
 
                 const componentName = node.id?.name || "Unknown";
                 const hasRenderMethod = node.body.body.some(
-                    (member) =>
+                    (member: any) =>
                         member.type === "MethodDefinition" &&
                         member.key.type === "Identifier" &&
                         member.key.name === "render" &&

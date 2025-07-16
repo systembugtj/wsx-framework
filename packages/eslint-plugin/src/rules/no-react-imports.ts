@@ -32,7 +32,7 @@ export const noReactImports: WSXRuleModule = {
         ];
 
         return {
-            ImportDeclaration(node) {
+            ImportDeclaration(node: any) {
                 const source = node.source.value;
                 if (
                     typeof source === "string" &&

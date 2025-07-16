@@ -48,7 +48,7 @@ export const webComponentNaming: WSXRuleModule = {
         ]);
 
         return {
-            Decorator(node) {
+            Decorator(node: any) {
                 if (
                     node.expression.type === "CallExpression" &&
                     node.expression.callee.type === "Identifier" &&
@@ -57,7 +57,7 @@ export const webComponentNaming: WSXRuleModule = {
                     const args = node.expression.arguments;
                     if (args.length > 0 && args[0].type === "ObjectExpression") {
                         const tagNameProp = args[0].properties.find(
-                            (prop) =>
+                            (prop: any) =>
                                 prop.type === "Property" &&
                                 prop.key &&
                                 prop.key.type === "Identifier" &&
