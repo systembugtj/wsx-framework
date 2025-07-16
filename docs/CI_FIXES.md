@@ -43,7 +43,6 @@ at validateBinaryVersion (/home/runner/work/wsx-framework/wsx-framework/node_mod
 - "PR Validation / Type Check"
 - "PR Validation / Test"
 - "PR Validation / Build"
-- "PR Validation / Coverage Report"
 ```
 
 ### Required Status Checks for Main Branch
@@ -69,8 +68,6 @@ jobs:
     name: "Test"
   build:
     name: "Build"
-  coverage-report:
-    name: "Coverage Report"
 ```
 
 #### release.yml
@@ -274,7 +271,7 @@ Chose **pure monorepo approach** instead of hybrid:
 
 ## Coverage Upload Issues (Fixed)
 
-### Codecov Upload Failures
+### Codecov Integration Removed
 
 **Issue**:
 ```
@@ -284,29 +281,30 @@ Error: Codecov: Failed to properly upload: The process '/home/runner/work/_actio
 ```
 
 **Root Cause**:
+- User doesn't have access to codecov.io
 - Multiple workflows trying to upload coverage
-- Not all steps generate coverage files
-- Codecov expects specific file paths that may not exist
+- Codecov expects specific file paths and permissions
 
 **Solution Applied**:
-Ensure coverage files exist before upload and use proper paths:
+Completely removed codecov integration from CI workflows:
 
-```yaml
-# In CI workflows
-- run: pnpm test:coverage                    # Generate coverage
-- name: Upload coverage to Codecov
-  uses: codecov/codecov-action@v3
-  with:
-    files: ./coverage/coverage-final.json    # Verify this path exists
-    flags: develop-branch                    # Use appropriate flags
-    name: codecov-develop                    # Descriptive name
-    fail_ci_if_error: false                 # Don't fail CI on upload issues
-```
+1. **Removed codecov action** from `ci.yml` test job
+2. **Removed codecov action** from `pr.yml` test job  
+3. **Removed entire coverage-report job** from `pr.yml` that included:
+   - `romeovs/lcov-reporter-action` for PR comments
+   - Coverage threshold checking with bc calculator
+   - Duplicate test coverage runs
 
-**Prevention**:
-- Run coverage generation before upload attempts
-- Use conditional steps if coverage is optional
-- Check file existence with proper error handling
+**Files Changed**:
+- `.github/workflows/ci.yml` - Removed codecov upload action
+- `.github/workflows/pr.yml` - Removed codecov action and coverage-report job
+- Coverage still generated with `pnpm test:coverage` but not uploaded
+
+**Alternative Coverage Options**:
+- Coverage reports still generated locally in `./coverage/` directory
+- HTML coverage report available for local development: `./coverage/index.html`
+- JSON and LCOV formats still available for other tools if needed
+- Could integrate with other coverage services like Coveralls if access available
 
 ## Future Improvements
 

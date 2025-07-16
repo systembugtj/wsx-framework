@@ -56,12 +56,6 @@ jobs:
             - run: pnpm install --frozen-lockfile
             - run: pnpm build
             - run: pnpm test:coverage
-            - uses: codecov/codecov-action@v3
-              with:
-                  files: ./coverage/lcov.info
-                  flags: develop-branch
-                  name: codecov-develop
-                  fail_ci_if_error: false
 
     build:
         name: Build
