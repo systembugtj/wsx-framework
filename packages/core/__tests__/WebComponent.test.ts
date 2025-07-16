@@ -399,13 +399,20 @@ describe("WebComponent", () => {
         it("should render error UI when renderError is called", () => {
             container.appendChild(component);
 
-            // Trigger error rendering
-            component.triggerError();
+            // Suppress expected error logs during this test
+            const consoleSpy = jest.spyOn(console, "error").mockImplementation(() => {});
 
-            const errorDiv = component.shadowRoot.querySelector('div[style*="color: red"]');
-            expect(errorDiv).toBeTruthy();
-            expect(errorDiv?.textContent).toContain("[TestComponent] Component Error:");
-            expect(errorDiv?.textContent).toContain("Test render error");
+            try {
+                // Trigger error rendering
+                component.triggerError();
+
+                const errorDiv = component.shadowRoot.querySelector('div[style*="color: red"]');
+                expect(errorDiv).toBeTruthy();
+                expect(errorDiv?.textContent).toContain("[TestComponent] Component Error:");
+                expect(errorDiv?.textContent).toContain("Test render error");
+            } finally {
+                consoleSpy.mockRestore();
+            }
         });
 
         it("should clear existing content when rendering error", () => {
@@ -414,12 +421,19 @@ describe("WebComponent", () => {
             // Verify normal content exists
             expect(component.shadowRoot.querySelector("#test-content")).toBeTruthy();
 
-            // Trigger error
-            component.triggerError();
+            // Suppress expected error logs during this test
+            const consoleSpy = jest.spyOn(console, "error").mockImplementation(() => {});
 
-            // Normal content should be gone, only error content should remain
-            expect(component.shadowRoot.querySelector("#test-content")).toBeNull();
-            expect(component.shadowRoot.querySelector('div[style*="color: red"]')).toBeTruthy();
+            try {
+                // Trigger error
+                component.triggerError();
+
+                // Normal content should be gone, only error content should remain
+                expect(component.shadowRoot.querySelector("#test-content")).toBeNull();
+                expect(component.shadowRoot.querySelector('div[style*="color: red"]')).toBeTruthy();
+            } finally {
+                consoleSpy.mockRestore();
+            }
         });
     });
 
