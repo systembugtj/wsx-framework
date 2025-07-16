@@ -1,6 +1,6 @@
 {
     "name": "@systembug/wsx-examples",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Example applications using WSX Framework",
     "private": true,
     "scripts": {
