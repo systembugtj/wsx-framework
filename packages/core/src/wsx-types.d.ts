@@ -17,7 +17,7 @@ declare module "*.css" {
 
 // WSX 文件支持 - 将 .wsx 文件视为 TypeScript 模块
 declare module "*.wsx" {
-    const Component: any;
+    const Component: unknown;
     export default Component;
 }
 
@@ -25,9 +25,10 @@ declare module "*.wsx" {
 declare global {
     namespace JSX {
         interface IntrinsicElements {
-            [elemName: string]: any;
+            [elemName: string]: unknown;
         }
 
+        // eslint-disable-next-line @typescript-eslint/no-empty-object-type
         interface Element extends HTMLElement {}
 
         interface ElementClass {
@@ -35,22 +36,22 @@ declare global {
         }
 
         interface ElementAttributesProperty {
-            props: {};
+            props: object;
         }
 
         interface ElementChildrenAttribute {
-            children: {};
+            children: object;
         }
 
-        type LibraryManagedAttributes<C, P> = P;
+        type LibraryManagedAttributes<_C, P> = P;
     }
 }
 
 // JSX 工厂函数类型
 declare function h(
-    type: string | Function,
-    props?: Record<string, any> | null,
-    ...children: any[]
+    type: string | ((...args: unknown[]) => unknown),
+    props?: Record<string, unknown> | null,
+    ...children: unknown[]
 ): HTMLElement;
 
 declare const Fragment: symbol;

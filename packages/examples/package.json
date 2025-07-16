@@ -8,8 +8,8 @@
         "build": "vite build",
         "preview": "vite preview",
         "typecheck": "tsc --noEmit",
-        "lint": "eslint . --ext .ts,.tsx,.wsx",
-        "lint:fix": "eslint . --ext .ts,.tsx,.wsx --fix"
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix"
     },
     "dependencies": {
         "@systembug/wsx-core": "workspace:*"

@@ -6,10 +6,12 @@ import { Rule } from "eslint";
 
 export interface WSXRuleContext extends Rule.RuleContext {
     // WSX 特定的上下文扩展
+    report: (descriptor: Rule.ReportDescriptor) => void;
 }
 
 export interface WSXRuleModule extends Rule.RuleModule {
     // WSX 特定的规则模块扩展
+    create: (context: WSXRuleContext) => Rule.RuleListener;
 }
 
 export interface WSXConfig {

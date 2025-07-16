@@ -9,13 +9,14 @@ import { renderMethodRequired } from "./rules/render-method-required";
 import { noReactImports } from "./rules/no-react-imports";
 import { webComponentNaming } from "./rules/web-component-naming";
 import { recommendedConfig } from "./configs/recommended";
+import { createFlatConfig } from "./configs/flat";
 import { WSXPlugin } from "./types";
 
 const plugin: WSXPlugin = {
     // 插件元信息
     meta: {
-        name: "wsx-eslint-plugin",
-        version: "1.0.0",
+        name: "@systembug/eslint-plugin-wsx",
+        version: "0.0.2",
     },
 
     // 核心规则（移除 valid-jsx-pragma）
@@ -30,5 +31,16 @@ const plugin: WSXPlugin = {
         recommended: recommendedConfig,
     },
 };
+
+// Export for ESLint 9 flat config
+export const flat = {
+    recommended: createFlatConfig(plugin),
+};
+
+// Export individual rules for manual configuration
+export const rules = plugin.rules;
+
+// Export configs
+export const configs = plugin.configs;
 
 export default plugin;
