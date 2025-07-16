@@ -24,6 +24,10 @@ module.exports = {
                 varsIgnorePattern: "^_",
             },
         ],
+        // WSX specific rules - disabled for now while testing plugin loading
+        // "wsx/render-method-required": "error",
+        // "wsx/no-react-imports": "error",
+        // "wsx/web-component-naming": "warn",
     },
     globals: {
         NodeListOf: "readonly",

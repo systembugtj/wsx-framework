@@ -139,7 +139,7 @@ importers:
         specifier: workspace:*
         version: link:../core
     devDependencies:
-      '@systembug/wsx-eslint-plugin':
+      '@systembug/eslint-plugin-wsx':
         specifier: workspace:*
         version: link:../eslint-plugin
       '@systembug/wsx-vite-plugin':
