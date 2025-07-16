@@ -167,6 +167,111 @@ pnpm test:coverage
 5. **Keep workflows simple** and focused
 6. **Document fixes** for future reference
 
+## Local vs CI Environment Differences (Fixed)
+
+### TypeScript Implicit Any Errors
+
+**Issue**: 
+```
+error TS7006: Parameter 'node' implicitly has an 'any' type
+error TS7006: Parameter 'prop' implicitly has an 'any' type
+```
+
+**Symptoms**:
+- ✅ **Local**: TypeScript compilation works fine
+- ❌ **CI**: Hard errors prevent build from completing
+
+**Root Cause**:
+Different TypeScript strictness settings between environments:
+
+| Setting | Local Environment | CI Environment |
+|---------|------------------|----------------|
+| `noImplicitAny` | false/lenient | true/strict |
+| TypeScript version | IDE version or different | Exact from package-lock |
+| Error handling | IDE shows warnings | CLI treats as hard errors |
+| Configuration | IDE/workspace overrides | Pure tsconfig.json |
+
+**Solution Applied**:
+Added explicit `any` type annotations to ESLint rule parameters:
+
+```typescript
+// Before (failed in CI)
+Decorator(node) {
+ImportDeclaration(node) {  
+const hasRenderMethod = node.body.body.some((member) =>
+const tagNameProp = args[0].properties.find((prop) =>
+
+// After (works everywhere)
+Decorator(node: any) {
+ImportDeclaration(node: any) {
+const hasRenderMethod = node.body.body.some((member: any) =>
+const tagNameProp = args[0].properties.find((prop: any) =>
+```
+
+**Why `any` is Appropriate**:
+- ESLint rule parameters are inherently dynamic and untyped
+- AST nodes have complex union types that vary by context
+- ESLint framework doesn't provide strong typing for rule parameters
+- Runtime type guards are used for actual type safety
+
+**Files Changed**:
+- `packages/eslint-plugin/src/rules/render-method-required.ts`
+- `packages/eslint-plugin/src/rules/no-react-imports.ts`  
+- `packages/eslint-plugin/src/rules/web-component-naming.ts`
+
+**Prevention**:
+- Set `"noImplicitAny": true` in local tsconfig for consistency
+- Use `pnpm typecheck` locally before pushing to catch these early
+- Consider adding stricter TypeScript settings to pre-commit hooks
+
+## TypeScript Project References Conflicts (Fixed)
+
+### Multiple Configuration Errors
+
+**Issue**:
+```
+error TS6305: Output file has not been built from source file
+error TS6306: Referenced project must have setting "composite": true
+error TS6307: File is not listed within the file list of project
+error TS6310: Referenced project may not disable emit
+```
+
+**Root Cause**:
+Conflicting TypeScript configuration between project references and direct includes:
+
+1. **Root config included source files**: `"include": ["packages/*/src/**/*"]`
+2. **Root config had project references**: `"references": [...]`  
+3. **Same files owned by multiple projects**: Causes ownership conflicts
+
+**Solution Applied**:
+Chose **pure monorepo approach** instead of hybrid:
+
+```json
+// Root tsconfig.json - removed conflicting settings
+{
+  "include": ["packages/*/src/**/*"],  // Keep direct includes
+  // "references": [...],              // Remove project references
+  // "composite": true,                // Remove composite mode
+}
+
+// Package tsconfig.json - simplified
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist"
+    // "rootDir": "./src",              // Remove rootDir restriction
+    // "composite": true,               // Remove composite mode
+    // "tsBuildInfoFile": null          // Remove build info
+  }
+}
+```
+
+**Why This Works**:
+- **Single ownership**: Each file belongs to one TypeScript project
+- **Simpler configuration**: Easier to maintain and debug
+- **tsup handles building**: Don't need TypeScript project references for build
+- **Suitable for small monorepo**: Our 4-package setup doesn't need incremental builds
+
 ## Future Improvements
 
 1. **Add pre-commit hooks** for local validation
