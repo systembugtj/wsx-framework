@@ -272,6 +272,42 @@ Chose **pure monorepo approach** instead of hybrid:
 - **tsup handles building**: Don't need TypeScript project references for build
 - **Suitable for small monorepo**: Our 4-package setup doesn't need incremental builds
 
+## Coverage Upload Issues (Fixed)
+
+### Codecov Upload Failures
+
+**Issue**:
+```
+[error] None of the following appear to exist as files: ./coverage/coverage-final.json
+[error] There was an error running the uploader: Error while cleaning paths. No paths matched existing files!
+Error: Codecov: Failed to properly upload: The process '/home/runner/work/_actions/codecov/codecov-action/v3/dist/codecov' failed with exit code 255
+```
+
+**Root Cause**:
+- Multiple workflows trying to upload coverage
+- Not all steps generate coverage files
+- Codecov expects specific file paths that may not exist
+
+**Solution Applied**:
+Ensure coverage files exist before upload and use proper paths:
+
+```yaml
+# In CI workflows
+- run: pnpm test:coverage                    # Generate coverage
+- name: Upload coverage to Codecov
+  uses: codecov/codecov-action@v3
+  with:
+    files: ./coverage/coverage-final.json    # Verify this path exists
+    flags: develop-branch                    # Use appropriate flags
+    name: codecov-develop                    # Descriptive name
+    fail_ci_if_error: false                 # Don't fail CI on upload issues
+```
+
+**Prevention**:
+- Run coverage generation before upload attempts
+- Use conditional steps if coverage is optional
+- Check file existence with proper error handling
+
 ## Future Improvements
 
 1. **Add pre-commit hooks** for local validation
