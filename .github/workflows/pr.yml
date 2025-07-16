@@ -93,10 +93,10 @@ jobs:
             # Upload coverage to codecov
             - uses: codecov/codecov-action@v3
               with:
-                  files: ./coverage/coverage-final.json
+                  files: ./coverage/lcov.info
                   flags: unittests
                   name: codecov-umbrella
-                  fail_ci_if_error: true
+                  fail_ci_if_error: false
 
     # Build packages
     build:
