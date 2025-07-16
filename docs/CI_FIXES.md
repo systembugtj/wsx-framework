@@ -111,7 +111,14 @@ git commit -m "feat: Implement comprehensive CI/CD pipeline"
 **Issue**: Project reference configuration errors
 **Solution**: Ensure consistent TypeScript configuration across packages
 
-### 5. pnpm Cache Issues
+### 5. pnpm Lockfile Mismatch
+**Issue**: `specifiers in the lockfile don't match specs in package.json`
+**Solution**: 
+- Regenerate lockfile locally: `pnpm install`
+- Commit updated `pnpm-lock.yaml`
+- CI uses `--frozen-lockfile` by default (which is correct)
+
+### 6. pnpm Cache Issues
 **Issue**: Dependency resolution conflicts in CI
 **Solution**: 
 - Use `pnpm install --frozen-lockfile` in CI
