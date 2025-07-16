@@ -43,7 +43,7 @@ declare global {
             placeholder?: string;
             src?: string;
             alt?: string;
-            href?: string;
+            href?: string | null;
             target?: string;
 
             // Ref callback
