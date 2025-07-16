@@ -1,14 +1,14 @@
 /**
  * 插件类型定义
  */
-export type PluginType = 'text' | 'marker';
+export type PluginType = "text" | "marker";
 
 /**
  * 节流函数类型定义
  */
 export type ThrottleFunction<T extends unknown[]> = (...args: T) => void;
 
-const TEXT_COLOR_CACHE = 'editor-js-text-color-cache';
+const TEXT_COLOR_CACHE = "editor-js-text-color-cache";
 
 /**
  * 检查是否为CSS变量
@@ -16,7 +16,7 @@ const TEXT_COLOR_CACHE = 'editor-js-text-color-cache';
  * @returns 是否为CSS变量
  */
 function isColorVariable(value: string): boolean {
-  return value.startsWith('var(') && value.endsWith(')');
+    return value.startsWith("var(") && value.endsWith(")");
 }
 
 /**
@@ -25,7 +25,7 @@ function isColorVariable(value: string): boolean {
  * @returns 变量名
  */
 function extractVariableName(variable: string): string {
-  return variable.slice(4, -1).trim();
+    return variable.slice(4, -1).trim();
 }
 
 /**
@@ -34,8 +34,8 @@ function extractVariableName(variable: string): string {
  * @returns CSS属性值
  */
 function getCSSPropertyValue(propertyName: string): string {
-  const computedStyle = getComputedStyle(document.documentElement);
-  return computedStyle.getPropertyValue(propertyName).trim() || propertyName;
+    const computedStyle = getComputedStyle(document.documentElement);
+    return computedStyle.getPropertyValue(propertyName).trim() || propertyName;
 }
 
 /**
@@ -44,11 +44,11 @@ function getCSSPropertyValue(propertyName: string): string {
  * @returns string color string
  */
 export function handleCSSVariables(colorValue: string): string {
-  if (isColorVariable(colorValue)) {
-    const variableName = extractVariableName(colorValue);
-    return getCSSPropertyValue(variableName);
-  }
-  return colorValue;
+    if (isColorVariable(colorValue)) {
+        const variableName = extractVariableName(colorValue);
+        return getCSSPropertyValue(variableName);
+    }
+    return colorValue;
 }
 
 /**
@@ -58,8 +58,8 @@ export function handleCSSVariables(colorValue: string): string {
  * @returns 返回设置的默认颜色
  */
 export function setDefaultColorCache(defaultColor: string, pluginType: PluginType): string {
-  sessionStorage.setItem(`${TEXT_COLOR_CACHE}-${pluginType}`, JSON.stringify(defaultColor));
-  return defaultColor;
+    sessionStorage.setItem(`${TEXT_COLOR_CACHE}-${pluginType}`, JSON.stringify(defaultColor));
+    return defaultColor;
 }
 
 /**
@@ -68,7 +68,7 @@ export function setDefaultColorCache(defaultColor: string, pluginType: PluginTyp
  * @param pluginType 插件类型
  */
 export function setCustomColorCache(customColor: string, pluginType: PluginType): void {
-  sessionStorage.setItem(`${TEXT_COLOR_CACHE}-${pluginType}-custom`, JSON.stringify(customColor));
+    sessionStorage.setItem(`${TEXT_COLOR_CACHE}-${pluginType}-custom`, JSON.stringify(customColor));
 }
 
 /**
@@ -77,8 +77,8 @@ export function setCustomColorCache(customColor: string, pluginType: PluginType)
  * @returns 缓存的自定义颜色值或null
  */
 export function getCustomColorCache(pluginType: PluginType): string | null {
-  const cachedCustomColor = sessionStorage.getItem(`${TEXT_COLOR_CACHE}-${pluginType}-custom`);
-  return cachedCustomColor ? JSON.parse(cachedCustomColor) : null;
+    const cachedCustomColor = sessionStorage.getItem(`${TEXT_COLOR_CACHE}-${pluginType}-custom`);
+    return cachedCustomColor ? JSON.parse(cachedCustomColor) : null;
 }
 
 /**
@@ -88,18 +88,18 @@ export function getCustomColorCache(pluginType: PluginType): string | null {
  * @returns 节流后的函数
  */
 export function throttle<T extends unknown[]>(
-  fn: ThrottleFunction<T>,
-  delay: number
+    fn: ThrottleFunction<T>,
+    delay: number
 ): (...args: T) => void {
-  let id: NodeJS.Timeout | null = null;
-  return (...args: T) => {
-    if (!id) {
-      id = setTimeout(() => {
-        fn(...args);
-        id = null;
-      }, delay);
-    }
-  };
+    let id: NodeJS.Timeout | null = null;
+    return (...args: T) => {
+        if (!id) {
+            id = setTimeout(() => {
+                fn(...args);
+                id = null;
+            }, delay);
+        }
+    };
 }
 /**
  * Get cached text/marker color
@@ -108,9 +108,9 @@ export function throttle<T extends unknown[]>(
  * @returns 缓存的颜色值或默认颜色
  */
 export function getDefaultColorCache(defaultColor: string, pluginType: PluginType): string {
-  const cachedDefaultColor = sessionStorage.getItem(`${TEXT_COLOR_CACHE}-${pluginType}`);
-  return cachedDefaultColor ? JSON.parse(cachedDefaultColor) : defaultColor;
+    const cachedDefaultColor = sessionStorage.getItem(`${TEXT_COLOR_CACHE}-${pluginType}`);
+    return cachedDefaultColor ? JSON.parse(cachedDefaultColor) : defaultColor;
 }
 
-export const CONVERTER_BTN = 'ce-inline-toolbar__dropdown';
-export const CONVERTER_PANEL = 'ce-conversion-toolbar--showed';
+export const CONVERTER_BTN = "ce-inline-toolbar__dropdown";
+export const CONVERTER_PANEL = "ce-conversion-toolbar--showed";

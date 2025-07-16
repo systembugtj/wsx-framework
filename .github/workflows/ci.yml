@@ -21,6 +21,7 @@ jobs:
                   node-version: 18
                   cache: "pnpm"
             - run: pnpm install --frozen-lockfile
+            - run: pnpm build
             - run: pnpm lint
             - run: pnpm format:check
 
@@ -55,18 +56,13 @@ jobs:
             - run: pnpm install --frozen-lockfile
             - run: pnpm build
             - run: pnpm test:coverage
-            - uses: codecov/codecov-action@v3
-              with:
-                  files: ./coverage/coverage-final.json
-                  flags: develop-branch
-                  name: codecov-develop
 
     build:
         name: Build
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                node-version: [16, 18, 20]
+                node-version: [18, 20, 22]
         steps:
             - uses: actions/checkout@v4
             - uses: pnpm/action-setup@v2

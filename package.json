@@ -1,6 +1,6 @@
 {
     "name": "@systembug/wsx-framework",
-    "version": "0.0.2",
+    "version": "0.0.1",
     "description": "A modern Web Components framework with JSX syntax and TypeScript support",
     "private": true,
     "workspaces": [
@@ -36,6 +36,7 @@
         "@types/node": "^20.0.0",
         "@typescript-eslint/eslint-plugin": "^6.21.0",
         "@typescript-eslint/parser": "^6.21.0",
+        "esbuild": "0.25.6",
         "eslint": "^8.0.0",
         "eslint-config-prettier": "^9.1.0",
         "eslint-plugin-prettier": "^5.5.1",
@@ -65,5 +66,14 @@
         "custom-elements"
     ],
     "author": "Your Name",
-    "license": "MIT"
+    "license": "MIT",
+    "volta": {
+        "node": "18.18.2",
+        "pnpm": "8.15.0"
+    },
+    "pnpm": {
+        "overrides": {
+            "esbuild": "0.25.6"
+        }
+    }
 }
