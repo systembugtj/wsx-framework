@@ -15,23 +15,23 @@ declare global {
     namespace JSX {
         interface IntrinsicElements {
             // 标准HTML元素
-            div: HTMLAttributes;
-            button: HTMLAttributes;
-            section: HTMLAttributes;
-            span: HTMLAttributes;
-            input: HTMLAttributes;
-            p: HTMLAttributes;
-            h1: HTMLAttributes;
-            h2: HTMLAttributes;
-            h3: HTMLAttributes;
-            ul: HTMLAttributes;
-            li: HTMLAttributes;
-            a: HTMLAttributes;
+            div: HTMLAttributes<HTMLDivElement>;
+            button: HTMLAttributes<HTMLButtonElement>;
+            section: HTMLAttributes<HTMLElement>;
+            span: HTMLAttributes<HTMLSpanElement>;
+            input: HTMLAttributes<HTMLInputElement>;
+            p: HTMLAttributes<HTMLParagraphElement>;
+            h1: HTMLAttributes<HTMLHeadingElement>;
+            h2: HTMLAttributes<HTMLHeadingElement>;
+            h3: HTMLAttributes<HTMLHeadingElement>;
+            ul: HTMLAttributes<HTMLUListElement>;
+            li: HTMLAttributes<HTMLLIElement>;
+            a: HTMLAttributes<HTMLAnchorElement>;
             // Web Components 元素
-            slot: HTMLAttributes;
+            slot: HTMLAttributes<HTMLSlotElement>;
         }
 
-        interface HTMLAttributes {
+        interface HTMLAttributes<T extends HTMLElement = HTMLElement> {
             className?: string;
             class?: string;
             id?: string;
@@ -46,8 +46,8 @@ declare global {
             href?: string | null;
             target?: string;
 
-            // Ref callback
-            ref?: (element: HTMLElement) => void;
+            // Ref callback with proper typing
+            ref?: (element: T) => void;
 
             // Data attributes
             [dataAttr: `data-${string}`]: string;
@@ -108,7 +108,7 @@ export function h(
 
             // 处理ref回调
             if (key === "ref" && typeof value === "function") {
-                (value as (element: HTMLElement) => void)(element);
+                value(element);
             }
             // 处理className和class
             else if (key === "className" || key === "class") {
