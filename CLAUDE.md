@@ -209,6 +209,35 @@ export class MyComponent extends WebComponent {
 - Support for event handlers, refs, and all standard HTML attributes
 - Fragment support for multiple root elements
 
+#### IDE Support for JSX
+To ensure proper IDE support and eliminate "This JSX tag requires 'React' to be in scope" errors:
+
+1. **Add JSX pragma comment** to the top of your .wsx files:
+   ```typescript
+   /** @jsxImportSource @systembug/wsx-core */
+   ```
+
+2. **TypeScript configuration** should include:
+   ```json
+   {
+     "compilerOptions": {
+       "jsx": "react-jsx",
+       "jsxImportSource": "@systembug/wsx-core"
+     }
+   }
+   ```
+
+3. **VS Code file associations** (optional, add to .vscode/settings.json):
+   ```json
+   {
+     "files.associations": {
+       "*.wsx": "typescriptreact"
+     }
+   }
+   ```
+
+The pragma comment tells TypeScript and your IDE that JSX should use the WSX framework's JSX runtime instead of React's, providing proper IntelliSense and eliminating type errors.
+
 ### Auto-Registration System
 - `@autoRegister()` decorator automatically registers components
 - Converts PascalCase class names to kebab-case tag names
@@ -256,6 +285,7 @@ export class MyComponent extends WebComponent {
 ### Creating a New Component
 ```typescript
 // MyButton.wsx
+/** @jsxImportSource @systembug/wsx-core */
 import { WebComponent, autoRegister, createLogger } from '@systembug/wsx-core';
 import styles from './MyButton.css?inline';
 
@@ -328,10 +358,18 @@ GitHub Actions workflow that:
 ## Troubleshooting
 
 ### Common Issues
-1. **Import errors**: Check TypeScript path mappings in tsconfig.json
-2. **Build failures**: Ensure all workspace dependencies are properly linked
-3. **Test failures**: Check Jest configuration and mocks
-4. **Linting errors**: Run `pnpm lint:fix` to auto-fix issues
+1. **"This JSX tag requires 'React' to be in scope" IDE error**: 
+   - Add `/** @jsxImportSource @systembug/wsx-core */` to the top of your .wsx file
+   - Ensure tsconfig.json has `"jsx": "react-jsx"` and `"jsxImportSource": "@systembug/wsx-core"`
+   - Restart TypeScript service in IDE: `Cmd+Shift+P` → "TypeScript: Restart TS Server"
+
+2. **Import errors**: Check TypeScript path mappings in tsconfig.json
+
+3. **Build failures**: Ensure all workspace dependencies are properly linked
+
+4. **Test failures**: Check Jest configuration and mocks
+
+5. **Linting errors**: Run `pnpm lint:fix` to auto-fix issues
 
 ### Debug Mode
 Enable debug logging by setting the log level:

@@ -18,6 +18,7 @@ A modern Web Components framework with JSX syntax and TypeScript support, publis
 - 📝 **Developer Experience** - ESLint rules and hot reload support
 - 🧪 **Testing Ready** - Jest setup with Web Components mocking
 - 🔍 **Code Quality** - ESLint, Prettier, and pre-commit hooks
+- ⚡ **Framework-Level JSX Support** - Complete JSX support without React dependency
 
 ## Packages
 
@@ -75,7 +76,7 @@ import styles from './MyComponent.css?inline';
 
 const logger = createLogger('MyComponent');
 
-// No need to import h or Fragment - Vite plugin auto-injects them!
+// Framework-level JSX support - no React dependency needed!
 @autoRegister("my-component")
 export class MyComponent extends WebComponent {
   constructor() {
@@ -95,10 +96,26 @@ export class MyComponent extends WebComponent {
 ```
 
 ### Key Features
+- **Framework-Level JSX Support**: Complete JSX support without React dependency
+- **TypeScript Integration**: Full IntelliSense and type safety with `jsxImportSource`
 - **Auto JSX Injection**: The Vite plugin automatically injects `h` and `Fragment` imports
 - **Clean Imports**: Focus on your component logic, not boilerplate
-- **TypeScript Support**: Full IntelliSense and type safety
 - **CSS Encapsulation**: Import CSS with `?inline` for Shadow DOM styling
+
+## JSX Configuration
+
+WSX Framework provides framework-level JSX support. Configure your `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "@systembug/wsx-core/jsx"
+  }
+}
+```
+
+This enables complete JSX support without any React dependency!
 
 ## Usage in HTML
 
@@ -107,6 +124,13 @@ export class MyComponent extends WebComponent {
   <p>This content goes in the slot</p>
 </my-component>
 ```
+
+## Documentation
+
+- [Quick Start Guide](docs/QUICK_START.md) - Get started with WSX Framework in minutes
+- [JSX Support Guide](docs/JSX_SUPPORT.md) - Complete guide to JSX configuration and usage
+- [Design Documentation](docs/WSX_DESIGN.md) - Framework architecture and design decisions
+- [Development Plan](docs/WSX_PRACTICE_PLAN.md) - Development workflow and best practices
 
 ## Development
 

@@ -1,0 +1,13 @@
+{
+    "permissions": {
+        "allow": [
+            "Bash(pnpm build:*)",
+            "Bash(pnpm --filter @systembug/wsx-examples build)",
+            "Bash(kill:*)",
+            "Bash(pnpm typecheck:*)",
+            "Bash(pnpm --filter @systembug/wsx-examples typecheck)",
+            "Bash(pnpm --filter @systembug/wsx-core build)"
+        ],
+        "deny": []
+    }
+}

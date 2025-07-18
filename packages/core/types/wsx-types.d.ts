@@ -21,18 +21,23 @@ declare module "*.wsx" {
     export default Component;
 }
 
-// JSX 全局类型声明
+// JSX 工厂函数类型
+declare function h(
+    type: string | ((...args: unknown[]) => unknown),
+    props?: Record<string, unknown> | null,
+    ...children: unknown[]
+): HTMLElement;
+
+declare const Fragment: symbol;
+
+// Global JSX namespace declaration
 declare global {
     namespace JSX {
+        type Element = HTMLElement;
+
         interface IntrinsicElements {
-            [elemName: string]: unknown;
-        }
-
-        // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-        interface Element extends HTMLElement {}
-
-        interface ElementClass {
-            render(): Element;
+            // HTML elements
+            [elemName: string]: object;
         }
 
         interface ElementAttributesProperty {
@@ -42,18 +47,7 @@ declare global {
         interface ElementChildrenAttribute {
             children: object;
         }
-
-        type LibraryManagedAttributes<_C, P> = P;
     }
 }
-
-// JSX 工厂函数类型
-declare function h(
-    type: string | ((...args: unknown[]) => unknown),
-    props?: Record<string, unknown> | null,
-    ...children: unknown[]
-): HTMLElement;
-
-declare const Fragment: symbol;
 
 export { h, Fragment };

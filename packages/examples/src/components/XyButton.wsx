@@ -1,3 +1,4 @@
+/** @jsxImportSource @systembug/wsx-core */
 /**
  * XyButton WSX Component - 迁移自xy-button.js
  *
@@ -9,7 +10,7 @@
  * - 完整的样式系统和主题变量
  */
 
-import { WebComponent, autoRegister, h, Fragment } from "@systembug/wsx-core";
+import { WebComponent, autoRegister } from "@systembug/wsx-core";
 import styles from "./XyButton.css?inline";
 
 export interface XyButtonConfig {

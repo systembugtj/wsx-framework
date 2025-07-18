@@ -8,7 +8,7 @@ import type { Linter } from "eslint";
 
 export const flatConfig: Linter.FlatConfig = {
     name: "wsx/recommended",
-    files: ["**/*.tsx", "**/*.jsx"],
+    files: ["**/*.wsx"],
     languageOptions: {
         parser: "@typescript-eslint/parser",
         ecmaVersion: "latest",

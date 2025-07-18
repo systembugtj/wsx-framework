@@ -21,6 +21,8 @@ export default [
                 ecmaFeatures: {
                     jsx: true,
                 },
+                jsxPragma: "h",
+                jsxFragmentName: "Fragment",
                 extraFileExtensions: [".wsx"],
             },
             globals: {

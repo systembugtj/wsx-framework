@@ -9,9 +9,8 @@
         "resolveJsonModule": true,
         "isolatedModules": true,
         "noEmit": true,
-        "jsx": "react",
-        "jsxFactory": "h",
-        "jsxFragmentFactory": "Fragment",
+        "jsx": "react-jsx",
+        "jsxImportSource": "@systembug/wsx-core",
         "strict": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
@@ -25,10 +24,15 @@
         "baseUrl": ".",
         "paths": {
             "@systembug/wsx-core": ["./packages/core/src"],
+            "@systembug/wsx-core/*": ["./packages/core/types/*"],
             "@systembug/wsx-vite-plugin": ["./packages/vite-plugin/src"],
             "@systembug/eslint-plugin-wsx": ["./packages/eslint-plugin/src"]
         }
     },
-    "include": ["packages/*/src/**/*", "packages/vite-plugin/test/setup.ts"],
+    "include": [
+        "packages/*/src/**/*",
+        "packages/vite-plugin/test/setup.ts",
+        "packages/core/types/wsx-types.d.ts"
+    ],
     "exclude": ["node_modules", "dist", "**/*.test.*"]
 }

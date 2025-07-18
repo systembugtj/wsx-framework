@@ -2,6 +2,7 @@
     "name": "@systembug/wsx-examples",
     "version": "0.0.2",
     "description": "Example applications using WSX Framework",
+    "type": "module",
     "private": true,
     "scripts": {
         "dev": "vite",

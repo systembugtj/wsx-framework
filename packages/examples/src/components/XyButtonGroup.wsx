@@ -1,3 +1,4 @@
+/** @jsxImportSource @systembug/wsx-core */
 /**
  * XyButtonGroup WSX Component - 迁移自xy-button.js
  *

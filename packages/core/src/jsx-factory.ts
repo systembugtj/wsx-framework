@@ -9,63 +9,7 @@
  * - TypeScript类型安全
  */
 
-// JSX命名空间声明 - 原生版本
-declare global {
-    // eslint-disable-next-line @typescript-eslint/no-namespace
-    namespace JSX {
-        interface IntrinsicElements {
-            // 标准HTML元素
-            div: HTMLAttributes<HTMLDivElement>;
-            button: HTMLAttributes<HTMLButtonElement>;
-            section: HTMLAttributes<HTMLElement>;
-            span: HTMLAttributes<HTMLSpanElement>;
-            input: HTMLAttributes<HTMLInputElement>;
-            p: HTMLAttributes<HTMLParagraphElement>;
-            h1: HTMLAttributes<HTMLHeadingElement>;
-            h2: HTMLAttributes<HTMLHeadingElement>;
-            h3: HTMLAttributes<HTMLHeadingElement>;
-            ul: HTMLAttributes<HTMLUListElement>;
-            li: HTMLAttributes<HTMLLIElement>;
-            a: HTMLAttributes<HTMLAnchorElement>;
-            // Web Components 元素
-            slot: HTMLAttributes<HTMLSlotElement>;
-        }
-
-        interface HTMLAttributes<T extends HTMLElement = HTMLElement> {
-            className?: string;
-            class?: string;
-            id?: string;
-            style?: string;
-            disabled?: boolean;
-            title?: string;
-            type?: string;
-            value?: string;
-            placeholder?: string;
-            src?: string;
-            alt?: string;
-            href?: string | null;
-            target?: string;
-
-            // Ref callback with proper typing
-            ref?: (element: T) => void;
-
-            // Data attributes
-            [dataAttr: `data-${string}`]: string;
-
-            // Event handlers
-            onClick?: (event: Event) => void;
-            onInput?: (event: Event) => void;
-            onChange?: (event: Event) => void;
-            onMouseOver?: (event: Event) => void;
-            onMouseOut?: (event: Event) => void;
-            onFocus?: (event: Event) => void;
-            onBlur?: (event: Event) => void;
-
-            // 允许任意属性
-            [key: string]: unknown;
-        }
-    }
-}
+// JSX 类型声明已移至 types/wsx-types.d.ts
 
 // JSX子元素类型
 export type JSXChildren =

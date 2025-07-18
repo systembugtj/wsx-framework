@@ -1,3 +1,4 @@
+/** @jsxImportSource @systembug/wsx-core */
 /**
  * 通用WSX颜色选择器 - Web Component示例
  *
