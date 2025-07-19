@@ -1,6 +1,6 @@
 {
     "name": "@systembug/wsx-core",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Core WSX Framework - Web Components with JSX syntax",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
