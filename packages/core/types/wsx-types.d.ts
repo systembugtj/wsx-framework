@@ -30,24 +30,4 @@ declare function h(
 
 declare const Fragment: symbol;
 
-// Global JSX namespace declaration
-declare global {
-    namespace JSX {
-        type Element = HTMLElement;
-
-        interface IntrinsicElements {
-            // HTML elements
-            [elemName: string]: object;
-        }
-
-        interface ElementAttributesProperty {
-            props: object;
-        }
-
-        interface ElementChildrenAttribute {
-            children: object;
-        }
-    }
-}
-
 export { h, Fragment };

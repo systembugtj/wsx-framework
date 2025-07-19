@@ -5,12 +5,15 @@
  */
 
 import type { Linter } from "eslint";
+import { renderMethodRequired } from "../rules/render-method-required";
+import { noReactImports } from "../rules/no-react-imports";
+import { webComponentNaming } from "../rules/web-component-naming";
 
 export const flatConfig: Linter.FlatConfig = {
     name: "wsx/recommended",
     files: ["**/*.wsx"],
     languageOptions: {
-        parser: "@typescript-eslint/parser",
+        parser: "@typescript-eslint/parser" as any,
         ecmaVersion: "latest",
         sourceType: "module",
         parserOptions: {
@@ -52,9 +55,9 @@ export const flatConfig: Linter.FlatConfig = {
     plugins: {
         wsx: {
             rules: {
-                "render-method-required": {},
-                "no-react-imports": {},
-                "web-component-naming": {},
+                "render-method-required": renderMethodRequired,
+                "no-react-imports": noReactImports,
+                "web-component-naming": webComponentNaming,
             },
         },
     },
