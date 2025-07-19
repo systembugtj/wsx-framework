@@ -1,8 +1,10 @@
 import { defineConfig } from "vite";
 import { wsx } from "@systembug/wsx-vite-plugin";
+import UnoCSS from "unocss/vite";
 
 export default defineConfig({
     plugins: [
+        UnoCSS(),
         wsx({
             debug: false,
             jsxFactory: "h",

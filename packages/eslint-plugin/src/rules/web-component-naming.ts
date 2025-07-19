@@ -48,6 +48,7 @@ export const webComponentNaming: WSXRuleModule = {
         ]);
 
         return {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             Decorator(node: any) {
                 if (
                     node.expression.type === "CallExpression" &&
@@ -57,6 +58,7 @@ export const webComponentNaming: WSXRuleModule = {
                     const args = node.expression.arguments;
                     if (args.length > 0 && args[0].type === "ObjectExpression") {
                         const tagNameProp = args[0].properties.find(
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
                             (prop: any) =>
                                 prop.type === "Property" &&
                                 prop.key &&

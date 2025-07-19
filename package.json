@@ -19,6 +19,8 @@
         "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,wsx,json,css,md}\"",
         "typecheck": "tsc --noEmit",
         "dev": "pnpm --filter @systembug/wsx-examples dev",
+        "debug:chrome": "node scripts/debug-chrome.js",
+        "debug:wsx": "pnpm dev & pnpm debug:chrome",
         "clean": "pnpm -r clean && rm -rf node_modules",
         "prepare": "husky install",
         "precommit": "lint-staged",

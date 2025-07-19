@@ -122,8 +122,8 @@ export default class ColorPicker extends WebComponent {
         const colorPanel = this.isOpen ? this.renderColorPanel() : null;
 
         return (
-            <section className="color-section">
-                <div className="color-popover">
+            <section class="color-section">
+                <div class="color-popover">
                     {colorButton}
                     {colorPanel}
                 </div>
@@ -138,7 +138,7 @@ export default class ColorPicker extends WebComponent {
         return (
             <xy-button
                 type="button"
-                className={`color-btn ${this.disabled ? "disabled" : ""}`}
+                class={`color-btn ${this.disabled ? "disabled" : ""}`}
                 style={`--theme-color: ${this.selectedColor}`}
                 disabled={this.disabled}
                 onClick={this.handleButtonClick}
@@ -146,7 +146,7 @@ export default class ColorPicker extends WebComponent {
                     this.colorBtn = el;
                 }}
             >
-                <span className="color-indicator">_</span>
+                <span class="color-indicator">_</span>
             </xy-button>
         );
     }
@@ -157,13 +157,13 @@ export default class ColorPicker extends WebComponent {
     private renderColorPanel(): HTMLElement {
         return (
             <div
-                className="color-panel"
+                class="color-panel"
                 onClick={this.handlePanelClick}
                 ref={(el: HTMLDivElement) => {
                     this.colorPanel = el;
                 }}
             >
-                <div className="color-grid">
+                <div class="color-grid">
                     {this.hasCustomPicker ? this.renderCustomPicker() : null}
                     {this.renderColorButtons()}
                 </div>
@@ -178,7 +178,7 @@ export default class ColorPicker extends WebComponent {
         return (
             <xy-button
                 type="button"
-                className="color-cube custom-picker"
+                class="color-cube custom-picker"
                 style={{ backgroundColor: this.customColor }}
                 onClick={this.handleCustomPickerClick}
                 title="自定义颜色"
@@ -194,7 +194,7 @@ export default class ColorPicker extends WebComponent {
             <xy-button
                 key={color}
                 type="button"
-                className="color-cube"
+                class="color-cube"
                 style={`background-color: ${color}`}
                 data-color={color}
                 title={color}

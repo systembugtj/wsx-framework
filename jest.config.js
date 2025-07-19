@@ -1,5 +1,5 @@
 /** @type {import('jest').Config} */
-module.exports = {
+export default {
     preset: "ts-jest",
     testEnvironment: "jsdom",
     roots: ["<rootDir>/packages"],
@@ -15,7 +15,7 @@ module.exports = {
             "ts-jest",
             {
                 tsconfig: {
-                    jsx: "react-jsx",
+                    jsx: "preserve",
                     jsxImportSource: "@systembug/wsx-core",
                     experimentalDecorators: true,
                     emitDecoratorMetadata: true,

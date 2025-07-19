@@ -13,7 +13,9 @@
         "lint:fix": "eslint . --fix"
     },
     "dependencies": {
-        "@systembug/wsx-core": "workspace:*"
+        "@systembug/wsx-core": "workspace:*",
+        "@unocss/preset-attributify": "^66.3.3",
+        "@unocss/preset-uno": "^66.3.3"
     },
     "devDependencies": {
         "@systembug/eslint-plugin-wsx": "workspace:*",
@@ -22,7 +24,7 @@
         "@typescript-eslint/parser": "^6.0.0",
         "eslint": "^8.0.0",
         "typescript": "^5.0.0",
-        "vite": "^5.0.0",
-        "esbuild": "0.25.6"
+        "unocss": "^66.3.3",
+        "vite": "^5.0.0"
     }
 }

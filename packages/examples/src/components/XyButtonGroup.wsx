@@ -33,7 +33,7 @@ export default class XyButtonGroup extends WebComponent {
 
     render(): HTMLElement {
         return (
-            <div className="button-group-container">
+            <div class="button-group-container">
                 <slot />
             </div>
         );

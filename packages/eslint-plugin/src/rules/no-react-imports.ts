@@ -32,6 +32,7 @@ export const noReactImports: WSXRuleModule = {
         ];
 
         return {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             ImportDeclaration(node: any) {
                 const source = node.source.value;
                 if (

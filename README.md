@@ -65,6 +65,9 @@ pnpm test
 
 # Start development with watch mode
 pnpm dev
+
+# Debug with Chrome DevTools
+pnpm debug:wsx
 ```
 
 ## Creating a WSX Component
@@ -131,6 +134,7 @@ This enables complete JSX support without any React dependency!
 - [JSX Support Guide](docs/JSX_SUPPORT.md) - Complete guide to JSX configuration and usage
 - [Design Documentation](docs/WSX_DESIGN.md) - Framework architecture and design decisions
 - [Development Plan](docs/WSX_PRACTICE_PLAN.md) - Development workflow and best practices
+- [Chrome Debugging Guide](docs/chrome-debugging-guide.md) - Debug Web Components with Chrome DevTools
 
 ## Development
 
@@ -160,6 +164,10 @@ pnpm build
 
 # Development with watch mode
 pnpm dev
+
+# Chrome debugging
+pnpm debug:chrome        # Start Chrome in debug mode
+pnpm debug:wsx           # Start WSX app + Chrome debug mode
 
 # Testing
 pnpm test                 # Run all tests
@@ -194,9 +202,12 @@ wsx-framework/
 │   ├── eslint-plugin/     # ESLint rules
 │   ├── components/        # Pre-built components
 │   └── examples/          # Example applications
+├── scripts/               # Development scripts
+│   └── debug-chrome.js    # Chrome debugging script
+├── docs/                  # Documentation
+│   └── chrome-debugging-guide.md  # Chrome debugging guide
 ├── test/                  # Global test setup
-├── .github/              # GitHub Actions CI/CD
-└── docs/                 # Documentation
+└── .github/              # GitHub Actions CI/CD
 ```
 
 ### Development Tooling
@@ -218,6 +229,11 @@ wsx-framework/
 - **tsup** - Fast TypeScript bundler
 - **TypeScript** - Type checking and compilation
 - **pnpm workspaces** - Monorepo package management
+
+#### Debugging
+- **Chrome DevTools** - Web Components debugging with Shadow DOM inspection
+- **Browser Tools MCP** - Model Context Protocol integration for AI-assisted debugging
+- **Remote Debugging** - Chrome remote debugging on port 9222
 
 ### VS Code Setup
 

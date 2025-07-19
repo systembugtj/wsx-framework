@@ -1,0 +1,89 @@
+/** @jsxImportSource @systembug/wsx-core */
+
+import { WebComponent, autoRegister } from "@systembug/wsx-core";
+
+@autoRegister({ tagName: "theme-switcher" })
+export default class ThemeSwitcher extends WebComponent {
+    private currentTheme: "light" | "dark" | "auto" = "auto";
+
+    constructor() {
+        super({
+            styleName: "theme-switcher",
+        });
+
+        this.initTheme();
+    }
+
+    render(): HTMLElement {
+        return (
+            <div class="theme-switcher-container">
+                <button
+                    class="theme-switcher-btn"
+                    onClick={this.toggleTheme}
+                    title={`当前主题: ${this.getThemeLabel()}`}
+                >
+                    <span class="theme-switcher-icon">{this.getThemeIcon()}</span>
+                </button>
+            </div>
+        );
+    }
+
+    private getThemeIcon(): string {
+        const icons = {
+            light: "☀️",
+            dark: "🌙",
+            auto: "🔄",
+        };
+
+        return icons[this.currentTheme];
+    }
+
+    private getThemeLabel(): string {
+        const labels = {
+            light: "浅色",
+            dark: "深色",
+            auto: "自动",
+        };
+
+        return labels[this.currentTheme];
+    }
+
+    private toggleTheme = (): void => {
+        const themes: ("light" | "dark" | "auto")[] = ["auto", "light", "dark"];
+        const currentIndex = themes.indexOf(this.currentTheme);
+        const nextIndex = (currentIndex + 1) % themes.length;
+        this.setTheme(themes[nextIndex]);
+    };
+
+    private setTheme(theme: "light" | "dark" | "auto"): void {
+        this.currentTheme = theme;
+        const html = document.documentElement;
+
+        if (theme === "auto") {
+            html.removeAttribute("class");
+            this.checkSystemTheme();
+        } else {
+            html.className = theme;
+        }
+
+        localStorage.setItem("wsx-theme", theme);
+        this.rerender();
+    }
+
+    private checkSystemTheme(): void {
+        const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.className = isDark ? "dark" : "";
+    }
+
+    private initTheme(): void {
+        const savedTheme =
+            (localStorage.getItem("wsx-theme") as "light" | "dark" | "auto") || "auto";
+        this.setTheme(savedTheme);
+
+        window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+            if (this.currentTheme === "auto") {
+                document.documentElement.className = e.matches ? "dark" : "";
+            }
+        });
+    }
+}

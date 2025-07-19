@@ -31,7 +31,7 @@ export type JSXChildren =
  * @returns DOM元素
  */
 export function h(
-    tag: string | ((...args: unknown[]) => HTMLElement),
+    tag: string | ((props: Record<string, unknown> | null, children: JSXChildren[]) => HTMLElement),
     props: Record<string, unknown> | null = {},
     ...children: JSXChildren[]
 ): HTMLElement {

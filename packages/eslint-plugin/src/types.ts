@@ -40,4 +40,5 @@ export interface WSXPlugin {
     meta: WSXPluginMeta;
     rules: Record<string, WSXRuleModule>;
     configs: Record<string, WSXConfig>;
+    [key: string]: unknown;
 }

@@ -41,8 +41,8 @@ describe("WSX ESLint Plugin Integration", () => {
             expect(wsxPlugin).toHaveProperty("configs");
 
             expect(wsxPlugin.meta).toEqual({
-                name: "wsx-eslint-plugin",
-                version: "1.0.0",
+                name: "@systembug/eslint-plugin-wsx",
+                version: "0.0.2",
             });
         });
 

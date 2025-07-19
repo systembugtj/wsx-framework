@@ -1,0 +1,22 @@
+{
+    "mcpServers": {
+        "browser-tools": {
+            "command": "npx",
+            "args": ["@agentdeskai/browser-tools-mcp"],
+            "env": {
+                "BROWSER_TYPE": "chrome"
+            }
+        }
+    },
+    "mcp": {
+        "servers": {
+            "browser-tools": {
+                "command": "npx",
+                "args": ["@agentdeskai/browser-tools-mcp"],
+                "env": {
+                    "BROWSER_TYPE": "chrome"
+                }
+            }
+        }
+    }
+}

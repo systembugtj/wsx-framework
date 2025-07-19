@@ -3,7 +3,7 @@
     "compilerOptions": {
         "outDir": "./dist",
         "jsx": "react-jsx",
-        "jsxImportSource": "@systembug/wsx-core/jsx"
+        "jsxImportSource": "@systembug/wsx-core"
     },
     "include": ["src/**/*"],
     "exclude": ["dist", "**/*.test.*"]

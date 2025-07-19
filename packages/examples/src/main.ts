@@ -6,7 +6,13 @@
  */
 
 import { createLogger } from "@systembug/wsx-core";
+import "uno.css";
+import "./App.css";
+import "./components/XyButton.css";
+import "./components/XyButtonGroup.css";
+import "./components/ColorPicker.css";
 import "./App.wsx";
+import "./components/ThemeSwitcher.wsx";
 
 const logger = createLogger("Main");
 

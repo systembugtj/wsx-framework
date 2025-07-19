@@ -18,7 +18,7 @@ export interface XyButtonConfig {
     icon?: string;
     loading?: boolean;
     href?: string;
-    htmltype?: string;
+    htmltype?: "reset" | "submit" | "button";
     target?: string;
     rel?: string;
     download?: string;
@@ -96,7 +96,7 @@ export default class XyButton extends WebComponent {
                 target={this.target}
                 rel={this.rel || undefined}
                 download={this.download || undefined}
-                className="btn"
+                class="btn"
                 onMouseDown={this.handleMouseDown}
                 onKeyDown={this.handleKeyDown}
                 ref={(el: HTMLAnchorElement) => {
@@ -111,7 +111,7 @@ export default class XyButton extends WebComponent {
             <button
                 type={this.htmltype || "button"}
                 disabled={this.disabled}
-                className="btn"
+                class="btn"
                 onMouseDown={this.handleMouseDown}
                 onKeyDown={this.handleKeyDown}
                 ref={(el: HTMLButtonElement) => {
@@ -122,7 +122,7 @@ export default class XyButton extends WebComponent {
             </button>
         );
 
-        return <div className="xy-button-container">{isLink ? linkElement : buttonElement}</div>;
+        return <div class="xy-button-container">{isLink ? linkElement : buttonElement}</div>;
     }
 
     private renderContent(): (HTMLElement | string)[] {
@@ -132,7 +132,7 @@ export default class XyButton extends WebComponent {
         if (this.loading) {
             content.push(
                 <div
-                    className="loading"
+                    class="loading"
                     ref={(el: HTMLElement) => {
                         this.loadingElement = el;
                     }}
@@ -146,7 +146,7 @@ export default class XyButton extends WebComponent {
         if (!this.loading && this.icon && this.icon !== "null") {
             content.push(
                 <div
-                    className="icon"
+                    class="icon"
                     data-icon={this.icon}
                     ref={(el: HTMLElement) => {
                         this.iconElement = el;
@@ -282,7 +282,7 @@ export default class XyButton extends WebComponent {
         }
 
         if (this.htmltype && this.btnElement instanceof HTMLButtonElement) {
-            this.btnElement.type = this.htmltype;
+            this.btnElement.type = (this.htmltype as "reset" | "submit" | "button") ?? "button";
         }
     }
 

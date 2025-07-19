@@ -13,6 +13,7 @@ export const flatConfig: Linter.FlatConfig = {
     name: "wsx/recommended",
     files: ["**/*.wsx"],
     languageOptions: {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         parser: "@typescript-eslint/parser" as any,
         ecmaVersion: "latest",
         sourceType: "module",
@@ -94,7 +95,7 @@ export const flatConfig: Linter.FlatConfig = {
 };
 
 // Helper function to create a flat config with the plugin
-export function createFlatConfig(plugin: any): Linter.FlatConfig {
+export function createFlatConfig(plugin: Record<string, unknown>): Linter.FlatConfig {
     return {
         ...flatConfig,
         plugins: {
