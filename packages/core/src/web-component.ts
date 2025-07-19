@@ -26,6 +26,7 @@ export interface WebComponentConfig {
 export abstract class WebComponent extends HTMLElement {
     declare shadowRoot: ShadowRoot;
     protected config: WebComponentConfig;
+    protected connected: boolean = false;
 
     /**
      * 子类应该重写这个方法来定义观察的属性
@@ -59,6 +60,7 @@ export abstract class WebComponent extends HTMLElement {
      * Web Component生命周期：连接到DOM
      */
     connectedCallback(): void {
+        this.connected = true;
         try {
             // 渲染JSX内容到Shadow DOM
             const content = this.render();
@@ -125,6 +127,12 @@ export abstract class WebComponent extends HTMLElement {
      * 重新渲染组件
      */
     protected rerender(): void {
+        if (!this.connected) {
+            console.warn(
+                `[${this.constructor.name}] Component is not connected, skipping rerender.`
+            );
+            return;
+        }
         // 保存当前的 adopted stylesheets (jsdom may not support this)
         const adoptedStyleSheets = this.shadowRoot.adoptedStyleSheets || [];
 
