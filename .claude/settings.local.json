@@ -6,7 +6,13 @@
             "Bash(kill:*)",
             "Bash(pnpm typecheck:*)",
             "Bash(pnpm --filter @systembug/wsx-examples typecheck)",
-            "Bash(pnpm --filter @systembug/wsx-core build)"
+            "Bash(pnpm --filter @systembug/wsx-core build)",
+            "Bash(pnpm test:*)",
+            "Bash(pnpm lint:*)",
+            "Bash(git add:*)",
+            "Bash(git commit:*)",
+            "Bash(git tag:*)",
+            "Bash(git push:*)"
         ],
         "deny": []
     }
