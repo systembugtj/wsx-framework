@@ -12,7 +12,7 @@ jest.mock("../src/web-component", () => {
         shadowRoot: any;
         connected = true;
 
-        constructor(config: any = {}) {
+        constructor(_config: any = {}) {
             this.shadowRoot = {
                 innerHTML: "",
                 appendChild: jest.fn(),
