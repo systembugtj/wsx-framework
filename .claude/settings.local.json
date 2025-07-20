@@ -22,7 +22,8 @@
       "Bash(pnpm --filter @systembug/eslint-plugin-wsx test)",
       "Bash(pnpm --filter @systembug/wsx-vite-plugin test)",
       "Bash(ls:*)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "Bash(pnpm jest:*)"
     ],
     "deny": []
   }
