@@ -13,6 +13,8 @@ import "./components/XyButtonGroup.css";
 import "./components/ColorPicker.css";
 import "./App.wsx";
 import "./components/ThemeSwitcher.wsx";
+import "./SvgIcon.wsx";
+import "./SvgDemo.wsx";
 
 const logger = createLogger("Main");
 

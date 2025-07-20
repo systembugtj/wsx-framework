@@ -1,0 +1,88 @@
+/** @jsxImportSource @systembug/wsx-core */
+import { WebComponent, autoRegister, createLogger } from "@systembug/wsx-core";
+
+const logger = createLogger("SvgIcon");
+
+@autoRegister()
+export class SvgIcon extends WebComponent {
+    constructor() {
+        super();
+        logger.info("SvgIcon component initialized");
+    }
+
+    render() {
+        const size = this.getAttribute("size") || "24";
+        const color = this.getAttribute("color") || "currentColor";
+        const name = this.getAttribute("name") || "star";
+
+        // Different icon paths based on name
+        const iconPaths = {
+            star: "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z",
+            heart: "M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z",
+            check: "M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z",
+            close: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z",
+            github: "M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22",
+            play: "M8 5v14l11-7z",
+            settings:
+                "M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z",
+        };
+
+        const path = iconPaths[name as keyof typeof iconPaths] || iconPaths.star;
+
+        return (
+            <svg
+                width={size}
+                height={size}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke={color}
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="svg-icon"
+                onClick={this.handleClick}
+                style="cursor: pointer; transition: transform 0.2s ease; display: inline-block;"
+                onMouseEnter={this.handleMouseEnter}
+                onMouseLeave={this.handleMouseLeave}
+            >
+                <path d={path} fill={color} />
+            </svg>
+        );
+    }
+
+    private handleClick = (event: Event) => {
+        logger.debug("SVG icon clicked", { name: this.getAttribute("name") });
+
+        // Dispatch custom event
+        this.dispatchEvent(
+            new CustomEvent("icon-click", {
+                detail: {
+                    name: this.getAttribute("name"),
+                    originalEvent: event,
+                },
+                bubbles: true,
+            })
+        );
+    };
+
+    private handleMouseEnter = (event: Event) => {
+        const svg = event.target as SVGElement;
+        svg.style.transform = "scale(1.1)";
+    };
+
+    private handleMouseLeave = (event: Event) => {
+        const svg = event.target as SVGElement;
+        svg.style.transform = "scale(1)";
+    };
+
+    static get observedAttributes() {
+        return ["name", "size", "color"];
+    }
+
+    protected onAttributeChanged(name: string, oldValue: string, newValue: string): void {
+        logger.debug(`Attribute ${name} changed from ${oldValue} to ${newValue}`);
+        if (this.connected) {
+            this.rerender();
+        }
+    }
+}

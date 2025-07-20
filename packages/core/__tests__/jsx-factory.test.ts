@@ -5,6 +5,7 @@
 
 import { describe, it, expect, jest } from "@jest/globals";
 import { h, Fragment, JSXChildren } from "../src/jsx-factory";
+import { isSVGElement, SVG_NAMESPACE } from "../src/svg-utils";
 
 describe("JSX Factory (h function)", () => {
     describe("Basic Element Creation", () => {
@@ -391,5 +392,248 @@ describe("Edge Cases and Error Handling", () => {
 
         expect(element.getAttribute("tabindex")).toBe("5");
         expect(element.getAttribute("data-count")).toBe("42");
+    });
+});
+
+describe("SVG Element Support", () => {
+    describe("SVG Element Creation", () => {
+        it("should create SVG elements with correct namespace", () => {
+            const svgElement = h("svg");
+
+            expect(svgElement).toBeInstanceOf(SVGElement);
+            expect(svgElement.namespaceURI).toBe(SVG_NAMESPACE);
+            expect(svgElement.tagName).toBe("svg");
+        });
+
+        it("should create SVG graphics elements", () => {
+            const circle = h("circle");
+            const rect = h("rect");
+            const path = h("path");
+
+            expect(circle).toBeInstanceOf(SVGElement);
+            expect(rect).toBeInstanceOf(SVGElement);
+            expect(path).toBeInstanceOf(SVGElement);
+            expect(circle.namespaceURI).toBe(SVG_NAMESPACE);
+            expect(rect.namespaceURI).toBe(SVG_NAMESPACE);
+            expect(path.namespaceURI).toBe(SVG_NAMESPACE);
+        });
+
+        it("should create SVG text elements", () => {
+            const text = h("text");
+            const tspan = h("tspan");
+
+            expect(text).toBeInstanceOf(SVGElement);
+            expect(tspan).toBeInstanceOf(SVGElement);
+            expect(text.tagName).toBe("text");
+            expect(tspan.tagName).toBe("tspan");
+        });
+
+        it("should create SVG gradient elements", () => {
+            const linearGradient = h("linearGradient");
+            const stop = h("stop");
+
+            expect(linearGradient).toBeInstanceOf(SVGElement);
+            expect(stop).toBeInstanceOf(SVGElement);
+            expect(linearGradient.tagName).toBe("linearGradient");
+            expect(stop.tagName).toBe("stop");
+        });
+    });
+
+    describe("SVG Attributes", () => {
+        it("should handle className as class attribute for SVG", () => {
+            const circle = h("circle", { className: "my-circle" });
+
+            expect(circle.getAttribute("class")).toBe("my-circle");
+            // SVG elements don't have className property
+            expect((circle as any).className).not.toBe("my-circle");
+        });
+
+        it("should handle class attribute for SVG", () => {
+            const rect = h("rect", { class: "my-rect" });
+
+            expect(rect.getAttribute("class")).toBe("my-rect");
+        });
+
+        it("should handle SVG-specific attributes", () => {
+            const circle = h("circle", {
+                cx: "50",
+                cy: "50",
+                r: "25",
+                fill: "red",
+                stroke: "blue",
+                "stroke-width": "2",
+            });
+
+            expect(circle.getAttribute("cx")).toBe("50");
+            expect(circle.getAttribute("cy")).toBe("50");
+            expect(circle.getAttribute("r")).toBe("25");
+            expect(circle.getAttribute("fill")).toBe("red");
+            expect(circle.getAttribute("stroke")).toBe("blue");
+            expect(circle.getAttribute("stroke-width")).toBe("2");
+        });
+
+        it("should handle viewBox attribute", () => {
+            const svg = h("svg", {
+                viewBox: "0 0 100 100",
+                width: "200",
+                height: "200",
+            });
+
+            expect(svg.getAttribute("viewBox")).toBe("0 0 100 100");
+            expect(svg.getAttribute("width")).toBe("200");
+            expect(svg.getAttribute("height")).toBe("200");
+        });
+
+        it("should handle camelCase SVG attributes", () => {
+            const text = h("text", {
+                textAnchor: "middle",
+                dominantBaseline: "central",
+            });
+
+            expect(text.getAttribute("textAnchor")).toBe("middle");
+            expect(text.getAttribute("dominantBaseline")).toBe("central");
+        });
+    });
+
+    describe("SVG Nested Structure", () => {
+        it("should create nested SVG structure", () => {
+            const svg = h("svg", { viewBox: "0 0 100 100", width: "100", height: "100" }, [
+                h("circle", { cx: "25", cy: "25", r: "20", fill: "red" }),
+                h("rect", { x: "50", y: "50", width: "40", height: "40", fill: "blue" }),
+                h("text", { x: "50", y: "25", textAnchor: "middle" }, "Hello SVG"),
+            ]);
+
+            expect(svg.children).toHaveLength(3);
+            expect(svg.children[0].tagName).toBe("circle");
+            expect(svg.children[1].tagName).toBe("rect");
+            expect(svg.children[2].tagName).toBe("text");
+            expect(svg.children[2].textContent).toBe("Hello SVG");
+        });
+
+        it("should create SVG with gradients", () => {
+            const svg = h("svg", { viewBox: "0 0 100 100" }, [
+                h("defs", {}, [
+                    h("linearGradient", { id: "grad1" }, [
+                        h("stop", { offset: "0%", "stop-color": "red" }),
+                        h("stop", { offset: "100%", "stop-color": "blue" }),
+                    ]),
+                ]),
+                h("circle", { cx: "50", cy: "50", r: "40", fill: "url(#grad1)" }),
+            ]);
+
+            const defs = svg.children[0];
+            const gradient = defs.children[0];
+
+            expect(defs.tagName).toBe("defs");
+            expect(gradient.tagName).toBe("linearGradient");
+            expect(gradient.children).toHaveLength(2);
+            expect(gradient.children[0].tagName).toBe("stop");
+            expect(gradient.children[1].tagName).toBe("stop");
+        });
+    });
+
+    describe("SVG Event Handling", () => {
+        it("should attach event listeners to SVG elements", () => {
+            const clickHandler = jest.fn();
+            const circle = h("circle", {
+                cx: "50",
+                cy: "50",
+                r: "25",
+                onClick: clickHandler,
+            });
+
+            circle.dispatchEvent(new Event("click"));
+
+            expect(clickHandler).toHaveBeenCalledTimes(1);
+        });
+
+        it("should handle multiple events on SVG elements", () => {
+            const mouseEnterHandler = jest.fn();
+            const mouseLeaveHandler = jest.fn();
+
+            const rect = h("rect", {
+                x: "10",
+                y: "10",
+                width: "50",
+                height: "50",
+                onMouseEnter: mouseEnterHandler,
+                onMouseLeave: mouseLeaveHandler,
+            });
+
+            rect.dispatchEvent(new Event("mouseenter"));
+            rect.dispatchEvent(new Event("mouseleave"));
+
+            expect(mouseEnterHandler).toHaveBeenCalledTimes(1);
+            expect(mouseLeaveHandler).toHaveBeenCalledTimes(1);
+        });
+    });
+
+    describe("Mixed HTML and SVG", () => {
+        it("should correctly differentiate HTML and SVG elements", () => {
+            const htmlDiv = h("div");
+            const svgCircle = h("circle");
+
+            expect(htmlDiv).toBeInstanceOf(HTMLDivElement);
+            expect(svgCircle).toBeInstanceOf(SVGElement);
+            expect(htmlDiv.namespaceURI).toBe("http://www.w3.org/1999/xhtml");
+            expect(svgCircle.namespaceURI).toBe(SVG_NAMESPACE);
+        });
+
+        it("should handle className differently for HTML vs SVG", () => {
+            const htmlDiv = h("div", { className: "html-class" });
+            const svgCircle = h("circle", { className: "svg-class" });
+
+            expect(htmlDiv.className).toBe("html-class");
+            expect(htmlDiv.getAttribute("class")).toBe("html-class");
+
+            expect(svgCircle.getAttribute("class")).toBe("svg-class");
+            expect((svgCircle as any).className).not.toBe("svg-class");
+        });
+
+        it("should create complex mixed structure", () => {
+            const container = h("div", { className: "svg-container" }, [
+                h("h2", {}, "SVG Example"),
+                h("svg", { viewBox: "0 0 100 100", width: "100" }, [
+                    h("circle", { cx: "50", cy: "50", r: "40", fill: "green" }),
+                ]),
+                h("p", {}, "Description below SVG"),
+            ]);
+
+            expect(container.children).toHaveLength(3);
+            expect(container.children[0]).toBeInstanceOf(HTMLHeadingElement);
+            expect(container.children[1]).toBeInstanceOf(SVGElement);
+            expect(container.children[2]).toBeInstanceOf(HTMLParagraphElement);
+
+            const svg = container.children[1];
+            expect(svg.children[0].tagName).toBe("circle");
+        });
+    });
+});
+
+describe("SVG Utils", () => {
+    describe("isSVGElement function", () => {
+        it("should correctly identify SVG elements", () => {
+            expect(isSVGElement("svg")).toBe(true);
+            expect(isSVGElement("circle")).toBe(true);
+            expect(isSVGElement("rect")).toBe(true);
+            expect(isSVGElement("path")).toBe(true);
+            expect(isSVGElement("text")).toBe(true);
+            expect(isSVGElement("linearGradient")).toBe(true);
+            expect(isSVGElement("stop")).toBe(true);
+        });
+
+        it("should correctly identify non-SVG elements", () => {
+            expect(isSVGElement("div")).toBe(false);
+            expect(isSVGElement("span")).toBe(false);
+            expect(isSVGElement("button")).toBe(false);
+            expect(isSVGElement("input")).toBe(false);
+            expect(isSVGElement("unknown-element")).toBe(false);
+        });
+
+        it("should be case sensitive", () => {
+            expect(isSVGElement("SVG")).toBe(false);
+            expect(isSVGElement("Circle")).toBe(false);
+            expect(isSVGElement("RECT")).toBe(false);
+        });
     });
 });

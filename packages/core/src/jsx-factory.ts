@@ -11,11 +11,14 @@
 
 // JSX 类型声明已移至 types/wsx-types.d.ts
 
+import { createElement, isSVGElement, getSVGAttributeName } from "./svg-utils";
+
 // JSX子元素类型
 export type JSXChildren =
     | string
     | number
     | HTMLElement
+    | SVGElement
     | DocumentFragment
     | JSXChildren[]
     | null
@@ -31,20 +34,27 @@ export type JSXChildren =
  * @returns DOM元素
  */
 export function h(
-    tag: string | ((props: Record<string, unknown> | null, children: JSXChildren[]) => HTMLElement),
+    tag:
+        | string
+        | ((
+              props: Record<string, unknown> | null,
+              children: JSXChildren[]
+          ) => HTMLElement | SVGElement),
     props: Record<string, unknown> | null = {},
     ...children: JSXChildren[]
-): HTMLElement {
+): HTMLElement | SVGElement {
     // 处理组件函数
     if (typeof tag === "function") {
         return tag(props, children);
     }
 
-    // 创建DOM元素
-    const element = document.createElement(tag);
+    // 创建DOM元素 - 自动检测SVG命名空间
+    const element = createElement(tag);
 
     // 处理属性
     if (props) {
+        const isSVG = isSVGElement(tag);
+
         Object.entries(props).forEach(([key, value]) => {
             if (value === null || value === undefined || value === false) {
                 return;
@@ -56,7 +66,13 @@ export function h(
             }
             // 处理className和class
             else if (key === "className" || key === "class") {
-                element.className = value as string;
+                if (isSVG) {
+                    // SVG元素使用class属性
+                    element.setAttribute("class", value as string);
+                } else {
+                    // HTML元素可以使用className
+                    (element as HTMLElement).className = value as string;
+                }
             }
             // 处理style
             else if (key === "style" && typeof value === "string") {
@@ -75,7 +91,9 @@ export function h(
             }
             // 处理其他属性
             else {
-                element.setAttribute(key, String(value));
+                // 对SVG元素使用正确的属性名
+                const attributeName = isSVG ? getSVGAttributeName(key) : key;
+                element.setAttribute(attributeName, String(value));
             }
         });
     }
@@ -89,7 +107,7 @@ export function h(
 
         if (typeof child === "string" || typeof child === "number") {
             element.appendChild(document.createTextNode(String(child)));
-        } else if (child instanceof HTMLElement) {
+        } else if (child instanceof HTMLElement || child instanceof SVGElement) {
             element.appendChild(child);
         } else if (child instanceof DocumentFragment) {
             element.appendChild(child);
@@ -104,11 +122,12 @@ export function h(
  */
 function flattenChildren(
     children: JSXChildren[]
-): (string | number | HTMLElement | DocumentFragment | boolean | null | undefined)[] {
+): (string | number | HTMLElement | SVGElement | DocumentFragment | boolean | null | undefined)[] {
     const result: (
         | string
         | number
         | HTMLElement
+        | SVGElement
         | DocumentFragment
         | boolean
         | null
@@ -142,7 +161,7 @@ export function Fragment(_props: unknown, children: JSXChildren[]): DocumentFrag
 
         if (typeof child === "string" || typeof child === "number") {
             fragment.appendChild(document.createTextNode(String(child)));
-        } else if (child instanceof HTMLElement) {
+        } else if (child instanceof HTMLElement || child instanceof SVGElement) {
             fragment.appendChild(child);
         } else if (child instanceof DocumentFragment) {
             fragment.appendChild(child);

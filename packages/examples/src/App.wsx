@@ -80,18 +80,33 @@ export default class App extends WebComponent {
 
                     <div class="hero-actions">
                         <button class="btn-primary" onClick={this.scrollToQuickStart}>
-                            <span class="btn-icon">▶</span>
+                            <svg-icon
+                                name="play"
+                                size="18"
+                                color="white"
+                                style="margin-right: 8px;"
+                            ></svg-icon>
                             Get Started
                         </button>
 
                         <button class="btn-secondary" onClick={this.openGitHub}>
-                            <span class="btn-icon">📖</span>
-                            Why WSX
+                            <svg-icon
+                                name="github"
+                                size="18"
+                                color="currentColor"
+                                style="margin-right: 8px;"
+                            ></svg-icon>
+                            GitHub
                         </button>
 
                         <button class="btn-ghost" onClick={this.openExamples}>
-                            <span class="btn-icon">⚡</span>
-                            Install
+                            <svg-icon
+                                name="star"
+                                size="18"
+                                color="currentColor"
+                                style="margin-right: 8px;"
+                            ></svg-icon>
+                            Examples
                         </button>
                     </div>
                 </div>
@@ -193,6 +208,14 @@ class MyButton extends WebComponent {
                     </p>
 
                     <div class="examples-grid">
+                        <div class="example-card">
+                            <h3>SVG Graphics</h3>
+                            <p>Native SVG support with namespace handling</p>
+                            <div class="example-demo">
+                                <svg-demo></svg-demo>
+                            </div>
+                        </div>
+
                         <div class="example-card">
                             <h3>Color Picker</h3>
                             <p>Custom web component with color selection</p>
