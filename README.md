@@ -19,6 +19,7 @@ A modern Web Components framework with JSX syntax and TypeScript support, publis
 - 🧪 **Testing Ready** - Jest setup with Web Components mocking
 - 🔍 **Code Quality** - ESLint, Prettier, and pre-commit hooks
 - ⚡ **Framework-Level JSX Support** - Complete JSX support without React dependency
+- 🎯 **Native SVG Support** - Proper namespace handling for SVG elements and attributes
 
 ## Packages
 
@@ -298,6 +299,66 @@ export class MyComponent extends WebComponent {
   // 5. attributeChangedCallback - Attributes changed
   protected onAttributeChanged(name: string, oldValue: string, newValue: string) {
     // Handle attribute changes
+  }
+}
+```
+
+## SVG Support
+
+WSX Framework provides native SVG support with proper namespace handling:
+
+```tsx
+@autoRegister()
+export class SvgIcon extends WebComponent {
+  render() {
+    return (
+      <svg width="24" height="24" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" fill="blue" />
+        <path d="M8 12l2 2 4-4" stroke="white" strokeWidth="2" />
+      </svg>
+    );
+  }
+}
+```
+
+### Features
+
+- **Automatic namespace detection** - SVG elements use `createElementNS` automatically
+- **Proper attribute handling** - `className` converts to `class` for SVG elements
+- **Full TypeScript support** - Complete type safety for SVG elements and attributes
+- **Event handling** - Standard event listeners work on SVG elements
+- **Mixed content** - Seamlessly mix HTML and SVG in the same component
+
+### Example: Interactive SVG Chart
+
+```tsx
+@autoRegister()
+export class SvgChart extends WebComponent {
+  render() {
+    const data = [30, 80, 45, 60];
+    
+    return (
+      <svg width="300" height="200" viewBox="0 0 300 200">
+        <defs>
+          <linearGradient id="gradient">
+            <stop offset="0%" stopColor="#3498db" />
+            <stop offset="100%" stopColor="#9b59b6" />
+          </linearGradient>
+        </defs>
+        
+        {data.map((value, index) => (
+          <rect
+            key={index}
+            x={index * 60 + 20}
+            y={200 - value * 2}
+            width="40"
+            height={value * 2}
+            fill="url(#gradient)"
+            onClick={() => console.log(`Bar ${index}: ${value}`)}
+          />
+        ))}
+      </svg>
+    );
   }
 }
 ```

@@ -24,10 +24,15 @@
         "clean": "pnpm -r clean && rm -rf node_modules",
         "prepare": "husky install",
         "precommit": "lint-staged",
-        "release": "semantic-release",
-        "release:dry": "semantic-release --dry-run"
+        "changeset": "changeset",
+        "changeset:version": "changeset version",
+        "changeset:publish": "changeset publish",
+        "changeset:status": "changeset status",
+        "release": "pnpm build && pnpm changeset:publish",
+        "version": "pnpm changeset:version"
     },
     "devDependencies": {
+        "@changesets/cli": "^2.29.5",
         "@commitlint/cli": "^19.8.1",
         "@commitlint/config-conventional": "^19.8.1",
         "@semantic-release/changelog": "^6.0.3",
