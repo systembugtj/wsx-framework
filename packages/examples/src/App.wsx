@@ -209,6 +209,14 @@ class MyButton extends WebComponent {
 
                     <div class="examples-grid">
                         <div class="example-card">
+                            <h3>🔄 Reactive State</h3>
+                            <p>Automatic re-rendering with state changes</p>
+                            <div class="example-demo">
+                                <simple-reactive-demo></simple-reactive-demo>
+                            </div>
+                        </div>
+
+                        <div class="example-card">
                             <h3>SVG Graphics</h3>
                             <p>Native SVG support with namespace handling</p>
                             <div class="example-demo">

@@ -15,6 +15,7 @@ import "./App.wsx";
 import "./components/ThemeSwitcher.wsx";
 import "./SvgIcon.wsx";
 import "./SvgDemo.wsx";
+import "./SimpleReactiveDemo.wsx";
 
 const logger = createLogger("Main");
 

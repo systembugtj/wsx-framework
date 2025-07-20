@@ -9,19 +9,24 @@ export default {
         "<rootDir>/packages/*/dist/",
         "<rootDir>/packages/eslint-plugin/__tests__/setup.ts",
         "<rootDir>/packages/vite-plugin/",
+        "<rootDir>/packages/examples/**", // Exclude examples from Jest since it will use Vitest
     ],
     transform: {
         "^.+\\.(ts|tsx)$": [
             "ts-jest",
             {
                 tsconfig: {
-                    jsx: "preserve",
+                    jsx: "react-jsx",
                     jsxImportSource: "@systembug/wsx-core",
                     experimentalDecorators: true,
                     emitDecoratorMetadata: true,
                     isolatedModules: true,
                     esModuleInterop: true,
                     allowSyntheticDefaultImports: true,
+                    moduleResolution: "node",
+                    target: "es2020",
+                    module: "esnext",
+                    strict: true,
                 },
             },
         ],
@@ -39,6 +44,7 @@ export default {
         "!packages/*/src/**/*.d.ts",
         "!packages/*/src/**/*.test.{ts,tsx}",
         "!packages/*/src/**/__tests__/**",
+        "!packages/examples/**", // Exclude examples from coverage
     ],
     coverageDirectory: "<rootDir>/coverage",
     coverageReporters: ["text", "lcov", "html", "json"],
