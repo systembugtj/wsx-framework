@@ -1,0 +1,55 @@
+{
+    "name": "@systembug/wsx-base-components",
+    "version": "0.0.5",
+    "description": "Base UI components built with WSX Framework",
+    "type": "module",
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.js",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "require": "./dist/index.cjs"
+        },
+        "./styles": "./dist/index.css"
+    },
+    "files": [
+        "dist",
+        "src",
+        "!**/__tests__",
+        "!**/test"
+    ],
+    "scripts": {
+        "build": "tsup",
+        "dev": "tsup --watch",
+        "clean": "rm -rf dist",
+        "typecheck": "tsc --noEmit",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix"
+    },
+    "dependencies": {
+        "@systembug/wsx-core": "workspace:*"
+    },
+    "devDependencies": {
+        "@systembug/eslint-plugin-wsx": "workspace:*",
+        "@systembug/wsx-vite-plugin": "workspace:*",
+        "@typescript-eslint/eslint-plugin": "^8.37.0",
+        "@typescript-eslint/parser": "^8.37.0",
+        "eslint": "^9.31.0",
+        "tsup": "^8.0.0",
+        "typescript": "^5.0.0"
+    },
+    "keywords": [
+        "wsx",
+        "web-components",
+        "ui-components",
+        "typescript",
+        "jsx"
+    ],
+    "author": "WSX Framework Team",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/systembugtj/wsx-framework.git",
+        "directory": "packages/base-components"
+    }
+}

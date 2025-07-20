@@ -13,10 +13,13 @@ describe("reactive system integration", () => {
             renderCount++;
         };
 
-        const state = reactive({
-            count: 0,
-            message: "hello"
-        }, mockRerender);
+        const state = reactive(
+            {
+                count: 0,
+                message: "hello",
+            },
+            mockRerender
+        );
 
         // 初始状态
         expect(renderCount).toBe(0);
@@ -24,7 +27,7 @@ describe("reactive system integration", () => {
 
         // 修改状态
         state.count = 5;
-        
+
         return new Promise<void>((resolve) => {
             queueMicrotask(() => {
                 expect(renderCount).toBe(1);
@@ -94,8 +97,8 @@ describe("reactive system integration", () => {
 
         const [getCount, setCount] = createState(0, mockRerender);
 
-        setCount(prev => prev + 10);
-        setCount(prev => prev + 5);
+        setCount((prev) => prev + 10);
+        setCount((prev) => prev + 5);
 
         return new Promise<void>((resolve) => {
             queueMicrotask(() => {
@@ -131,12 +134,12 @@ describe("reactive system integration", () => {
 
     it("should handle error recovery in callbacks", () => {
         const consoleSpy = jest.spyOn(console, "error").mockImplementation(() => {});
-        
+
         let goodCallbackCount = 0;
         const goodCallback = () => {
             goodCallbackCount++;
         };
-        
+
         const badCallback = () => {
             throw new Error("Callback error");
         };
@@ -154,7 +157,7 @@ describe("reactive system integration", () => {
                     "[WSX Reactive] Error in callback:",
                     expect.any(Error)
                 );
-                
+
                 consoleSpy.mockRestore();
                 resolve();
             });
@@ -167,11 +170,14 @@ describe("reactive system integration", () => {
             renderCount++;
         };
 
-        const state = reactive({
-            user: { name: "John", preferences: { theme: "light" } },
-            ui: { loading: false, errors: [] as string[] },
-            data: { items: [] as any[] }
-        }, mockRerender);
+        const state = reactive(
+            {
+                user: { name: "John", preferences: { theme: "light" } },
+                ui: { loading: false, errors: [] as string[] },
+                data: { items: [] as any[] },
+            },
+            mockRerender
+        );
 
         // 复杂的状态更新
         state.user = { name: "Jane", preferences: { theme: "dark" } };

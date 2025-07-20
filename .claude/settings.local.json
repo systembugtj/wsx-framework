@@ -23,7 +23,9 @@
       "Bash(pnpm --filter @systembug/wsx-vite-plugin test)",
       "Bash(ls:*)",
       "Bash(mv:*)",
-      "Bash(pnpm jest:*)"
+      "Bash(pnpm jest:*)",
+      "Bash(pnpm --filter @systembug/wsx-base-components build)",
+      "Bash(timeout 10s pnpm --filter @systembug/wsx-examples dev)"
     ],
     "deny": []
   }

@@ -1,6 +1,7 @@
 /** @jsxImportSource @systembug/wsx-core */
 
 import { WebComponent, autoRegister } from "@systembug/wsx-core";
+import styles from "./ThemeSwitcher.css?inline";
 
 @autoRegister({ tagName: "theme-switcher" })
 export default class ThemeSwitcher extends WebComponent {
@@ -8,6 +9,7 @@ export default class ThemeSwitcher extends WebComponent {
 
     constructor() {
         super({
+            styles,
             styleName: "theme-switcher",
         });
 
@@ -19,6 +21,7 @@ export default class ThemeSwitcher extends WebComponent {
             <div class="theme-switcher-container">
                 <button
                     class="theme-switcher-btn"
+                    data-theme={this.currentTheme}
                     onClick={this.toggleTheme}
                     title={`当前主题: ${this.getThemeLabel()}`}
                 >

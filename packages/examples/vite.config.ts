@@ -14,9 +14,11 @@ export default defineConfig({
     build: {
         outDir: "dist",
     },
-    resolve: {
-        alias: {
-            "@systembug/wsx-core": new URL("../core/src/index.ts", import.meta.url).pathname,
-        },
-    },
+    // TODO: Suport HMR for WSX components
+    // Uncomment the following lines if you need to resolve the wsx-core package
+    // resolve: {
+    //     alias: {
+    //         "@systembug/wsx-core": new URL("../core/src/index.ts", import.meta.url).pathname,
+    //     },
+    // },
 });

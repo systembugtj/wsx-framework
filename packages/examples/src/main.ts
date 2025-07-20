@@ -8,14 +8,9 @@
 import { createLogger } from "@systembug/wsx-core";
 import "uno.css";
 import "./App.css";
-import "./components/XyButton.css";
-import "./components/XyButtonGroup.css";
-import "./components/ColorPicker.css";
+// Import base components package (includes CSS)
+import "@systembug/wsx-base-components";
 import "./App.wsx";
-import "./components/ThemeSwitcher.wsx";
-import "./SvgIcon.wsx";
-import "./SvgDemo.wsx";
-import "./SimpleReactiveDemo.wsx";
 
 const logger = createLogger("Main");
 

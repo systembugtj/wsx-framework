@@ -1,5 +1,5 @@
 // Vitest setup for examples package
-import { vi } from 'vitest';
+import { vi } from "vitest";
 
 // Mock window.customElements if not available
 if (typeof window !== "undefined" && !window.customElements) {
@@ -33,14 +33,14 @@ if (typeof window !== "undefined" && !window.ShadowRoot) {
 }
 
 // Mock CSS.supports if not available
-if (typeof CSS === 'undefined') {
+if (typeof CSS === "undefined") {
     (globalThis as Record<string, unknown>).CSS = {
         supports: vi.fn(() => false),
     };
 }
 
 // Mock constructable stylesheets if not available
-if (typeof CSSStyleSheet === 'undefined') {
+if (typeof CSSStyleSheet === "undefined") {
     (globalThis as Record<string, unknown>).CSSStyleSheet = class {
         replaceSync() {}
     };

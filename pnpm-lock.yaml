@@ -90,6 +90,34 @@ importers:
         specifier: ^5.0.0
         version: 5.8.3
 
+  packages/base-components:
+    dependencies:
+      '@systembug/wsx-core':
+        specifier: workspace:*
+        version: link:../core
+    devDependencies:
+      '@systembug/eslint-plugin-wsx':
+        specifier: workspace:*
+        version: link:../eslint-plugin
+      '@systembug/wsx-vite-plugin':
+        specifier: workspace:*
+        version: link:../vite-plugin
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^8.37.0
+        version: 8.37.0(@typescript-eslint/parser@8.37.0(eslint@9.31.0(jiti@2.4.2))(typescript@5.8.3))(eslint@9.31.0(jiti@2.4.2))(typescript@5.8.3)
+      '@typescript-eslint/parser':
+        specifier: ^8.37.0
+        version: 8.37.0(eslint@9.31.0(jiti@2.4.2))(typescript@5.8.3)
+      eslint:
+        specifier: ^9.31.0
+        version: 9.31.0(jiti@2.4.2)
+      tsup:
+        specifier: ^8.0.0
+        version: 8.5.0(jiti@2.4.2)(postcss@8.5.6)(typescript@5.8.3)(yaml@2.8.0)
+      typescript:
+        specifier: ^5.0.0
+        version: 5.8.3
+
   packages/core:
     devDependencies:
       '@types/node':
@@ -144,6 +172,9 @@ importers:
 
   packages/examples:
     dependencies:
+      '@systembug/wsx-base-components':
+        specifier: workspace:*
+        version: link:../base-components
       '@systembug/wsx-core':
         specifier: workspace:*
         version: link:../core

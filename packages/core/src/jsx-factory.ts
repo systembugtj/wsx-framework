@@ -170,3 +170,43 @@ export function Fragment(_props: unknown, children: JSXChildren[]): DocumentFrag
 
     return fragment;
 }
+
+/**
+ * JSX function for React's new JSX transform
+ * Handles the new format: jsx(tag, { children: child, ...props })
+ */
+export function jsx(
+    tag: string | Function,
+    props: Record<string, unknown> | null
+): HTMLElement | SVGElement {
+    if (!props) {
+        return h(tag, null);
+    }
+    
+    const { children, ...restProps } = props;
+    if (children !== undefined) {
+        return h(tag, restProps, children);
+    }
+    return h(tag, restProps);
+}
+
+/**
+ * JSX function for multiple children in React's new JSX transform
+ * Handles the new format: jsxs(tag, { children: [child1, child2], ...props })
+ */
+export function jsxs(
+    tag: string | Function,
+    props: Record<string, unknown> | null
+): HTMLElement | SVGElement {
+    if (!props) {
+        return h(tag, null);
+    }
+    
+    const { children, ...restProps } = props;
+    if (Array.isArray(children)) {
+        return h(tag, restProps, ...children);
+    } else if (children !== undefined) {
+        return h(tag, restProps, children);
+    }
+    return h(tag, restProps);
+}

@@ -140,9 +140,10 @@ export function makeReactive(_debugMode: boolean = false) {
                     };
                 }
             }
-            
-            render() {
-                return super.render ? super.render() : document.createElement('div');
+
+            render(): HTMLElement {
+                // 抽象方法必须由子类实现
+                throw new Error("render() method must be implemented by subclass");
             }
         } as T;
     };
