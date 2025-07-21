@@ -1,161 +1,204 @@
-# WSX Base Components
+# @systembug/wsx-base-components
 
-基于 WSX Framework 构建的基础 UI 组件库。
+现代化的 Web Components 基础组件库，基于 WSX Framework 构建。
 
-## 特性
+## 🚀 快速开始
 
-- 🎯 **零运行时开销** - 基于原生 Web Components
-- 🎨 **CSS 内联** - 样式自动注入到 Shadow DOM
-- 🔧 **TypeScript 支持** - 完整的类型定义
-- 📦 **标准构建** - 支持 ESM 和 CJS 格式
-- 🚀 **响应式支持** - 可选使用响应式状态管理
-
-## 安装
+### 安装
 
 ```bash
 npm install @systembug/wsx-base-components
 ```
 
-## 使用
+### 使用
 
-```typescript
-import { XyButton, ColorPicker, ThemeSwitcher } from '@systembug/wsx-base-components';
-
-// 组件会自动注册到全局，可以直接使用
-document.body.innerHTML = '<xy-button>Click me</xy-button>';
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="module">
+        import { XyButton } from '@systembug/wsx-base-components';
+    </script>
+</head>
+<body>
+    <xy-button variant="primary">Hello World</xy-button>
+</body>
+</html>
 ```
 
-## 组件库构建配置
+## 🎨 组件
 
-### Vite 配置
+### XyButton - 现代按钮组件
 
-```typescript
-// vite.config.ts
-import { defineConfig } from 'vite';
-import { wsx } from '@systembug/wsx-vite-plugin';
+一个完全重新设计的现代化按钮组件，具有语义化设计、无障碍访问和响应式布局。
 
-export default defineConfig({
-  build: {
-    lib: {
-      entry: 'src/index.ts',
-      name: 'WSXBaseComponents',
-      formats: ['es', 'cjs'],
-    },
-    rollupOptions: {
-      external: ['@systembug/wsx-core'],
-      output: {
-        globals: {
-          '@systembug/wsx-core': 'WSXCore',
-        },
-      },
-    },
-    cssCodeSplit: false, // 关键：禁用CSS代码分割，确保CSS内联到JS中
-  },
-  plugins: [
-    wsx({
-      debug: false,
-      jsxFactory: 'jsx',
-      jsxFragment: 'Fragment',
-    }),
-  ],
+#### 特性
+
+- **6种变体** - Primary, Secondary, Outline, Ghost, Danger, Link
+- **3种尺寸** - Small, Medium, Large
+- **完整状态** - Normal, Hover, Active, Disabled, Loading
+- **图标支持** - 左侧/右侧图标，SVG动画加载器
+- **布局选项** - Block, Rounded
+- **无障碍访问** - 键盘导航，ARIA支持
+- **响应式设计** - 移动端适配，高对比度模式
+
+#### 使用示例
+
+```html
+<!-- 基础用法 -->
+<xy-button variant="primary">Primary Button</xy-button>
+<xy-button variant="secondary">Secondary Button</xy-button>
+<xy-button variant="danger">Delete</xy-button>
+
+<!-- 图标按钮 -->
+<xy-button icon="🚀" variant="primary">Launch</xy-button>
+<xy-button icon="→" icon-position="right" variant="primary">Next</xy-button>
+
+<!-- 状态按钮 -->
+<xy-button loading variant="primary">Loading...</xy-button>
+<xy-button disabled variant="primary">Disabled</xy-button>
+
+<!-- 布局按钮 -->
+<xy-button block variant="primary">Full Width</xy-button>
+<xy-button rounded variant="primary">Rounded</xy-button>
+```
+
+#### API
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `variant` | `string` | `"primary"` | 按钮变体：primary, secondary, outline, ghost, danger, link |
+| `size` | `string` | `"md"` | 按钮尺寸：sm, md, lg |
+| `disabled` | `boolean` | `false` | 是否禁用 |
+| `loading` | `boolean` | `false` | 是否显示加载状态 |
+| `icon` | `string` | `null` | 图标内容 |
+| `icon-position` | `string` | `"left"` | 图标位置：left, right |
+| `block` | `boolean` | `false` | 是否块级布局 |
+| `rounded` | `boolean` | `false` | 是否圆角样式 |
+| `href` | `string` | `null` | 链接地址（作为链接使用） |
+| `target` | `string` | `"_blank"` | 链接目标 |
+| `type` | `string` | `"button"` | 按钮类型：button, submit, reset |
+
+#### 事件
+
+```javascript
+// 监听点击事件
+button.addEventListener('xy-button-click', (event) => {
+    console.log('Button clicked:', event.detail);
+    // event.detail 包含：variant, size, disabled, loading
 });
 ```
 
-### Package.json 配置
+## 🛠️ 开发
 
-```json
-{
-  "name": "@your-org/your-component-lib",
-  "version": "1.0.0",
-  "type": "module",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    }
-  },
-  "files": [
-    "dist",
-    "src"
-  ],
-  "scripts": {
-    "build": "vite build",
-    "dev": "vite build --watch"
-  },
-  "dependencies": {
-    "@systembug/wsx-core": "^0.0.5"
-  },
-  "devDependencies": {
-    "@systembug/wsx-vite-plugin": "^0.0.5",
-    "vite": "^5.4.19",
-    "typescript": "^5.0.0"
-  }
+### 安装依赖
+
+```bash
+pnpm install
+```
+
+### 构建
+
+```bash
+npm run build
+```
+
+### 开发模式
+
+```bash
+npm run dev
+```
+
+### 启动演示服务器
+
+```bash
+# 构建并启动演示服务器
+npm run demo
+
+# 或者直接启动静态服务器
+npm run start
+```
+
+访问 http://localhost:3000 查看演示页面。
+
+### 可用的脚本
+
+- `npm run build` - 构建生产版本
+- `npm run dev` - 开发模式（监听文件变化）
+- `npm run serve` - 启动预览服务器
+- `npm run demo` - 构建并启动演示服务器
+- `npm run start` - 启动静态文件服务器
+- `npm run clean` - 清理构建文件
+- `npm run typecheck` - TypeScript 类型检查
+- `npm run lint` - ESLint 检查
+- `npm run lint:fix` - ESLint 自动修复
+
+## 🎯 主题定制
+
+所有样式都通过 CSS 自定义属性控制：
+
+```css
+:host {
+    /* 颜色系统 */
+    --xy-button-primary-bg: #3b82f6;
+    --xy-button-primary-hover-bg: #2563eb;
+    --xy-button-primary-color: #ffffff;
+    
+    /* 尺寸系统 */
+    --xy-button-sm-padding: 0.5rem 0.75rem;
+    --xy-button-md-padding: 0.75rem 1rem;
+    --xy-button-lg-padding: 1rem 1.5rem;
+    
+    /* 视觉效果 */
+    --xy-button-border-radius: 0.5rem;
+    --xy-button-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    --xy-button-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 ```
 
-### 关键配置说明
+### 深色主题
 
-1. **CSS 内联**: `cssCodeSplit: false` 确保 CSS 被内联到 JS 中，而不是输出到单独文件
-2. **外部依赖**: 将 `@systembug/wsx-core` 标记为外部依赖，避免重复打包
-3. **WSX 插件**: 使用 `@systembug/wsx-vite-plugin` 处理 `.wsx` 文件
-4. **双格式输出**: 同时输出 ESM 和 CJS 格式，兼容不同环境
-
-### 组件开发规范
-
-1. **CSS 导入**: 使用 `import styles from './Component.css?inline'` 导入样式
-2. **默认导出**: 组件类使用 `export default class ComponentName extends WebComponent`
-3. **自动注册**: 使用 `@autoRegister({ tagName: 'component-name' })` 装饰器
-
-### 示例组件
-
-```typescript
-// Component.wsx
-/** @jsxImportSource @systembug/wsx-core */
-
-import { WebComponent, autoRegister } from '@systembug/wsx-core';
-import styles from './Component.css?inline';
-
-@autoRegister({ tagName: 'my-component' })
-export default class MyComponent extends WebComponent {
-  constructor() {
-    super({
-      styles,
-      styleName: 'my-component',
-    });
-  }
-
-  render() {
-    return (
-      <div class="my-component">
-        <h1>Hello WSX!</h1>
-      </div>
-    );
-  }
+```css
+[data-theme="dark"] {
+    --xy-button-primary-bg: #1e40af;
+    --xy-button-secondary-bg: #374151;
+    --xy-button-outline-border: #4b5563;
 }
 ```
 
-## 构建输出
+## ♿ 无障碍访问
 
-构建完成后，会生成以下文件：
+组件完全支持无障碍访问：
 
-```
-dist/
-├── index.js      # ESM 格式，CSS 内联
-└── index.cjs     # CJS 格式，CSS 内联
-```
+- **键盘导航** - 支持 Enter 和 Space 键激活
+- **ARIA 属性** - 完整的屏幕阅读器支持
+- **焦点管理** - 清晰的焦点指示器
+- **语义化标签** - 正确的 HTML 结构
 
-**注意**: 没有单独的 CSS 文件，所有样式都已内联到 JS 中。
+## 📱 响应式设计
 
-## 社区最佳实践
+- **移动端适配** - 自动调整尺寸和间距
+- **高对比度模式** - 支持用户偏好设置
+- **减少动画** - 尊重用户的可访问性偏好
+- **打印样式** - 完整的打印支持
 
-1. **组件设计**: 遵循 Web Components 标准，确保组件的独立性和可复用性
-2. **样式隔离**: 利用 Shadow DOM 实现样式隔离，避免全局样式污染
-3. **类型安全**: 提供完整的 TypeScript 类型定义
-4. **文档完善**: 为每个组件提供使用示例和 API 文档
-5. **测试覆盖**: 编写单元测试和集成测试
+## 🌐 浏览器支持
 
-## 许可证
+- Chrome 67+
+- Firefox 63+
+- Safari 11.1+
+- Edge 79+
 
-MIT 
+## 📄 许可证
+
+MIT License
+
+## 🤝 贡献
+
+欢迎提交 Issue 和 Pull Request！
+
+## 📚 相关链接
+
+- [WSX Framework](https://github.com/systembugtj/wsx-framework)
+- [设计文档](./docs/modern-xybutton-design.md)
+- [在线演示](http://localhost:3000) 

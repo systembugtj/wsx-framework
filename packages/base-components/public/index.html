@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Modern XyButton Test</title>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 2rem;
+                background: #f8fafc;
+                color: #1e293b;
+            }
+            .demo-section {
+                background: white;
+                padding: 2rem;
+                margin: 1rem 0;
+                border-radius: 12px;
+                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            }
+            .demo-section h2 {
+                margin-top: 0;
+                color: #1e293b;
+                font-size: 1.5rem;
+                font-weight: 600;
+            }
+            .demo-section h3 {
+                color: #64748b;
+                font-size: 1rem;
+                font-weight: 500;
+                margin: 1.5rem 0 0.5rem 0;
+            }
+            .button-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
+                margin: 1rem 0;
+            }
+            .button-row {
+                display: flex;
+                gap: 0.5rem;
+                flex-wrap: wrap;
+                align-items: center;
+                margin: 0.5rem 0;
+            }
+            .code-block {
+                background: #f1f5f9;
+                padding: 1rem;
+                border-radius: 6px;
+                font-family: "Monaco", "Menlo", monospace;
+                font-size: 0.875rem;
+                overflow-x: auto;
+                margin: 1rem 0;
+            }
+            .theme-toggle {
+                position: fixed;
+                top: 1rem;
+                right: 1rem;
+                z-index: 1000;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="theme-toggle">
+            <theme-switcher></theme-switcher>
+        </div>
+
+        <h1>🎨 Modern XyButton Component</h1>
+        <p>一个现代化的按钮组件，具有语义化设计、无障碍访问和响应式布局。</p>
+
+        <div class="demo-section">
+            <h2>按钮变体 (Variants)</h2>
+            <p>支持多种视觉样式，适应不同的使用场景。</p>
+
+            <h3>基础变体</h3>
+            <div class="button-grid">
+                <div>
+                    <xy-button variant="primary">Primary</xy-button>
+                    <div class="code-block">
+                        &lt;xy-button variant="primary"&gt;Primary&lt;/xy-button&gt;
+                    </div>
+                </div>
+                <div>
+                    <xy-button variant="secondary">Secondary</xy-button>
+                    <div class="code-block">
+                        &lt;xy-button variant="secondary"&gt;Secondary&lt;/xy-button&gt;
+                    </div>
+                </div>
+                <div>
+                    <xy-button variant="outline">Outline</xy-button>
+                    <div class="code-block">
+                        &lt;xy-button variant="outline"&gt;Outline&lt;/xy-button&gt;
+                    </div>
+                </div>
+                <div>
+                    <xy-button variant="ghost">Ghost</xy-button>
+                    <div class="code-block">
+                        &lt;xy-button variant="ghost"&gt;Ghost&lt;/xy-button&gt;
+                    </div>
+                </div>
+                <div>
+                    <xy-button variant="danger">Danger</xy-button>
+                    <div class="code-block">
+                        &lt;xy-button variant="danger"&gt;Danger&lt;/xy-button&gt;
+                    </div>
+                </div>
+                <div>
+                    <xy-button variant="link">Link</xy-button>
+                    <div class="code-block">
+                        &lt;xy-button variant="link"&gt;Link&lt;/xy-button&gt;
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>按钮尺寸 (Sizes)</h2>
+            <p>三种标准尺寸，适应不同的界面需求。</p>
+
+            <div class="button-row">
+                <xy-button size="sm" variant="primary">Small</xy-button>
+                <xy-button size="md" variant="primary">Medium</xy-button>
+                <xy-button size="lg" variant="primary">Large</xy-button>
+            </div>
+
+            <div class="code-block">
+                &lt;xy-button size="sm" variant="primary"&gt;Small&lt;/xy-button&gt; &lt;xy-button
+                size="md" variant="primary"&gt;Medium&lt;/xy-button&gt; &lt;xy-button size="lg"
+                variant="primary"&gt;Large&lt;/xy-button&gt;
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>图标按钮</h2>
+            <p>支持左侧和右侧图标，增强按钮的语义表达。</p>
+
+            <h3>左侧图标</h3>
+            <div class="button-row">
+                <xy-button icon="🚀" variant="primary">Launch</xy-button>
+                <xy-button icon="💾" variant="secondary">Save</xy-button>
+                <xy-button icon="📧" variant="outline">Email</xy-button>
+            </div>
+
+            <h3>右侧图标</h3>
+            <div class="button-row">
+                <xy-button icon="→" icon-position="right" variant="primary">Next</xy-button>
+                <xy-button icon="⬇" icon-position="right" variant="secondary">Download</xy-button>
+                <xy-button icon="🔗" icon-position="right" variant="outline">Link</xy-button>
+            </div>
+
+            <div class="code-block">
+                &lt;xy-button icon="🚀" variant="primary"&gt;Launch&lt;/xy-button&gt; &lt;xy-button
+                icon="→" icon-position="right" variant="primary"&gt;Next&lt;/xy-button&gt;
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>状态按钮</h2>
+            <p>支持加载、禁用等状态，提供清晰的用户反馈。</p>
+
+            <h3>加载状态</h3>
+            <div class="button-row">
+                <xy-button loading variant="primary">Loading</xy-button>
+                <xy-button loading variant="secondary">Loading</xy-button>
+                <xy-button loading variant="outline">Loading</xy-button>
+            </div>
+
+            <h3>禁用状态</h3>
+            <div class="button-row">
+                <xy-button disabled variant="primary">Disabled</xy-button>
+                <xy-button disabled variant="secondary">Disabled</xy-button>
+                <xy-button disabled variant="outline">Disabled</xy-button>
+            </div>
+
+            <div class="code-block">
+                &lt;xy-button loading variant="primary"&gt;Loading&lt;/xy-button&gt; &lt;xy-button
+                disabled variant="primary"&gt;Disabled&lt;/xy-button&gt;
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>布局选项</h2>
+            <p>支持块级布局和圆角样式。</p>
+
+            <h3>块级按钮</h3>
+            <xy-button block variant="primary">Block Button</xy-button>
+
+            <h3>圆角按钮</h3>
+            <div class="button-row">
+                <xy-button rounded variant="primary">Rounded</xy-button>
+                <xy-button rounded variant="secondary">Rounded</xy-button>
+                <xy-button rounded variant="outline">Rounded</xy-button>
+            </div>
+
+            <div class="code-block">
+                &lt;xy-button block variant="primary"&gt;Block Button&lt;/xy-button&gt;
+                &lt;xy-button rounded variant="primary"&gt;Rounded&lt;/xy-button&gt;
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>链接按钮</h2>
+            <p>支持作为链接使用，保持按钮的视觉一致性。</p>
+
+            <div class="button-row">
+                <xy-button href="https://github.com" target="_blank" variant="primary"
+                    >GitHub</xy-button
+                >
+                <xy-button href="https://example.com" variant="outline">External Link</xy-button>
+                <xy-button href="#" variant="link">Internal Link</xy-button>
+            </div>
+
+            <div class="code-block">
+                &lt;xy-button href="https://github.com" target="_blank"
+                variant="primary"&gt;GitHub&lt;/xy-button&gt; &lt;xy-button href="#"
+                variant="link"&gt;Internal Link&lt;/xy-button&gt;
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>表单按钮</h2>
+            <p>支持表单提交和重置功能。</p>
+
+            <div class="button-row">
+                <xy-button type="submit" variant="primary">Submit</xy-button>
+                <xy-button type="reset" variant="secondary">Reset</xy-button>
+                <xy-button type="button" variant="outline">Cancel</xy-button>
+            </div>
+
+            <div class="code-block">
+                &lt;xy-button type="submit" variant="primary"&gt;Submit&lt;/xy-button&gt;
+                &lt;xy-button type="reset" variant="secondary"&gt;Reset&lt;/xy-button&gt;
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>交互演示</h2>
+            <p>点击按钮查看交互效果和事件触发。</p>
+
+            <div class="button-row">
+                <xy-button id="demo-btn" variant="primary">Click Me</xy-button>
+                <xy-button id="toggle-btn" variant="secondary">Toggle Active</xy-button>
+            </div>
+
+            <div id="event-log" class="code-block" style="min-height: 100px; background: #f8fafc">
+                事件日志将在这里显示...
+            </div>
+        </div>
+
+        <script type="module">
+            // 导入组件库
+            import { XyButton, ThemeSwitcher } from "../dist/index.js";
+
+            console.log("Modern XyButton loaded successfully!");
+
+            // 事件监听演示
+            const demoBtn = document.getElementById("demo-btn");
+            const toggleBtn = document.getElementById("toggle-btn");
+            const eventLog = document.getElementById("event-log");
+
+            let isActive = false;
+
+            demoBtn.addEventListener("xy-button-click", (event) => {
+                logEvent("Button clicked", event.detail);
+            });
+
+            toggleBtn.addEventListener("xy-button-click", (event) => {
+                isActive = !isActive;
+                if (isActive) {
+                    toggleBtn.setAttribute("active", "");
+                    logEvent("Button activated");
+                } else {
+                    toggleBtn.removeAttribute("active");
+                    logEvent("Button deactivated");
+                }
+            });
+
+            function logEvent(message, data = null) {
+                const timestamp = new Date().toLocaleTimeString();
+                const logEntry = `[${timestamp}] ${message}${data ? ": " + JSON.stringify(data, null, 2) : ""}`;
+                eventLog.textContent = logEntry + "\n" + eventLog.textContent;
+            }
+
+            // 初始化日志
+            logEvent("Modern XyButton demo initialized");
+        </script>
+    </body>
+</html>
