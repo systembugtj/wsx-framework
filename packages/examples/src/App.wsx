@@ -372,10 +372,18 @@ class MyButton extends WebComponent {
                             <p>Various button styles and states with ripple effects</p>
                             <div class="example-demo">
                                 <div class="button-demo">
-                                    <xy-button type="primary">Primary</xy-button>
-                                    <xy-button type="danger">Danger</xy-button>
-                                    <xy-button type="flat">Flat</xy-button>
-                                    <xy-button disabled>Disabled</xy-button>
+                                    <xy-button variant="primary" size="lg">
+                                        P
+                                    </xy-button>
+                                    <xy-button variant="danger" size="sm">
+                                        D
+                                    </xy-button>
+                                    <xy-button variant="flat" size="sm">
+                                        F
+                                    </xy-button>
+                                    <xy-button variant="flat" disabled size="xs">
+                                        D
+                                    </xy-button>
                                 </div>
                             </div>
                         </div>

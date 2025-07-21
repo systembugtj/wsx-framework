@@ -19,10 +19,6 @@
     ],
     "scripts": {
         "build": "vite build",
-        "dev": "vite build --watch",
-        "serve": "vite preview --port 3000",
-        "demo": "npm run build && npm run serve",
-        "start": "npx http-server public -p 3000 -o",
         "clean": "rm -rf dist",
         "typecheck": "tsc --noEmit",
         "lint": "eslint .",

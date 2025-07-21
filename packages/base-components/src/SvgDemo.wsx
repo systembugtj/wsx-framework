@@ -200,7 +200,7 @@ export default class SvgDemo extends WebComponent {
         rect.setAttribute("fill", "#e74c3c");
 
         // You could create a proper tooltip here
-        console.log(`Value: ${value}`);
+        logger.debug(`Tooltip value: ${value}`);
     };
 
     private hideTooltip = (event: Event) => {

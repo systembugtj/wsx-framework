@@ -32,17 +32,17 @@ declare module "*.svg" {
     export default src;
 }
 
-// 全局类型扩展
-declare global {
-    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-    interface Window extends Record<string, unknown> {
-        // 可以在这里添加全局window属性
-    }
-
-    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-    interface HTMLElement extends Record<string, unknown> {
-        // 可以在这里添加HTMLElement扩展
-    }
-}
+// 全局类型扩展 - 预留给将来添加全局类型
+// declare global {
+//     interface Window {
+//         // 可以在这里添加全局window属性
+//         wsxDebug?: boolean;
+//     }
+//
+//     interface HTMLElement {
+//         // 可以在这里添加HTMLElement扩展
+//         wsxComponent?: WebComponent;
+//     }
+// }
 
 export {};

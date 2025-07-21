@@ -11,7 +11,7 @@
 
 // JSX 类型声明已移至 types/wsx-types.d.ts
 
-import { createElement, isSVGElement, getSVGAttributeName } from "./svg-utils";
+import { createElement, isSVGElement, getSVGAttributeName } from "./utils/svg-utils";
 
 // JSX子元素类型
 export type JSXChildren =
@@ -176,13 +176,18 @@ export function Fragment(_props: unknown, children: JSXChildren[]): DocumentFrag
  * Handles the new format: jsx(tag, { children: child, ...props })
  */
 export function jsx(
-    tag: string | Function,
+    tag:
+        | string
+        | ((
+              props: Record<string, unknown> | null,
+              children: JSXChildren[]
+          ) => HTMLElement | SVGElement),
     props: Record<string, unknown> | null
 ): HTMLElement | SVGElement {
     if (!props) {
         return h(tag, null);
     }
-    
+
     const { children, ...restProps } = props;
     if (children !== undefined) {
         return h(tag, restProps, children);
@@ -195,13 +200,18 @@ export function jsx(
  * Handles the new format: jsxs(tag, { children: [child1, child2], ...props })
  */
 export function jsxs(
-    tag: string | Function,
+    tag:
+        | string
+        | ((
+              props: Record<string, unknown> | null,
+              children: JSXChildren[]
+          ) => HTMLElement | SVGElement),
     props: Record<string, unknown> | null
 ): HTMLElement | SVGElement {
     if (!props) {
         return h(tag, null);
     }
-    
+
     const { children, ...restProps } = props;
     if (Array.isArray(children)) {
         return h(tag, restProps, ...children);

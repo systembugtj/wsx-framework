@@ -24,8 +24,8 @@ export type { AutoRegistrationOptions } from "../src/auto-register";
 export { StyleManager } from "../src/styles/style-manager";
 
 // 导出 Logger 相关类型和函数
-export { WSXLogger, logger, createLogger } from "../src/logger";
-export type { Logger, LogLevel } from "../src/logger";
+export { WSXLogger, logger, createLogger } from "../src/utils/logger.ts";
+export type { Logger, LogLevel } from "../src/utils/logger.ts";
 
 // 重新导出 JSX 运行时
 export { h as jsx, h as jsxs, Fragment as F } from "../src/jsx-factory";

@@ -6,7 +6,7 @@
  */
 
 import { WebComponent, type WebComponentConfig } from "./web-component";
-import { reactive, createState, reactiveWithDebug } from "./reactive";
+import { reactive, createState, reactiveWithDebug } from "./utils/reactive";
 
 /**
  * 响应式 WebComponent 配置
@@ -167,5 +167,5 @@ export function createReactiveComponent<T extends WebComponent>(
 }
 
 // 导出响应式相关的所有功能
-export { reactive, createState, ReactiveDebug } from "./reactive";
-export type { ReactiveCallback } from "./reactive";
+export { reactive, createState, ReactiveDebug } from "./utils/reactive";
+export type { ReactiveCallback } from "./utils/reactive";

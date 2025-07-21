@@ -1,32 +1,34 @@
 {
-  "permissions": {
-    "allow": [
-      "Bash(pnpm build:*)",
-      "Bash(pnpm --filter @systembug/wsx-examples build)",
-      "Bash(kill:*)",
-      "Bash(pnpm typecheck:*)",
-      "Bash(pnpm --filter @systembug/wsx-examples typecheck)",
-      "Bash(pnpm --filter @systembug/wsx-core build)",
-      "Bash(pnpm test:*)",
-      "Bash(pnpm lint:*)",
-      "Bash(git add:*)",
-      "Bash(git commit:*)",
-      "Bash(git tag:*)",
-      "Bash(git push:*)",
-      "Bash(npm publish:*)",
-      "Bash(pnpm add:*)",
-      "Bash(rm:*)",
-      "Bash(pnpm --filter @systembug/wsx-core test)",
-      "Bash(pnpm --filter @systembug/wsx-eslint-plugin test)",
-      "Bash(pnpm list:*)",
-      "Bash(pnpm --filter @systembug/eslint-plugin-wsx test)",
-      "Bash(pnpm --filter @systembug/wsx-vite-plugin test)",
-      "Bash(ls:*)",
-      "Bash(mv:*)",
-      "Bash(pnpm jest:*)",
-      "Bash(pnpm --filter @systembug/wsx-base-components build)",
-      "Bash(timeout 10s pnpm --filter @systembug/wsx-examples dev)"
-    ],
-    "deny": []
-  }
+    "permissions": {
+        "allow": [
+            "Bash(pnpm build:*)",
+            "Bash(pnpm --filter @systembug/wsx-examples build)",
+            "Bash(kill:*)",
+            "Bash(pnpm typecheck:*)",
+            "Bash(pnpm --filter @systembug/wsx-examples typecheck)",
+            "Bash(pnpm --filter @systembug/wsx-core build)",
+            "Bash(pnpm test:*)",
+            "Bash(pnpm lint:*)",
+            "Bash(git add:*)",
+            "Bash(git commit:*)",
+            "Bash(git tag:*)",
+            "Bash(git push:*)",
+            "Bash(npm publish:*)",
+            "Bash(pnpm add:*)",
+            "Bash(rm:*)",
+            "Bash(pnpm --filter @systembug/wsx-core test)",
+            "Bash(pnpm --filter @systembug/wsx-eslint-plugin test)",
+            "Bash(pnpm list:*)",
+            "Bash(pnpm --filter @systembug/eslint-plugin-wsx test)",
+            "Bash(pnpm --filter @systembug/wsx-vite-plugin test)",
+            "Bash(ls:*)",
+            "Bash(mv:*)",
+            "Bash(pnpm jest:*)",
+            "Bash(pnpm --filter @systembug/wsx-base-components build)",
+            "Bash(timeout 10s pnpm --filter @systembug/wsx-examples dev)",
+            "Bash(pnpm --filter @systembug/wsx-core lint)",
+            "Bash(pnpm --filter @systembug/wsx-base-components lint)"
+        ],
+        "deny": []
+    }
 }
