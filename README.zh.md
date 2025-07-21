@@ -232,7 +232,7 @@ WSX 框架提供框架级的 JSX 支持。配置你的 `tsconfig.json`：
 
 ```bash
 # 克隆仓库
-git clone https://github.com/systembug/wsx-framework.git
+git clone https://github.com/systembugtj/wsx-framework.git
 cd wsx-framework
 
 # 安装依赖
@@ -496,8 +496,8 @@ MIT
 
 ## 链接
 
-- **仓库**：https://github.com/systembug/wsx-framework
-- **Issues**：https://github.com/systembug/wsx-framework/issues
+- **仓库**：https://github.com/systembugtj/wsx-framework
+- **Issues**：https://github.com/systembugtj/wsx-framework/issues
 - **NPM 组织**：https://www.npmjs.com/org/systembug
 
 ## 致谢

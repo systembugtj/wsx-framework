@@ -5,87 +5,87 @@
 }
 
 .theme-switcher-container {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    z-index: 1000;
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .theme-switcher-btn {
-    width: 3rem;
-    height: 3rem;
-    padding: 0.5rem;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #333;
+    width: var(--theme-switcher-width, 2.5rem);
+    height: var(--theme-switcher-height, 2.5rem);
+    padding: var(--theme-switcher-padding, 0.5rem);
+    border-radius: var(--theme-switcher-border-radius, 8px);
+    background: var(--theme-switcher-bg, #dc2626);
+    border: var(--theme-switcher-border, none);
+    color: var(--theme-switcher-color, white);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(10px);
+    transition: all var(--theme-switcher-transition, 0.3s ease);
+    box-shadow: var(--theme-switcher-shadow, 0 4px 15px rgba(220, 38, 38, 0.4));
+    font-weight: var(--theme-switcher-font-weight, 600);
+    font-family: var(--theme-switcher-font-family, inherit);
 }
 
 .theme-switcher-btn:hover {
-    background: rgba(255, 255, 255, 1);
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    background: var(--theme-switcher-hover-bg, #b91c1c);
+    transform: var(--theme-switcher-hover-transform, translateY(-2px));
+    box-shadow: var(--theme-switcher-hover-shadow, 0 8px 25px rgba(220, 38, 38, 0.5));
 }
 
 .theme-switcher-btn:active {
-    transform: translateY(0) scale(0.95);
+    transform: var(--theme-switcher-active-transform, translateY(0));
 }
 
 .theme-switcher-icon {
-    font-size: 1.2rem;
+    font-size: var(--theme-switcher-icon-size, 1rem);
     line-height: 1;
-    transition: transform 0.3s ease;
+    transition: transform var(--theme-switcher-icon-transition, 0.3s ease);
 }
 
 .theme-switcher-btn:hover .theme-switcher-icon {
-    transform: rotate(360deg);
+    transform: var(--theme-switcher-icon-hover-transform, rotate(360deg));
 }
 
-/* Dark theme adjustments */
-:host(.dark) .theme-switcher-btn {
-    background: rgba(30, 30, 30, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #fff;
+/* Light theme specific styles */
+.theme-switcher-btn[data-theme="light"] {
+    background: var(--theme-switcher-light-bg, #dc2626);
+    color: var(--theme-switcher-light-color, white);
 }
 
-:host(.dark) .theme-switcher-btn:hover {
-    background: rgba(30, 30, 30, 1);
+.theme-switcher-btn[data-theme="light"]:hover {
+    background: var(--theme-switcher-light-hover-bg, #b91c1c);
 }
 
-/* Auto theme indicator */
+/* Dark theme specific styles */
+.theme-switcher-btn[data-theme="dark"] {
+    background: var(--theme-switcher-dark-bg, #dc2626);
+    color: var(--theme-switcher-dark-color, white);
+}
+
+.theme-switcher-btn[data-theme="dark"]:hover {
+    background: var(--theme-switcher-dark-hover-bg, #b91c1c);
+}
+
+/* Auto theme specific styles */
 .theme-switcher-btn[data-theme="auto"] {
-    background: linear-gradient(45deg, 
-        rgba(255, 255, 255, 0.9) 50%, 
-        rgba(30, 30, 30, 0.9) 50%);
-    color: #666;
+    background: var(--theme-switcher-auto-bg, linear-gradient(135deg, #dc2626, #b91c1c));
+    color: var(--theme-switcher-auto-color, white);
 }
 
 .theme-switcher-btn[data-theme="auto"]:hover {
-    background: linear-gradient(45deg, 
-        rgba(255, 255, 255, 1) 50%, 
-        rgba(30, 30, 30, 1) 50%);
+    background: var(--theme-switcher-auto-hover-bg, linear-gradient(135deg, #b91c1c, #991b1b));
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
-    .theme-switcher-container {
-        top: 0.75rem;
-        right: 0.75rem;
-    }
-    
     .theme-switcher-btn {
-        width: 2.5rem;
-        height: 2.5rem;
+        width: var(--theme-switcher-mobile-width, 2rem);
+        height: var(--theme-switcher-mobile-height, 2rem);
     }
-    
+
     .theme-switcher-icon {
-        font-size: 1rem;
+        font-size: var(--theme-switcher-mobile-icon-size, 0.9rem);
     }
 }

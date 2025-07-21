@@ -32,13 +32,18 @@ export default class ThemeSwitcher extends WebComponent {
     }
 
     private getThemeIcon(): string {
-        const icons = {
-            light: "☀️",
-            dark: "🌙",
-            auto: "🔄",
-        };
+        // 根据当前实际应用的主题显示图标，而不是设置的主题
+        const html = document.documentElement;
+        const isDark = html.classList.contains("dark");
 
-        return icons[this.currentTheme];
+        if (this.currentTheme === "auto") {
+            // 自动模式：根据系统主题显示对应图标
+            return isDark ? "🌙" : "☀️";
+        } else if (this.currentTheme === "light") {
+            return "☀️";
+        } else {
+            return "🌙";
+        }
     }
 
     private getThemeLabel(): string {

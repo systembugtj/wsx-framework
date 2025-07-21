@@ -3,8 +3,8 @@ import { WebComponent, autoRegister, createLogger } from "@systembug/wsx-core";
 
 const logger = createLogger("SvgIcon");
 
-@autoRegister()
-export class SvgIcon extends WebComponent {
+@autoRegister({ tagName: "svg-icon" })
+export default class SvgIcon extends WebComponent {
     constructor() {
         super();
         logger.info("SvgIcon component initialized");

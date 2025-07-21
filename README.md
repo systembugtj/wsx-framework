@@ -232,7 +232,7 @@ This monorepo uses pnpm workspaces with comprehensive development tooling:
 
 ```bash
 # Clone the repository
-git clone https://github.com/systembug/wsx-framework.git
+git clone https://github.com/systembugtj/wsx-framework.git
 cd wsx-framework
 
 # Install dependencies
@@ -496,8 +496,8 @@ All packages are published under the `@systembug` npm organization:
 
 ## Links
 
-- **Repository**: https://github.com/systembug/wsx-framework
-- **Issues**: https://github.com/systembug/wsx-framework/issues
+- **Repository**: https://github.com/systembugtj/wsx-framework
+- **Issues**: https://github.com/systembugtj/wsx-framework/issues
 - **NPM Organization**: https://www.npmjs.com/org/systembug
 
 ## Credits

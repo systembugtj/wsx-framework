@@ -3,14 +3,18 @@
  * WSX Framework 官网 - 基于Vue.js设计风格
  *
  * 特性：
- * - Vue.js风格的Hero区域
- * - 三列特性展示
+ * - Vue.js风格的紫色渐变主题
+ * - 现代化导航栏
+ * - 优雅的Hero区域
+ * - 清晰的三列特性展示
+ * - 交互式代码示例
  * - 响应式设计
- * - 现代化交互效果
  */
 
 import { WebComponent, autoRegister } from "@systembug/wsx-core";
 import styles from "./App.css?inline";
+// 显式导入ThemeSwitcher
+import "@systembug/wsx-base-components";
 
 export interface AppConfig {
     title?: string;
@@ -21,6 +25,7 @@ export interface AppConfig {
 export default class App extends WebComponent {
     private appTitle: string = "WSX Framework";
     private appTheme: "light" | "dark" = "light";
+    private isNavOpen: boolean = false;
 
     constructor(config: AppConfig = {}) {
         super({
@@ -36,8 +41,8 @@ export default class App extends WebComponent {
     render(): HTMLElement {
         return (
             <div class="app-container">
-                {/* 主题切换器 */}
-                <theme-switcher></theme-switcher>
+                {/* 导航栏 */}
+                {this.renderNavigation()}
 
                 {/* Hero区域 */}
                 {this.renderHero()}
@@ -51,9 +56,53 @@ export default class App extends WebComponent {
                 {/* 示例展示区域 */}
                 {this.renderExamples()}
 
+                {/* 生态系统区域 */}
+                {this.renderEcosystem()}
+
                 {/* 页脚 */}
                 {this.renderFooter()}
             </div>
+        );
+    }
+
+    /**
+     * 渲染导航栏 - Vue.js风格
+     */
+    private renderNavigation(): HTMLElement {
+        return (
+            <nav class="main-nav">
+                <div class="nav-container">
+                    <div class="nav-brand">
+                        <span class="nav-logo">⚡</span>
+                        <span class="nav-title">WSX</span>
+                    </div>
+
+                    <div class={`nav-menu ${this.isNavOpen ? "nav-open" : ""}`}>
+                        <a href="#features" class="nav-link" onClick={this.smoothScroll}>
+                            Features
+                        </a>
+                        <a href="#quick-start" class="nav-link" onClick={this.smoothScroll}>
+                            Quick Start
+                        </a>
+                        <a href="#examples" class="nav-link" onClick={this.smoothScroll}>
+                            Examples
+                        </a>
+                        <a href="#ecosystem" class="nav-link" onClick={this.smoothScroll}>
+                            Ecosystem
+                        </a>
+                        <button class="nav-cta" onClick={this.scrollToQuickStart}>
+                            Get Started
+                        </button>
+                        <theme-switcher></theme-switcher>
+                    </div>
+
+                    <button class="nav-toggle" onClick={this.toggleNav}>
+                        <span class="nav-toggle-line"></span>
+                        <span class="nav-toggle-line"></span>
+                        <span class="nav-toggle-line"></span>
+                    </button>
+                </div>
+            </nav>
         );
     }
 
@@ -65,9 +114,18 @@ export default class App extends WebComponent {
             <section class="hero-section">
                 <div class="hero-background">
                     <div class="hero-pattern"></div>
+                    <div class="hero-shapes">
+                        <div class="hero-shape hero-shape-1"></div>
+                        <div class="hero-shape hero-shape-2"></div>
+                        <div class="hero-shape hero-shape-3"></div>
+                    </div>
                 </div>
 
                 <div class="hero-content">
+                    <div class="hero-badge">
+                        <span class="badge-text">🚀 Just Released</span>
+                    </div>
+
                     <h1 class="hero-title">
                         <span class="title-main">WSX Framework</span>
                         <span class="title-subtitle">The Progressive Web Components Framework</span>
@@ -75,8 +133,24 @@ export default class App extends WebComponent {
 
                     <p class="hero-description">
                         An approachable, performant and versatile framework for building native web
-                        components with JSX syntax.
+                        components with JSX syntax. Zero dependencies, TypeScript-first, and
+                        production-ready.
                     </p>
+
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">0</span>
+                            <span class="stat-label">Dependencies</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">TypeScript</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">⚡</span>
+                            <span class="stat-label">Fast</span>
+                        </div>
+                    </div>
 
                     <div class="hero-actions">
                         <button class="btn-primary" onClick={this.scrollToQuickStart}>
@@ -96,7 +170,7 @@ export default class App extends WebComponent {
                                 color="currentColor"
                                 style="margin-right: 8px;"
                             ></svg-icon>
-                            GitHub
+                            View on GitHub
                         </button>
 
                         <button class="btn-ghost" onClick={this.openExamples}>
@@ -106,7 +180,7 @@ export default class App extends WebComponent {
                                 color="currentColor"
                                 style="margin-right: 8px;"
                             ></svg-icon>
-                            Examples
+                            Try Examples
                         </button>
                     </div>
                 </div>
@@ -122,9 +196,10 @@ export default class App extends WebComponent {
             {
                 title: "Approachable",
                 description:
-                    "Builds on top of standard Web Components with intuitive JSX syntax and world-class TypeScript support.",
+                    "Builds on top of standard Web Components with intuitive JSX syntax and world-class TypeScript support. Easy to learn and use.",
                 icon: "🎯",
                 color: "green",
+                details: ["JSX Syntax", "TypeScript First", "Web Standards"],
             },
             {
                 title: "Performant",
@@ -132,6 +207,7 @@ export default class App extends WebComponent {
                     "Zero dependencies, native DOM operations, and compiler-optimized rendering system that rarely requires manual optimization.",
                 icon: "⚡",
                 color: "blue",
+                details: ["Zero Dependencies", "Native DOM", "Optimized Rendering"],
             },
             {
                 title: "Versatile",
@@ -139,19 +215,35 @@ export default class App extends WebComponent {
                     "A rich, incrementally adoptable ecosystem that scales from simple components to full-featured applications.",
                 icon: "🔧",
                 color: "purple",
+                details: ["Incremental Adoption", "Rich Ecosystem", "Scalable"],
             },
         ];
 
         return (
-            <section class="features-section">
-                <div class="features-grid">
-                    {features.map((feature, index) => (
-                        <div class={`feature-card feature-${feature.color}`} key={index}>
-                            <div class="feature-icon">{feature.icon}</div>
-                            <h3 class="feature-title">{feature.title}</h3>
-                            <p class="feature-description">{feature.description}</p>
-                        </div>
-                    ))}
+            <section id="features" class="features-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Why Choose WSX Framework?</h2>
+                        <p class="section-description">
+                            Built for modern web development with a focus on simplicity,
+                            performance, and developer experience.
+                        </p>
+                    </div>
+
+                    <div class="features-grid">
+                        {features.map((feature, index) => (
+                            <div class={`feature-card feature-${feature.color}`} key={index}>
+                                <div class="feature-icon">{feature.icon}</div>
+                                <h3 class="feature-title">{feature.title}</h3>
+                                <p class="feature-description">{feature.description}</p>
+                                <ul class="feature-details">
+                                    {feature.details.map((detail, detailIndex) => (
+                                        <li key={detailIndex}>{detail}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </section>
         );
@@ -164,21 +256,24 @@ export default class App extends WebComponent {
         return (
             <section id="quick-start" class="quick-start-section">
                 <div class="container">
-                    <h2 class="section-title">Quick Start</h2>
-                    <p class="section-description">
-                        Get started with WSX Framework in minutes. Create your first web component
-                        with JSX syntax.
-                    </p>
+                    <div class="section-header">
+                        <h2 class="section-title">Quick Start</h2>
+                        <p class="section-description">
+                            Get started with WSX Framework in minutes. Create your first web
+                            component with JSX syntax and TypeScript support.
+                        </p>
+                    </div>
 
-                    <div class="code-example">
-                        <div class="code-header">
-                            <span class="code-title">Installation</span>
-                            <button class="copy-btn" onClick={this.copyCode}>
-                                📋 Copy
-                            </button>
-                        </div>
-                        <pre class="code-block">
-                            <code>{`npm install @systembug/wsx-core
+                    <div class="quick-start-grid">
+                        <div class="code-example">
+                            <div class="code-header">
+                                <span class="code-title">Installation</span>
+                                <button class="copy-btn" onClick={this.copyCode}>
+                                    📋 Copy
+                                </button>
+                            </div>
+                            <pre class="code-block">
+                                <code>{`npm install @systembug/wsx-core
 
 # Create your first component
 import { WebComponent } from '@systembug/wsx-core';
@@ -188,7 +283,32 @@ class MyButton extends WebComponent {
         return <button>Hello WSX!</button>;
     }
 }`}</code>
-                        </pre>
+                            </pre>
+                        </div>
+
+                        <div class="quick-start-steps">
+                            <div class="step-item">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>Install</h4>
+                                    <p>Install WSX Framework via npm</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Create</h4>
+                                    <p>Create your first component with JSX</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4>Build</h4>
+                                    <p>Build and deploy your web components</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -200,16 +320,22 @@ class MyButton extends WebComponent {
      */
     private renderExamples(): HTMLElement {
         return (
-            <section class="examples-section">
+            <section id="examples" class="examples-section">
                 <div class="container">
-                    <h2 class="section-title">Interactive Examples</h2>
-                    <p class="section-description">
-                        Explore WSX Framework capabilities with these interactive examples.
-                    </p>
+                    <div class="section-header">
+                        <h2 class="section-title">Interactive Examples</h2>
+                        <p class="section-description">
+                            Explore WSX Framework capabilities with these interactive examples. See
+                            how easy it is to build powerful web components.
+                        </p>
+                    </div>
 
                     <div class="examples-grid">
                         <div class="example-card">
-                            <h3>🔄 Reactive State</h3>
+                            <div class="example-header">
+                                <h3>🔄 Reactive State</h3>
+                                <span class="example-badge">Core</span>
+                            </div>
                             <p>Automatic re-rendering with state changes</p>
                             <div class="example-demo">
                                 <simple-reactive-demo></simple-reactive-demo>
@@ -217,24 +343,33 @@ class MyButton extends WebComponent {
                         </div>
 
                         <div class="example-card">
-                            <h3>SVG Graphics</h3>
-                            <p>Native SVG support with namespace handling</p>
+                            <div class="example-header">
+                                <h3>SVG Graphics</h3>
+                                <span class="example-badge">Advanced</span>
+                            </div>
+                            <p>Native SVG support with namespace handling and animations</p>
                             <div class="example-demo">
                                 <svg-demo></svg-demo>
                             </div>
                         </div>
 
                         <div class="example-card">
-                            <h3>Color Picker</h3>
-                            <p>Custom web component with color selection</p>
+                            <div class="example-header">
+                                <h3>Color Picker</h3>
+                                <span class="example-badge">Interactive</span>
+                            </div>
+                            <p>Custom web component with color selection and state management</p>
                             <div class="example-demo">
                                 <color-picker></color-picker>
                             </div>
                         </div>
 
                         <div class="example-card">
-                            <h3>Button Components</h3>
-                            <p>Various button styles and states</p>
+                            <div class="example-header">
+                                <h3>Button Components</h3>
+                                <span class="example-badge">Basic</span>
+                            </div>
+                            <p>Various button styles and states with ripple effects</p>
                             <div class="example-demo">
                                 <div class="button-demo">
                                     <xy-button type="primary">Primary</xy-button>
@@ -242,6 +377,83 @@ class MyButton extends WebComponent {
                                     <xy-button type="flat">Flat</xy-button>
                                     <xy-button disabled>Disabled</xy-button>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
+    }
+
+    /**
+     * 渲染生态系统区域
+     */
+    private renderEcosystem(): HTMLElement {
+        return (
+            <section id="ecosystem" class="ecosystem-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Ecosystem</h2>
+                        <p class="section-description">
+                            A rich ecosystem of tools and libraries to enhance your development
+                            experience.
+                        </p>
+                    </div>
+
+                    <div class="ecosystem-grid">
+                        <div class="ecosystem-card">
+                            <div class="ecosystem-icon">🔧</div>
+                            <h3>Core Framework</h3>
+                            <p>The main WSX Framework with JSX support and Web Components</p>
+                            <div class="ecosystem-links">
+                                <a href="#" onClick={this.openDocs}>
+                                    Documentation
+                                </a>
+                                <a href="#" onClick={this.openGitHub}>
+                                    GitHub
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="ecosystem-card">
+                            <div class="ecosystem-icon">🎨</div>
+                            <h3>Base Components</h3>
+                            <p>Pre-built UI components for rapid development</p>
+                            <div class="ecosystem-links">
+                                <a href="#" onClick={this.openDocs}>
+                                    Components
+                                </a>
+                                <a href="#" onClick={this.openExamples}>
+                                    Examples
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="ecosystem-card">
+                            <div class="ecosystem-icon">⚡</div>
+                            <h3>Vite Plugin</h3>
+                            <p>Build tool integration for seamless development</p>
+                            <div class="ecosystem-links">
+                                <a href="#" onClick={this.openDocs}>
+                                    Setup Guide
+                                </a>
+                                <a href="#" onClick={this.openGitHub}>
+                                    Plugin
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="ecosystem-card">
+                            <div class="ecosystem-icon">🔍</div>
+                            <h3>ESLint Plugin</h3>
+                            <p>Code quality and best practices enforcement</p>
+                            <div class="ecosystem-links">
+                                <a href="#" onClick={this.openDocs}>
+                                    Rules
+                                </a>
+                                <a href="#" onClick={this.openGitHub}>
+                                    Plugin
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -259,8 +471,22 @@ class MyButton extends WebComponent {
                 <div class="container">
                     <div class="footer-content">
                         <div class="footer-section">
-                            <h3>WSX Framework</h3>
+                            <div class="footer-brand">
+                                <span class="footer-logo">⚡</span>
+                                <h3>WSX Framework</h3>
+                            </div>
                             <p>The Progressive Web Components Framework</p>
+                            <div class="footer-social">
+                                <button class="social-btn" onClick={this.openGitHub}>
+                                    GitHub
+                                </button>
+                                <button class="social-btn" onClick={this.openDiscord}>
+                                    Discord
+                                </button>
+                                <button class="social-btn" onClick={this.openTwitter}>
+                                    Twitter
+                                </button>
+                            </div>
                         </div>
 
                         <div class="footer-section">
@@ -273,12 +499,17 @@ class MyButton extends WebComponent {
                                 </li>
                                 <li>
                                     <a href="#" onClick={this.openGitHub}>
-                                        GitHub
+                                        GitHub Repository
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#" onClick={this.openExamples}>
                                         Examples
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" onClick={this.openBlog}>
+                                        Blog
                                     </a>
                                 </li>
                             </ul>
@@ -289,7 +520,7 @@ class MyButton extends WebComponent {
                             <ul>
                                 <li>
                                     <a href="#" onClick={this.openDiscord}>
-                                        Discord
+                                        Discord Server
                                     </a>
                                 </li>
                                 <li>
@@ -298,8 +529,34 @@ class MyButton extends WebComponent {
                                     </a>
                                 </li>
                                 <li>
+                                    <a href="#" onClick={this.openGitHub}>
+                                        GitHub Discussions
+                                    </a>
+                                </li>
+                                <li>
                                     <a href="#" onClick={this.openBlog}>
-                                        Blog
+                                        Community Blog
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="footer-section">
+                            <h4>Legal</h4>
+                            <ul>
+                                <li>
+                                    <a href="#" onClick={this.openLicense}>
+                                        MIT License
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" onClick={this.openPrivacy}>
+                                        Privacy Policy
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" onClick={this.openTerms}>
+                                        Terms of Service
                                     </a>
                                 </li>
                             </ul>
@@ -308,6 +565,7 @@ class MyButton extends WebComponent {
 
                     <div class="footer-bottom">
                         <p>&copy; 2024 WSX Framework. Released under the MIT License.</p>
+                        <p>Made with ❤️ by the WSX Framework team</p>
                     </div>
                 </div>
             </footer>
@@ -315,6 +573,25 @@ class MyButton extends WebComponent {
     }
 
     // 事件处理方法
+    private toggleNav = (): void => {
+        this.isNavOpen = !this.isNavOpen;
+        this.rerender();
+    };
+
+    private smoothScroll = (event: Event): void => {
+        event.preventDefault();
+        const target = event.target as HTMLAnchorElement;
+        const href = target.getAttribute("href");
+        if (href && href.startsWith("#")) {
+            const element = document.querySelector(href);
+            if (element) {
+                element.scrollIntoView({ behavior: "smooth" });
+            }
+        }
+        this.isNavOpen = false;
+        this.rerender();
+    };
+
     private scrollToQuickStart = (): void => {
         const element = document.getElementById("quick-start");
         if (element) {
@@ -323,7 +600,7 @@ class MyButton extends WebComponent {
     };
 
     private openGitHub = (): void => {
-        window.open("https://github.com/systembug/wsx-framework", "_blank");
+        window.open("https://github.com/systembugtj/wsx-framework", "_blank");
     };
 
     private openExamples = (): void => {
@@ -361,6 +638,18 @@ class MyButton extends WebComponent {
         window.open("https://wsx-framework.dev/blog", "_blank");
     };
 
+    private openLicense = (): void => {
+        window.open("https://github.com/systembugtj/wsx-framework/blob/main/LICENSE", "_blank");
+    };
+
+    private openPrivacy = (): void => {
+        window.open("https://wsx-framework.dev/privacy", "_blank");
+    };
+
+    private openTerms = (): void => {
+        window.open("https://wsx-framework.dev/terms", "_blank");
+    };
+
     /**
      * 组件连接到DOM后的初始化
      */
@@ -382,10 +671,20 @@ class MyButton extends WebComponent {
     private handleScroll = (): void => {
         const scrolled = window.scrollY;
         const hero = document.querySelector(".hero-section") as HTMLElement;
+        const nav = document.querySelector(".main-nav") as HTMLElement;
 
         if (hero) {
             // 添加视差滚动效果
             hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        }
+
+        if (nav) {
+            // 导航栏滚动效果
+            if (scrolled > 100) {
+                nav.classList.add("nav-scrolled");
+            } else {
+                nav.classList.remove("nav-scrolled");
+            }
         }
     };
 }

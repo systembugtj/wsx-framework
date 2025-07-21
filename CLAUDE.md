@@ -405,7 +405,7 @@ See CONTRIBUTING.md for detailed contribution guidelines including:
 
 ## Resources
 
-- **Repository**: https://github.com/systembug/wsx-framework
+- **Repository**: https://github.com/systembugtj/wsx-framework
 - **Issues**: GitHub Issues for bug reports and feature requests
 - **Discussions**: GitHub Discussions for community questions
 - **License**: MIT License

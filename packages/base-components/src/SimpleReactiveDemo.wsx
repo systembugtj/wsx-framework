@@ -9,7 +9,7 @@ import { ReactiveWebComponent, autoRegister, createLogger } from "@systembug/wsx
 const logger = createLogger("SimpleReactiveDemo");
 
 @autoRegister({ tagName: "simple-reactive-demo" })
-export class SimpleReactiveDemo extends ReactiveWebComponent {
+export default class SimpleReactiveDemo extends ReactiveWebComponent {
     // 响应式状态 - 自动触发重渲染
     private state = this.reactive({
         count: 0,

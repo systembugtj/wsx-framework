@@ -3,8 +3,8 @@ import { WebComponent, autoRegister, createLogger } from "@systembug/wsx-core";
 
 const logger = createLogger("SvgDemo");
 
-@autoRegister()
-export class SvgDemo extends WebComponent {
+@autoRegister({ tagName: "svg-demo" })
+export default class SvgDemo extends WebComponent {
     private animationId: number | null = null;
     private rotationAngle = 0;
 
