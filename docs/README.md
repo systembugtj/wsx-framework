@@ -13,9 +13,9 @@
 - **[Web Components基础](WSX_DESIGN.md)** - Web Components标准介绍
 
 ### 🛠️ 开发指南
-- **[Chrome调试指南](chrome-debugging-guide.md)** - 使用Chrome DevTools调试WSX组件
-- **[实践计划](WSX_PRACTICE_PLAN.md)** - 系统性的学习计划
-- **[独立开发模板](WSX_SOLO_DEV_TEMPLATE.md)** - 快速搭建开发环境
+- **[Chrome调试指南](design/2025-07-19-chrome-debugging-guide.md)** - 使用Chrome DevTools调试WSX组件
+- **[实践计划](design/2025-07-14-wsx-practice-plan.md)** - 系统性的学习计划
+- **[独立开发模板](design/2025-07-16-wsx-solo-dev-template.md)** - 快速搭建开发环境
 
 ### 🔧 工具链
 - **[ESLint插件](../packages/eslint-plugin/README.md)** - 代码质量检查
@@ -35,13 +35,13 @@ wsx-framework/
 - **[设计文档](design/)** - UI/UX设计指南和组件库
 
 ### 🔄 CI/CD
-- **[CI/CD策略](CICD_STRATEGY.md)** - 持续集成和部署策略
-- **[CI修复记录](CI_FIXES.md)** - 持续集成问题的解决方案
-- **[GitHub规则集](GITHUB_RULESETS.md)** - 代码质量和安全规则
+- **[CI/CD策略](design/2025-07-15-cicd-strategy.md)** - 持续集成和部署策略
+- **[CI修复记录](design/2025-07-15-ci-fixes.md)** - 持续集成问题的解决方案
+- **[GitHub规则集](design/2025-07-15-github-rulesets.md)** - 代码质量和安全规则
 
 ### 📋 项目管理
-- **[实现总结](IMPLEMENTATION_SUMMARY.md)** - 项目实现状态总结
-- **[框架重设计任务](wsx-framework-redesign-task.md)** - 重构计划
+- **[实现总结](design/2025-07-15-implementation-summary.md)** - 项目实现状态总结
+- **[框架重设计任务](design/2025-07-19-wsx-framework-redesign-task.md)** - 重构计划
 
 ## 🎯 设计理念亮点
 
