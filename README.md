@@ -1,8 +1,8 @@
-# WSX Framework (@systembug)
+# WSX Framework (@wsxjs)
 
-[![npm version](https://badge.fury.io/js/@systembug%2Fwsx-core.svg)](https://badge.fury.io/js/@systembug%2Fwsx-core)
-[![npm downloads](https://img.shields.io/npm/dm/@systembug/wsx-core.svg)](https://www.npmjs.com/package/@systembug/wsx-core)
-[![CI Status](https://github.com/systembugtj/wsx-framework/workflows/CI/badge.svg)](https://github.com/systembugtj/wsx-framework/actions)
+[![npm version](https://badge.fury.io/js/@wsxjs%2Fwsx-core.svg)](https://badge.fury.io/js/@wsxjs%2Fwsx-core)
+[![npm downloads](https://img.shields.io/npm/dm/@wsxjs/wsx-core.svg)](https://www.npmjs.com/package/@wsxjs/wsx-core)
+[![CI Status](https://github.com/wsxjs/wsxjs/workflows/CI/badge.svg)](https://github.com/wsxjs/wsxjs/actions)
 [![Coverage Status](https://codecov.io/gh/systembugtj/wsx-framework/branch/main/graph/badge.svg)](https://codecov.io/gh/systembugtj/wsx-framework)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
@@ -98,29 +98,29 @@ WSX provides essential tools to make Web Components development modern and enjoy
 
 ### Published Packages
 
-#### @systembug/wsx-core
-[![npm version](https://badge.fury.io/js/@systembug%2Fwsx-core.svg)](https://badge.fury.io/js/@systembug%2Fwsx-core)
-[![npm downloads](https://img.shields.io/npm/dm/@systembug/wsx-core.svg)](https://www.npmjs.com/package/@systembug/wsx-core)
-[![bundle size](https://img.shields.io/bundlephobia/minzip/@systembug/wsx-core.svg)](https://bundlephobia.com/result?p=@systembug/wsx-core)
+#### @wsxjs/wsx-core
+[![npm version](https://badge.fury.io/js/@wsxjs%2Fwsx-core.svg)](https://badge.fury.io/js/@wsxjs%2Fwsx-core)
+[![npm downloads](https://img.shields.io/npm/dm/@wsxjs/wsx-core.svg)](https://www.npmjs.com/package/@wsxjs/wsx-core)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/@wsxjs/wsx-core.svg)](https://bundlephobia.com/result?p=@wsxjs/wsx-core)
 
 Core framework with WebComponent base class, JSX factory, logger, and utilities
 
-#### @systembug/wsx-vite-plugin
-[![npm version](https://badge.fury.io/js/@systembug%2Fwsx-vite-plugin.svg)](https://badge.fury.io/js/@systembug%2Fwsx-vite-plugin)
-[![npm downloads](https://img.shields.io/npm/dm/@systembug/wsx-vite-plugin.svg)](https://www.npmjs.com/package/@systembug/wsx-vite-plugin)
+#### @wsxjs/wsx-vite-plugin
+[![npm version](https://badge.fury.io/js/@wsxjs%2Fwsx-vite-plugin.svg)](https://badge.fury.io/js/@wsxjs%2Fwsx-vite-plugin)
+[![npm downloads](https://img.shields.io/npm/dm/@wsxjs/wsx-vite-plugin.svg)](https://www.npmjs.com/package/@wsxjs/wsx-vite-plugin)
 [![vite compatibility](https://img.shields.io/badge/vite-%3E%3D4.0.0-blueviolet.svg)](https://vitejs.dev/)
 
 Vite integration for .wsx files (auto-injects JSX factory)
 
-#### @systembug/wsx-eslint-plugin
-[![npm version](https://badge.fury.io/js/@systembug%2Fwsx-eslint-plugin.svg)](https://badge.fury.io/js/@systembug%2Fwsx-eslint-plugin)
-[![npm downloads](https://img.shields.io/npm/dm/@systembug/wsx-eslint-plugin.svg)](https://www.npmjs.com/package/@systembug/wsx-eslint-plugin)
+#### @wsxjs/wsx-eslint-plugin
+[![npm version](https://badge.fury.io/js/@wsxjs%2Fwsx-eslint-plugin.svg)](https://badge.fury.io/js/@wsxjs%2Fwsx-eslint-plugin)
+[![npm downloads](https://img.shields.io/npm/dm/@wsxjs/wsx-eslint-plugin.svg)](https://www.npmjs.com/package/@wsxjs/wsx-eslint-plugin)
 [![eslint compatibility](https://img.shields.io/badge/eslint-%3E%3D8.0.0-orange.svg)](https://eslint.org/)
 
 ESLint rules for WSX components
 
 ### Development Package
-- **@systembug/wsx-examples** - Interactive showcase application with example components
+- **@wsxjs/wsx-examples** - Interactive showcase application with example components
 
 ## Quick Start
 
@@ -132,7 +132,7 @@ pnpm install
 pnpm build
 
 # Run examples
-pnpm --filter @systembug/wsx-examples dev
+pnpm --filter @wsxjs/wsx-examples dev
 
 # Run tests
 pnpm test
@@ -150,7 +150,7 @@ WSX components are **standard Web Components** with JSX syntax sugar:
 
 ```tsx
 // MyComponent.wsx - This is a REAL Web Component
-import { WebComponent, autoRegister } from '@systembug/wsx-core';
+import { WebComponent, autoRegister } from '@wsxjs/wsx-core';
 import styles from './MyComponent.css?inline';
 
 @autoRegister() // Registers as <my-component> custom element
@@ -190,7 +190,7 @@ WSX Framework provides framework-level JSX support. Configure your `tsconfig.jso
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "@systembug/wsx-core/jsx"
+    "jsxImportSource": "@wsxjs/wsx-core/jsx"
   }
 }
 ```
@@ -244,7 +244,7 @@ This monorepo uses pnpm workspaces with comprehensive development tooling:
 
 ```bash
 # Clone the repository
-git clone https://github.com/systembugtj/wsx-framework.git
+git clone https://github.com/wsxjs/wsxjs.git
 cd wsx-framework
 
 # Install dependencies
@@ -463,12 +463,12 @@ To use WSX Framework in your project:
 
 ```bash
 # Install core framework
-npm install @systembug/wsx-core
+npm install @wsxjs/wsx-core
 
 # Install additional packages as needed
-npm install @systembug/wsx-components
-npm install @systembug/wsx-vite-plugin
-npm install @systembug/wsx-eslint-plugin
+npm install @wsxjs/wsx-base-components
+npm install @wsxjs/wsx-vite-plugin
+npm install @wsxjs/wsx-eslint-plugin
 ```
 
 ## Contributing
@@ -499,17 +499,17 @@ MIT
 
 ## Package Information
 
-All packages are published under the `@systembug` npm organization:
+All packages are published under the `@wsxjs` npm organization:
 
-- Core: `npm install @systembug/wsx-core`
-- Vite Plugin: `npm install @systembug/wsx-vite-plugin` 
-- ESLint Plugin: `npm install @systembug/wsx-eslint-plugin`
-- Components: `npm install @systembug/wsx-components`
+- Core: `npm install @wsxjs/wsx-core`
+- Vite Plugin: `npm install @wsxjs/wsx-vite-plugin` 
+- ESLint Plugin: `npm install @wsxjs/wsx-eslint-plugin`
+- Components: `npm install @wsxjs/wsx-base-components`
 
 ## Links
 
-- **Repository**: https://github.com/systembugtj/wsx-framework
-- **Issues**: https://github.com/systembugtj/wsx-framework/issues
+- **Repository**: https://github.com/wsxjs/wsxjs
+- **Issues**: https://github.com/wsxjs/wsxjs/issues
 - **NPM Organization**: https://www.npmjs.com/org/systembug
 
 ## Credits

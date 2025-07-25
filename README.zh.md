@@ -1,8 +1,8 @@
-# WSX 框架 (@systembug)
+# WSX 框架 (@wsxjs)
 
-[![npm version](https://badge.fury.io/js/@systembug%2Fwsx-core.svg)](https://badge.fury.io/js/@systembug%2Fwsx-core)
-[![npm downloads](https://img.shields.io/npm/dm/@systembug/wsx-core.svg)](https://www.npmjs.com/package/@systembug/wsx-core)
-[![CI Status](https://github.com/systembugtj/wsx-framework/workflows/CI/badge.svg)](https://github.com/systembugtj/wsx-framework/actions)
+[![npm version](https://badge.fury.io/js/@wsxjs%2Fwsx-core.svg)](https://badge.fury.io/js/@wsxjs%2Fwsx-core)
+[![npm downloads](https://img.shields.io/npm/dm/@wsxjs/wsx-core.svg)](https://www.npmjs.com/package/@wsxjs/wsx-core)
+[![CI Status](https://github.com/wsxjs/wsxjs/workflows/CI/badge.svg)](https://github.com/wsxjs/wsxjs/actions)
 [![Coverage Status](https://codecov.io/gh/systembugtj/wsx-framework/branch/main/graph/badge.svg)](https://codecov.io/gh/systembugtj/wsx-framework)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
@@ -88,29 +88,29 @@ WSX 提供必要的工具，让 Web Components 开发现代化且愉快：
 
 ### 已发布的包
 
-#### @systembug/wsx-core
-[![npm version](https://badge.fury.io/js/@systembug%2Fwsx-core.svg)](https://badge.fury.io/js/@systembug%2Fwsx-core)
-[![npm downloads](https://img.shields.io/npm/dm/@systembug/wsx-core.svg)](https://www.npmjs.com/package/@systembug/wsx-core)
-[![bundle size](https://img.shields.io/bundlephobia/minzip/@systembug/wsx-core.svg)](https://bundlephobia.com/result?p=@systembug/wsx-core)
+#### @wsxjs/wsx-core
+[![npm version](https://badge.fury.io/js/@wsxjs%2Fwsx-core.svg)](https://badge.fury.io/js/@wsxjs%2Fwsx-core)
+[![npm downloads](https://img.shields.io/npm/dm/@wsxjs/wsx-core.svg)](https://www.npmjs.com/package/@wsxjs/wsx-core)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/@wsxjs/wsx-core.svg)](https://bundlephobia.com/result?p=@wsxjs/wsx-core)
 
 核心框架，包含 WebComponent 基类、JSX 工厂、日志器和工具
 
-#### @systembug/wsx-vite-plugin
-[![npm version](https://badge.fury.io/js/@systembug%2Fwsx-vite-plugin.svg)](https://badge.fury.io/js/@systembug%2Fwsx-vite-plugin)
-[![npm downloads](https://img.shields.io/npm/dm/@systembug/wsx-vite-plugin.svg)](https://www.npmjs.com/package/@systembug/wsx-vite-plugin)
+#### @wsxjs/wsx-vite-plugin
+[![npm version](https://badge.fury.io/js/@wsxjs%2Fwsx-vite-plugin.svg)](https://badge.fury.io/js/@wsxjs%2Fwsx-vite-plugin)
+[![npm downloads](https://img.shields.io/npm/dm/@wsxjs/wsx-vite-plugin.svg)](https://www.npmjs.com/package/@wsxjs/wsx-vite-plugin)
 [![vite compatibility](https://img.shields.io/badge/vite-%3E%3D4.0.0-blueviolet.svg)](https://vitejs.dev/)
 
 用于 .wsx 文件的 Vite 集成（自动注入 JSX 工厂）
 
-#### @systembug/wsx-eslint-plugin
-[![npm version](https://badge.fury.io/js/@systembug%2Fwsx-eslint-plugin.svg)](https://badge.fury.io/js/@systembug%2Fwsx-eslint-plugin)
-[![npm downloads](https://img.shields.io/npm/dm/@systembug/wsx-eslint-plugin.svg)](https://www.npmjs.com/package/@systembug/wsx-eslint-plugin)
+#### @wsxjs/wsx-eslint-plugin
+[![npm version](https://badge.fury.io/js/@wsxjs%2Fwsx-eslint-plugin.svg)](https://badge.fury.io/js/@wsxjs%2Fwsx-eslint-plugin)
+[![npm downloads](https://img.shields.io/npm/dm/@wsxjs/wsx-eslint-plugin.svg)](https://www.npmjs.com/package/@wsxjs/wsx-eslint-plugin)
 [![eslint compatibility](https://img.shields.io/badge/eslint-%3E%3D8.0.0-orange.svg)](https://eslint.org/)
 
 WSX 组件的 ESLint 规则
 
 ### 开发包
-- **@systembug/wsx-examples** - 交互式展示应用，包含示例组件
+- **@wsxjs/wsx-examples** - 交互式展示应用，包含示例组件
 
 ## 快速开始
 
@@ -122,7 +122,7 @@ pnpm install
 pnpm build
 
 # 运行示例
-pnpm --filter @systembug/wsx-examples dev
+pnpm --filter @wsxjs/wsx-examples dev
 
 # 运行测试
 pnpm test
@@ -140,7 +140,7 @@ WSX 组件就是**标准的 Web Components**，只是带有 JSX 语法糖：
 
 ```tsx
 // MyComponent.wsx - 这是一个真正的 Web Component
-import { WebComponent, autoRegister } from '@systembug/wsx-core';
+import { WebComponent, autoRegister } from '@wsxjs/wsx-core';
 import styles from './MyComponent.css?inline';
 
 @autoRegister() // 注册为 <my-component> 自定义元素
@@ -180,7 +180,7 @@ WSX 框架提供框架级的 JSX 支持。配置你的 `tsconfig.json`：
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "@systembug/wsx-core/jsx"
+    "jsxImportSource": "@wsxjs/wsx-core/jsx"
   }
 }
 ```
@@ -232,7 +232,7 @@ WSX 框架提供框架级的 JSX 支持。配置你的 `tsconfig.json`：
 
 ```bash
 # 克隆仓库
-git clone https://github.com/systembugtj/wsx-framework.git
+git clone https://github.com/wsxjs/wsxjs.git
 cd wsx-framework
 
 # 安装依赖
@@ -451,12 +451,12 @@ export class SvgChart extends WebComponent {
 
 ```bash
 # 安装核心框架
-npm install @systembug/wsx-core
+npm install @wsxjs/wsx-core
 
 # 根据需要安装其他包
-npm install @systembug/wsx-components
-npm install @systembug/wsx-vite-plugin
-npm install @systembug/wsx-eslint-plugin
+npm install @wsxjs/wsx-base-components
+npm install @wsxjs/wsx-vite-plugin
+npm install @wsxjs/wsx-eslint-plugin
 ```
 
 ## 贡献
@@ -487,17 +487,17 @@ MIT
 
 ## 包信息
 
-所有包都在 `@systembug` npm 组织下发布：
+所有包都在 `@wsxjs` npm 组织下发布：
 
-- 核心：`npm install @systembug/wsx-core`
-- Vite 插件：`npm install @systembug/wsx-vite-plugin` 
-- ESLint 插件：`npm install @systembug/wsx-eslint-plugin`
-- 组件：`npm install @systembug/wsx-components`
+- 核心：`npm install @wsxjs/wsx-core`
+- Vite 插件：`npm install @wsxjs/wsx-vite-plugin` 
+- ESLint 插件：`npm install @wsxjs/wsx-eslint-plugin`
+- 组件：`npm install @wsxjs/wsx-base-components`
 
 ## 链接
 
-- **仓库**：https://github.com/systembugtj/wsx-framework
-- **Issues**：https://github.com/systembugtj/wsx-framework/issues
+- **仓库**：https://github.com/wsxjs/wsxjs
+- **Issues**：https://github.com/wsxjs/wsxjs/issues
 - **NPM 组织**：https://www.npmjs.com/org/systembug
 
 ## 致谢

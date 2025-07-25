@@ -3,7 +3,7 @@
 ## 安装
 
 ```bash
-npm install @systembug/wsx-core @systembug/wsx-vite-plugin @systembug/eslint-plugin-wsx
+npm install @wsxjs/wsx-core @wsxjs/wsx-vite-plugin @wsxjs/wsx-eslint-plugin
 ```
 
 ## 配置
@@ -16,7 +16,7 @@ npm install @systembug/wsx-core @systembug/wsx-vite-plugin @systembug/eslint-plu
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "@systembug/wsx-core/jsx"
+    "jsxImportSource": "@wsxjs/wsx-core/jsx"
   }
 }
 ```
@@ -27,7 +27,7 @@ npm install @systembug/wsx-core @systembug/wsx-vite-plugin @systembug/eslint-plu
 
 ```typescript
 import { defineConfig } from 'vite';
-import { wsx } from '@systembug/wsx-vite-plugin';
+import { wsx } from '@wsxjs/wsx-vite-plugin';
 
 export default defineConfig({
   plugins: [wsx()]
@@ -39,7 +39,7 @@ export default defineConfig({
 在 `eslint.config.js` 中添加：
 
 ```javascript
-import wsxPlugin from '@systembug/eslint-plugin-wsx';
+import wsxPlugin from '@wsxjs/wsx-eslint-plugin';
 
 export default [
   {
@@ -57,7 +57,7 @@ export default [
 
 ```typescript
 // MyButton.wsx
-import { WebComponent, autoRegister } from '@systembug/wsx-core';
+import { WebComponent, autoRegister } from '@wsxjs/wsx-core';
 import styles from './MyButton.css?inline';
 
 @autoRegister('my-button')

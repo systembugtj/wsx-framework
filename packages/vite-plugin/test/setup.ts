@@ -1,5 +1,5 @@
 /**
- * Jest setup file for @systembug/wsx-vite-plugin tests
+ * Jest setup file for @wsxjs/wsx-vite-plugin tests
  */
 
 // Global test setup

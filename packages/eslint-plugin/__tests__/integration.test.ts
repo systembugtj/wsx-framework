@@ -41,7 +41,7 @@ describe("WSX ESLint Plugin Integration", () => {
             expect(wsxPlugin).toHaveProperty("configs");
 
             expect(wsxPlugin.meta).toEqual({
-                name: "@systembug/eslint-plugin-wsx",
+                name: "@wsxjs/eslint-plugin-wsx",
                 version: "0.0.2",
             });
         });
@@ -77,7 +77,7 @@ describe("WSX ESLint Plugin Integration", () => {
     describe("Real World Code Analysis", () => {
         test("validates correct WSX component", async () => {
             const code = `
-        import { WebComponent, autoRegister } from '@systembug/wsx-core';
+        import { WebComponent, autoRegister } from '@wsxjs/wsx-core';
 
         @autoRegister({ tagName: 'my-component' })
         export class MyComponent extends WebComponent {
@@ -93,7 +93,7 @@ describe("WSX ESLint Plugin Integration", () => {
 
         test("catches missing render method", async () => {
             const code = `
-        import { WebComponent, autoRegister } from '@systembug/wsx-core';
+        import { WebComponent, autoRegister } from '@wsxjs/wsx-core';
 
         @autoRegister({ tagName: 'broken-component' })
         export class BrokenComponent extends WebComponent {
@@ -112,7 +112,7 @@ describe("WSX ESLint Plugin Integration", () => {
         test("catches React imports", async () => {
             const code = `
         import React from 'react';
-        import { WebComponent, autoRegister } from '@systembug/wsx-core';
+        import { WebComponent, autoRegister } from '@wsxjs/wsx-core';
 
         @autoRegister({ tagName: 'react-component' })
         export class ReactComponent extends WebComponent {
@@ -130,7 +130,7 @@ describe("WSX ESLint Plugin Integration", () => {
 
         test("catches invalid tag names", async () => {
             const code = `
-        import { WebComponent, autoRegister } from '@systembug/wsx-core';
+        import { WebComponent, autoRegister } from '@wsxjs/wsx-core';
 
         @autoRegister({ tagName: 'button' })
         export class InvalidComponent extends WebComponent {
@@ -148,7 +148,7 @@ describe("WSX ESLint Plugin Integration", () => {
 
         test("handles complex real-world component", async () => {
             const code = `
-        import { WebComponent, autoRegister, createLogger } from '@systembug/wsx-core';
+        import { WebComponent, autoRegister, createLogger } from '@wsxjs/wsx-core';
 
         const logger = createLogger('ComplexComponent');
 
@@ -235,7 +235,7 @@ describe("WSX ESLint Plugin Integration", () => {
 
         test("handles .wsx files specifically", async () => {
             const code = `
-        import { WebComponent } from '@systembug/wsx-core';
+        import { WebComponent } from '@wsxjs/wsx-core';
 
         export class WSXComponent extends WebComponent {
           // Missing render method - should be caught

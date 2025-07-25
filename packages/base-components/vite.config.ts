@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
-import { wsx } from "@systembug/wsx-vite-plugin";
+import { wsx } from "@wsxjs/wsx-vite-plugin";
 
 export default defineConfig({
     build: {
@@ -10,10 +10,10 @@ export default defineConfig({
             fileName: (format) => `index.${format === "es" ? "js" : "cjs"}`,
         },
         rollupOptions: {
-            external: ["@systembug/wsx-core"],
+            external: ["@wsxjs/wsx-core"],
             output: {
                 globals: {
-                    "@systembug/wsx-core": "WSXCore",
+                    "@wsxjs/wsx-core": "WSXCore",
                 },
             },
         },

@@ -1,4 +1,4 @@
-/** @jsxImportSource @systembug/wsx-core */
+/** @jsxImportSource @wsxjs/wsx-core */
 /**
  * 响应式计数器组件 - 展示 WSX 响应式状态系统
  *
@@ -8,7 +8,7 @@
  * - 原生性能：基于浏览器 Proxy API，零运行时开销
  */
 
-import { ReactiveWebComponent, autoRegister, createLogger } from "@systembug/wsx-core";
+import { ReactiveWebComponent, autoRegister, createLogger } from "@wsxjs/wsx-core";
 import styles from "./ReactiveCounter.css?inline";
 
 const logger = createLogger("ReactiveCounter");

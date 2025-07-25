@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
-import { wsx } from "@systembug/wsx-vite-plugin";
+import { wsx } from "@wsxjs/wsx-vite-plugin";
 import UnoCSS from "unocss/vite";
 
 export default defineConfig({
@@ -29,7 +29,7 @@ export default defineConfig({
     // Uncomment the following lines if you need to resolve the wsx-core package
     // resolve: {
     //     alias: {
-    //         "@systembug/wsx-core": new URL("../core/src/index.ts", import.meta.url).pathname,
+    //         "@wsxjs/wsx-core": new URL("../core/src/index.ts", import.meta.url).pathname,
     //     },
     // },
 });

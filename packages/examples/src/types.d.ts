@@ -6,7 +6,7 @@
 
 // WSX组件模块声明
 declare module "*.wsx" {
-    import { WebComponent } from "@systembug/wsx-core";
+    import { WebComponent } from "@wsxjs/wsx-core";
     const Component: typeof WebComponent;
     export default Component;
 }

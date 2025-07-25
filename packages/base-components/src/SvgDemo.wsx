@@ -1,5 +1,5 @@
-/** @jsxImportSource @systembug/wsx-core */
-import { WebComponent, autoRegister, createLogger } from "@systembug/wsx-core";
+/** @jsxImportSource @wsxjs/wsx-core */
+import { WebComponent, autoRegister, createLogger } from "@wsxjs/wsx-core";
 
 const logger = createLogger("SvgDemo");
 

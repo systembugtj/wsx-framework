@@ -1,10 +1,10 @@
-/** @jsxImportSource @systembug/wsx-core */
+/** @jsxImportSource @wsxjs/wsx-core */
 /**
  * 简单的响应式演示组件
  * 展示 WSX 响应式状态系统的基本功能
  */
 
-import { ReactiveWebComponent, autoRegister, createLogger } from "@systembug/wsx-core";
+import { ReactiveWebComponent, autoRegister, createLogger } from "@wsxjs/wsx-core";
 
 const logger = createLogger("SimpleReactiveDemo");
 

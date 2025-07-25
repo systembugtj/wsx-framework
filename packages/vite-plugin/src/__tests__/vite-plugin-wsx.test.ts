@@ -77,7 +77,7 @@ describe("WSX Vite Plugin", () => {
     describe("Code Transformation", () => {
         test("transforms .wsx files with JSX", async () => {
             const code = `
-        import { WebComponent, autoRegister } from '@systembug/wsx-core';
+        import { WebComponent, autoRegister } from '@wsxjs/wsx-core';
 
         @autoRegister()
         export class TestComponent extends WebComponent {
@@ -102,7 +102,7 @@ describe("WSX Vite Plugin", () => {
 
         test("auto-injects JSX imports when missing", async () => {
             const code = `
-        import { WebComponent, autoRegister } from '@systembug/wsx-core';
+        import { WebComponent, autoRegister } from '@wsxjs/wsx-core';
 
         @autoRegister()
         export class TestComponent extends WebComponent {
@@ -126,7 +126,7 @@ describe("WSX Vite Plugin", () => {
 
         test("skips injection when JSX imports already exist", async () => {
             const code = `
-        import { WebComponent, autoRegister, h, Fragment } from '@systembug/wsx-core';
+        import { WebComponent, autoRegister, h, Fragment } from '@wsxjs/wsx-core';
 
         @autoRegister()
         export class TestComponent extends WebComponent {
@@ -147,16 +147,14 @@ describe("WSX Vite Plugin", () => {
                 // Should not add duplicate imports - the plugin should not modify existing imports
                 const importLines = result.code
                     .split("\n")
-                    .filter(
-                        (line) => line.includes("import") && line.includes("@systembug/wsx-core")
-                    );
+                    .filter((line) => line.includes("import") && line.includes("@wsxjs/wsx-core"));
                 expect(importLines.length).toBe(1);
             }
         });
 
         test("handles Fragment usage", async () => {
             const code = `
-        import { WebComponent, autoRegister } from '@systembug/wsx-core';
+        import { WebComponent, autoRegister } from '@wsxjs/wsx-core';
 
         @autoRegister()
         export class TestComponent extends WebComponent {
@@ -201,7 +199,7 @@ describe("WSX Vite Plugin", () => {
 
         test("handles code without JSX", async () => {
             const code = `
-        import { WebComponent, autoRegister } from '@systembug/wsx-core';
+        import { WebComponent, autoRegister } from '@wsxjs/wsx-core';
 
         @autoRegister()
         export class TestComponent extends WebComponent {
@@ -233,7 +231,7 @@ describe("WSX Vite Plugin", () => {
             });
 
             const code = `
-        import { WebComponent, autoRegister } from '@systembug/wsx-core';
+        import { WebComponent, autoRegister } from '@wsxjs/wsx-core';
 
         @autoRegister()
         export class TestComponent extends WebComponent {
@@ -258,7 +256,7 @@ describe("WSX Vite Plugin", () => {
 
         test("handles complex JSX with event handlers", async () => {
             const code = `
-        import { WebComponent, autoRegister } from '@systembug/wsx-core';
+        import { WebComponent, autoRegister } from '@wsxjs/wsx-core';
 
         @autoRegister()
         export class TestComponent extends WebComponent {
@@ -312,7 +310,7 @@ describe("WSX Vite Plugin", () => {
         test("continues processing on minor syntax issues", async () => {
             // Test with code that has minor issues but should still transform
             const code = `
-        import { WebComponent, autoRegister } from '@systembug/wsx-core';
+        import { WebComponent, autoRegister } from '@wsxjs/wsx-core';
 
         @autoRegister()
         export class TestComponent extends WebComponent {
@@ -375,7 +373,7 @@ describe("WSX Vite Plugin", () => {
             const debugPlugin = vitePluginWSX({ debug: true });
 
             const code = `
-        import { WebComponent, autoRegister } from '@systembug/wsx-core';
+        import { WebComponent, autoRegister } from '@wsxjs/wsx-core';
 
         @autoRegister()
         export class TestComponent extends WebComponent {
@@ -406,7 +404,7 @@ describe("WSX Vite Plugin", () => {
             const debugPlugin = vitePluginWSX({ debug: true });
 
             const code = `
-        import { WebComponent, autoRegister } from '@systembug/wsx-core';
+        import { WebComponent, autoRegister } from '@wsxjs/wsx-core';
 
         @autoRegister()
         export class TestComponent extends WebComponent {
@@ -433,7 +431,7 @@ describe("WSX Vite Plugin", () => {
             const debugPlugin = vitePluginWSX({ debug: true });
 
             const code = `
-        import { WebComponent, autoRegister } from '@systembug/wsx-core';
+        import { WebComponent, autoRegister } from '@wsxjs/wsx-core';
 
         @autoRegister()
         export class TestComponent extends WebComponent {
@@ -458,7 +456,7 @@ describe("WSX Vite Plugin", () => {
             const debugPlugin = vitePluginWSX({ debug: true });
 
             const code = `
-        import { WebComponent, autoRegister } from '@systembug/wsx-core';
+        import { WebComponent, autoRegister } from '@wsxjs/wsx-core';
 
         @autoRegister()
         export class TestComponent extends WebComponent {
@@ -485,7 +483,7 @@ describe("WSX Vite Plugin", () => {
             ).join("\n        ");
 
             const code = `
-        import { WebComponent, autoRegister } from '@systembug/wsx-core';
+        import { WebComponent, autoRegister } from '@wsxjs/wsx-core';
 
         @autoRegister()
         export class LargeComponent extends WebComponent {

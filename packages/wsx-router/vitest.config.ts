@@ -1,5 +1,5 @@
 import { defineConfig } from "vitest/config";
-import { wsx } from "@systembug/wsx-vite-plugin";
+import { wsx } from "@wsxjs/wsx-vite-plugin";
 
 export default defineConfig({
     plugins: [
@@ -22,7 +22,7 @@ export default defineConfig({
     },
     resolve: {
         alias: {
-            "@systembug/wsx-core": new URL("../core/src", import.meta.url).pathname,
+            "@wsxjs/wsx-core": new URL("../core/src", import.meta.url).pathname,
         },
     },
 });

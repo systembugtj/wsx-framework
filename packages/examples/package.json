@@ -1,5 +1,5 @@
 {
-    "name": "@systembug/wsx-examples",
+    "name": "@wsxjs/wsx-examples",
     "version": "0.0.4",
     "description": "Example applications using WSX Framework",
     "type": "module",
@@ -19,15 +19,15 @@
         "lint:fix": "eslint . --fix"
     },
     "dependencies": {
-        "@systembug/wsx-core": "workspace:*",
-        "@systembug/wsx-base-components": "workspace:*",
-        "@systembug/wsx-router": "workspace:*",
+        "@wsxjs/wsx-core": "workspace:*",
+        "@wsxjs/wsx-base-components": "workspace:*",
+        "@wsxjs/wsx-router": "workspace:*",
         "@unocss/preset-attributify": "^66.3.3",
         "@unocss/preset-uno": "^66.3.3"
     },
     "devDependencies": {
-        "@systembug/eslint-plugin-wsx": "workspace:*",
-        "@systembug/wsx-vite-plugin": "workspace:*",
+        "@wsxjs/eslint-plugin-wsx": "workspace:*",
+        "@wsxjs/wsx-vite-plugin": "workspace:*",
         "@testing-library/dom": "^10.4.0",
         "@testing-library/user-event": "^14.6.1",
         "@typescript-eslint/eslint-plugin": "^6.0.0",

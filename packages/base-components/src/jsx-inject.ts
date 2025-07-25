@@ -1,2 +1,2 @@
 // JSX inject file for tsup build
-export { jsx, Fragment } from "@systembug/wsx-core";
+export { jsx, Fragment } from "@wsxjs/wsx-core";

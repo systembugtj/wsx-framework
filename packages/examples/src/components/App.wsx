@@ -1,4 +1,4 @@
-/** @jsxImportSource @systembug/wsx-core */
+/** @jsxImportSource @wsxjs/wsx-core */
 /**
  * WSX Framework Example App - Router-based Demo
  *
@@ -10,11 +10,11 @@
  * - Component separation
  */
 
-import { WebComponent, autoRegister } from "@systembug/wsx-core";
+import { WebComponent, autoRegister } from "@wsxjs/wsx-core";
 import styles from "./App.css?inline";
 // Import base components and router
-import "@systembug/wsx-base-components";
-import "@systembug/wsx-router";
+import "@wsxjs/wsx-base-components";
+import "@wsxjs/wsx-router";
 // Import route-based section components
 import "./HomeSection.wsx";
 import "./FeaturesSection.wsx";
@@ -217,7 +217,7 @@ export default class App extends WebComponent {
     };
 
     private openGitHub = (): void => {
-        window.open("https://github.com/systembugtj/wsx-framework", "_blank");
+        window.open("https://github.com/wsxjs/wsxjs", "_blank");
     };
 
     private openDocs = (): void => {
@@ -237,7 +237,7 @@ export default class App extends WebComponent {
     };
 
     private openLicense = (): void => {
-        window.open("https://github.com/systembugtj/wsx-framework/blob/main/LICENSE", "_blank");
+        window.open("https://github.com/wsxjs/wsxjs/blob/main/LICENSE", "_blank");
     };
 
     private openPrivacy = (): void => {

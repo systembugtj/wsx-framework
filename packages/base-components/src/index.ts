@@ -1,4 +1,4 @@
-/** @jsxImportSource @systembug/wsx-core */
+/** @jsxImportSource @wsxjs/wsx-core */
 
 // Export all base components (using default imports since they're default exports)
 export { default as XyButton } from "./XyButton.wsx";
@@ -14,4 +14,4 @@ export { default as SimpleReactiveDemo } from "./SimpleReactiveDemo.wsx";
 export * from "./ColorPickerUtils";
 
 // Note: Re-exports from core are causing TypeScript rootDir issues
-// Users can import directly from @systembug/wsx-core if needed
+// Users can import directly from @wsxjs/wsx-core if needed

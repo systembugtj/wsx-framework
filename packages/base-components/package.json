@@ -1,5 +1,5 @@
 {
-    "name": "@systembug/wsx-base-components",
+    "name": "@wsxjs/wsx-base-components",
     "version": "0.0.5",
     "description": "Base UI components built with WSX Framework",
     "type": "module",
@@ -27,11 +27,11 @@
         "lint:fix": "eslint . --fix"
     },
     "dependencies": {
-        "@systembug/wsx-core": "workspace:*"
+        "@wsxjs/wsx-core": "workspace:*"
     },
     "devDependencies": {
-        "@systembug/eslint-plugin-wsx": "workspace:*",
-        "@systembug/wsx-vite-plugin": "workspace:*",
+        "@wsxjs/eslint-plugin-wsx": "workspace:*",
+        "@wsxjs/wsx-vite-plugin": "workspace:*",
         "@typescript-eslint/eslint-plugin": "^8.37.0",
         "@typescript-eslint/parser": "^8.37.0",
         "eslint": "^9.31.0",
@@ -51,7 +51,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/systembugtj/wsx-framework.git",
+        "url": "https://github.com/wsxjs/wsxjs.git",
         "directory": "packages/base-components"
     }
 }

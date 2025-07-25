@@ -1,4 +1,4 @@
-/** @jsxImportSource @systembug/wsx-core */
+/** @jsxImportSource @wsxjs/wsx-core */
 /**
  * XyButtonGroup WSX Component - 迁移自xy-button.js
  *
@@ -6,7 +6,7 @@
  * 提供统一的样式和布局管理
  */
 
-import { WebComponent, autoRegister } from "@systembug/wsx-core";
+import { WebComponent, autoRegister } from "@wsxjs/wsx-core";
 import styles from "./XyButtonGroup.css?inline";
 
 export interface XyButtonGroupConfig {

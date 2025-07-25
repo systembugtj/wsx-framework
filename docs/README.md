@@ -97,12 +97,12 @@ WSX Framework 采用原生优先的设计理念：
 
 1. **安装**
    ```bash
-   npm install @systembug/wsx-core
+   npm install @wsxjs/wsx-core
    ```
 
 2. **创建组件**
    ```jsx
-   import { WebComponent, h } from '@systembug/wsx-core';
+   import { WebComponent, h } from '@wsxjs/wsx-core';
    
    class MyButton extends WebComponent {
      render() {

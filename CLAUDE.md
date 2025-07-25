@@ -4,7 +4,7 @@ This file contains comprehensive information about the WSX Framework project to 
 
 ## Project Overview
 
-WSX Framework is a modern Web Components framework that provides JSX syntax and TypeScript support for building native web components. It was extracted from the commando-tauri project and restructured as an independent monorepo under the `@systembug` organization.
+WSX Framework is a modern Web Components framework that provides JSX syntax and TypeScript support for building native web components. It was extracted from the commando-tauri project and restructured as an independent monorepo under the `@wsxjs` organization.
 
 ### Key Features
 - Zero React dependency - pure native Web Components
@@ -20,7 +20,7 @@ WSX Framework is a modern Web Components framework that provides JSX syntax and 
 ```
 wsx-framework/
 ├── packages/
-│   ├── core/                    # @systembug/wsx-core
+│   ├── core/                    # @wsxjs/wsx-core
 │   │   ├── src/
 │   │   │   ├── WebComponent.ts       # Abstract base class for all WSX components
 │   │   │   ├── jsx-factory.ts        # Zero-dependency JSX implementation
@@ -31,26 +31,26 @@ wsx-framework/
 │   │   │   └── wsx-types.d.ts        # TypeScript declarations
 │   │   └── __tests__/               # Jest test files
 │   │
-│   ├── vite-plugin/             # @systembug/wsx-vite-plugin
+│   ├── vite-plugin/             # @wsxjs/wsx-vite-plugin
 │   │   └── src/
 │   │       ├── index.ts              # Main export
 │   │       └── vite-plugin-wsx.ts    # Vite plugin implementation
 │   │
-│   ├── eslint-plugin/           # @systembug/wsx-eslint-plugin
+│   ├── eslint-plugin/           # @wsxjs/wsx-eslint-plugin
 │   │   └── src/
 │   │       ├── index.ts              # Main export
 │   │       ├── rules/                # ESLint rules for WSX
 │   │       ├── configs/              # Recommended configurations
 │   │       └── types.ts              # Type definitions
 │   │
-│   ├── components/              # @systembug/wsx-components
+│   ├── components/              # @wsxjs/wsx-base-components
 │   │   └── src/
 │   │       ├── XyButton.wsx          # Button component implementation
 │   │       ├── XyButtonGroup.wsx     # Button group container
 │   │       ├── ColorPicker.wsx       # Color picker component
 │   │       └── ColorPickerUtils.ts   # Utility functions
 │   │
-│   └── examples/                # @systembug/wsx-examples
+│   └── examples/                # @wsxjs/wsx-examples
 │       ├── src/
 │       │   └── main.ts               # Example application
 │       ├── index.html                # HTML entry point
@@ -82,7 +82,7 @@ wsx-framework/
 
 ## Package Details
 
-### @systembug/wsx-core
+### @wsxjs/wsx-core
 The core framework package containing:
 - `WebComponent`: Abstract base class for all WSX components
 - `jsx`, `jsxs`, `Fragment`: JSX runtime implementation
@@ -90,7 +90,7 @@ The core framework package containing:
 - `StyleManager`: CSS management for Shadow DOM
 - `WSXLogger`, `createLogger`: Logging utilities
 
-### @systembug/wsx-vite-plugin
+### @wsxjs/wsx-vite-plugin
 Vite integration that:
 - Processes .wsx files as TypeScript with JSX
 - Auto-injects JSX factory imports (h, Fragment) when missing
@@ -99,7 +99,7 @@ Vite integration that:
 - **Professional test suite**: Unit tests and integration tests with Vite build scenarios
 - **Comprehensive coverage**: Tests transformation, error handling, HMR, and performance
 
-### @systembug/wsx-eslint-plugin
+### @wsxjs/wsx-eslint-plugin
 ESLint rules specifically for WSX development:
 - **render-method-required**: Ensures WSX components implement required render() method
 - **no-react-imports**: Prevents React imports in WSX files (framework uses its own JSX)
@@ -107,13 +107,13 @@ ESLint rules specifically for WSX development:
 - **Professional test suite**: 38 tests with 100% code coverage using Jest + RuleTester
 - **Integration testing**: Real-world validation in examples package
 
-### @systembug/wsx-components
+### @wsxjs/wsx-base-components
 Pre-built UI components:
 - `XyButton`: Feature-rich button with multiple styles and states
 - `XyButtonGroup`: Container for grouping buttons
 - `ColorPicker`: Advanced color selection component with custom picker support
 
-### @systembug/wsx-examples
+### @wsxjs/wsx-examples
 Example applications demonstrating framework usage:
 - **Real-world testing environment**: Uses ESLint plugin configuration to validate framework rules
 - **Interactive showcase**: App.wsx demonstrates all framework features
@@ -149,18 +149,18 @@ pnpm format:check       # Check code formatting
 pnpm typecheck          # Run TypeScript type checking
 
 # Specific Package Commands
-pnpm --filter @systembug/wsx-core build
-pnpm --filter @systembug/wsx-examples dev
+pnpm --filter @wsxjs/wsx-core build
+pnpm --filter @wsxjs/wsx-examples dev
 
 # ESLint Plugin Testing
-pnpm --filter @systembug/wsx-eslint-plugin test           # Run 38 tests
-pnpm --filter @systembug/wsx-eslint-plugin test:coverage  # 100% coverage report
-pnpm --filter @systembug/wsx-eslint-plugin test:watch     # Development mode
+pnpm --filter @wsxjs/wsx-eslint-plugin test           # Run 38 tests
+pnpm --filter @wsxjs/wsx-eslint-plugin test:coverage  # 100% coverage report
+pnpm --filter @wsxjs/wsx-eslint-plugin test:watch     # Development mode
 
 # Vite Plugin Testing
-pnpm --filter @systembug/wsx-vite-plugin test             # Run plugin tests
-pnpm --filter @systembug/wsx-vite-plugin test:coverage    # Coverage report
-pnpm --filter @systembug/wsx-vite-plugin test:watch       # Development mode
+pnpm --filter @wsxjs/wsx-vite-plugin test             # Run plugin tests
+pnpm --filter @wsxjs/wsx-vite-plugin test:coverage    # Coverage report
+pnpm --filter @wsxjs/wsx-vite-plugin test:watch       # Development mode
 ```
 
 ### File Naming Conventions
@@ -214,7 +214,7 @@ To ensure proper IDE support and eliminate "This JSX tag requires 'React' to be 
 
 1. **Add JSX pragma comment** to the top of your .wsx files:
    ```typescript
-   /** @jsxImportSource @systembug/wsx-core */
+   /** @jsxImportSource @wsxjs/wsx-core */
    ```
 
 2. **TypeScript configuration** should include:
@@ -222,7 +222,7 @@ To ensure proper IDE support and eliminate "This JSX tag requires 'React' to be 
    {
      "compilerOptions": {
        "jsx": "react-jsx",
-       "jsxImportSource": "@systembug/wsx-core"
+       "jsxImportSource": "@wsxjs/wsx-core"
      }
    }
    ```
@@ -285,8 +285,8 @@ The pragma comment tells TypeScript and your IDE that JSX should use the WSX fra
 ### Creating a New Component
 ```typescript
 // MyButton.wsx
-/** @jsxImportSource @systembug/wsx-core */
-import { WebComponent, autoRegister, createLogger } from '@systembug/wsx-core';
+/** @jsxImportSource @wsxjs/wsx-core */
+import { WebComponent, autoRegister, createLogger } from '@wsxjs/wsx-core';
 import styles from './MyButton.css?inline';
 
 const logger = createLogger('MyButton');
@@ -324,7 +324,7 @@ export class MyButton extends WebComponent {
 ### Vite Configuration
 ```typescript
 import { defineConfig } from 'vite';
-import { wsx } from '@systembug/wsx-vite-plugin';
+import { wsx } from '@wsxjs/wsx-vite-plugin';
 
 export default defineConfig({
   plugins: [wsx()],
@@ -341,11 +341,11 @@ Each package builds to a `dist/` directory with:
 - `index.css` - Bundled styles (for components package)
 
 ### NPM Publishing
-Packages are scoped under `@systembug`:
-- `@systembug/wsx-core`
-- `@systembug/wsx-vite-plugin`
-- `@systembug/wsx-eslint-plugin`
-- `@systembug/wsx-components`
+Packages are scoped under `@wsxjs`:
+- `@wsxjs/wsx-core`
+- `@wsxjs/wsx-vite-plugin`
+- `@wsxjs/wsx-eslint-plugin`
+- `@wsxjs/wsx-base-components`
 
 ### CI/CD Pipeline
 GitHub Actions workflow that:
@@ -359,8 +359,8 @@ GitHub Actions workflow that:
 
 ### Common Issues
 1. **"This JSX tag requires 'React' to be in scope" IDE error**: 
-   - Add `/** @jsxImportSource @systembug/wsx-core */` to the top of your .wsx file
-   - Ensure tsconfig.json has `"jsx": "react-jsx"` and `"jsxImportSource": "@systembug/wsx-core"`
+   - Add `/** @jsxImportSource @wsxjs/wsx-core */` to the top of your .wsx file
+   - Ensure tsconfig.json has `"jsx": "react-jsx"` and `"jsxImportSource": "@wsxjs/wsx-core"`
    - Restart TypeScript service in IDE: `Cmd+Shift+P` → "TypeScript: Restart TS Server"
 
 2. **Import errors**: Check TypeScript path mappings in tsconfig.json
@@ -374,7 +374,7 @@ GitHub Actions workflow that:
 ### Debug Mode
 Enable debug logging by setting the log level:
 ```typescript
-import { createLogger } from '@systembug/wsx-core';
+import { createLogger } from '@wsxjs/wsx-core';
 const logger = createLogger('Component', true, 'debug');
 ```
 
@@ -405,7 +405,7 @@ See CONTRIBUTING.md for detailed contribution guidelines including:
 
 ## Resources
 
-- **Repository**: https://github.com/systembugtj/wsx-framework
+- **Repository**: https://github.com/wsxjs/wsxjs
 - **Issues**: GitHub Issues for bug reports and feature requests
 - **Discussions**: GitHub Discussions for community questions
 - **License**: MIT License
@@ -444,16 +444,16 @@ packages/eslint-plugin/
 ### Development Commands
 ```bash
 # ESLint Plugin Test Development
-pnpm --filter @systembug/wsx-eslint-plugin test:watch
-pnpm --filter @systembug/wsx-eslint-plugin test:coverage
+pnpm --filter @wsxjs/wsx-eslint-plugin test:watch
+pnpm --filter @wsxjs/wsx-eslint-plugin test:coverage
 
 # Vite Plugin Test Development  
-pnpm --filter @systembug/wsx-vite-plugin test:watch
-pnpm --filter @systembug/wsx-vite-plugin test:coverage
+pnpm --filter @wsxjs/wsx-vite-plugin test:watch
+pnpm --filter @wsxjs/wsx-vite-plugin test:coverage
 
 # Real-world validation
-pnpm --filter @systembug/wsx-examples lint     # ESLint plugin validation
-pnpm --filter @systembug/wsx-examples dev      # Vite plugin validation
+pnpm --filter @wsxjs/wsx-examples lint     # ESLint plugin validation
+pnpm --filter @wsxjs/wsx-examples dev      # Vite plugin validation
 ```
 
 ## Framework Development Best Practices

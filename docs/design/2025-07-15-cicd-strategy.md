@@ -302,7 +302,7 @@ PR Requirements for main:
 ```markdown
 [![npm version](https://badge.fury.io/js/@systembug%2Fwsx-core.svg)](https://badge.fury.io/js/@systembug%2Fwsx-core)
 [![npm downloads](https://img.shields.io/npm/dm/@systembug/wsx-core.svg)](https://www.npmjs.com/package/@systembug/wsx-core)
-[![CI Status](https://github.com/systembugtj/wsx-framework/workflows/CI/badge.svg)](https://github.com/systembugtj/wsx-framework/actions)
+[![CI Status](https://github.com/wsxjs/wsxjs/workflows/CI/badge.svg)](https://github.com/wsxjs/wsxjs/actions)
 [![Coverage Status](https://codecov.io/gh/systembugtj/wsx-framework/branch/main/graph/badge.svg)](https://codecov.io/gh/systembugtj/wsx-framework)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 ```

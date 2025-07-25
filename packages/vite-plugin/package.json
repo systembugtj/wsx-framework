@@ -1,5 +1,5 @@
 {
-    "name": "@systembug/wsx-vite-plugin",
+    "name": "@wsxjs/wsx-vite-plugin",
     "version": "0.0.5",
     "description": "Vite plugin for WSX Framework",
     "main": "./dist/index.js",
@@ -34,7 +34,7 @@
         "web-components"
     ],
     "dependencies": {
-        "@systembug/wsx-core": "workspace:*"
+        "@wsxjs/wsx-core": "workspace:*"
     },
     "devDependencies": {
         "@types/jest": "^29.0.0",

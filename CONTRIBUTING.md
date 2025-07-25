@@ -47,7 +47,7 @@ Thank you for your interest in contributing to WSX Framework! This document prov
    pnpm dev
 
    # Run the examples showcase application
-   pnpm --filter @systembug/wsx-examples dev
+   pnpm --filter @wsxjs/wsx-examples dev
    # This starts a local server at http://localhost:5173
 
    # Run tests continuously
@@ -68,10 +68,10 @@ cd packages/examples
 pnpm dev
 
 # Or from the root directory
-pnpm --filter @systembug/wsx-examples dev
+pnpm --filter @wsxjs/wsx-examples dev
 
 # Build the examples for production
-pnpm --filter @systembug/wsx-examples build
+pnpm --filter @wsxjs/wsx-examples build
 ```
 
 The examples showcase includes:
@@ -196,7 +196,7 @@ packages/
 
 ### Core Package Changes
 
-When modifying `@systembug/wsx-core`:
+When modifying `@wsxjs/wsx-core`:
 - Update exports in `src/index.ts`
 - Add tests for new functionality
 - Update TypeScript declarations

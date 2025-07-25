@@ -1,7 +1,7 @@
 import js from "@eslint/js";
 import typescript from "@typescript-eslint/eslint-plugin";
 import typescriptParser from "@typescript-eslint/parser";
-import wsxPlugin from "@systembug/eslint-plugin-wsx";
+import wsxPlugin from "@wsxjs/eslint-plugin-wsx";
 import globals from "globals";
 
 export default [

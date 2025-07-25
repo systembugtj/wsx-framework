@@ -19,7 +19,7 @@ global.console = {
 };
 
 // Mock any external dependencies that might not be available during testing
-jest.mock("@systembug/wsx-core", () => ({
+jest.mock("@wsxjs/wsx-core", () => ({
     WebComponent: class WebComponent {},
     autoRegister: jest.fn(),
     createLogger: jest.fn(() => ({

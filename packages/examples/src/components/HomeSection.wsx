@@ -1,8 +1,8 @@
-/** @jsxImportSource @systembug/wsx-core */
-import { WebComponent, autoRegister } from "@systembug/wsx-core";
+/** @jsxImportSource @wsxjs/wsx-core */
+import { WebComponent, autoRegister } from "@wsxjs/wsx-core";
 import styles from "./App.css?inline";
-import "@systembug/wsx-base-components";
-import "@systembug/wsx-router";
+import "@wsxjs/wsx-base-components";
+import "@wsxjs/wsx-router";
 import "./WsxLogo.wsx";
 
 @autoRegister({ tagName: "home-section" })
@@ -99,6 +99,6 @@ export default class HomeSection extends WebComponent {
     }
 
     private openGitHub = (): void => {
-        window.open("https://github.com/systembugtj/wsx-framework", "_blank");
+        window.open("https://github.com/wsxjs/wsxjs", "_blank");
     };
 }

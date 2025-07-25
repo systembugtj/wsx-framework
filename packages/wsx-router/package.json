@@ -1,5 +1,5 @@
 {
-    "name": "@systembug/wsx-router",
+    "name": "@wsxjs/wsx-router",
     "version": "0.0.5",
     "description": "WSX Router - Native History API-based routing for WSX Framework",
     "type": "module",
@@ -30,11 +30,11 @@
         "lint:fix": "eslint . --fix"
     },
     "dependencies": {
-        "@systembug/wsx-core": "workspace:*"
+        "@wsxjs/wsx-core": "workspace:*"
     },
     "devDependencies": {
-        "@systembug/eslint-plugin-wsx": "workspace:*",
-        "@systembug/wsx-vite-plugin": "workspace:*",
+        "@wsxjs/eslint-plugin-wsx": "workspace:*",
+        "@wsxjs/wsx-vite-plugin": "workspace:*",
         "@typescript-eslint/eslint-plugin": "^8.37.0",
         "@typescript-eslint/parser": "^8.37.0",
         "@vitest/ui": "^2.1.8",
@@ -57,7 +57,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/systembugtj/wsx-framework.git",
+        "url": "https://github.com/wsxjs/wsxjs.git",
         "directory": "packages/wsx-router"
     }
 }

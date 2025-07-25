@@ -15,7 +15,7 @@ import { WSXPlugin } from "./types";
 const plugin: WSXPlugin = {
     // 插件元信息
     meta: {
-        name: "@systembug/eslint-plugin-wsx",
+        name: "@wsxjs/eslint-plugin-wsx",
         version: "0.0.2",
     },
 

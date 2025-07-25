@@ -1,5 +1,5 @@
-/** @jsxImportSource @systembug/wsx-core */
-import { WebComponent, autoRegister } from "@systembug/wsx-core";
+/** @jsxImportSource @wsxjs/wsx-core */
+import { WebComponent, autoRegister } from "@wsxjs/wsx-core";
 import styles from "./App.css?inline";
 
 @autoRegister({ tagName: "quick-start-section" })
@@ -29,10 +29,10 @@ export default class QuickStartSection extends WebComponent {
                                 </button>
                             </div>
                             <pre class="code-block">
-                                <code>{`npm install @systembug/wsx-core
+                                <code>{`npm install @wsxjs/wsx-core
 
 # Create your first component
-import { WebComponent } from '@systembug/wsx-core';
+import { WebComponent } from '@wsxjs/wsx-core';
 
 class MyButton extends WebComponent {
     render() {

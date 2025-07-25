@@ -69,7 +69,7 @@ declare global {
 {
     "compilerOptions": {
         "jsx": "react-jsx",
-        "jsxImportSource": "@systembug/wsx-core/jsx"
+        "jsxImportSource": "@wsxjs/wsx-core/jsx"
     }
 }
 ```
@@ -81,7 +81,7 @@ WSX Framework 提供了专门的 Vite 插件：
 ```typescript
 // vite.config.ts
 import { defineConfig } from 'vite';
-import { wsx } from '@systembug/wsx-vite-plugin';
+import { wsx } from '@wsxjs/wsx-vite-plugin';
 
 export default defineConfig({
     plugins: [
@@ -100,7 +100,7 @@ export default defineConfig({
 
 ```javascript
 // eslint.config.js
-import wsxPlugin from '@systembug/eslint-plugin-wsx';
+import wsxPlugin from '@wsxjs/eslint-plugin-wsx';
 
 export default [
     {
@@ -129,7 +129,7 @@ export default [
 
 ```typescript
 // XyButton.wsx
-import { WebComponent, autoRegister } from '@systembug/wsx-core';
+import { WebComponent, autoRegister } from '@wsxjs/wsx-core';
 
 @autoRegister({ tagName: 'xy-button' })
 export default class XyButton extends WebComponent {
@@ -342,7 +342,7 @@ wsx({
 ### 从 React 迁移
 
 1. 移除 React 导入
-2. 将 `jsxImportSource` 改为 `"@systembug/wsx-core/jsx"`
+2. 将 `jsxImportSource` 改为 `"@wsxjs/wsx-core/jsx"`
 3. 使用 WSX 的 `h` 和 `Fragment` 函数
 4. 更新事件处理器类型
 

@@ -17,7 +17,7 @@ ruleTester.run("no-react-imports", noReactImports, {
     valid: [
         // Valid: WSX framework imports
         {
-            code: `import { WebComponent, autoRegister } from '@systembug/wsx-core';`,
+            code: `import { WebComponent, autoRegister } from '@wsxjs/wsx-core';`,
         },
         // Valid: Other non-React imports
         {

@@ -1,4 +1,4 @@
-/** @jsxImportSource @systembug/wsx-core */
+/** @jsxImportSource @wsxjs/wsx-core */
 /**
  * 通用WSX颜色选择器 - Web Component示例
  *
@@ -9,7 +9,7 @@
  * - 完全通用，不依赖特定UI库
  */
 
-import { WebComponent, autoRegister, createLogger } from "@systembug/wsx-core";
+import { WebComponent, autoRegister, createLogger } from "@wsxjs/wsx-core";
 import styles from "./ColorPicker.css?inline";
 import {
     handleCSSVariables,

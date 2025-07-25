@@ -1,5 +1,5 @@
 {
-    "name": "@systembug/wsx-framework",
+    "name": "@wsxjs/wsx-framework",
     "version": "0.0.5",
     "description": "A modern Web Components framework with JSX syntax and TypeScript support",
     "type": "module",
@@ -19,7 +19,7 @@
         "format": "prettier --write \"**/*.{ts,tsx,js,jsx,wsx,json,css,md}\"",
         "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,wsx,json,css,md}\"",
         "typecheck": "tsc --noEmit",
-        "dev": "pnpm --filter @systembug/wsx-examples dev",
+        "dev": "pnpm --filter @wsxjs/wsx-examples dev",
         "debug:chrome": "node scripts/debug-chrome.js",
         "debug:wsx": "pnpm dev & pnpm debug:chrome",
         "clean": "pnpm -r clean && rm -rf node_modules",
@@ -31,8 +31,8 @@
         "changeset:status": "changeset status",
         "release": "pnpm build && pnpm changeset:publish",
         "version": "pnpm changeset:version",
-        "build:pages": "pnpm build && pnpm --filter @systembug/wsx-examples build:pages",
-        "deploy:pages": "pnpm build:pages && pnpm --filter @systembug/wsx-examples deploy:pages"
+        "build:pages": "pnpm build && pnpm --filter @wsxjs/wsx-examples build:pages",
+        "deploy:pages": "pnpm build:pages && pnpm --filter @wsxjs/wsx-examples deploy:pages"
     },
     "devDependencies": {
         "@changesets/cli": "^2.29.5",
@@ -68,7 +68,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/systembugtj/wsx-framework.git"
+        "url": "https://github.com/wsxjs/wsxjs.git"
     },
     "keywords": [
         "web-components",

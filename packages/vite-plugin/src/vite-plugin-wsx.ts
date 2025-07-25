@@ -41,8 +41,8 @@ export interface WSXPluginOptions {
  * 获取 JSX 工厂函数的导入路径
  */
 function getJSXFactoryImportPath(_options: WSXPluginOptions): string {
-    // 使用 @systembug/wsx-core 包中的 JSX 工厂
-    return "@systembug/wsx-core";
+    // 使用 @wsxjs/wsx-core 包中的 JSX 工厂
+    return "@wsxjs/wsx-core";
 }
 
 /**
@@ -92,7 +92,7 @@ export function vitePluginWSX(options: WSXPluginOptions = {}): Plugin {
             let transformedCode = code;
 
             // 1. 检查是否已经有JSX工厂导入
-            const hasWSXCoreImport = code.includes('from "@systembug/wsx-core"');
+            const hasWSXCoreImport = code.includes('from "@wsxjs/wsx-core"');
             // 更精确的检测：使用正则表达式检查 JSX 工厂函数是否在导入中
             const hasJSXInImport =
                 hasWSXCoreImport &&

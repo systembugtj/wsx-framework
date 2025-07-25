@@ -182,4 +182,4 @@ WSX Framework 致力于成为构建原生 Web Components 的最佳开发体验�
 
 最后更新: 2025年7月
 
-这是一份持续更新的文档。欢迎在 [GitHub Discussions](https://github.com/systembugtj/wsx-framework/discussions) 参与讨论，共同塑造 WSX 的未来！
+这是一份持续更新的文档。欢迎在 [GitHub Discussions](https://github.com/wsxjs/wsxjs/discussions) 参与讨论，共同塑造 WSX 的未来！

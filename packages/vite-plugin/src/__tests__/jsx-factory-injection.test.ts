@@ -31,22 +31,22 @@ describe("JSX Factory Auto-Injection Bug Fix", () => {
         const testCases = [
             {
                 name: "should NOT inject when h is already imported",
-                code: `import { WebComponent, h, Fragment } from "@systembug/wsx-core";`,
+                code: `import { WebComponent, h, Fragment } from "@wsxjs/wsx-core";`,
                 shouldInject: false,
             },
             {
                 name: "should NOT inject when Fragment is already imported",
-                code: `import { WebComponent, Fragment } from "@systembug/wsx-core";`,
+                code: `import { WebComponent, Fragment } from "@wsxjs/wsx-core";`,
                 shouldInject: false,
             },
             {
                 name: "should NOT inject when both h and Fragment are imported",
-                code: `import { WebComponent, h, Fragment, autoRegister } from "@systembug/wsx-core";`,
+                code: `import { WebComponent, h, Fragment, autoRegister } from "@wsxjs/wsx-core";`,
                 shouldInject: false,
             },
             {
                 name: "should inject when neither h nor Fragment are imported",
-                code: `import { WebComponent, autoRegister } from "@systembug/wsx-core";
+                code: `import { WebComponent, autoRegister } from "@wsxjs/wsx-core";
 export class TestComponent extends WebComponent {
   render() {
     return <div>Test</div>;
@@ -56,7 +56,7 @@ export class TestComponent extends WebComponent {
             },
             {
                 name: "should inject when other imports exist but not JSX factory",
-                code: `import { WebComponent, StyleManager } from "@systembug/wsx-core";
+                code: `import { WebComponent, StyleManager } from "@wsxjs/wsx-core";
 export class TestComponent extends WebComponent {
   render() {
     return <div>Test</div>;
@@ -66,7 +66,7 @@ export class TestComponent extends WebComponent {
             },
             {
                 name: "should NOT inject when no JSX syntax is present",
-                code: `import { WebComponent, autoRegister } from "@systembug/wsx-core";
+                code: `import { WebComponent, autoRegister } from "@wsxjs/wsx-core";
 export class TestComponent extends WebComponent {
   render() {
     return document.createElement('div');
@@ -91,7 +91,7 @@ export class TestComponent extends WebComponent {
                     // Should either return null (no transformation) or not add JSX imports
                     if (result) {
                         expect(result.code).not.toContain(
-                            'import { h, Fragment } from "@systembug/wsx-core"'
+                            'import { h, Fragment } from "@wsxjs/wsx-core"'
                         );
                     }
                 }
@@ -101,7 +101,7 @@ export class TestComponent extends WebComponent {
 
     describe("Regression Tests for Original Bug", () => {
         it("should NOT falsely detect h in { WebComponent }", async () => {
-            const code = `import { WebComponent, autoRegister } from "@systembug/wsx-core";
+            const code = `import { WebComponent, autoRegister } from "@wsxjs/wsx-core";
 export class TestComponent extends WebComponent {
   render() {
     return <div>Test</div>;
@@ -120,7 +120,7 @@ export class TestComponent extends WebComponent {
         });
 
         it("should NOT falsely detect Fragment in other identifiers", async () => {
-            const code = `import { WebComponent, DocumentFragment } from "@systembug/wsx-core";
+            const code = `import { WebComponent, DocumentFragment } from "@wsxjs/wsx-core";
 export class TestComponent extends WebComponent {
   render() {
     return <div>Test</div>;
@@ -139,14 +139,14 @@ export class TestComponent extends WebComponent {
 
         it("should handle whitespace variations in imports", async () => {
             const testCases = [
-                `import {WebComponent,h,Fragment} from "@systembug/wsx-core";`,
-                `import { WebComponent, h, Fragment } from "@systembug/wsx-core";`,
-                `import {  WebComponent  ,  h  ,  Fragment  } from "@systembug/wsx-core";`,
+                `import {WebComponent,h,Fragment} from "@wsxjs/wsx-core";`,
+                `import { WebComponent, h, Fragment } from "@wsxjs/wsx-core";`,
+                `import {  WebComponent  ,  h  ,  Fragment  } from "@wsxjs/wsx-core";`,
                 `import {
   WebComponent,
   h,
   Fragment
-} from "@systembug/wsx-core";`,
+} from "@wsxjs/wsx-core";`,
             ];
 
             for (const code of testCases) {
@@ -159,7 +159,7 @@ export class TestComponent extends WebComponent {
                 // Should not inject since h and Fragment are already imported
                 if (result) {
                     expect(result.code).not.toContain(
-                        'import { h, Fragment } from "@systembug/wsx-core"'
+                        'import { h, Fragment } from "@wsxjs/wsx-core"'
                     );
                 }
             }
@@ -167,7 +167,7 @@ export class TestComponent extends WebComponent {
     });
 
     describe("Edge Cases", () => {
-        it("should handle files without @systembug/wsx-core import", async () => {
+        it("should handle files without @wsxjs/wsx-core import", async () => {
             const code = `import React from 'react';
 export class TestComponent {
   render() {
@@ -186,8 +186,8 @@ export class TestComponent {
         });
 
         it("should handle multiple imports from the same package", async () => {
-            const code = `import { WebComponent } from "@systembug/wsx-core";
-import { h } from "@systembug/wsx-core";
+            const code = `import { WebComponent } from "@wsxjs/wsx-core";
+import { h } from "@wsxjs/wsx-core";
 export class TestComponent extends WebComponent {
   render() {
     return <div>Test</div>;
@@ -202,14 +202,12 @@ export class TestComponent extends WebComponent {
 
             // Should not inject since h is already imported (even in separate import)
             if (result) {
-                expect(result.code).not.toContain(
-                    'import { h, Fragment } from "@systembug/wsx-core"'
-                );
+                expect(result.code).not.toContain('import { h, Fragment } from "@wsxjs/wsx-core"');
             }
         });
 
         it("should handle renamed imports", async () => {
-            const code = `import { WebComponent, h as jsx } from "@systembug/wsx-core";
+            const code = `import { WebComponent, h as jsx } from "@wsxjs/wsx-core";
 export class TestComponent extends WebComponent {
   render() {
     return <div>Test</div>;
@@ -230,7 +228,7 @@ export class TestComponent extends WebComponent {
 
     describe("JSX Transform Integration", () => {
         it("should correctly transform JSX after injection", async () => {
-            const code = `import { WebComponent, autoRegister } from "@systembug/wsx-core";
+            const code = `import { WebComponent, autoRegister } from "@wsxjs/wsx-core";
 @autoRegister()
 export class TestComponent extends WebComponent {
   render() {
@@ -255,7 +253,7 @@ export class TestComponent extends WebComponent {
         });
 
         it("should handle Fragment usage", async () => {
-            const code = `import { WebComponent, autoRegister } from "@systembug/wsx-core";
+            const code = `import { WebComponent, autoRegister } from "@wsxjs/wsx-core";
 @autoRegister()
 export class TestComponent extends WebComponent {
   render() {

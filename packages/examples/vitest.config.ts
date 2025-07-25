@@ -1,5 +1,5 @@
 import { defineConfig } from "vitest/config";
-import { wsx } from "@systembug/wsx-vite-plugin";
+import { wsx } from "@wsxjs/wsx-vite-plugin";
 import path from "path";
 
 export default defineConfig({
@@ -20,14 +20,14 @@ export default defineConfig({
     resolve: {
         alias: {
             "@": path.resolve(__dirname, "./src"),
-            "@systembug/wsx-core": path.resolve(__dirname, "../core/src"),
+            "@wsxjs/wsx-core": path.resolve(__dirname, "../core/src"),
         },
     },
     esbuild: {
         jsx: "transform",
         jsxFactory: "h",
         jsxFragment: "Fragment",
-        jsxInject: `import { h, Fragment } from '@systembug/wsx-core'`,
+        jsxInject: `import { h, Fragment } from '@wsxjs/wsx-core'`,
         target: "es2020",
     },
 });

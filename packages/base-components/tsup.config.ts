@@ -10,7 +10,7 @@ export default defineConfig({
     minify: false,
     splitting: false,
     treeshake: true,
-    external: ["@systembug/wsx-core"],
+    external: ["@wsxjs/wsx-core"],
     esbuildOptions: (options) => {
         options.jsx = "transform";
         options.jsxFactory = "jsx";

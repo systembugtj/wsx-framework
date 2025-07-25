@@ -93,7 +93,7 @@ GitHub Repository Rulesets provide a modern way to enforce branch protection and
 ## Configuration Steps
 
 ### 1. Access Repository Rulesets
-1. Navigate to your repository: `https://github.com/systembugtj/wsx-framework`
+1. Navigate to your repository: `https://github.com/wsxjs/wsxjs`
 2. Go to **Settings** → **Rules** → **Rulesets**
 3. Click **New ruleset**
 

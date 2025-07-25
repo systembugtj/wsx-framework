@@ -1,4 +1,4 @@
-import { createLogger } from "@systembug/wsx-core";
+import { createLogger } from "@wsxjs/wsx-core";
 
 const logger = createLogger("RouterUtils");
 

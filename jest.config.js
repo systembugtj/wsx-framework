@@ -4,8 +4,8 @@ export default {
     testEnvironment: "jsdom",
     roots: [
         "<rootDir>/packages/core",
-        "<rootDir>/packages/eslint-plugin", 
-        "<rootDir>/packages/vite-plugin"
+        "<rootDir>/packages/eslint-plugin",
+        "<rootDir>/packages/vite-plugin",
     ],
     testMatch: ["**/__tests__/**/*.+(ts|tsx|js)", "**/?(*.)+(spec|test).+(ts|tsx|js)"],
     testPathIgnorePatterns: [
@@ -20,7 +20,7 @@ export default {
             {
                 tsconfig: {
                     jsx: "react-jsx",
-                    jsxImportSource: "@systembug/wsx-core",
+                    jsxImportSource: "@wsxjs/wsx-core",
                     experimentalDecorators: true,
                     emitDecoratorMetadata: true,
                     isolatedModules: true,
@@ -35,10 +35,10 @@ export default {
         ],
     },
     moduleNameMapper: {
-        "^@systembug/wsx-core$": "<rootDir>/packages/core/src",
-        "^@systembug/wsx-vite-plugin$": "<rootDir>/packages/vite-plugin/src",
-        "^@systembug/wsx-eslint-plugin$": "<rootDir>/packages/eslint-plugin/src",
-        "^@systembug/wsx-components$": "<rootDir>/packages/components/src",
+        "^@wsxjs/wsx-core$": "<rootDir>/packages/core/src",
+        "^@wsxjs/wsx-vite-plugin$": "<rootDir>/packages/vite-plugin/src",
+        "^@wsxjs/eslint-plugin-wsx$": "<rootDir>/packages/eslint-plugin/src",
+        "^@wsxjs/wsx-base-components$": "<rootDir>/packages/base-components/src",
         "\\.css\\?inline$": "<rootDir>/test/__mocks__/styleMock.js",
     },
     setupFilesAfterEnv: ["<rootDir>/test/setup.ts"],

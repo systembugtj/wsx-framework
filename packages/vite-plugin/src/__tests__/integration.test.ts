@@ -71,7 +71,7 @@ describe("WSX Vite Plugin Integration", () => {
             const plugin = vitePluginWSX();
 
             const code = `
-        import { WebComponent, autoRegister } from '@systembug/wsx-core';
+        import { WebComponent, autoRegister } from '@wsxjs/wsx-core';
 
         @autoRegister()
         export class TestComponent extends WebComponent {
@@ -129,7 +129,7 @@ describe("WSX Vite Plugin Integration", () => {
             });
 
             const code = `
-        import { WebComponent, autoRegister } from '@systembug/wsx-core';
+        import { WebComponent, autoRegister } from '@wsxjs/wsx-core';
 
         @autoRegister()
         export class TestComponent extends WebComponent {
@@ -212,7 +212,7 @@ describe("WSX Vite Plugin Integration", () => {
             const plugin = vitePluginWSX();
 
             const codeWithoutJSX = `
-        import { WebComponent, autoRegister } from '@systembug/wsx-core';
+        import { WebComponent, autoRegister } from '@wsxjs/wsx-core';
 
         @autoRegister()
         export class TestComponent extends WebComponent {

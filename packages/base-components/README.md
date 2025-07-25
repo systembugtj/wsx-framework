@@ -199,6 +199,6 @@ MIT License
 
 ## 📚 相关链接
 
-- [WSX Framework](https://github.com/systembugtj/wsx-framework)
+- [WSX Framework](https://github.com/wsxjs/wsxjs)
 - [设计文档](./docs/modern-xybutton-design.md)
 - [在线演示](http://localhost:3000) 

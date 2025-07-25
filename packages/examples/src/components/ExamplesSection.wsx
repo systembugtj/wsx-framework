@@ -1,8 +1,8 @@
-/** @jsxImportSource @systembug/wsx-core */
-import { WebComponent, autoRegister } from "@systembug/wsx-core";
+/** @jsxImportSource @wsxjs/wsx-core */
+import { WebComponent, autoRegister } from "@wsxjs/wsx-core";
 import styles from "./App.css?inline";
-import "@systembug/wsx-base-components";
-import "@systembug/wsx-router";
+import "@wsxjs/wsx-base-components";
+import "@wsxjs/wsx-router";
 
 @autoRegister({ tagName: "examples-section" })
 export default class ExamplesSection extends WebComponent {

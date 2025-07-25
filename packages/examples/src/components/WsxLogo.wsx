@@ -1,5 +1,5 @@
-/** @jsxImportSource @systembug/wsx-core */
-import { WebComponent, autoRegister } from "@systembug/wsx-core";
+/** @jsxImportSource @wsxjs/wsx-core */
+import { WebComponent, autoRegister } from "@wsxjs/wsx-core";
 
 @autoRegister({ tagName: "wsx-logo" })
 export default class WsxLogo extends WebComponent {

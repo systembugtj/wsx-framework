@@ -5,11 +5,11 @@
  * The App component showcases all framework features and example components.
  */
 
-import { createLogger } from "@systembug/wsx-core";
+import { createLogger } from "@wsxjs/wsx-core";
 import "uno.css";
 import "./main.css";
 // Import base components package (includes CSS)
-import "@systembug/wsx-base-components";
+import "@wsxjs/wsx-base-components";
 import "./components/App.wsx";
 
 const logger = createLogger("Main");

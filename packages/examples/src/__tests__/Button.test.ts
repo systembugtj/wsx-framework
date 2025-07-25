@@ -3,7 +3,7 @@
  */
 
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { WebComponent, autoRegister, h } from "@systembug/wsx-core";
+import { WebComponent, autoRegister, h } from "@wsxjs/wsx-core";
 
 @autoRegister({ tagName: "test-button" })
 class TestButton extends WebComponent {
