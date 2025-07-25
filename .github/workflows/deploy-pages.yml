@@ -62,6 +62,8 @@ jobs:
                   pnpm build:pages
               env:
                   NODE_ENV: production
+                  GITHUB_PAGES: true
+                  CUSTOM_DOMAIN: true
 
             - name: Setup Pages
               uses: actions/configure-pages@v4
