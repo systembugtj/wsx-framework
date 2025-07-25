@@ -1,4 +1,4 @@
-/* WSX Link 样式 */
+/* WSX Link 基础样式 - 使用 CSS Parts 允许宿主自定义 */
 :host {
     display: inline-block;
     min-width: fit-content;
