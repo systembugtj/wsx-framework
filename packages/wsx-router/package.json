@@ -1,6 +1,6 @@
 {
     "name": "@systembug/wsx-router",
-    "version": "0.0.1",
+    "version": "0.0.5",
     "description": "WSX Router - Native History API-based routing for WSX Framework",
     "type": "module",
     "main": "./dist/index.cjs",
