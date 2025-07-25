@@ -1,0 +1,121 @@
+/** @jsxImportSource @systembug/wsx-core */
+import { WebComponent, autoRegister } from "@systembug/wsx-core";
+import styles from "../App.css?inline";
+import "@systembug/wsx-router";
+
+@autoRegister({ tagName: "ecosystem-section" })
+export default class EcosystemSection extends WebComponent {
+    constructor() {
+        super({ styles });
+    }
+
+    render() {
+        return (
+            <section id="ecosystem" class="ecosystem-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Ecosystem</h2>
+                        <p class="section-description">
+                            A rich ecosystem of tools and libraries to enhance your development
+                            experience.
+                        </p>
+                    </div>
+
+                    <div class="ecosystem-grid">
+                        <div class="ecosystem-card">
+                            <div class="ecosystem-icon">🔧</div>
+                            <h3>Core Framework</h3>
+                            <p>The main WSX Framework with JSX support and Web Components</p>
+                            <div class="ecosystem-links">
+                                <a href="#" onClick={this.openDocs}>
+                                    Documentation
+                                </a>
+                                <a href="#" onClick={this.openGitHub}>
+                                    GitHub
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="ecosystem-card">
+                            <div class="ecosystem-icon">🧭</div>
+                            <h3>Router</h3>
+                            <p>Native History API-based routing for single-page applications</p>
+                            <div class="ecosystem-links">
+                                <a href="#" onClick={this.openDocs}>
+                                    Router Docs
+                                </a>
+                                <wsx-link to="/quick-start" class="ecosystem-demo">
+                                    See Demo
+                                </wsx-link>
+                            </div>
+                        </div>
+
+                        <div class="ecosystem-card">
+                            <div class="ecosystem-icon">🎨</div>
+                            <h3>Base Components</h3>
+                            <p>Pre-built UI components for rapid development</p>
+                            <div class="ecosystem-links">
+                                <a href="#" onClick={this.openDocs}>
+                                    Components
+                                </a>
+                                <wsx-link to="/examples" class="ecosystem-demo">
+                                    Examples
+                                </wsx-link>
+                            </div>
+                        </div>
+
+                        <div class="ecosystem-card">
+                            <div class="ecosystem-icon">⚡</div>
+                            <h3>Vite Plugin</h3>
+                            <p>Build tool integration for seamless development</p>
+                            <div class="ecosystem-links">
+                                <a href="#" onClick={this.openDocs}>
+                                    Setup Guide
+                                </a>
+                                <a href="#" onClick={this.openGitHub}>
+                                    Plugin
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="ecosystem-card">
+                            <div class="ecosystem-icon">🔍</div>
+                            <h3>ESLint Plugin</h3>
+                            <p>Code quality and best practices enforcement</p>
+                            <div class="ecosystem-links">
+                                <a href="#" onClick={this.openDocs}>
+                                    Rules
+                                </a>
+                                <a href="#" onClick={this.openGitHub}>
+                                    Plugin
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="ecosystem-card">
+                            <div class="ecosystem-icon">🧪</div>
+                            <h3>Testing</h3>
+                            <p>Comprehensive testing with Vitest for .wsx components</p>
+                            <div class="ecosystem-links">
+                                <a href="#" onClick={this.openDocs}>
+                                    Testing Guide
+                                </a>
+                                <a href="#" onClick={this.openGitHub}>
+                                    Examples
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
+    }
+
+    private openDocs = (): void => {
+        window.open("https://wsx-framework.dev/docs", "_blank");
+    };
+
+    private openGitHub = (): void => {
+        window.open("https://github.com/systembugtj/wsx-framework", "_blank");
+    };
+}

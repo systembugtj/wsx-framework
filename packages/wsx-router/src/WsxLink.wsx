@@ -1,0 +1,162 @@
+/** @jsxImportSource @systembug/wsx-core */
+import { WebComponent, autoRegister, createLogger } from "@systembug/wsx-core";
+import styles from "./WsxLink.css?inline";
+
+const logger = createLogger("WsxLink");
+
+/**
+ * WSX Link - 路由导航链接组件
+ *
+ * 属性：
+ * - to: 目标路径
+ * - replace: 是否替换历史记录（默认 false）
+ * - active-class: 激活状态样式类（默认 'active'）
+ * - exact: 是否精确匹配（默认 false）
+ *
+ * 使用示例：
+ * ```html
+ * <wsx-link to="/users">用户列表</wsx-link>
+ * <wsx-link to="/users/123" active-class="current">用户详情</wsx-link>
+ * <wsx-link to="/settings" replace>设置</wsx-link>
+ * ```
+ */
+@autoRegister({ tagName: "wsx-link" })
+export default class WsxLink extends WebComponent {
+    static observedAttributes = ["to", "replace", "active-class", "exact"];
+
+    private to: string = "";
+    private replace: boolean = false;
+    private activeClass: string = "active";
+    private exact: boolean = false;
+
+    constructor() {
+        super({
+            styles,
+            styleName: "wsx-link",
+        });
+    }
+
+    render() {
+        return (
+            <a href={this.to} class="wsx-link" onClick={this.handleClick} part="link">
+                <slot></slot>
+            </a>
+        );
+    }
+
+    protected onConnected() {
+        // Initialize attributes from HTML when connected
+        this.to = this.getAttribute("to") || "";
+        this.replace = this.hasAttribute("replace");
+        this.activeClass = this.getAttribute("active-class") || "active";
+        this.exact = this.hasAttribute("exact");
+
+        // Update the href of the rendered link
+        const link = this.shadowRoot.querySelector(".wsx-link") as HTMLAnchorElement;
+        if (link) {
+            link.href = this.to;
+        }
+
+        // 监听路由变化以更新激活状态
+        window.addEventListener("popstate", this.updateActiveState);
+        document.addEventListener("route-changed", this.updateActiveState);
+
+        // 初始更新激活状态
+        this.updateActiveState();
+    }
+
+    protected onDisconnected() {
+        window.removeEventListener("popstate", this.updateActiveState);
+        document.removeEventListener("route-changed", this.updateActiveState);
+    }
+
+    protected onAttributeChanged(name: string, _oldValue: string, newValue: string) {
+        switch (name) {
+            case "to":
+                this.to = newValue || "";
+                this.rerender(); // Re-render to update href in JSX
+                this.updateActiveState();
+                break;
+            case "replace":
+                this.replace = newValue !== null && newValue !== "false";
+                break;
+            case "active-class":
+                this.activeClass = newValue || "active";
+                this.updateActiveState();
+                break;
+            case "exact":
+                this.exact = newValue !== null && newValue !== "false";
+                this.updateActiveState();
+                break;
+        }
+    }
+
+    private handleClick = (event: MouseEvent) => {
+        // 防止默认链接行为
+        event.preventDefault();
+
+        if (!this.to) {
+            logger.warn("No 'to' attribute specified");
+            return;
+        }
+
+        // 检查是否为外部链接
+        if (this.isExternalLink(this.to)) {
+            window.open(this.to, "_blank");
+            return;
+        }
+
+        // 使用 History API 进行导航
+        if (this.replace) {
+            window.history.replaceState(null, "", this.to);
+        } else {
+            window.history.pushState(null, "", this.to);
+        }
+
+        // 触发路由变化事件
+        window.dispatchEvent(new PopStateEvent("popstate"));
+
+        logger.debug(`Navigated to: ${this.to}`);
+    };
+
+    private updateActiveState = () => {
+        const currentPath = window.location.pathname;
+        const isActive = this.exact
+            ? currentPath === this.to
+            : currentPath.startsWith(this.to) && this.to !== "/";
+
+        const link = this.shadowRoot?.querySelector("a");
+        if (link) {
+            if (isActive) {
+                link.classList.add(this.activeClass);
+                this.setAttribute("active", "");
+            } else {
+                link.classList.remove(this.activeClass);
+                this.removeAttribute("active");
+            }
+        }
+    };
+
+    private isExternalLink(url: string): boolean {
+        return (
+            url.startsWith("http://") ||
+            url.startsWith("https://") ||
+            url.startsWith("mailto:") ||
+            url.startsWith("tel:")
+        );
+    }
+
+    /**
+     * 编程式导航
+     */
+    public navigate() {
+        if (this.to) {
+            this.handleClick(
+                new MouseEvent("click", {
+                    bubbles: true,
+                    cancelable: true,
+                })
+            );
+        }
+    }
+}

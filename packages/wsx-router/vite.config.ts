@@ -5,7 +5,7 @@ export default defineConfig({
     build: {
         lib: {
             entry: "src/index.ts",
-            name: "WSXBaseComponents",
+            name: "WSXRouter",
             formats: ["es", "cjs"],
             fileName: (format) => `index.${format === "es" ? "js" : "cjs"}`,
         },

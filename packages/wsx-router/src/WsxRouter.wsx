@@ -1,0 +1,180 @@
+/** @jsxImportSource @systembug/wsx-core */
+import { WebComponent, autoRegister, createLogger } from "@systembug/wsx-core";
+import styles from "./WsxRouter.css?inline";
+
+const logger = createLogger("WsxRouter");
+
+/**
+ * WSX Router - 基于原生 History API 的极简路由
+ *
+ * 设计原则：
+ * - 充分利用 History API 和 URL API
+ * - 不重新发明轮子，只做优雅封装
+ * - 声明式路由配置
+ * - 自动拦截导航
+ *
+ * 使用示例：
+ * ```html
+ * <wsx-router>
+ *   <wsx-view route="/" component="home-page"></wsx-view>
+ *   <wsx-view route="/users/:id" component="user-detail"></wsx-view>
+ *   <wsx-view route="*" component="not-found"></wsx-view>
+ * </wsx-router>
+ * ```
+ */
+@autoRegister({ tagName: "wsx-router" })
+export default class WsxRouter extends WebComponent {
+    private views: Map<string, HTMLElement> = new Map();
+    private currentView: HTMLElement | null = null;
+
+    constructor() {
+        super({ styles });
+    }
+
+    render() {
+        return (
+            <div class="router-outlet">
+                <slot></slot>
+            </div>
+        );
+    }
+
+    protected onConnected() {
+        logger.debug("WsxRouter connected to DOM");
+
+        // 收集所有视图
+        this.collectViews();
+        logger.debug("WsxRouter collected views:", this.views.size);
+
+        // 监听原生 popstate 事件
+        window.addEventListener("popstate", this.handleRouteChange);
+
+        // 拦截所有链接点击，让 History API 接管
+        this.addEventListener("click", this.interceptLinks);
+
+        // 初始路由
+        this.handleRouteChange();
+    }
+
+    protected onDisconnected() {
+        window.removeEventListener("popstate", this.handleRouteChange);
+    }
+
+    private collectViews() {
+        // Get the slot element
+        const slot = this.shadowRoot?.querySelector("slot");
+        if (!slot) {
+            logger.error("WsxRouter: No slot found");
+            return;
+        }
+
+        // Get slotted elements (light DOM children)
+        const slottedElements = slot.assignedElements();
+
+        // Filter for wsx-view elements
+        const views = slottedElements.filter((el) => el.tagName.toLowerCase() === "wsx-view");
+        logger.debug("WsxRouter found views:", views.length);
+
+        views.forEach((view) => {
+            const route = view.getAttribute("route") || "/";
+            this.views.set(route, view as HTMLElement);
+            // 初始隐藏所有视图
+            (view as HTMLElement).style.display = "none";
+            logger.debug(`WsxRouter hiding view for route: ${route}`);
+        });
+    }
+
+    private handleRouteChange = () => {
+        const path = window.location.pathname;
+        logger.debug(`Route changed to: ${path}`);
+
+        // 隐藏当前视图
+        if (this.currentView) {
+            this.currentView.style.display = "none";
+            logger.debug("Hiding previous view");
+        }
+
+        // 查找匹配的视图
+        const view = this.matchRoute(path);
+        if (view) {
+            view.style.display = "block";
+            this.currentView = view;
+            logger.debug(`Showing view for route: ${view.getAttribute("route")}`);
+
+            // 传递路由参数
+            const params = this.extractParams(view.getAttribute("route") || "/", path);
+            if (params) {
+                view.setAttribute("params", JSON.stringify(params));
+            }
+        } else {
+            logger.warn(`No view found for path: ${path}`);
+        }
+
+        // 触发路由变化事件
+        this.dispatchEvent(
+            new CustomEvent("route-changed", {
+                detail: { path, view },
+                bubbles: true,
+                composed: true,
+            })
+        );
+    };
+
+    private matchRoute(path: string): HTMLElement | null {
+        // 精确匹配
+        if (this.views.has(path)) {
+            return this.views.get(path)!;
+        }
+
+        // 参数匹配
+        for (const [route, view] of this.views) {
+            if (route.includes(":")) {
+                const pattern = route.replace(/:[^/]+/g, "([^/]+)");
+                const regex = new RegExp(`^${pattern}$`);
+                if (regex.test(path)) {
+                    return view;
+                }
+            }
+        }
+
+        // 通配符匹配
+        return this.views.get("*") || null;
+    }
+
+    private extractParams(route: string, path: string): Record<string, string> | null {
+        if (!route.includes(":")) return null;
+
+        const paramNames = route.match(/:([^/]+)/g)?.map((p) => p.slice(1)) || [];
+        const pattern = route.replace(/:[^/]+/g, "([^/]+)");
+        const regex = new RegExp(`^${pattern}$`);
+        const matches = path.match(regex);
+
+        if (!matches || !paramNames.length) return null;
+
+        const params: Record<string, string> = {};
+        paramNames.forEach((name, index) => {
+            params[name] = matches[index + 1];
+        });
+
+        return params;
+    }
+
+    private interceptLinks = (event: MouseEvent) => {
+        const link = (event.target as HTMLElement).closest("a");
+        if (!link) return;
+
+        const href = link.getAttribute("href");
+        if (!href || href.startsWith("http") || href.startsWith("#")) return;
+
+        event.preventDefault();
+        this.navigate(href);
+    };
+
+    /**
+     * 编程式导航 - 使用原生 History API
+     */
+    public navigate(path: string) {
+        window.history.pushState(null, "", path);
+        this.handleRouteChange();
+    }
+}

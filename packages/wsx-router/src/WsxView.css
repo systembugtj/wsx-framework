@@ -1,0 +1,51 @@
+/* WSX View 样式 */
+:host {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.route-view {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* 加载状态 */
+:host([loading]) .route-view {
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+/* 错误状态 */
+:host([error]) .route-view {
+    border: 1px solid var(--error-color, #ff0000);
+    padding: 1rem;
+}
+
+/* 动画支持预留 */
+.route-view.entering {
+    animation: fadeIn 0.3s ease-out;
+}
+
+.route-view.leaving {
+    animation: fadeOut 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}

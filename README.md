@@ -218,6 +218,8 @@ Since WSX components are native Web Components, use them like any HTML element:
 - [Design Documentation](docs/WSX_DESIGN.md) - Framework architecture and design decisions
 - [Development Plan](docs/WSX_PRACTICE_PLAN.md) - Development workflow and best practices
 - [Chrome Debugging Guide](docs/chrome-debugging-guide.md) - Debug Web Components with Chrome DevTools
+- [Roadmap](docs/ROADMAP.md) - Future development plans and feature timeline
+- [Example Development Plan](docs/EXAMPLE_DEVELOPMENT_PLAN.md) - Plan for creating comprehensive examples
 
 ## Development
 

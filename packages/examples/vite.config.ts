@@ -13,6 +13,10 @@ export default defineConfig({
     ],
     build: {
         outDir: "dist",
+        sourcemap: true, // Examples can keep source maps since it's not published
+    },
+    server: {
+        sourcemap: true, // Enable source maps for dev server
     },
     // TODO: Suport HMR for WSX components
     // Uncomment the following lines if you need to resolve the wsx-core package

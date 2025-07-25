@@ -1,20 +1,26 @@
 /** @jsxImportSource @systembug/wsx-core */
 /**
- * WSX Framework 官网 - 基于Vue.js设计风格
+ * WSX Framework Example App - Router-based Demo
  *
- * 特性：
- * - Vue.js风格的紫色渐变主题
- * - 现代化导航栏
- * - 优雅的Hero区域
- * - 清晰的三列特性展示
- * - 交互式代码示例
- * - 响应式设计
+ * Features:
+ * - WSX Router demonstration with navigation
+ * - Route-based component loading
+ * - Active link highlighting
+ * - Modern navigation
+ * - Component separation
  */
 
 import { WebComponent, autoRegister } from "@systembug/wsx-core";
 import styles from "./App.css?inline";
-// 显式导入ThemeSwitcher
+// Import base components and router
 import "@systembug/wsx-base-components";
+import "@systembug/wsx-router";
+// Import route-based section components
+import "./components/HomeSection.wsx";
+import "./components/FeaturesSection.wsx";
+import "./components/QuickStartSection.wsx";
+import "./components/ExamplesSection.wsx";
+import "./components/EcosystemSection.wsx";
 
 export interface AppConfig {
     title?: string;
@@ -23,8 +29,6 @@ export interface AppConfig {
 
 @autoRegister({ tagName: "wsx-app" })
 export default class App extends WebComponent {
-    private appTitle: string = "WSX Framework";
-    private appTheme: "light" | "dark" = "light";
     private isNavOpen: boolean = false;
 
     constructor(config: AppConfig = {}) {
@@ -33,40 +37,31 @@ export default class App extends WebComponent {
             styleName: "wsx-app",
             ...config,
         });
-
-        this.appTitle = config.title || "WSX Framework";
-        this.appTheme = config.theme || "light";
     }
 
     render(): HTMLElement {
         return (
             <div class="app-container">
-                {/* 导航栏 */}
+                {/* Navigation */}
                 {this.renderNavigation()}
 
-                {/* Hero区域 */}
-                {this.renderHero()}
+                {/* Router Container */}
+                <wsx-router>
+                    <wsx-view route="/" component="home-section"></wsx-view>
+                    <wsx-view route="/features" component="features-section"></wsx-view>
+                    <wsx-view route="/quick-start" component="quick-start-section"></wsx-view>
+                    <wsx-view route="/examples" component="examples-section"></wsx-view>
+                    <wsx-view route="/ecosystem" component="ecosystem-section"></wsx-view>
+                </wsx-router>
 
-                {/* 特性展示区域 */}
-                {this.renderFeatures()}
-
-                {/* 快速开始区域 */}
-                {this.renderQuickStart()}
-
-                {/* 示例展示区域 */}
-                {this.renderExamples()}
-
-                {/* 生态系统区域 */}
-                {this.renderEcosystem()}
-
-                {/* 页脚 */}
+                {/* Footer */}
                 {this.renderFooter()}
             </div>
         );
     }
 
     /**
-     * 渲染导航栏 - Vue.js风格
+     * Render navigation with router links
      */
     private renderNavigation(): HTMLElement {
         return (
@@ -78,21 +73,21 @@ export default class App extends WebComponent {
                     </div>
 
                     <div class={`nav-menu ${this.isNavOpen ? "nav-open" : ""}`}>
-                        <a href="#features" class="nav-link" onClick={this.smoothScroll}>
+                        <wsx-link to="/" class="nav-link" active-class="nav-link-active" exact>
+                            Home
+                        </wsx-link>
+                        <wsx-link to="/features" class="nav-link" active-class="nav-link-active">
                             Features
-                        </a>
-                        <a href="#quick-start" class="nav-link" onClick={this.smoothScroll}>
+                        </wsx-link>
+                        <wsx-link to="/quick-start" class="nav-link" active-class="nav-link-active">
                             Quick Start
-                        </a>
-                        <a href="#examples" class="nav-link" onClick={this.smoothScroll}>
+                        </wsx-link>
+                        <wsx-link to="/examples" class="nav-link" active-class="nav-link-active">
                             Examples
-                        </a>
-                        <a href="#ecosystem" class="nav-link" onClick={this.smoothScroll}>
+                        </wsx-link>
+                        <wsx-link to="/ecosystem" class="nav-link" active-class="nav-link-active">
                             Ecosystem
-                        </a>
-                        <button class="nav-cta" onClick={this.scrollToQuickStart}>
-                            Get Started
-                        </button>
+                        </wsx-link>
                         <theme-switcher></theme-switcher>
                     </div>
 
@@ -107,371 +102,7 @@ export default class App extends WebComponent {
     }
 
     /**
-     * 渲染Hero区域 - Vue.js风格
-     */
-    private renderHero(): HTMLElement {
-        return (
-            <section class="hero-section">
-                <div class="hero-background">
-                    <div class="hero-pattern"></div>
-                    <div class="hero-shapes">
-                        <div class="hero-shape hero-shape-1"></div>
-                        <div class="hero-shape hero-shape-2"></div>
-                        <div class="hero-shape hero-shape-3"></div>
-                    </div>
-                </div>
-
-                <div class="hero-content">
-                    <div class="hero-badge">
-                        <span class="badge-text">🚀 Just Released</span>
-                    </div>
-
-                    <h1 class="hero-title">
-                        <span class="title-main">WSX Framework</span>
-                        <span class="title-subtitle">The Progressive Web Components Framework</span>
-                    </h1>
-
-                    <p class="hero-description">
-                        An approachable, performant and versatile framework for building native web
-                        components with JSX syntax. Zero dependencies, TypeScript-first, and
-                        production-ready.
-                    </p>
-
-                    <div class="hero-stats">
-                        <div class="stat-item">
-                            <span class="stat-number">0</span>
-                            <span class="stat-label">Dependencies</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">100%</span>
-                            <span class="stat-label">TypeScript</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">⚡</span>
-                            <span class="stat-label">Fast</span>
-                        </div>
-                    </div>
-
-                    <div class="hero-actions">
-                        <button class="btn-primary" onClick={this.scrollToQuickStart}>
-                            <svg-icon
-                                name="play"
-                                size="18"
-                                color="white"
-                                style="margin-right: 8px;"
-                            ></svg-icon>
-                            Get Started
-                        </button>
-
-                        <button class="btn-secondary" onClick={this.openGitHub}>
-                            <svg-icon
-                                name="github"
-                                size="18"
-                                color="currentColor"
-                                style="margin-right: 8px;"
-                            ></svg-icon>
-                            View on GitHub
-                        </button>
-
-                        <button class="btn-ghost" onClick={this.openExamples}>
-                            <svg-icon
-                                name="star"
-                                size="18"
-                                color="currentColor"
-                                style="margin-right: 8px;"
-                            ></svg-icon>
-                            Try Examples
-                        </button>
-                    </div>
-                </div>
-            </section>
-        );
-    }
-
-    /**
-     * 渲染特性展示区域 - 三列布局
-     */
-    private renderFeatures(): HTMLElement {
-        const features = [
-            {
-                title: "Approachable",
-                description:
-                    "Builds on top of standard Web Components with intuitive JSX syntax and world-class TypeScript support. Easy to learn and use.",
-                icon: "🎯",
-                color: "green",
-                details: ["JSX Syntax", "TypeScript First", "Web Standards"],
-            },
-            {
-                title: "Performant",
-                description:
-                    "Zero dependencies, native DOM operations, and compiler-optimized rendering system that rarely requires manual optimization.",
-                icon: "⚡",
-                color: "blue",
-                details: ["Zero Dependencies", "Native DOM", "Optimized Rendering"],
-            },
-            {
-                title: "Versatile",
-                description:
-                    "A rich, incrementally adoptable ecosystem that scales from simple components to full-featured applications.",
-                icon: "🔧",
-                color: "purple",
-                details: ["Incremental Adoption", "Rich Ecosystem", "Scalable"],
-            },
-        ];
-
-        return (
-            <section id="features" class="features-section">
-                <div class="container">
-                    <div class="section-header">
-                        <h2 class="section-title">Why Choose WSX Framework?</h2>
-                        <p class="section-description">
-                            Built for modern web development with a focus on simplicity,
-                            performance, and developer experience.
-                        </p>
-                    </div>
-
-                    <div class="features-grid">
-                        {features.map((feature, index) => (
-                            <div class={`feature-card feature-${feature.color}`} key={index}>
-                                <div class="feature-icon">{feature.icon}</div>
-                                <h3 class="feature-title">{feature.title}</h3>
-                                <p class="feature-description">{feature.description}</p>
-                                <ul class="feature-details">
-                                    {feature.details.map((detail, detailIndex) => (
-                                        <li key={detailIndex}>{detail}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-        );
-    }
-
-    /**
-     * 渲染快速开始区域
-     */
-    private renderQuickStart(): HTMLElement {
-        return (
-            <section id="quick-start" class="quick-start-section">
-                <div class="container">
-                    <div class="section-header">
-                        <h2 class="section-title">Quick Start</h2>
-                        <p class="section-description">
-                            Get started with WSX Framework in minutes. Create your first web
-                            component with JSX syntax and TypeScript support.
-                        </p>
-                    </div>
-
-                    <div class="quick-start-grid">
-                        <div class="code-example">
-                            <div class="code-header">
-                                <span class="code-title">Installation</span>
-                                <button class="copy-btn" onClick={this.copyCode}>
-                                    📋 Copy
-                                </button>
-                            </div>
-                            <pre class="code-block">
-                                <code>{`npm install @systembug/wsx-core
-
-# Create your first component
-import { WebComponent } from '@systembug/wsx-core';
-
-class MyButton extends WebComponent {
-    render() {
-        return <button>Hello WSX!</button>;
-    }
-}`}</code>
-                            </pre>
-                        </div>
-
-                        <div class="quick-start-steps">
-                            <div class="step-item">
-                                <div class="step-number">1</div>
-                                <div class="step-content">
-                                    <h4>Install</h4>
-                                    <p>Install WSX Framework via npm</p>
-                                </div>
-                            </div>
-                            <div class="step-item">
-                                <div class="step-number">2</div>
-                                <div class="step-content">
-                                    <h4>Create</h4>
-                                    <p>Create your first component with JSX</p>
-                                </div>
-                            </div>
-                            <div class="step-item">
-                                <div class="step-number">3</div>
-                                <div class="step-content">
-                                    <h4>Build</h4>
-                                    <p>Build and deploy your web components</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        );
-    }
-
-    /**
-     * 渲染示例展示区域
-     */
-    private renderExamples(): HTMLElement {
-        return (
-            <section id="examples" class="examples-section">
-                <div class="container">
-                    <div class="section-header">
-                        <h2 class="section-title">Interactive Examples</h2>
-                        <p class="section-description">
-                            Explore WSX Framework capabilities with these interactive examples. See
-                            how easy it is to build powerful web components.
-                        </p>
-                    </div>
-
-                    <div class="examples-grid">
-                        <div class="example-card">
-                            <div class="example-header">
-                                <h3>🔄 Reactive State</h3>
-                                <span class="example-badge">Core</span>
-                            </div>
-                            <p>Automatic re-rendering with state changes</p>
-                            <div class="example-demo">
-                                <simple-reactive-demo></simple-reactive-demo>
-                            </div>
-                        </div>
-
-                        <div class="example-card">
-                            <div class="example-header">
-                                <h3>SVG Graphics</h3>
-                                <span class="example-badge">Advanced</span>
-                            </div>
-                            <p>Native SVG support with namespace handling and animations</p>
-                            <div class="example-demo">
-                                <svg-demo></svg-demo>
-                            </div>
-                        </div>
-
-                        <div class="example-card">
-                            <div class="example-header">
-                                <h3>Color Picker</h3>
-                                <span class="example-badge">Interactive</span>
-                            </div>
-                            <p>Custom web component with color selection and state management</p>
-                            <div class="example-demo">
-                                <color-picker></color-picker>
-                            </div>
-                        </div>
-
-                        <div class="example-card">
-                            <div class="example-header">
-                                <h3>Button Components</h3>
-                                <span class="example-badge">Basic</span>
-                            </div>
-                            <p>Various button styles and states with ripple effects</p>
-                            <div class="example-demo">
-                                <div class="button-demo">
-                                    <xy-button variant="primary" size="lg">
-                                        P
-                                    </xy-button>
-                                    <xy-button variant="danger" size="sm">
-                                        D
-                                    </xy-button>
-                                    <xy-button variant="flat" size="sm">
-                                        F
-                                    </xy-button>
-                                    <xy-button variant="flat" disabled size="xs">
-                                        D
-                                    </xy-button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        );
-    }
-
-    /**
-     * 渲染生态系统区域
-     */
-    private renderEcosystem(): HTMLElement {
-        return (
-            <section id="ecosystem" class="ecosystem-section">
-                <div class="container">
-                    <div class="section-header">
-                        <h2 class="section-title">Ecosystem</h2>
-                        <p class="section-description">
-                            A rich ecosystem of tools and libraries to enhance your development
-                            experience.
-                        </p>
-                    </div>
-
-                    <div class="ecosystem-grid">
-                        <div class="ecosystem-card">
-                            <div class="ecosystem-icon">🔧</div>
-                            <h3>Core Framework</h3>
-                            <p>The main WSX Framework with JSX support and Web Components</p>
-                            <div class="ecosystem-links">
-                                <a href="#" onClick={this.openDocs}>
-                                    Documentation
-                                </a>
-                                <a href="#" onClick={this.openGitHub}>
-                                    GitHub
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="ecosystem-card">
-                            <div class="ecosystem-icon">🎨</div>
-                            <h3>Base Components</h3>
-                            <p>Pre-built UI components for rapid development</p>
-                            <div class="ecosystem-links">
-                                <a href="#" onClick={this.openDocs}>
-                                    Components
-                                </a>
-                                <a href="#" onClick={this.openExamples}>
-                                    Examples
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="ecosystem-card">
-                            <div class="ecosystem-icon">⚡</div>
-                            <h3>Vite Plugin</h3>
-                            <p>Build tool integration for seamless development</p>
-                            <div class="ecosystem-links">
-                                <a href="#" onClick={this.openDocs}>
-                                    Setup Guide
-                                </a>
-                                <a href="#" onClick={this.openGitHub}>
-                                    Plugin
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="ecosystem-card">
-                            <div class="ecosystem-icon">🔍</div>
-                            <h3>ESLint Plugin</h3>
-                            <p>Code quality and best practices enforcement</p>
-                            <div class="ecosystem-links">
-                                <a href="#" onClick={this.openDocs}>
-                                    Rules
-                                </a>
-                                <a href="#" onClick={this.openGitHub}>
-                                    Plugin
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        );
-    }
-
-    /**
-     * 渲染页脚
+     * Render footer
      */
     private renderFooter(): HTMLElement {
         return (
@@ -511,9 +142,7 @@ class MyButton extends WebComponent {
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" onClick={this.openExamples}>
-                                        Examples
-                                    </a>
+                                    <wsx-link to="/examples">Examples</wsx-link>
                                 </li>
                                 <li>
                                     <a href="#" onClick={this.openBlog}>
@@ -580,54 +209,14 @@ class MyButton extends WebComponent {
         );
     }
 
-    // 事件处理方法
+    // Event handlers
     private toggleNav = (): void => {
         this.isNavOpen = !this.isNavOpen;
         this.rerender();
     };
 
-    private smoothScroll = (event: Event): void => {
-        event.preventDefault();
-        const target = event.target as HTMLAnchorElement;
-        const href = target.getAttribute("href");
-        if (href && href.startsWith("#")) {
-            const element = document.querySelector(href);
-            if (element) {
-                element.scrollIntoView({ behavior: "smooth" });
-            }
-        }
-        this.isNavOpen = false;
-        this.rerender();
-    };
-
-    private scrollToQuickStart = (): void => {
-        const element = document.getElementById("quick-start");
-        if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
-        }
-    };
-
     private openGitHub = (): void => {
         window.open("https://github.com/systembugtj/wsx-framework", "_blank");
-    };
-
-    private openExamples = (): void => {
-        this.scrollToQuickStart();
-    };
-
-    private copyCode = (): void => {
-        const codeBlock = document.querySelector(".code-block code");
-        if (codeBlock) {
-            navigator.clipboard.writeText(codeBlock.textContent || "");
-            // 显示复制成功提示
-            const copyBtn = document.querySelector(".copy-btn");
-            if (copyBtn) {
-                copyBtn.textContent = "✅ Copied!";
-                setTimeout(() => {
-                    copyBtn.textContent = "📋 Copy";
-                }, 2000);
-            }
-        }
     };
 
     private openDocs = (): void => {
@@ -659,35 +248,29 @@ class MyButton extends WebComponent {
     };
 
     /**
-     * 组件连接到DOM后的初始化
+     * Component lifecycle - connected to DOM
      */
     protected onConnected(): void {
-        // 添加滚动监听
+        // Add scroll listener for navigation effects
         window.addEventListener("scroll", this.handleScroll);
     }
 
     /**
-     * 组件从DOM断开时的清理
+     * Component lifecycle - disconnected from DOM
      */
     protected onDisconnected(): void {
         window.removeEventListener("scroll", this.handleScroll);
     }
 
     /**
-     * 处理滚动事件
+     * Handle scroll effects
      */
     private handleScroll = (): void => {
         const scrolled = window.scrollY;
-        const hero = document.querySelector(".hero-section") as HTMLElement;
         const nav = document.querySelector(".main-nav") as HTMLElement;
 
-        if (hero) {
-            // 添加视差滚动效果
-            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-        }
-
         if (nav) {
-            // 导航栏滚动效果
+            // Navigation scroll effects
             if (scrolled > 100) {
                 nav.classList.add("nav-scrolled");
             } else {

@@ -1,0 +1,102 @@
+/** @jsxImportSource @systembug/wsx-core */
+import { WebComponent, autoRegister, createLogger } from "@systembug/wsx-core";
+import styles from "./WsxView.css?inline";
+
+const logger = createLogger("WsxView");
+
+/**
+ * 路由视图组件 - 条件渲染的容器
+ *
+ * 属性：
+ * - route: 路由路径（支持参数）
+ * - component: 要渲染的组件名称
+ * - params: 路由参数（自动注入）
+ *
+ * 使用示例：
+ * ```html
+ * <wsx-view route="/users/:id" component="user-detail"></wsx-view>
+ * ```
+ */
+@autoRegister({ tagName: "wsx-view" })
+export default class WsxView extends WebComponent {
+    static observedAttributes = ["route", "component", "params"];
+
+    private component: string | null = null;
+    private params: Record<string, string> = {};
+    private componentInstance: HTMLElement | null = null;
+
+    constructor() {
+        super({
+            styles,
+            styleName: "wsx-view",
+        });
+    }
+
+    render() {
+        return <div class="route-view" part="view"></div>;
+    }
+
+    protected onConnected() {
+        // Check if component attribute is already set and load it
+        const componentName = this.getAttribute("component");
+        if (componentName && !this.componentInstance) {
+            this.loadComponent(componentName);
+        }
+    }
+
+    protected onAttributeChanged(name: string, _oldValue: string, newValue: string) {
+        if (name === "component" && newValue && !this.componentInstance) {
+            this.loadComponent(newValue);
+        } else if (name === "params" && this.componentInstance) {
+            // 更新组件参数
+            try {
+                this.params = JSON.parse(newValue);
+                Object.entries(this.params).forEach(([key, value]) => {
+                    this.componentInstance!.setAttribute(key, value);
+                });
+            } catch (e) {
+                logger.error("Failed to parse params:", e);
+            }
+        }
+    }
+
+    private async loadComponent(componentName: string) {
+        // 清理旧组件
+        if (this.componentInstance) {
+            this.componentInstance.remove();
+            this.componentInstance = null;
+        }
+
+        // 检查组件是否已注册
+        const elementClass = customElements.get(componentName);
+
+        if (!elementClass) {
+            logger.warn(`Component ${componentName} not found in customElements registry`);
+            return;
+        }
+
+        this.componentInstance = document.createElement(componentName);
+
+        // 传递初始参数
+        if (Object.keys(this.params).length > 0) {
+            Object.entries(this.params).forEach(([key, value]) => {
+                this.componentInstance!.setAttribute(key, value);
+            });
+        }
+
+        const container = this.shadowRoot?.querySelector(".route-view");
+        if (container) {
+            container.appendChild(this.componentInstance);
+        } else {
+            logger.error("Route view container not found");
+        }
+    }
+
+    protected onDisconnected() {
+        // 清理组件实例
+        if (this.componentInstance) {
+            this.componentInstance.remove();
+            this.componentInstance = null;
+        }
+    }
+}

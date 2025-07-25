@@ -11,7 +11,7 @@
 
 // JSX 类型声明已移至 types/wsx-types.d.ts
 
-import { createElement, isSVGElement, getSVGAttributeName } from "./utils/svg-utils";
+import { createElement, shouldUseSVGNamespace, getSVGAttributeName } from "./utils/svg-utils";
 
 // JSX子元素类型
 export type JSXChildren =
@@ -53,7 +53,7 @@ export function h(
 
     // 处理属性
     if (props) {
-        const isSVG = isSVGElement(tag);
+        const isSVG = shouldUseSVGNamespace(tag);
 
         Object.entries(props).forEach(([key, value]) => {
             if (value === null || value === undefined || value === false) {

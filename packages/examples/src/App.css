@@ -40,6 +40,99 @@
     }
 }
 
+/* Router Navigation Styles */
+.nav-link-active {
+    color: var(--primary-red) !important;
+    border-bottom: 2px solid var(--primary-red);
+    font-weight: 600;
+}
+
+.demo-nav-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 4px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.demo-nav-btn:hover {
+    background: var(--primary-red);
+    color: white;
+    border-color: var(--primary-red);
+}
+
+.demo-nav-btn.active {
+    background: var(--primary-red);
+    color: white;
+    border-color: var(--primary-red);
+}
+
+.router-demo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.router-example {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.router-example h3 {
+    margin-bottom: 1rem;
+    color: var(--primary-red);
+}
+
+.router-example ul {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.router-example li {
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+}
+
+.router-code {
+    margin-top: 1rem;
+    background: var(--bg-primary);
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+.router-code pre {
+    margin: 0;
+    padding: 1rem;
+}
+
+.router-code code {
+    font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-primary);
+}
+
+.ecosystem-demo {
+    color: var(--primary-red);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.ecosystem-demo:hover {
+    color: var(--secondary-red);
+}
+
 /* 手动浅色模式类 */
 .light {
     --text-primary: #2c3e50;

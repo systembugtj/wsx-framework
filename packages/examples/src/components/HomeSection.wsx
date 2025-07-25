@@ -1,0 +1,99 @@
+/** @jsxImportSource @systembug/wsx-core */
+import { WebComponent, autoRegister } from "@systembug/wsx-core";
+import styles from "../App.css?inline";
+import "@systembug/wsx-base-components";
+import "@systembug/wsx-router";
+
+@autoRegister({ tagName: "home-section" })
+export default class HomeSection extends WebComponent {
+    constructor() {
+        super({ styles });
+    }
+
+    render() {
+        return (
+            <div>
+                <section class="hero-section">
+                    <div class="hero-background">
+                        <div class="hero-pattern"></div>
+                        <div class="hero-shapes">
+                            <div class="hero-shape hero-shape-1"></div>
+                            <div class="hero-shape hero-shape-2"></div>
+                            <div class="hero-shape hero-shape-3"></div>
+                        </div>
+                    </div>
+
+                    <div class="hero-content">
+                        <div class="hero-badge">
+                            <span class="badge-text">🚀 Just Released</span>
+                        </div>
+
+                        <h1 class="hero-title">
+                            <span class="title-main">WSX Framework</span>
+                            <span class="title-subtitle">
+                                The Progressive Web Components Framework
+                            </span>
+                        </h1>
+
+                        <p class="hero-description">
+                            An approachable, performant and versatile framework for building native
+                            web components with JSX syntax. Zero dependencies, TypeScript-first, and
+                            production-ready.
+                        </p>
+
+                        <div class="hero-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">0</span>
+                                <span class="stat-label">Dependencies</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">100%</span>
+                                <span class="stat-label">TypeScript</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">⚡</span>
+                                <span class="stat-label">Fast</span>
+                            </div>
+                        </div>
+
+                        <div class="hero-actions">
+                            <wsx-link to="/quick-start" class="btn-primary">
+                                <svg-icon
+                                    name="play"
+                                    size="18"
+                                    color="white"
+                                    style="margin-right: 8px;"
+                                ></svg-icon>
+                                Get Started
+                            </wsx-link>
+
+                            <button class="btn-secondary" onClick={this.openGitHub}>
+                                <svg-icon
+                                    name="github"
+                                    size="18"
+                                    color="currentColor"
+                                    style="margin-right: 8px;"
+                                ></svg-icon>
+                                View on GitHub
+                            </button>
+
+                            <wsx-link to="/examples" class="btn-ghost">
+                                <svg-icon
+                                    name="star"
+                                    size="18"
+                                    color="currentColor"
+                                    style="margin-right: 8px;"
+                                ></svg-icon>
+                                Try Examples
+                            </wsx-link>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        );
+    }
+
+    private openGitHub = (): void => {
+        window.open("https://github.com/systembugtj/wsx-framework", "_blank");
+    };
+}
