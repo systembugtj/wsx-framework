@@ -18,7 +18,7 @@
 ```typescript
 // vite.config.ts
 import { defineConfig } from 'vite';
-import { wsx } from '@systembug/wsx-vite-plugin';
+import { wsx } from '@wsxjs/wsx-vite-plugin';
 
 export default defineConfig({
   build: {
@@ -28,10 +28,10 @@ export default defineConfig({
       formats: ['es', 'cjs'],
     },
     rollupOptions: {
-      external: ['@systembug/wsx-core'],
+      external: ['@wsxjs-core'],
       output: {
         globals: {
-          '@systembug/wsx-core': 'WSXCore',
+          '@wsxjs-core': 'WSXCore',
         },
       },
     },
@@ -56,7 +56,7 @@ cssCodeSplit: false  // 禁用CSS代码分割，确保CSS内联到JS中
 
 #### 外部依赖配置
 ```typescript
-external: ['@systembug/wsx-core']  // 避免重复打包核心库
+external: ['@wsxjs-core']  // 避免重复打包核心库
 ```
 
 #### 输出格式配置
@@ -88,10 +88,10 @@ formats: ['es', 'cjs']  // 同时输出ESM和CJS格式
     "dev": "vite build --watch"
   },
   "dependencies": {
-    "@systembug/wsx-core": "^0.0.5"
+    "@wsxjs-core": "^0.0.5"
   },
   "devDependencies": {
-    "@systembug/wsx-vite-plugin": "^0.0.5",
+    "@wsxjs-vite-plugin": "^0.0.5",
     "vite": "^5.4.19",
     "typescript": "^5.0.0"
   }

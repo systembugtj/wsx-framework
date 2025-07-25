@@ -1,4 +1,4 @@
-# @systembug/eslint-plugin-wsx
+# @wsxjs/eslint-plugin-wsx
 
 ## 0.0.5
 
@@ -26,4 +26,4 @@
     None - this is a backward-compatible addition.
 
 - Updated dependencies
-    - @systembug/wsx-core@0.0.5
+    - @wsxjs-core@0.0.5

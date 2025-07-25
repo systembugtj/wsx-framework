@@ -66,7 +66,7 @@ The CI/CD pipeline has been successfully implemented for the WSX Framework monor
 ### NPM Token Setup
 1. Generate token at https://www.npmjs.com/settings/tokens
 2. Add as repository secret: `NPM_TOKEN`
-3. Ensure token has publish permissions for `@systembug` scope
+3. Ensure token has publish permissions for `@wsxjs` scope
 
 ## 📊 Coverage and Quality
 
@@ -117,7 +117,7 @@ feature/xyz → develop → main → NPM Release
 ## 🎯 NPM Publishing
 
 ### Package Publishing
-- **Scope**: `@systembug`
+- **Scope**: `@wsxjs`
 - **Packages**: core, vite-plugin, eslint-plugin
 - **Excludes**: examples (development only)
 - **Registry**: https://registry.npmjs.org

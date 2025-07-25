@@ -56,7 +56,7 @@ graph TD;
 #### Examples 组件模板
 ```tsx
 // MyFeatureExample.wsx
-import { WebComponent, autoRegister } from '@systembug/wsx-core';
+import { WebComponent, autoRegister } from '@wsxjs/wsx-core';
 @autoRegister()
 export class MyFeatureExample extends WebComponent {
   render() {
@@ -81,7 +81,7 @@ export class MyFeatureExample extends WebComponent {
 - **功能**：简要描述
 - **用法**：
 ```ts
-import { MyFeature } from '@systembug/wsx-core';
+import { MyFeature } from '@wsxjs-core';
 MyFeature.doSomething();
 ```
 - **参数说明**：

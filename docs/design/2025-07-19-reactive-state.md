@@ -14,7 +14,7 @@ WSX 响应式状态系统提供了基于浏览器原生 Proxy API 的轻量级�
 ### 基础响应式对象
 
 ```tsx
-import { reactive } from '@systembug/wsx-core';
+import { reactive } from '@wsxjs/wsx-core';
 
 // 创建响应式对象
 const state = reactive({
@@ -32,7 +32,7 @@ state.message = 'Updated'; // 输出: "State changed!"
 ### 响应式组件
 
 ```tsx
-import { ReactiveWebComponent, autoRegister } from '@systembug/wsx-core';
+import { ReactiveWebComponent, autoRegister } from '@wsxjs-core';
 
 @autoRegister()
 export class Counter extends ReactiveWebComponent {
@@ -183,7 +183,7 @@ state.a = 30;
 ### 全局调试
 
 ```tsx
-import { ReactiveDebug } from '@systembug/wsx-core';
+import { ReactiveDebug } from '@wsxjs-core';
 
 // 启用全局调试
 ReactiveDebug.enable();

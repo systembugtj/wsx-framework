@@ -33,11 +33,11 @@ module.exports = {
             2,
             "always",
             [
-                "core", // @systembug/wsx-core
-                "vite-plugin", // @systembug/wsx-vite-plugin
-                "eslint-plugin", // @systembug/wsx-eslint-plugin
-                "components", // @systembug/wsx-components
-                "examples", // @systembug/wsx-examples
+                "core", // @wsxjs/wsx-core
+                "vite-plugin", // @wsxjs-vite-plugin
+                "eslint-plugin", // @wsxjs-eslint-plugin
+                "components", // @wsxjs-components
+                "examples", // @wsxjs-examples
                 "release", // Release-related changes
                 "deps", // Dependency updates
                 "config", // Configuration changes

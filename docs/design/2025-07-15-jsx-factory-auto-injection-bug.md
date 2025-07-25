@@ -1,7 +1,7 @@
 # WSX Vite Plugin JSX Factory Auto-Injection Bug Fix
 
 **Date:** 2025-07-15  
-**Component:** @systembug/wsx-vite-plugin  
+**Component:** @wsxjs/wsx-vite-plugin  
 **Severity:** Critical  
 **Status:** Fixed  
 
@@ -29,7 +29,7 @@ const hasJSXInImport =
 1. **Overly Broad Detection**: The condition `code.includes('{ h')` was too permissive
 2. **False Positive**: It matched `{ WebComponent` in imports like:
    ```typescript
-   import { WebComponent, autoRegister } from "@systembug/wsx-core";
+   import { WebComponent, autoRegister } from "@wsxjs-core";
    ```
 3. **Logic Flaw**: The plugin incorrectly determined that JSX factory functions were already imported when they weren't
 
@@ -101,25 +101,25 @@ Debug output after fix:
 ### Valid Cases (Should NOT inject)
 ```typescript
 // Already has h
-import { WebComponent, h, Fragment } from "@systembug/wsx-core";
+import { WebComponent, h, Fragment } from "@wsxjs-core";
 
 // Already has Fragment
-import { WebComponent, Fragment } from "@systembug/wsx-core";
+import { WebComponent, Fragment } from "@wsxjs-core";
 
 // Already has both
-import { WebComponent, h, Fragment, autoRegister } from "@systembug/wsx-core";
+import { WebComponent, h, Fragment, autoRegister } from "@wsxjs-core";
 ```
 
 ### Invalid Cases (Should inject)
 ```typescript
 // Missing both h and Fragment
-import { WebComponent, autoRegister } from "@systembug/wsx-core";
+import { WebComponent, autoRegister } from "@wsxjs-core";
 
 // Has other imports but not JSX factory
-import { WebComponent, StyleManager } from "@systembug/wsx-core";
+import { WebComponent, StyleManager } from "@wsxjs-core";
 
 // False positive case (the original bug)
-import { WebComponent, autoRegister } from "@systembug/wsx-core";
+import { WebComponent, autoRegister } from "@wsxjs-core";
 // This should NOT match as having 'h' import
 ```
 

@@ -101,7 +101,7 @@ Based on conventional commits since last release:
 ### Publishing Strategy
 - **Batch publishing**: All packages published in single release
 - **Dependency coordination**: Ensure internal dependencies are updated
-- **NPM registry**: Published to public NPM under `@systembug` scope
+- **NPM registry**: Published to public NPM under `@wsxjs` scope
 
 ## Tools and Configuration
 
@@ -300,7 +300,7 @@ PR Requirements for main:
 
 ### NPM Badges to Add
 ```markdown
-[![npm version](https://badge.fury.io/js/@systembug%2Fwsx-core.svg)](https://badge.fury.io/js/@systembug%2Fwsx-core)
+[![npm version](https://badge.fury.io/js/@wsxjs%2Fwsx-core.svg)](https://badge.fury.io/js/@wsxjs%2Fwsx-core)
 [![npm downloads](https://img.shields.io/npm/dm/@wsxjs/wsx-core.svg)](https://www.npmjs.com/package/@wsxjs/wsx-core)
 [![CI Status](https://github.com/wsxjs/wsxjs/workflows/CI/badge.svg)](https://github.com/wsxjs/wsxjs/actions)
 [![Coverage Status](https://codecov.io/gh/systembugtj/wsx-framework/branch/main/graph/badge.svg)](https://codecov.io/gh/systembugtj/wsx-framework)

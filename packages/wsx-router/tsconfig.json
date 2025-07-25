@@ -7,7 +7,7 @@
         "declarationMap": true,
         "sourceMap": true,
         "jsx": "react-jsx",
-        "jsxImportSource": "@systembug/wsx-core",
+        "jsxImportSource": "@wsxjs/wsx-core",
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true
     },

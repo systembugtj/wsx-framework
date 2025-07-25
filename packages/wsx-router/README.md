@@ -1,4 +1,4 @@
-# @systembug/wsx-router
+# @wsxjs/wsx-router
 
 WSX Router - Native History API-based routing for WSX Framework
 
@@ -14,7 +14,7 @@ WSX Router - Native History API-based routing for WSX Framework
 ## Installation
 
 ```bash
-pnpm add @systembug/wsx-router
+pnpm add @wsxjs-router
 ```
 
 ## Quick Start
@@ -41,7 +41,7 @@ pnpm add @systembug/wsx-router
 ### 3. Programmatic Navigation
 
 ```typescript
-import { RouterUtils } from '@systembug/wsx-router';
+import { RouterUtils } from '@wsxjs-router';
 
 // Navigate to a route
 RouterUtils.navigate('/users/456');

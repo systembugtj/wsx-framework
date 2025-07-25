@@ -1,4 +1,4 @@
-# @systembug/wsx-vite-plugin
+# @wsxjs/wsx-vite-plugin
 
 ## 0.0.5
 
@@ -26,4 +26,4 @@
     None - this is a backward-compatible addition.
 
 - Updated dependencies
-    - @systembug/wsx-core@0.0.5
+    - @wsxjs-core@0.0.5
