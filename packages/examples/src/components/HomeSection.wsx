@@ -1,8 +1,9 @@
 /** @jsxImportSource @systembug/wsx-core */
 import { WebComponent, autoRegister } from "@systembug/wsx-core";
-import styles from "../App.css?inline";
+import styles from "./App.css?inline";
 import "@systembug/wsx-base-components";
 import "@systembug/wsx-router";
+import "./WsxLogo.wsx";
 
 @autoRegister({ tagName: "home-section" })
 export default class HomeSection extends WebComponent {
@@ -26,6 +27,10 @@ export default class HomeSection extends WebComponent {
                     <div class="hero-content">
                         <div class="hero-badge">
                             <span class="badge-text">🚀 Just Released</span>
+                        </div>
+
+                        <div class="hero-logo">
+                            <wsx-logo variant="icon" size="80" color="#dc2626"></wsx-logo>
                         </div>
 
                         <h1 class="hero-title">

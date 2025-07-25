@@ -1,0 +1,110 @@
+/** @jsxImportSource @systembug/wsx-core */
+import { WebComponent, autoRegister } from "@systembug/wsx-core";
+
+@autoRegister({ tagName: "wsx-logo" })
+export default class WsxLogo extends WebComponent {
+    static observedAttributes = ["size", "color", "variant"];
+
+    private size: number = 32;
+    private color: string = "#dc2626";
+    private variant: "icon" | "text" | "full" = "icon";
+
+    constructor() {
+        super();
+    }
+
+    protected onConnected() {
+        // Initialize attributes
+        this.size = parseInt(this.getAttribute("size") || "32");
+        this.color = this.getAttribute("color") || "#dc2626";
+        this.variant = (this.getAttribute("variant") as "icon" | "text" | "full") || "icon";
+    }
+
+    protected onAttributeChanged(name: string, _oldValue: string, newValue: string) {
+        switch (name) {
+            case "size":
+                this.size = parseInt(newValue) || 32;
+                this.rerender();
+                break;
+            case "color":
+                this.color = newValue || "#dc2626";
+                this.rerender();
+                break;
+            case "variant":
+                this.variant = (newValue as "icon" | "text" | "full") || "icon";
+                this.rerender();
+                break;
+        }
+    }
+
+    render() {
+        if (this.variant === "text") {
+            return this.renderTextLogo();
+        } else if (this.variant === "full") {
+            return this.renderFullLogo();
+        } else {
+            return this.renderIconLogo();
+        }
+    }
+
+    private renderIconLogo() {
+        const strokeWidth = this.size > 40 ? 2 : 1.5;
+        return (
+            <svg
+                width={this.size}
+                height={this.size}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke={this.color}
+                stroke-width={strokeWidth}
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                style="display: inline-block; vertical-align: middle;"
+            >
+                <path d="m2 2 4 10 4-10m4 0 4 10 4-10" />
+                <path d="m6 12 6 10 6-10" />
+                <circle cx="12" cy="12" r="1" fill={this.color} />
+            </svg>
+        );
+    }
+
+    private renderTextLogo() {
+        const fontSize = this.size * 0.6;
+        return (
+            <div
+                style={`display: inline-flex; align-items: center; font-size: ${fontSize}px; font-weight: 700; color: ${this.color}; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;`}
+            >
+                WSX
+            </div>
+        );
+    }
+
+    private renderFullLogo() {
+        const iconSize = this.size * 0.8;
+        const fontSize = this.size * 0.5;
+        return (
+            <div style="display: inline-flex; align-items: center; gap: 8px;">
+                <svg
+                    width={iconSize}
+                    height={iconSize}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke={this.color}
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    style="display: inline-block;"
+                >
+                    <path d="m2 2 4 10 4-10m4 0 4 10 4-10" />
+                    <path d="m6 12 6 10 6-10" />
+                    <circle cx="12" cy="12" r="1" fill={this.color} />
+                </svg>
+                <div
+                    style={`font-size: ${fontSize}px; font-weight: 700; color: ${this.color}; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;`}
+                >
+                    WSX Framework
+                </div>
+            </div>
+        );
+    }
+}

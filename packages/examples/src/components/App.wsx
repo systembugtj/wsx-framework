@@ -16,11 +16,12 @@ import styles from "./App.css?inline";
 import "@systembug/wsx-base-components";
 import "@systembug/wsx-router";
 // Import route-based section components
-import "./components/HomeSection.wsx";
-import "./components/FeaturesSection.wsx";
-import "./components/QuickStartSection.wsx";
-import "./components/ExamplesSection.wsx";
-import "./components/EcosystemSection.wsx";
+import "./HomeSection.wsx";
+import "./FeaturesSection.wsx";
+import "./QuickStartSection.wsx";
+import "./ExamplesSection.wsx";
+import "./EcosystemSection.wsx";
+import "./WsxLogo.wsx";
 
 export interface AppConfig {
     title?: string;
@@ -63,12 +64,12 @@ export default class App extends WebComponent {
     /**
      * Render navigation with router links
      */
-    private renderNavigation(): HTMLElement {
+    private renderNavigation() {
         return (
             <nav class="main-nav">
                 <div class="nav-container">
                     <div class="nav-brand">
-                        <span class="nav-logo">⚡</span>
+                        <wsx-logo variant="icon" size="28" color="#dc2626"></wsx-logo>
                         <span class="nav-title">WSX</span>
                     </div>
 
@@ -104,14 +105,14 @@ export default class App extends WebComponent {
     /**
      * Render footer
      */
-    private renderFooter(): HTMLElement {
+    private renderFooter() {
         return (
             <footer class="footer">
                 <div class="container">
                     <div class="footer-content">
                         <div class="footer-section">
                             <div class="footer-brand">
-                                <span class="footer-logo">⚡</span>
+                                <wsx-logo variant="icon" size="24" color="#fca5a5"></wsx-logo>
                                 <h3>WSX Framework</h3>
                             </div>
                             <p>The Progressive Web Components Framework</p>

@@ -7,10 +7,10 @@
 
 import { createLogger } from "@systembug/wsx-core";
 import "uno.css";
-import "./App.css";
+import "./main.css";
 // Import base components package (includes CSS)
 import "@systembug/wsx-base-components";
-import "./App.wsx";
+import "./components/App.wsx";
 
 const logger = createLogger("Main");
 

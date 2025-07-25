@@ -1,6 +1,6 @@
 /** @jsxImportSource @systembug/wsx-core */
 import { WebComponent, autoRegister } from "@systembug/wsx-core";
-import styles from "../App.css?inline";
+import styles from "./App.css?inline";
 
 @autoRegister({ tagName: "features-section" })
 export default class FeaturesSection extends WebComponent {
