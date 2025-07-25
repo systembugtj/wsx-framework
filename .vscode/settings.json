@@ -1,0 +1,27 @@
+{
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "typescript.enablePromptUseWorkspaceTsdk": true,
+    "files.associations": {
+        "*.wsx": "typescriptreact"
+    },
+    "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "wsx"],
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/dist": true,
+        "**/.pnpm-store": true,
+        "**/coverage": true
+    },
+    "files.exclude": {
+        "**/.git": true,
+        "**/.DS_Store": true,
+        "**/node_modules": true
+    },
+    "[svg]": {
+        "editor.defaultFormatter": "jock.svg"
+    }
+}

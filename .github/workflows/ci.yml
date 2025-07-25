@@ -1,0 +1,76 @@
+name: CI
+
+on:
+    push:
+        branches: [develop]
+    schedule:
+        # Daily CI run at 2 AM UTC
+        - cron: "0 2 * * *"
+
+jobs:
+    lint:
+        name: Lint
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v2
+              with:
+                  version: 8
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 18
+                  cache: "pnpm"
+            - run: pnpm install --frozen-lockfile
+            - run: pnpm build
+            - run: pnpm lint
+            - run: pnpm format:check
+
+    typecheck:
+        name: TypeCheck
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v2
+              with:
+                  version: 8
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 18
+                  cache: "pnpm"
+            - run: pnpm install --frozen-lockfile
+            - run: pnpm build
+            - run: pnpm typecheck
+
+    test:
+        name: Test
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v2
+              with:
+                  version: 8
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 18
+                  cache: "pnpm"
+            - run: pnpm install --frozen-lockfile
+            - run: pnpm build
+            - run: pnpm test:coverage
+
+    build:
+        name: Build
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [18, 20, 22]
+        steps:
+            - uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v2
+              with:
+                  version: 8
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+                  cache: "pnpm"
+            - run: pnpm install --frozen-lockfile
+            - run: pnpm build
