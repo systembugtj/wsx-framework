@@ -30,7 +30,9 @@
         "changeset:publish": "changeset publish",
         "changeset:status": "changeset status",
         "release": "pnpm build && pnpm changeset:publish",
-        "version": "pnpm changeset:version"
+        "version": "pnpm changeset:version",
+        "build:pages": "pnpm build && pnpm --filter @systembug/wsx-examples build:pages",
+        "deploy:pages": "pnpm build:pages && pnpm --filter @systembug/wsx-examples deploy:pages"
     },
     "devDependencies": {
         "@changesets/cli": "^2.29.5",
