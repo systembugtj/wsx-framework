@@ -92,14 +92,14 @@ importers:
 
   packages/base-components:
     dependencies:
-      '@systembug/wsx-core':
+      '@wsxjs/wsx-core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
-      '@systembug/eslint-plugin-wsx':
+      '@wsxjs/eslint-plugin-wsx':
         specifier: workspace:*
         version: link:../eslint-plugin
-      '@systembug/wsx-vite-plugin':
+      '@wsxjs/wsx-vite-plugin':
         specifier: workspace:*
         version: link:../vite-plugin
       '@typescript-eslint/eslint-plugin':
@@ -138,7 +138,7 @@ importers:
 
   packages/eslint-plugin:
     dependencies:
-      '@systembug/wsx-core':
+      '@wsxjs/wsx-core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -178,13 +178,13 @@ importers:
 
   packages/examples:
     dependencies:
-      '@systembug/wsx-base-components':
+      '@wsxjs/wsx-base-components':
         specifier: workspace:*
         version: link:../base-components
-      '@systembug/wsx-core':
+      '@wsxjs/wsx-core':
         specifier: workspace:*
         version: link:../core
-      '@systembug/wsx-router':
+      '@wsxjs/wsx-router':
         specifier: workspace:*
         version: link:../wsx-router
       '@unocss/preset-attributify':
@@ -194,10 +194,10 @@ importers:
         specifier: ^66.3.3
         version: 66.3.3
     devDependencies:
-      '@systembug/eslint-plugin-wsx':
+      '@wsxjs/eslint-plugin-wsx':
         specifier: workspace:*
         version: link:../eslint-plugin
-      '@systembug/wsx-vite-plugin':
+      '@wsxjs/wsx-vite-plugin':
         specifier: workspace:*
         version: link:../vite-plugin
       '@testing-library/dom':
@@ -242,7 +242,7 @@ importers:
 
   packages/vite-plugin:
     dependencies:
-      '@systembug/wsx-core':
+      '@wsxjs/wsx-core':
         specifier: workspace:*
         version: link:../core
       esbuild:
@@ -273,14 +273,14 @@ importers:
 
   packages/wsx-router:
     dependencies:
-      '@systembug/wsx-core':
+      '@wsxjs/wsx-core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
-      '@systembug/eslint-plugin-wsx':
+      '@wsxjs/eslint-plugin-wsx':
         specifier: workspace:*
         version: link:../eslint-plugin
-      '@systembug/wsx-vite-plugin':
+      '@wsxjs/wsx-vite-plugin':
         specifier: workspace:*
         version: link:../vite-plugin
       '@typescript-eslint/eslint-plugin':

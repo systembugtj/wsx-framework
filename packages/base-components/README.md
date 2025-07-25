@@ -1,4 +1,4 @@
-# @systembug/wsx-base-components
+# @wsxjs/wsx-base-components
 
 现代化的 Web Components 基础组件库，基于 WSX Framework 构建。
 
@@ -7,7 +7,7 @@
 ### 安装
 
 ```bash
-npm install @systembug/wsx-base-components
+npm install @wsxjs/wsx-base-components
 ```
 
 ### 使用
@@ -17,7 +17,7 @@ npm install @systembug/wsx-base-components
 <html>
 <head>
     <script type="module">
-        import { XyButton } from '@systembug/wsx-base-components';
+        import { XyButton } from '@wsxjs/wsx-base-components';
     </script>
 </head>
 <body>

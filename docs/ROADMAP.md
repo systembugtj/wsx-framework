@@ -76,7 +76,7 @@ WSX Framework 致力于成为构建原生 Web Components 的最佳开发体验�
 - **`<wsx-worker-demo>`** - Web Worker 集成
 - **`<wsx-canvas-demo>`** - Canvas 与 Web Components 结合
 
-#### 3. 测试库 (`@systembug/wsx-testing`)
+#### 3. 测试库 (`@wsxjs/wsx-testing`)
 - Shadow DOM 查询工具
 - 自定义元素模拟助手
 - 事件模拟工具

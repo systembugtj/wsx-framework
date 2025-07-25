@@ -7,11 +7,11 @@ This document outlines the Continuous Integration and Continuous Deployment stra
 ```
 wsx-framework/
 ├── packages/
-│   ├── core/                    # @systembug/wsx-core
-│   ├── vite-plugin/             # @systembug/wsx-vite-plugin  
-│   ├── eslint-plugin/           # @systembug/wsx-eslint-plugin
-│   ├── components/              # @systembug/wsx-components
-│   └── examples/                # @systembug/wsx-examples (private)
+│   ├── core/                    # @wsxjs/wsx-core
+│   ├── vite-plugin/             # @wsxjs/wsx-vite-plugin  
+│   ├── eslint-plugin/           # @wsxjs/wsx-eslint-plugin
+│   ├── components/              # @wsxjs/wsx-components
+│   └── examples/                # @wsxjs/wsx-examples (private)
 ```
 
 ## Branch Strategy
@@ -94,7 +94,7 @@ Based on conventional commits since last release:
 ## Monorepo Considerations
 
 ### Package Dependencies
-- **Core dependencies**: `@systembug/wsx-core` is dependency for other packages
+- **Core dependencies**: `@wsxjs/wsx-core` is dependency for other packages
 - **Workspace references**: Use `workspace:*` for internal dependencies
 - **Synchronized versioning**: All packages bump version together
 
@@ -118,7 +118,7 @@ module.exports = {
       '@semantic-release/exec',
       {
         prepareCmd: 'pnpm version ${nextRelease.version} --workspaces',
-        publishCmd: 'pnpm publish --filter "!@systembug/wsx-examples" --access public'
+        publishCmd: 'pnpm publish --filter "!@wsxjs/wsx-examples" --access public'
       }
     ],
     '@semantic-release/github',
@@ -301,7 +301,7 @@ PR Requirements for main:
 ### NPM Badges to Add
 ```markdown
 [![npm version](https://badge.fury.io/js/@systembug%2Fwsx-core.svg)](https://badge.fury.io/js/@systembug%2Fwsx-core)
-[![npm downloads](https://img.shields.io/npm/dm/@systembug/wsx-core.svg)](https://www.npmjs.com/package/@systembug/wsx-core)
+[![npm downloads](https://img.shields.io/npm/dm/@wsxjs/wsx-core.svg)](https://www.npmjs.com/package/@wsxjs/wsx-core)
 [![CI Status](https://github.com/wsxjs/wsxjs/workflows/CI/badge.svg)](https://github.com/wsxjs/wsxjs/actions)
 [![Coverage Status](https://codecov.io/gh/systembugtj/wsx-framework/branch/main/graph/badge.svg)](https://codecov.io/gh/systembugtj/wsx-framework)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -309,10 +309,10 @@ PR Requirements for main:
 
 ### Package-specific Badges
 Each package should have its own badges:
-- **@systembug/wsx-core**: Version, downloads, size
-- **@systembug/wsx-vite-plugin**: Version, downloads, vite compatibility
-- **@systembug/wsx-eslint-plugin**: Version, downloads, eslint compatibility
-- **@systembug/wsx-components**: Version, downloads, bundle size
+- **@wsxjs/wsx-core**: Version, downloads, size
+- **@wsxjs/wsx-vite-plugin**: Version, downloads, vite compatibility
+- **@wsxjs/wsx-eslint-plugin**: Version, downloads, eslint compatibility
+- **@wsxjs/wsx-components**: Version, downloads, bundle size
 
 ## Success Metrics
 - **Release Frequency**: Weekly releases from develop merges

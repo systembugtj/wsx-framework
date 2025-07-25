@@ -193,8 +193,8 @@
 ## 示例组件模板
 
 ```typescript
-/** @jsxImportSource @systembug/wsx-core */
-import { WebComponent, autoRegister, createLogger } from '@systembug/wsx-core';
+/** @jsxImportSource @wsxjs/wsx-core */
+import { WebComponent, autoRegister, createLogger } from '@wsxjs/wsx-core';
 import styles from './ComponentName.css?inline';
 
 const logger = createLogger('ComponentName');
