@@ -28,7 +28,8 @@
             "Bash(timeout 10s pnpm --filter @systembug/wsx-examples dev)",
             "Bash(pnpm --filter @systembug/wsx-core lint)",
             "Bash(pnpm --filter @systembug/wsx-base-components lint)",
-            "Bash(gh run list:*)"
+            "Bash(gh run list:*)",
+            "Bash(pnpm install:*)"
         ],
         "deny": []
     }

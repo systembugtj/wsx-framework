@@ -6,7 +6,9 @@ export default defineConfig({
     // Set base path for GitHub Pages deployment
     base:
         process.env.NODE_ENV === "production" && process.env.GITHUB_PAGES === "true"
-            ? "/wsx-framework/"
+            ? process.env.CUSTOM_DOMAIN === "true"
+                ? "/"
+                : "/wsx-framework/"
             : "/",
     plugins: [
         UnoCSS(),
