@@ -8,6 +8,16 @@
 
 **JSX syntax sugar for native Web Components - Not a framework, just better developer experience.**
 
+## 🚀 Live Demo
+
+**[View Examples on GitHub Pages →](https://systembugtj.github.io/wsx-framework/)**
+
+Experience WSX Framework in action with our interactive examples showcasing:
+- Zero-dependency Web Components with JSX syntax
+- Router-based navigation
+- Theme switching
+- Component library examples
+
 ## Why WSX Exists
 
 WSX has one simple purpose: **Make Web Components development as enjoyable as writing JSX**, while keeping everything 100% native.

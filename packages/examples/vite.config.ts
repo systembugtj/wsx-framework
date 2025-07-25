@@ -3,6 +3,11 @@ import { wsx } from "@systembug/wsx-vite-plugin";
 import UnoCSS from "unocss/vite";
 
 export default defineConfig({
+    // Set base path for GitHub Pages deployment
+    base:
+        process.env.NODE_ENV === "production" && process.env.GITHUB_PAGES === "true"
+            ? "/wsx-framework/"
+            : "/",
     plugins: [
         UnoCSS(),
         wsx({
@@ -13,7 +18,7 @@ export default defineConfig({
     ],
     build: {
         outDir: "dist",
-        sourcemap: true, // Examples can keep source maps since it's not published
+        sourcemap: process.env.NODE_ENV !== "production", // No source maps in production
     },
     server: {
         sourcemap: true, // Enable source maps for dev server
