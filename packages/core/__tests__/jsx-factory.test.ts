@@ -5,7 +5,7 @@
 
 import { describe, it, expect, jest } from "@jest/globals";
 import { h, Fragment, JSXChildren } from "../src/jsx-factory";
-import { isSVGElement, SVG_NAMESPACE } from "../src/svg-utils";
+import { isSVGElement, SVG_NAMESPACE } from "../src/utils/svg-utils";
 
 describe("JSX Factory (h function)", () => {
     describe("Basic Element Creation", () => {

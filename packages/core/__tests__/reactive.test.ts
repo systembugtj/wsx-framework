@@ -3,7 +3,7 @@
  */
 
 import { describe, it, expect, beforeEach, jest } from "@jest/globals";
-import { reactive, createState, ReactiveDebug } from "../src/reactive";
+import { reactive, createState, ReactiveDebug } from "../src/utils/reactive";
 
 describe("reactive", () => {
     beforeEach(() => {

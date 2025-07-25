@@ -4,7 +4,7 @@
  */
 
 import { describe, it, expect, jest } from "@jest/globals";
-import { reactive, createState } from "../src/reactive";
+import { reactive, createState } from "../src/utils/reactive";
 
 describe("reactive system integration", () => {
     it("should integrate reactive objects with manual rerender callbacks", () => {
