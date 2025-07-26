@@ -4,7 +4,7 @@
 - **Type**: Feature
 - **Start Date**: 2025-01-25
 - **Author**: WSX Team
-
+- **状态**: Implemented
 ## Summary
 
 This RFC proposes a native Web Components based routing solution for WSX Framework that leverages browser History API and provides a declarative, zero-dependency router.

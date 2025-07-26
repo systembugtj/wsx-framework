@@ -14,7 +14,7 @@ export { WebComponent, type WebComponentConfig } from "../src/web-component";
 export { ReactiveWebComponent, type ReactiveWebComponentConfig } from "../src/reactive-component";
 
 // 导出 LightComponent 类和配置
-export { LightComponent, type LightComponentConfig } from "../src/light-component";,
+export { LightComponent, type LightComponentConfig } from "../src/light-component";
 // 导出 auto-register 相关类型和函数
 export {
     autoRegister,

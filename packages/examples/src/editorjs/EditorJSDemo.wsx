@@ -176,7 +176,7 @@ export default class EditorJSDemo extends LightComponent {
 
         try {
             const outputData = await this.editor.save();
-            const output = this.shadowRoot?.getElementById("output") as HTMLPreElement;
+            const output = this.querySelector("#output") as HTMLPreElement;
             if (output) {
                 output.textContent = JSON.stringify(outputData, null, 2);
                 output.classList.add("visible");

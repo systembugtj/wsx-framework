@@ -11,6 +11,8 @@ import { h, type JSXChildren } from "./jsx-factory";
 import { reactive, createState, reactiveWithDebug } from "./utils/reactive";
 import { createLogger } from "./utils/logger";
 
+const logger = createLogger("LightComponent");
+
 /**
  * Light DOM Component 配置接口
  */
@@ -61,7 +63,7 @@ export abstract class LightComponent extends HTMLElement {
             // 应用CSS样式到组件自身
             if (this.config.styles) {
                 const styleName = this.config.styleName || this.constructor.name;
-                this.applyGlobalStyles(styleName, this.config.styles);
+                this.applyScopedStyles(styleName, this.config.styles);
             }
 
             // 渲染JSX内容到Light DOM
@@ -71,7 +73,7 @@ export abstract class LightComponent extends HTMLElement {
             // 调用子类的初始化钩子
             this.onConnected?.();
         } catch (error) {
-            console.error(`[${this.constructor.name}] Error in connectedCallback:`, error);
+            logger.error(`[${this.constructor.name}] Error in connectedCallback:`, error);
             this.renderError(error);
         }
     }
@@ -179,7 +181,7 @@ export abstract class LightComponent extends HTMLElement {
      */
     protected rerender(): void {
         if (!this.connected) {
-            console.warn(
+            logger.warn(
                 `[${this.constructor.name}] Component is not connected, skipping rerender.`
             );
             return;
@@ -193,7 +195,7 @@ export abstract class LightComponent extends HTMLElement {
             const content = this.render();
             this.appendChild(content);
         } catch (error) {
-            console.error(`[${this.constructor.name}] Error in rerender:`, error);
+            logger.error(`[${this.constructor.name}] Error in rerender:`, error);
             this.renderError(error);
         }
     }
@@ -225,7 +227,7 @@ export abstract class LightComponent extends HTMLElement {
      * 为Light DOM组件应用样式
      * 直接将样式注入到组件自身，避免全局污染
      */
-    private applyGlobalStyles(styleName: string, cssText: string): void {
+    private applyScopedStyles(styleName: string, cssText: string): void {
         // 检查是否已经有该样式
         const existingStyle = this.querySelector(`style[data-wsx-light-component="${styleName}"]`);
         if (existingStyle) {

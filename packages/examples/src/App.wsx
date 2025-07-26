@@ -23,7 +23,6 @@ import "./components/ExamplesSection.wsx";
 import "./components/EcosystemSection.wsx";
 import "./components/WsxLogo.wsx";
 import "./editorjs/EditorJSDemo.wsx";
-import EditorJSDemo from "./editorjs/EditorJSDemo.wsx";
 
 export interface AppConfig {
     title?: string;

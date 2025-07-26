@@ -487,6 +487,10 @@ All packages properly exclude test files from npm publish:
 - Examples package validates framework usability in real development scenarios
 - Auto JSX injection eliminates developer boilerplate
 
+## RFC
+
+All RFC doc is located at docs/rfc
+
 ---
 
 This document should be updated as the project evolves. Last updated: 2025-01-15
