@@ -179,7 +179,7 @@ importers:
   packages/examples:
     dependencies:
       '@editorjs/editorjs':
-        specifier: ^2.30.8
+        specifier: ^2.29.1
         version: 2.30.8
       '@editorjs/header':
         specifier: ^2.8.8

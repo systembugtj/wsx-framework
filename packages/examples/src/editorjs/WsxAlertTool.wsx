@@ -2,7 +2,8 @@
 import { createLogger } from "@wsxjs/wsx-core";
 import type { BlockTool, BlockToolConstructorOptions, BlockToolData } from "@editorjs/editorjs";
 import "./WsxAlertTool.css";
-import WsxAlertComponent from "./WsxAlertComponent.wsx";
+import "./WsxAlertComponent.wsx";
+import type WsxAlertComponent from "./WsxAlertComponent.wsx";
 const logger = createLogger("WsxAlertTool");
 
 export interface AlertData extends BlockToolData {
@@ -38,7 +39,12 @@ export default class WsxAlertTool implements BlockTool {
     }
 
     render() {
-        return (
+        // Create a plain wrapper div for EditorJS
+        const wrapper = document.createElement('div');
+        wrapper.style.display = 'block';
+        
+        // Create and configure the WSX component  
+        this.component = (
             <wsx-alert-component
                 type={this.data.type}
                 message={this.data.message}
@@ -50,15 +56,23 @@ export default class WsxAlertTool implements BlockTool {
                     this.data.message = e.detail;
                 }}
             ></wsx-alert-component>
-        );
+        ) as WsxAlertComponent;
+        
+        // Append the component to the wrapper
+        wrapper.appendChild(this.component);
+        
+        // Return the plain DOM wrapper for EditorJS
+        return wrapper;
     }
 
     save(): AlertData {
-        const componentData = this.component.getData();
-        this.data = {
-            type: componentData.type as AlertData["type"],
-            message: componentData.message,
-        };
+        if (this.component) {
+            const componentData = this.component.getData();
+            this.data = {
+                type: componentData.type as AlertData["type"],
+                message: componentData.message,
+            };
+        }
         logger.info("Saving WSX alert data", this.data);
         return this.data;
     }

@@ -14,6 +14,8 @@ import { reactive, createState, reactiveWithDebug } from "./utils/reactive";
 export interface ReactiveWebComponentConfig extends WebComponentConfig {
     /** 是否启用响应式调试模式 */
     debug?: boolean;
+    /** 是否启用自动焦点保持 */
+    preserveFocus?: boolean;
 }
 
 /**
@@ -23,12 +25,14 @@ export interface ReactiveWebComponentConfig extends WebComponentConfig {
  */
 export abstract class ReactiveWebComponent extends WebComponent {
     private _isDebugEnabled: boolean = false;
+    private _preserveFocus: boolean = true;
     private _reactiveStates = new Map<string, any>();
 
     constructor(config: ReactiveWebComponentConfig = {}) {
         super(config);
 
         this._isDebugEnabled = config.debug ?? false;
+        this._preserveFocus = config.preserveFocus ?? true;
     }
 
     /**
@@ -75,6 +79,137 @@ export abstract class ReactiveWebComponent extends WebComponent {
         // 确保组件已连接到 DOM
         if (this.connected) {
             this.rerender();
+        }
+    }
+
+    /**
+     * 重写 rerender 方法以支持焦点保持
+     */
+    protected rerender(): void {
+        if (!this.connected) {
+            return;
+        }
+
+        let focusData: any = null;
+
+        // 保存焦点状态（如果启用）
+        if (this._preserveFocus) {
+            const activeElement = this.shadowRoot.activeElement;
+            focusData = this.saveFocusState(activeElement);
+        }
+
+        // 调用父类的重渲染逻辑
+        super.rerender();
+
+        // 恢复焦点状态（如果启用）- 立即同步执行避免闪烁
+        if (this._preserveFocus && focusData) {
+            this.restoreFocusState(focusData);
+        }
+    }
+
+    /**
+     * 保存焦点状态
+     */
+    private saveFocusState(activeElement: Element | null): any {
+        if (!activeElement) {
+            return null;
+        }
+
+        // 只保存可编辑元素的状态
+        const focusData: any = {
+            tagName: activeElement.tagName.toLowerCase(),
+            className: activeElement.className,
+        };
+
+        // 保存选择/光标位置
+        if (activeElement.hasAttribute("contenteditable")) {
+            const selection = window.getSelection();
+            if (selection && selection.rangeCount > 0) {
+                const range = selection.getRangeAt(0);
+                focusData.selectionStart = range.startOffset;
+                focusData.selectionEnd = range.endOffset;
+            }
+        }
+
+        // 保存输入/选择元素的状态
+        if (
+            activeElement instanceof HTMLInputElement ||
+            activeElement instanceof HTMLSelectElement
+        ) {
+            focusData.value = activeElement.value;
+            if ("selectionStart" in activeElement) {
+                focusData.selectionStart = activeElement.selectionStart;
+                focusData.selectionEnd = activeElement.selectionEnd;
+            }
+        }
+
+        return focusData;
+    }
+
+    /**
+     * 恢复焦点状态
+     */
+    private restoreFocusState(focusData: any): void {
+        if (!focusData) return;
+
+        try {
+            // 查找要恢复焦点的元素
+            let targetElement: Element | null = null;
+
+            // 首先尝试通过类名查找（最具体）
+            if (focusData.className) {
+                targetElement = this.shadowRoot.querySelector(
+                    `.${focusData.className.split(" ")[0]}`
+                );
+            }
+
+            // 备用方案：通过标签名查找
+            if (!targetElement) {
+                targetElement = this.shadowRoot.querySelector(focusData.tagName);
+            }
+
+            if (targetElement) {
+                // 恢复焦点 - 防止页面滚动
+                (targetElement as HTMLElement).focus({ preventScroll: true });
+
+                // 恢复选择/光标位置
+                if (focusData.selectionStart !== undefined) {
+                    if (targetElement instanceof HTMLInputElement) {
+                        targetElement.setSelectionRange(
+                            focusData.selectionStart,
+                            focusData.selectionEnd
+                        );
+                    } else if (targetElement instanceof HTMLSelectElement) {
+                        targetElement.value = focusData.value;
+                    } else if (targetElement.hasAttribute("contenteditable")) {
+                        this.setCursorPosition(targetElement, focusData.selectionStart);
+                    }
+                }
+            }
+        } catch {
+            // 静默处理焦点恢复失败，不应该影响正常渲染
+        }
+    }
+
+    /**
+     * 设置光标位置
+     */
+    private setCursorPosition(element: Element, position: number): void {
+        try {
+            const selection = window.getSelection();
+            if (selection) {
+                const range = document.createRange();
+                const textNode = element.childNodes[0];
+                if (textNode) {
+                    const maxPos = Math.min(position, textNode.textContent?.length || 0);
+                    range.setStart(textNode, maxPos);
+                    range.setEnd(textNode, maxPos);
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                }
+            }
+        } catch {
+            // 静默处理，焦点恢复失败不应该阻止渲染
         }
     }
 

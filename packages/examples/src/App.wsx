@@ -10,7 +10,7 @@
  * - Component separation
  */
 
-import { WebComponent, autoRegister } from "@wsxjs/wsx-core";
+import { LightComponent, autoRegister } from "@wsxjs/wsx-core";
 import styles from "./App.css?inline";
 // Import base components and router
 import "@wsxjs/wsx-base-components";
@@ -23,6 +23,7 @@ import "./components/ExamplesSection.wsx";
 import "./components/EcosystemSection.wsx";
 import "./components/WsxLogo.wsx";
 import "./editorjs/EditorJSDemo.wsx";
+import EditorJSDemo from "./editorjs/EditorJSDemo.wsx";
 
 export interface AppConfig {
     title?: string;
@@ -30,7 +31,7 @@ export interface AppConfig {
 }
 
 @autoRegister({ tagName: "wsx-app" })
-export default class App extends WebComponent {
+export default class App extends LightComponent {
     private isNavOpen: boolean = false;
 
     constructor(config: AppConfig = {}) {
@@ -46,7 +47,7 @@ export default class App extends WebComponent {
             <div class="app-container">
                 {/* Navigation */}
                 {this.renderNavigation()}
-
+                <editorjs-demo></editorjs-demo>
                 {/* Router Container */}
                 <wsx-router>
                     <wsx-view route="/" component="home-section"></wsx-view>

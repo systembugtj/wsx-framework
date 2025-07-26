@@ -120,6 +120,8 @@
     padding: 30px;
     margin-bottom: 30px;
     border: 1px solid #e9ecef;
+    /* Ensure EditorJS popover can escape container bounds */
+    overflow: visible !important;
 }
 
 .editor-title {
@@ -282,7 +284,38 @@
     }
 }
 
-/** Editrjs Styling */
+/** EditorJS Styling - Fix global CSS reset interference */
+
+/* Restore EditorJS default styles that are broken by global * { margin: 0; padding: 0; } */
+.codex-editor * {
+    box-sizing: initial;
+}
+
+/* Force popover to be visible - potential EditorJS bug workaround */
+.ce-popover {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+.codex-editor .ce-toolbar__plus {
+    margin: initial;
+    padding: initial;
+}
+
+.codex-editor .ce-popover__container {
+    margin: initial;
+    padding: initial;
+    box-sizing: border-box;
+}
+
+.codex-editor .ce-popover__items {
+    margin: initial;
+    padding: initial;
+}
+
+/** Original EditorJS Styling */
 :root {
     --selectionColor: #e1f2ff;
     --inlineSelectionColor: #d4ecff;
@@ -1286,7 +1319,7 @@
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    z-index: 4;
+    z-index: 10000;
     opacity: 0;
     max-height: 0;
     pointer-events: none;
@@ -1826,4 +1859,19 @@
 .codex-editor [data-placeholder-active]:empty:focus:before,
 .codex-editor [data-placeholder-active][data-empty="true"]:focus:before {
     content: attr(data-placeholder-active);
+}
+
+.ce-paragraph {
+    line-height: 1.6em;
+    outline: none;
+}
+.ce-block:only-of-type .ce-paragraph[data-placeholder-active]:empty:before,
+.ce-block:only-of-type .ce-paragraph[data-placeholder-active][data-empty="true"]:before {
+    content: attr(data-placeholder-active);
+}
+.ce-paragraph p:first-of-type {
+    margin-top: 0;
+}
+.ce-paragraph p:last-of-type {
+    margin-bottom: 0;
 }

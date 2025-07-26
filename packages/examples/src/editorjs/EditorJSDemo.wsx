@@ -1,16 +1,16 @@
 /** @jsxImportSource @wsxjs/wsx-core */
-import { WebComponent, autoRegister, createLogger } from "@wsxjs/wsx-core";
+import { LightComponent, autoRegister, createLogger } from "@wsxjs/wsx-core";
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 import Paragraph from "@editorjs/paragraph";
 import WsxAlertTool from "./WsxAlertTool.wsx";
-import "./WsxAlertComponent.wsx";
+import WsxHighlightTool from "./WsxHighlightTool.wsx";
 import styles from "./EditorJSDemo.css?inline";
 
 const logger = createLogger("EditorJSDemo");
 
 @autoRegister({ tagName: "editorjs-demo" })
-export default class EditorJSDemo extends WebComponent {
+export default class EditorJSDemo extends LightComponent {
     private editor?: EditorJS;
     private editorContainer?: HTMLElement;
 
@@ -18,6 +18,7 @@ export default class EditorJSDemo extends WebComponent {
         super({
             styles,
             styleName: "editor-demo",
+            lightDOM: true, // 使用 Light DOM 以便更好地集成到页面中
         });
         logger.info("EditorJS Demo initialized");
     }
@@ -54,27 +55,6 @@ export default class EditorJSDemo extends WebComponent {
                         </li>
                     </ul>
                 </div>
-
-                <div class="info-grid">
-                    <div class="info-card">
-                        <h3>📦 Custom Block Tool</h3>
-                        <p>
-                            The <code>WsxAlertBlock</code> demonstrates a custom block tool built
-                            with WSX. It features type selection, editable content, and proper data
-                            persistence.
-                        </p>
-                    </div>
-
-                    <div class="info-card">
-                        <h3>✏️ Inline Tool</h3>
-                        <p>
-                            The <code>WsxHighlightTool</code> shows how to create inline tools with
-                            WSX. Try selecting text and clicking the highlight button or use{" "}
-                            <kbd>Cmd+Shift+H</kbd>.
-                        </p>
-                    </div>
-                </div>
-
                 <div class="editor-container">
                     <h2 class="editor-title">Try the Editor</h2>
                     <div
@@ -94,6 +74,26 @@ export default class EditorJSDemo extends WebComponent {
                     <button onClick={this.loadSampleData} class="btn btn-success">
                         Load Sample Data
                     </button>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>📦 Custom Block Tool</h3>
+                        <p>
+                            The <code>WsxAlertBlock</code> demonstrates a custom block tool built
+                            with WSX. It features type selection, editable content, and proper data
+                            persistence.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>✏️ Inline Tool</h3>
+                        <p>
+                            The <code>WsxHighlightTool</code> shows how to create inline tools with
+                            WSX. Try selecting text and clicking the highlight button or use{" "}
+                            <kbd>Cmd+Shift+H</kbd>.
+                        </p>
+                    </div>
                 </div>
 
                 <pre id="output" class="output-panel" />
@@ -124,6 +124,7 @@ export default class EditorJSDemo extends WebComponent {
                         levels: [1, 2, 3, 4, 5, 6],
                         defaultLevel: 2,
                     },
+                    inlineToolbar: true,
                 },
                 paragraph: {
                     class: Paragraph,
@@ -131,8 +132,9 @@ export default class EditorJSDemo extends WebComponent {
                 },
                 alert: {
                     class: WsxAlertTool,
-                    inlineToolbar: false,
+                    inlineToolbar: true,
                 },
+                highlight: WsxHighlightTool,
             },
             placeholder: "Start typing or click + to add a WSX Alert block...",
             data: {
