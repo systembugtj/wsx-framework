@@ -44,8 +44,8 @@ module.exports = {
             ],
         ],
 
-        // Subject should be lowercase
-        "subject-case": [2, "always", "lower-case"],
+        // Subject case - disabled to allow flexible casing
+        "subject-case": [0],
 
         // Subject should not end with period
         "subject-full-stop": [2, "never", "."],
