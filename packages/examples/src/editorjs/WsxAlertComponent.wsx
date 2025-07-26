@@ -1,0 +1,115 @@
+/** @jsxImportSource @wsxjs/wsx-core */
+import { WebComponent, autoRegister, createLogger } from "@wsxjs/wsx-core";
+import styles from "./WsxAlertComponent.css?inline";
+
+const logger = createLogger("WsxAlertComponent");
+
+/**
+ * WSX Alert Component - A reusable Web Component for rendering alert blocks
+ *
+ * This demonstrates how WSX components can be used as building blocks
+ * for EditorJS plugins, providing better structure and reusability.
+ */
+@autoRegister({ tagName: "wsx-alert-component" })
+export default class WsxAlertComponent extends WebComponent {
+    private alertType: string = "info";
+    private alertMessage: string = "";
+    private isReadOnly: boolean = false;
+
+    static get observedAttributes() {
+        return ["type", "message", "readonly"];
+    }
+
+    constructor() {
+        super({
+            styles,
+            styleName: "wsx-alert-component",
+        });
+        logger.info("WSX Alert component initialized");
+    }
+
+    render() {
+        const icons = {
+            info: "ℹ️",
+            warning: "⚠️",
+            success: "✅",
+            error: "❌",
+        };
+
+        return (
+            <div class={`wsx-alert-wrapper ${this.alertType}`}>
+                <span class="wsx-alert-icon">{icons[this.alertType as keyof typeof icons]}</span>
+                <div class="wsx-alert-content">
+                    {!this.isReadOnly && (
+                        <select
+                            class="alert-type-selector"
+                            value={this.alertType}
+                            onchange={this.handleTypeChange}
+                        >
+                            <option value="info">Info</option>
+                            <option value="warning">Warning</option>
+                            <option value="success">Success</option>
+                            <option value="error">Error</option>
+                        </select>
+                    )}
+                    <div
+                        contentEditable={!this.isReadOnly ? "true" : "false"}
+                        class="alert-message"
+                        oninput={this.handleMessageInput}
+                        placeholder="Enter alert message..."
+                    >
+                        {this.alertMessage}
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    private handleTypeChange = (event: Event) => {
+        const select = event.target as HTMLSelectElement;
+        this.alertType = select.value;
+        logger.debug("Alert type changed", this.alertType);
+        this.update();
+        this.dispatchEvent(new CustomEvent("type-change", { detail: this.alertType }));
+    };
+
+    private handleMessageInput = (event: Event) => {
+        const div = event.target as HTMLDivElement;
+        this.alertMessage = div.textContent || "";
+        logger.debug("Alert message updated", this.alertMessage);
+        this.dispatchEvent(new CustomEvent("message-change", { detail: this.alertMessage }));
+    };
+
+    onAttributeChanged(name: string, oldValue: string | null, newValue: string | null) {
+        switch (name) {
+            case "type":
+                this.alertType = newValue || "info";
+                break;
+            case "message":
+                this.alertMessage = newValue || "";
+                break;
+            case "readonly":
+                this.isReadOnly = newValue === "true";
+                break;
+        }
+        this.update();
+    }
+
+    // Public API for EditorJS integration
+    setData(type: string, message: string) {
+        this.alertType = type;
+        this.alertMessage = message;
+        this.update();
+    }
+
+    getData() {
+        return {
+            type: this.alertType,
+            message: this.alertMessage,
+        };
+    }
+
+    update() {
+        this.render();
+    }
+}

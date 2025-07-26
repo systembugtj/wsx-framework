@@ -1,6 +1,6 @@
 /** @jsxImportSource @wsxjs/wsx-core */
 import { WebComponent, autoRegister } from "@wsxjs/wsx-core";
-import styles from "./App.css?inline";
+import styles from "./HomeSection.css?inline";
 import "@wsxjs/wsx-base-components";
 import "@wsxjs/wsx-router";
 import "./WsxLogo.wsx";

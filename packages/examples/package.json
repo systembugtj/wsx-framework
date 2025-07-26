@@ -19,20 +19,23 @@
         "lint:fix": "eslint . --fix"
     },
     "dependencies": {
-        "@wsxjs/wsx-core": "workspace:*",
-        "@wsxjs/wsx-base-components": "workspace:*",
-        "@wsxjs/wsx-router": "workspace:*",
+        "@editorjs/editorjs": "^2.30.8",
+        "@editorjs/header": "^2.8.8",
+        "@editorjs/paragraph": "^2.11.7",
         "@unocss/preset-attributify": "^66.3.3",
-        "@unocss/preset-uno": "^66.3.3"
+        "@unocss/preset-uno": "^66.3.3",
+        "@wsxjs/wsx-base-components": "workspace:*",
+        "@wsxjs/wsx-core": "workspace:*",
+        "@wsxjs/wsx-router": "workspace:*"
     },
     "devDependencies": {
-        "@wsxjs/eslint-plugin-wsx": "workspace:*",
-        "@wsxjs/wsx-vite-plugin": "workspace:*",
         "@testing-library/dom": "^10.4.0",
         "@testing-library/user-event": "^14.6.1",
         "@typescript-eslint/eslint-plugin": "^6.0.0",
         "@typescript-eslint/parser": "^6.0.0",
         "@vitest/ui": "^3.2.4",
+        "@wsxjs/eslint-plugin-wsx": "workspace:*",
+        "@wsxjs/wsx-vite-plugin": "workspace:*",
         "cross-env": "^7.0.3",
         "eslint": "^8.0.0",
         "gh-pages": "^6.1.1",

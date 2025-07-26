@@ -1,13 +1,17 @@
 /** @jsxImportSource @wsxjs/wsx-core */
 import { WebComponent, autoRegister } from "@wsxjs/wsx-core";
-import styles from "./App.css?inline";
+import styles from "./ExamplesSection.css?inline";
 import "@wsxjs/wsx-base-components";
 import "@wsxjs/wsx-router";
+import "../editorjs/EditorJSDemo.wsx";
 
 @autoRegister({ tagName: "examples-section" })
 export default class ExamplesSection extends WebComponent {
     constructor() {
-        super({ styles });
+        super({
+            styles,
+            styleName: "examples-section",
+        });
     }
 
     render() {
@@ -74,6 +78,20 @@ export default class ExamplesSection extends WebComponent {
                                         Ecosystem
                                     </wsx-link>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="example-card full-width">
+                            <div class="example-header">
+                                <h3>📝 EditorJS Plugin Demo</h3>
+                                <span class="example-badge">Integration</span>
+                            </div>
+                            <p>
+                                Build EditorJS plugins with WSX components for better developer
+                                experience
+                            </p>
+                            <div class="example-demo">
+                                <editorjs-demo></editorjs-demo>
                             </div>
                         </div>
                     </div>

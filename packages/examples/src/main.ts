@@ -10,7 +10,7 @@ import "uno.css";
 import "./main.css";
 // Import base components package (includes CSS)
 import "@wsxjs/wsx-base-components";
-import "./components/App.wsx";
+import "./App.wsx";
 
 const logger = createLogger("Main");
 

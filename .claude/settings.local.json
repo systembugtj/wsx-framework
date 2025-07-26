@@ -32,7 +32,8 @@
             "Bash(pnpm install:*)",
             "Bash(grep:*)",
             "Bash(find:*)",
-            "Bash(pnpm --filter @wsxjs/wsx-core publish --access public)"
+            "Bash(pnpm --filter @wsxjs/wsx-core publish --access public)",
+            "Bash(mkdir:*)"
         ],
         "deny": []
     }

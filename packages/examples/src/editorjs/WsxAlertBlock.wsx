@@ -1,0 +1,188 @@
+/** @jsxImportSource @wsxjs/wsx-core */
+import { WebComponent, autoRegister, createLogger } from "@wsxjs/wsx-core";
+import type { BlockTool, BlockToolConstructorOptions, BlockToolData } from "@editorjs/editorjs";
+
+const logger = createLogger("WsxAlertBlock");
+
+export interface AlertData extends BlockToolData {
+    type: "info" | "warning" | "success" | "error";
+    message: string;
+}
+
+/**
+ * WSX Alert Block - Demonstrates how WSX simplifies EditorJS plugin development
+ *
+ * Benefits of using WSX for EditorJS plugins:
+ * 1. Component-based architecture with proper lifecycle management
+ * 2. Type-safe JSX for rendering UI
+ * 3. Built-in Shadow DOM for style isolation
+ * 4. Reactive state management without external libraries
+ * 5. Cleaner code structure compared to vanilla JS plugins
+ */
+@autoRegister({ tagName: "wsx-alert-block" })
+export default class WsxAlertBlock extends WebComponent implements BlockTool {
+    private data: AlertData;
+    private readOnly: boolean;
+
+    static get toolbox() {
+        return {
+            title: "WSX Alert",
+            icon: `<svg width="20" height="20" viewBox="0 0 24 24"><path d="M11 17h2v-6h-2v6zm1-8q.425 0 .713-.288T13 8q0-.425-.288-.713T12 7q-.425 0-.713.288T11 8q0 .425.288.713T12 9zm0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.137 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.137T12 22z"/></svg>`,
+        };
+    }
+
+    static get isReadOnlySupported() {
+        return true;
+    }
+
+    constructor(options?: BlockToolConstructorOptions<AlertData>) {
+        super();
+        this.data = options?.data || { type: "info", message: "" };
+        this.readOnly = options?.readOnly || false;
+        logger.info("Alert block initialized", this.data);
+    }
+
+    render() {
+        const alertColors = {
+            info: "#3498db",
+            warning: "#f39c12",
+            success: "#27ae60",
+            error: "#e74c3c",
+        };
+
+        const icons = {
+            info: "ℹ️",
+            warning: "⚠️",
+            success: "✅",
+            error: "❌",
+        };
+
+        return (
+            <div
+                class="wsx-alert-wrapper"
+                style={`
+          display: flex;
+          align-items: center;
+          padding: 16px;
+          border-radius: 8px;
+          background-color: ${alertColors[this.data.type]}20;
+          border: 2px solid ${alertColors[this.data.type]};
+          margin: 12px 0;
+        `}
+            >
+                <span style="font-size: 24px; margin-right: 12px;">{icons[this.data.type]}</span>
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
+                    {!this.readOnly && (
+                        <select
+                            class="alert-type-selector"
+                            value={this.data.type}
+                            onChange={this.handleTypeChange}
+                            style="
+                width: fit-content;
+                padding: 4px 8px;
+                border-radius: 4px;
+                border: 1px solid #ddd;
+                background: white;
+                cursor: pointer;
+              "
+                        >
+                            <option value="info">Info</option>
+                            <option value="warning">Warning</option>
+                            <option value="success">Success</option>
+                            <option value="error">Error</option>
+                        </select>
+                    )}
+                    <div
+                        contentEditable={!this.readOnly}
+                        class="alert-message"
+                        style={`
+              min-height: 24px;
+              outline: none;
+              ${this.readOnly ? "" : "cursor: text;"}
+              color: #333;
+              font-size: 16px;
+            `}
+                        onInput={this.handleMessageInput}
+                        placeholder="Enter alert message..."
+                    >
+                        {this.data.message}
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    private handleTypeChange = (event: Event) => {
+        const select = event.target as HTMLSelectElement;
+        this.data.type = select.value as AlertData["type"];
+        logger.debug("Alert type changed", this.data.type);
+        this.update();
+    };
+
+    private handleMessageInput = (event: Event) => {
+        const div = event.target as HTMLDivElement;
+        this.data.message = div.textContent || "";
+        logger.debug("Alert message updated", this.data.message);
+    };
+
+    save(): AlertData {
+        const messageEl = this.shadowRoot?.querySelector(".alert-message") as HTMLDivElement;
+        if (messageEl) {
+            this.data.message = messageEl.textContent || "";
+        }
+        logger.info("Saving alert data", this.data);
+        return this.data;
+    }
+
+    validate(savedData: AlertData): boolean {
+        return savedData.message.trim().length > 0;
+    }
+
+    renderSettings() {
+        return (
+            <div style="padding: 16px;">
+                <label style="display: block; margin-bottom: 8px; font-weight: bold;">
+                    Alert Settings
+                </label>
+                <p style="color: #666; font-size: 14px;">
+                    Configure the alert appearance and behavior
+                </p>
+            </div>
+        );
+    }
+}
+
+// Export the tool class for EditorJS
+export class WsxAlertTool implements BlockTool {
+    private component: WsxAlertBlock;
+
+    static get toolbox() {
+        return WsxAlertBlock.toolbox;
+    }
+
+    static get isReadOnlySupported() {
+        return WsxAlertBlock.isReadOnlySupported;
+    }
+
+    constructor(options: BlockToolConstructorOptions<AlertData>) {
+        this.component = new WsxAlertBlock(options);
+    }
+
+    render() {
+        // Return the web component directly
+        return this.component as unknown as HTMLElement;
+    }
+
+    save() {
+        return this.component.save();
+    }
+
+    validate(savedData: AlertData) {
+        return this.component.validate(savedData);
+    }
+
+    renderSettings() {
+        const settings = new WsxAlertBlock();
+        return settings.renderSettings() as unknown as HTMLElement;
+    }
+}

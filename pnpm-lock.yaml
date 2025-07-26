@@ -96,18 +96,18 @@ importers:
         specifier: workspace:*
         version: link:../core
     devDependencies:
-      '@wsxjs/eslint-plugin-wsx':
-        specifier: workspace:*
-        version: link:../eslint-plugin
-      '@wsxjs/wsx-vite-plugin':
-        specifier: workspace:*
-        version: link:../vite-plugin
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.37.0
         version: 8.37.0(@typescript-eslint/parser@8.37.0(eslint@9.31.0(jiti@2.4.2))(typescript@5.8.3))(eslint@9.31.0(jiti@2.4.2))(typescript@5.8.3)
       '@typescript-eslint/parser':
         specifier: ^8.37.0
         version: 8.37.0(eslint@9.31.0(jiti@2.4.2))(typescript@5.8.3)
+      '@wsxjs/eslint-plugin-wsx':
+        specifier: workspace:*
+        version: link:../eslint-plugin
+      '@wsxjs/wsx-vite-plugin':
+        specifier: workspace:*
+        version: link:../vite-plugin
       eslint:
         specifier: ^9.31.0
         version: 9.31.0(jiti@2.4.2)
@@ -178,6 +178,21 @@ importers:
 
   packages/examples:
     dependencies:
+      '@editorjs/editorjs':
+        specifier: ^2.30.8
+        version: 2.30.8
+      '@editorjs/header':
+        specifier: ^2.8.8
+        version: 2.8.8
+      '@editorjs/paragraph':
+        specifier: ^2.11.7
+        version: 2.11.7
+      '@unocss/preset-attributify':
+        specifier: ^66.3.3
+        version: 66.3.3
+      '@unocss/preset-uno':
+        specifier: ^66.3.3
+        version: 66.3.3
       '@wsxjs/wsx-base-components':
         specifier: workspace:*
         version: link:../base-components
@@ -187,19 +202,7 @@ importers:
       '@wsxjs/wsx-router':
         specifier: workspace:*
         version: link:../wsx-router
-      '@unocss/preset-attributify':
-        specifier: ^66.3.3
-        version: 66.3.3
-      '@unocss/preset-uno':
-        specifier: ^66.3.3
-        version: 66.3.3
     devDependencies:
-      '@wsxjs/eslint-plugin-wsx':
-        specifier: workspace:*
-        version: link:../eslint-plugin
-      '@wsxjs/wsx-vite-plugin':
-        specifier: workspace:*
-        version: link:../vite-plugin
       '@testing-library/dom':
         specifier: ^10.4.0
         version: 10.4.0
@@ -215,6 +218,12 @@ importers:
       '@vitest/ui':
         specifier: ^3.2.4
         version: 3.2.4(vitest@3.2.4)
+      '@wsxjs/eslint-plugin-wsx':
+        specifier: workspace:*
+        version: link:../eslint-plugin
+      '@wsxjs/wsx-vite-plugin':
+        specifier: workspace:*
+        version: link:../vite-plugin
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
@@ -277,12 +286,6 @@ importers:
         specifier: workspace:*
         version: link:../core
     devDependencies:
-      '@wsxjs/eslint-plugin-wsx':
-        specifier: workspace:*
-        version: link:../eslint-plugin
-      '@wsxjs/wsx-vite-plugin':
-        specifier: workspace:*
-        version: link:../vite-plugin
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.37.0
         version: 8.37.0(@typescript-eslint/parser@8.37.0(eslint@9.31.0(jiti@2.4.2))(typescript@5.8.3))(eslint@9.31.0(jiti@2.4.2))(typescript@5.8.3)
@@ -295,6 +298,12 @@ importers:
       '@vitest/ui':
         specifier: ^2.1.8
         version: 2.1.9(vitest@2.1.9)
+      '@wsxjs/eslint-plugin-wsx':
+        specifier: workspace:*
+        version: link:../eslint-plugin
+      '@wsxjs/wsx-vite-plugin':
+        specifier: workspace:*
+        version: link:../vite-plugin
       eslint:
         specifier: ^9.31.0
         version: 9.31.0(jiti@2.4.2)
@@ -556,6 +565,12 @@ packages:
   '@changesets/write@0.4.0':
     resolution: {integrity: sha512-CdTLvIOPiCNuH71pyDu3rA+Q0n65cmAbXnwWH84rKGiFumFzkmHNT8KHTMEchcxN+Kl8I54xGUhJ7l3E7X396Q==}
 
+  '@codexteam/icons@0.0.4':
+    resolution: {integrity: sha512-V8N/TY2TGyas4wLrPIFq7bcow68b3gu8DfDt1+rrHPtXxcexadKauRJL6eQgfG7Z0LCrN4boLRawR4S9gjIh/Q==}
+
+  '@codexteam/icons@0.0.5':
+    resolution: {integrity: sha512-s6H2KXhLz2rgbMZSkRm8dsMJvyUNZsEjxobBEg9ztdrb1B2H3pEzY6iTwI4XUPJWJ3c3qRKwV4TrO3J5jUdoQA==}
+
   '@colors/colors@1.5.0':
     resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
     engines: {node: '>=0.1.90'}
@@ -656,6 +671,15 @@ packages:
   '@csstools/css-tokenizer@3.0.4':
     resolution: {integrity: sha512-Vd/9EVDiu6PPJt9yAh6roZP6El1xHrdvIVGjyBsHR0RYwNHgL7FJPyIIW4fANJNG6FtyZfvlRPpFI4ZM/lubvw==}
     engines: {node: '>=18'}
+
+  '@editorjs/editorjs@2.30.8':
+    resolution: {integrity: sha512-ClFuxI1qZTfXPJTacQfsJtOUP6bKoIe6BQNdAvGsDTDVwMnZEzoaSOwvUpdZEE56xppVfQueNK/1MElV9SJKHg==}
+
+  '@editorjs/header@2.8.8':
+    resolution: {integrity: sha512-bsMSs34u2hoi0UBuRoc5EGWXIFzJiwYgkFUYQGVm63y5FU+s8zPBmVx5Ip2sw1xgs0fqfDROqmteMvvmbCy62w==}
+
+  '@editorjs/paragraph@2.11.7':
+    resolution: {integrity: sha512-qD6bbWvRc4VvP0mXDOm+hOhzzhUYR9ZjcAvgCuKWcCbUMpCvhVF1s8NX40zdjekPi6JEnuHTamCncTrSzVsVhw==}
 
   '@esbuild/aix-ppc64@0.25.6':
     resolution: {integrity: sha512-ShbM/3XxwuxjFiuVBHA+d3j5dyac0aEVVq1oluIDf71hUw0aRF59dV/efUsIwFnR6m8JNM2FjZOzmaZ8yG61kw==}
@@ -5329,6 +5353,10 @@ snapshots:
       human-id: 4.1.1
       prettier: 2.8.8
 
+  '@codexteam/icons@0.0.4': {}
+
+  '@codexteam/icons@0.0.5': {}
+
   '@colors/colors@1.5.0':
     optional: true
 
@@ -5461,6 +5489,17 @@ snapshots:
       '@csstools/css-tokenizer': 3.0.4
 
   '@csstools/css-tokenizer@3.0.4': {}
+
+  '@editorjs/editorjs@2.30.8': {}
+
+  '@editorjs/header@2.8.8':
+    dependencies:
+      '@codexteam/icons': 0.0.5
+      '@editorjs/editorjs': 2.30.8
+
+  '@editorjs/paragraph@2.11.7':
+    dependencies:
+      '@codexteam/icons': 0.0.4
 
   '@esbuild/aix-ppc64@0.25.6':
     optional: true

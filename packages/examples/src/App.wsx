@@ -16,12 +16,13 @@ import styles from "./App.css?inline";
 import "@wsxjs/wsx-base-components";
 import "@wsxjs/wsx-router";
 // Import route-based section components
-import "./HomeSection.wsx";
-import "./FeaturesSection.wsx";
-import "./QuickStartSection.wsx";
-import "./ExamplesSection.wsx";
-import "./EcosystemSection.wsx";
-import "./WsxLogo.wsx";
+import "./components/HomeSection.wsx";
+import "./components/FeaturesSection.wsx";
+import "./components/QuickStartSection.wsx";
+import "./components/ExamplesSection.wsx";
+import "./components/EcosystemSection.wsx";
+import "./components/WsxLogo.wsx";
+import "./editorjs/EditorJSDemo.wsx";
 
 export interface AppConfig {
     title?: string;
@@ -40,7 +41,7 @@ export default class App extends WebComponent {
         });
     }
 
-    render(): HTMLElement {
+    render() {
         return (
             <div class="app-container">
                 {/* Navigation */}
@@ -52,6 +53,7 @@ export default class App extends WebComponent {
                     <wsx-view route="/features" component="features-section"></wsx-view>
                     <wsx-view route="/quick-start" component="quick-start-section"></wsx-view>
                     <wsx-view route="/examples" component="examples-section"></wsx-view>
+                    <wsx-view route="/editorjs" component="editorjs-demo"></wsx-view>
                     <wsx-view route="/ecosystem" component="ecosystem-section"></wsx-view>
                 </wsx-router>
 
@@ -85,6 +87,9 @@ export default class App extends WebComponent {
                         </wsx-link>
                         <wsx-link to="/examples" class="nav-link" active-class="nav-link-active">
                             Examples
+                        </wsx-link>
+                        <wsx-link to="/editorjs" class="nav-link" active-class="nav-link-active">
+                            EditorJS Demo
                         </wsx-link>
                         <wsx-link to="/ecosystem" class="nav-link" active-class="nav-link-active">
                             Ecosystem

@@ -1,0 +1,234 @@
+/** @jsxImportSource @wsxjs/wsx-core */
+import { WebComponent, autoRegister, createLogger } from "@wsxjs/wsx-core";
+import EditorJS from "@editorjs/editorjs";
+import Header from "@editorjs/header";
+import Paragraph from "@editorjs/paragraph";
+import WsxAlertTool from "./WsxAlertTool.wsx";
+import "./WsxAlertComponent.wsx";
+import styles from "./EditorJSDemo.css?inline";
+
+const logger = createLogger("EditorJSDemo");
+
+@autoRegister({ tagName: "editorjs-demo" })
+export default class EditorJSDemo extends WebComponent {
+    private editor?: EditorJS;
+    private editorContainer?: HTMLElement;
+
+    constructor() {
+        super({
+            styles,
+            styleName: "editor-demo",
+        });
+        logger.info("EditorJS Demo initialized");
+    }
+
+    render() {
+        return (
+            <div class="editor-demo-container">
+                <h1 class="demo-title">EditorJS + WSX Framework Demo</h1>
+
+                <div class="benefits-section">
+                    <h2 class="benefits-title">🚀 Why WSX for EditorJS Plugin Development?</h2>
+                    <ul class="benefits-list">
+                        <li>
+                            <strong>Component-based Architecture:</strong> Each tool is a
+                            self-contained Web Component
+                        </li>
+                        <li>
+                            <strong>Type Safety:</strong> Full TypeScript support with JSX
+                        </li>
+                        <li>
+                            <strong>Declarative UI:</strong> Build complex UIs with JSX instead of
+                            manual DOM manipulation
+                        </li>
+                        <li>
+                            <strong>Shadow DOM Isolation:</strong> Styles are automatically scoped
+                        </li>
+                        <li>
+                            <strong>Built-in State Management:</strong> Reactive updates without
+                            external libraries
+                        </li>
+                        <li>
+                            <strong>Developer Experience:</strong> Hot reload, debugging tools, and
+                            clean code structure
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>📦 Custom Block Tool</h3>
+                        <p>
+                            The <code>WsxAlertBlock</code> demonstrates a custom block tool built
+                            with WSX. It features type selection, editable content, and proper data
+                            persistence.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>✏️ Inline Tool</h3>
+                        <p>
+                            The <code>WsxHighlightTool</code> shows how to create inline tools with
+                            WSX. Try selecting text and clicking the highlight button or use{" "}
+                            <kbd>Cmd+Shift+H</kbd>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="editor-container">
+                    <h2 class="editor-title">Try the Editor</h2>
+                    <div
+                        ref={(el: HTMLElement) => {
+                            this.editorContainer = el;
+                        }}
+                        id="editorjs"
+                        class="editor-placeholder"
+                    />
+                </div>
+
+                <div class="editor-actions">
+                    <button onClick={this.saveData} class="btn">
+                        Save Data
+                    </button>
+
+                    <button onClick={this.loadSampleData} class="btn btn-success">
+                        Load Sample Data
+                    </button>
+                </div>
+
+                <pre id="output" class="output-panel" />
+            </div>
+        );
+    }
+
+    protected onConnected() {
+        this.initializeEditor();
+    }
+
+    protected onDisconnected() {
+        if (this.editor) {
+            this.editor.destroy();
+            logger.info("Editor destroyed");
+        }
+    }
+
+    private initializeEditor() {
+        if (!this.editorContainer) return;
+
+        this.editor = new EditorJS({
+            holder: this.editorContainer,
+            tools: {
+                header: {
+                    class: Header,
+                    config: {
+                        levels: [1, 2, 3, 4, 5, 6],
+                        defaultLevel: 2,
+                    },
+                },
+                paragraph: {
+                    class: Paragraph,
+                    inlineToolbar: true,
+                },
+                alert: {
+                    class: WsxAlertTool,
+                    inlineToolbar: false,
+                },
+            },
+            placeholder: "Start typing or click + to add a WSX Alert block...",
+            data: {
+                blocks: [
+                    {
+                        type: "header",
+                        data: {
+                            text: "Welcome to EditorJS with WSX!",
+                            level: 2,
+                        },
+                    },
+                    {
+                        type: "paragraph",
+                        data: {
+                            text: "This editor demonstrates how WSX Framework can enhance EditorJS plugin development with Web Components and JSX.",
+                        },
+                    },
+                    {
+                        type: "alert",
+                        data: {
+                            type: "info",
+                            message:
+                                "This is a custom WSX Alert block. Try changing the type or editing the message!",
+                        },
+                    },
+                ],
+            },
+            onReady: () => {
+                logger.info("Editor.js is ready");
+            },
+            onChange: (api, event) => {
+                logger.debug("Content changed", event);
+            },
+        });
+    }
+
+    private saveData = async () => {
+        if (!this.editor) return;
+
+        try {
+            const outputData = await this.editor.save();
+            const output = this.shadowRoot?.getElementById("output") as HTMLPreElement;
+            if (output) {
+                output.textContent = JSON.stringify(outputData, null, 2);
+                output.classList.add("visible");
+            }
+            logger.info("Data saved", outputData);
+        } catch (error) {
+            logger.error("Saving failed", error);
+        }
+    };
+
+    private loadSampleData = () => {
+        if (!this.editor) return;
+
+        const sampleData = {
+            blocks: [
+                {
+                    type: "header",
+                    data: {
+                        text: "WSX Makes EditorJS Plugin Development Better",
+                        level: 2,
+                    },
+                },
+                {
+                    type: "paragraph",
+                    data: {
+                        text: "With WSX, you can build EditorJS plugins using modern Web Components and JSX syntax. This provides better structure, type safety, and developer experience.",
+                    },
+                },
+                {
+                    type: "alert",
+                    data: {
+                        type: "success",
+                        message:
+                            "Successfully loaded sample data! This alert block is built with WSX.",
+                    },
+                },
+                {
+                    type: "paragraph",
+                    data: {
+                        text: "Try selecting this text and using the highlight tool (Cmd+Shift+H) to see the WSX inline tool in action!",
+                    },
+                },
+                {
+                    type: "alert",
+                    data: {
+                        type: "warning",
+                        message:
+                            "Remember: WSX components are just native Web Components with superpowers!",
+                    },
+                },
+            ],
+        };
+
+        this.editor.render(sampleData);
+        logger.info("Sample data loaded");
+    };
+}
