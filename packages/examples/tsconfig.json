@@ -5,6 +5,11 @@
         "jsx": "react-jsx",
         "jsxImportSource": "@wsxjs/wsx-core"
     },
-    "include": ["src/**/*"],
-    "exclude": ["dist", "**/*.test.*"]
+    "include": [
+        "src/**/*", 
+        "src/global.d.ts",
+        "src/**/*.wsx",
+        "src/**/*.test.ts"
+    ],
+    "exclude": ["dist"]
 }

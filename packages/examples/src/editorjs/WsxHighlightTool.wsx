@@ -1,7 +1,8 @@
 /** @jsxImportSource @wsxjs/wsx-core */
 import { createLogger } from "@wsxjs/wsx-core";
 import type { InlineTool, InlineToolConstructorOptions } from "@editorjs/editorjs";
-import WsxHighlightButton from "./WsxHighlightButton.wsx";
+import "./WsxHighlightButton.wsx";
+import type WsxHighlightButton from "./WsxHighlightButton.wsx";
 const logger = createLogger("WsxHighlightTool");
 
 // Export the inline tool class for EditorJS
@@ -29,14 +30,16 @@ export default class WsxHighlightTool implements InlineTool {
 
     constructor({ api }: InlineToolConstructorOptions) {
         this.api = api;
-        this.button = new WsxHighlightButton();
         logger.info("Highlight tool initialized");
     }
 
     render() {
-        this.button.setClickHandler(() => {
-            this.surround(this.api.selection.range);
-        });
+        this.button = (
+            <wsx-highlight-button
+                onClick={() => this.surround(this.api.selection.range)}
+            ></wsx-highlight-button>
+        ) as unknown as WsxHighlightButton;
+
         return this.button as unknown as HTMLElement;
     }
 

@@ -1,5 +1,6 @@
 // Vitest setup for examples package
 import { vi } from "vitest";
+import "@testing-library/jest-dom/vitest";
 
 // Mock window.customElements if not available
 if (typeof window !== "undefined" && !window.customElements) {

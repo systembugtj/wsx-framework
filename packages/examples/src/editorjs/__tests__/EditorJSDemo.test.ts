@@ -77,7 +77,7 @@ describe("EditorJSDemo Component", () => {
             expect(infoCards.length).toBe(2);
 
             expect(infoCards[0].textContent).toContain("Custom Block Tool");
-            expect(infoCards[0].textContent).toContain("WsxAlertBlock");
+            expect(infoCards[0].textContent).toContain("WsxAlertTool");
 
             expect(infoCards[1].textContent).toContain("Inline Tool");
             expect(infoCards[1].textContent).toContain("WsxHighlightTool");

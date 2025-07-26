@@ -5,6 +5,8 @@ import Header from "@editorjs/header";
 import Paragraph from "@editorjs/paragraph";
 import WsxAlertTool from "./WsxAlertTool.wsx";
 import WsxHighlightTool from "./WsxHighlightTool.wsx";
+import WsxCodeTool from "./WsxCodeTool.wsx";
+import WsxTableTool from "./WsxTableTool.wsx";
 import styles from "./EditorJSDemo.css?inline";
 
 const logger = createLogger("EditorJSDemo");
@@ -80,7 +82,7 @@ export default class EditorJSDemo extends LightComponent {
                     <div class="info-card">
                         <h3>📦 Custom Block Tool</h3>
                         <p>
-                            The <code>WsxAlertBlock</code> demonstrates a custom block tool built
+                            The <code>WsxAlertTool</code> demonstrates a custom block tool built
                             with WSX. It features type selection, editable content, and proper data
                             persistence.
                         </p>
@@ -132,11 +134,17 @@ export default class EditorJSDemo extends LightComponent {
                 },
                 alert: {
                     class: WsxAlertTool,
-                    inlineToolbar: true,
+                },
+                code: {
+                    class: WsxCodeTool,
+                },
+                table: {
+                    class: WsxTableTool,
                 },
                 highlight: WsxHighlightTool,
             },
-            placeholder: "Start typing or click + to add a WSX Alert block...",
+            placeholder:
+                "Start typing or click + to add WSX components - Alert, Code, Table, and more!",
             data: {
                 blocks: [
                     {

@@ -23,5 +23,7 @@
     },
     "[svg]": {
         "editor.defaultFormatter": "jock.svg"
-    }
+    },
+    "typescript.preferences.includePackageJsonAutoImports": "on",
+    "typescript.suggest.autoImports": true
 }

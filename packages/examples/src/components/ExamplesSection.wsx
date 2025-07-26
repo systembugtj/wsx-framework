@@ -92,7 +92,10 @@ export default class ExamplesSection extends WebComponent {
                             </p>
                             <div class="example-demo">
                                 <p style="padding: 20px; text-align: center; color: #666;">
-                                    <a href="#/editorjs" style="color: #3498db; text-decoration: none;">
+                                    <a
+                                        href="#/editorjs"
+                                        style="color: #3498db; text-decoration: none;"
+                                    >
                                         → Visit the EditorJS Demo page to try it out
                                     </a>
                                 </p>

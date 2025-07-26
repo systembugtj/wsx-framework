@@ -21,6 +21,7 @@ export default class WsxAlertTool implements BlockTool {
     private data: AlertData;
     private readOnly: boolean;
     private component: WsxAlertComponent;
+    private wrapper: HTMLElement;
 
     static get toolbox() {
         return {
@@ -40,29 +41,25 @@ export default class WsxAlertTool implements BlockTool {
 
     render() {
         // Create a plain wrapper div for EditorJS
-        const wrapper = document.createElement('div');
-        wrapper.style.display = 'block';
-        
-        // Create and configure the WSX component  
-        this.component = (
-            <wsx-alert-component
-                type={this.data.type}
-                message={this.data.message}
-                readonly={this.readOnly ? "true" : "false"}
-                ontypechange={(e: CustomEvent) => {
-                    this.data.type = e.detail;
-                }}
-                onmessagechange={(e: CustomEvent) => {
-                    this.data.message = e.detail;
-                }}
-            ></wsx-alert-component>
-        ) as WsxAlertComponent;
-        
-        // Append the component to the wrapper
-        wrapper.appendChild(this.component);
-        
-        // Return the plain DOM wrapper for EditorJS
-        return wrapper;
+        this.wrapper = (
+            <div>
+                <wsx-alert-component
+                    type={this.data.type}
+                    message={this.data.message}
+                    readonly={this.readOnly ? "true" : "false"}
+                    ontypechange={(e: CustomEvent) => {
+                        this.data.type = e.detail;
+                    }}
+                    onmessagechange={(e: CustomEvent) => {
+                        this.data.message = e.detail;
+                    }}
+                    ref={(component) => {
+                        this.component = component;
+                    }}
+                ></wsx-alert-component>
+            </div>
+        );
+        return this.wrapper;
     }
 
     save(): AlertData {

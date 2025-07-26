@@ -9,6 +9,9 @@ export default defineConfig({
         environment: "happy-dom",
         setupFiles: ["./test/setup.ts"],
         include: ["src/**/*.test.ts", "src/**/*.test.tsx", "test/**/*.test.ts"],
+        typecheck: {
+            include: ["src/**/*.{ts,tsx,wsx}", "src/types.d.ts"]
+        },
         coverage: {
             provider: "v8",
             reporter: ["text", "json", "html"],
