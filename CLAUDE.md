@@ -36,7 +36,7 @@ wsx-framework/
 │   │       ├── index.ts              # Main export
 │   │       └── vite-plugin-wsx.ts    # Vite plugin implementation
 │   │
-│   ├── eslint-plugin/           # @wsxjs/wsx-eslint-plugin
+│   ├── eslint-plugin/           # @wsxjs/eslint-plugin-wsx
 │   │   └── src/
 │   │       ├── index.ts              # Main export
 │   │       ├── rules/                # ESLint rules for WSX
@@ -99,7 +99,7 @@ Vite integration that:
 - **Professional test suite**: Unit tests and integration tests with Vite build scenarios
 - **Comprehensive coverage**: Tests transformation, error handling, HMR, and performance
 
-### @wsxjs/wsx-eslint-plugin
+### @wsxjs/eslint-plugin-wsx
 ESLint rules specifically for WSX development:
 - **render-method-required**: Ensures WSX components implement required render() method
 - **no-react-imports**: Prevents React imports in WSX files (framework uses its own JSX)
@@ -153,9 +153,9 @@ pnpm --filter @wsxjs/wsx-core build
 pnpm --filter @wsxjs/wsx-examples dev
 
 # ESLint Plugin Testing
-pnpm --filter @wsxjs/wsx-eslint-plugin test           # Run 38 tests
-pnpm --filter @wsxjs/wsx-eslint-plugin test:coverage  # 100% coverage report
-pnpm --filter @wsxjs/wsx-eslint-plugin test:watch     # Development mode
+pnpm --filter @wsxjs/eslint-plugin-wsx test           # Run 38 tests
+pnpm --filter @wsxjs/eslint-plugin-wsx test:coverage  # 100% coverage report
+pnpm --filter @wsxjs/eslint-plugin-wsx test:watch     # Development mode
 
 # Vite Plugin Testing
 pnpm --filter @wsxjs/wsx-vite-plugin test             # Run plugin tests
@@ -344,7 +344,7 @@ Each package builds to a `dist/` directory with:
 Packages are scoped under `@wsxjs`:
 - `@wsxjs/wsx-core`
 - `@wsxjs/wsx-vite-plugin`
-- `@wsxjs/wsx-eslint-plugin`
+- `@wsxjs/eslint-plugin-wsx`
 - `@wsxjs/wsx-base-components`
 
 ### CI/CD Pipeline
@@ -444,8 +444,8 @@ packages/eslint-plugin/
 ### Development Commands
 ```bash
 # ESLint Plugin Test Development
-pnpm --filter @wsxjs/wsx-eslint-plugin test:watch
-pnpm --filter @wsxjs/wsx-eslint-plugin test:coverage
+pnpm --filter @wsxjs/eslint-plugin-wsx test:watch
+pnpm --filter @wsxjs/eslint-plugin-wsx test:coverage
 
 # Vite Plugin Test Development  
 pnpm --filter @wsxjs/wsx-vite-plugin test:watch

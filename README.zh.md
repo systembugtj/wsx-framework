@@ -102,9 +102,9 @@ WSX 提供必要的工具，让 Web Components 开发现代化且愉快：
 
 用于 .wsx 文件的 Vite 集成（自动注入 JSX 工厂）
 
-#### @wsxjs/wsx-eslint-plugin
-[![npm version](https://badge.fury.io/js/@wsxjs%2Fwsx-eslint-plugin.svg)](https://badge.fury.io/js/@wsxjs%2Fwsx-eslint-plugin)
-[![npm downloads](https://img.shields.io/npm/dm/@wsxjs/wsx-eslint-plugin.svg)](https://www.npmjs.com/package/@wsxjs/wsx-eslint-plugin)
+#### @wsxjs/eslint-plugin-wsx
+[![npm version](https://badge.fury.io/js/@wsxjs%2Feslint-plugin-wsx.svg)](https://badge.fury.io/js/@wsxjs%2Feslint-plugin-wsx)
+[![npm downloads](https://img.shields.io/npm/dm/@wsxjs/eslint-plugin-wsx.svg)](https://www.npmjs.com/package/@wsxjs/eslint-plugin-wsx)
 [![eslint compatibility](https://img.shields.io/badge/eslint-%3E%3D8.0.0-orange.svg)](https://eslint.org/)
 
 WSX 组件的 ESLint 规则
@@ -456,7 +456,7 @@ npm install @wsxjs/wsx-core
 # 根据需要安装其他包
 npm install @wsxjs/wsx-base-components
 npm install @wsxjs/wsx-vite-plugin
-npm install @wsxjs/wsx-eslint-plugin
+npm install @wsxjs/eslint-plugin-wsx
 ```
 
 ## 贡献
@@ -491,7 +491,7 @@ MIT
 
 - 核心：`npm install @wsxjs/wsx-core`
 - Vite 插件：`npm install @wsxjs/wsx-vite-plugin` 
-- ESLint 插件：`npm install @wsxjs/wsx-eslint-plugin`
+- ESLint 插件：`npm install @wsxjs/eslint-plugin-wsx`
 - 组件：`npm install @wsxjs/wsx-base-components`
 
 ## 链接

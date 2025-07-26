@@ -9,7 +9,7 @@ wsx-framework/
 ├── packages/
 │   ├── core/                    # @wsxjs/wsx-core
 │   ├── vite-plugin/             # @wsxjs/wsx-vite-plugin  
-│   ├── eslint-plugin/           # @wsxjs/wsx-eslint-plugin
+│   ├── eslint-plugin/           # @wsxjs/eslint-plugin-wsx
 │   ├── components/              # @wsxjs/wsx-components
 │   └── examples/                # @wsxjs/wsx-examples (private)
 ```
@@ -311,7 +311,7 @@ PR Requirements for main:
 Each package should have its own badges:
 - **@wsxjs/wsx-core**: Version, downloads, size
 - **@wsxjs/wsx-vite-plugin**: Version, downloads, vite compatibility
-- **@wsxjs/wsx-eslint-plugin**: Version, downloads, eslint compatibility
+- **@wsxjs/eslint-plugin-wsx**: Version, downloads, eslint compatibility
 - **@wsxjs/wsx-components**: Version, downloads, bundle size
 
 ## Success Metrics

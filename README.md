@@ -112,9 +112,9 @@ Core framework with WebComponent base class, JSX factory, logger, and utilities
 
 Vite integration for .wsx files (auto-injects JSX factory)
 
-#### @wsxjs/wsx-eslint-plugin
-[![npm version](https://badge.fury.io/js/@wsxjs%2Fwsx-eslint-plugin.svg)](https://badge.fury.io/js/@wsxjs%2Fwsx-eslint-plugin)
-[![npm downloads](https://img.shields.io/npm/dm/@wsxjs/wsx-eslint-plugin.svg)](https://www.npmjs.com/package/@wsxjs/wsx-eslint-plugin)
+#### @wsxjs/eslint-plugin-wsx
+[![npm version](https://badge.fury.io/js/@wsxjs%2Feslint-plugin-wsx.svg)](https://badge.fury.io/js/@wsxjs%2Feslint-plugin-wsx)
+[![npm downloads](https://img.shields.io/npm/dm/@wsxjs/eslint-plugin-wsx.svg)](https://www.npmjs.com/package/@wsxjs/eslint-plugin-wsx)
 [![eslint compatibility](https://img.shields.io/badge/eslint-%3E%3D8.0.0-orange.svg)](https://eslint.org/)
 
 ESLint rules for WSX components
@@ -468,7 +468,7 @@ npm install @wsxjs/wsx-core
 # Install additional packages as needed
 npm install @wsxjs/wsx-base-components
 npm install @wsxjs/wsx-vite-plugin
-npm install @wsxjs/wsx-eslint-plugin
+npm install @wsxjs/eslint-plugin-wsx
 ```
 
 ## Contributing
@@ -503,7 +503,7 @@ All packages are published under the `@wsxjs` npm organization:
 
 - Core: `npm install @wsxjs/wsx-core`
 - Vite Plugin: `npm install @wsxjs/wsx-vite-plugin` 
-- ESLint Plugin: `npm install @wsxjs/wsx-eslint-plugin`
+- ESLint Plugin: `npm install @wsxjs/eslint-plugin-wsx`
 - Components: `npm install @wsxjs/wsx-base-components`
 
 ## Links

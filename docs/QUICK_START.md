@@ -3,7 +3,7 @@
 ## 安装
 
 ```bash
-npm install @wsxjs/wsx-core @wsxjs/wsx-vite-plugin @wsxjs/wsx-eslint-plugin
+npm install @wsxjs/wsx-core @wsxjs/wsx-vite-plugin @wsxjs/eslint-plugin-wsx
 ```
 
 ## 配置
@@ -39,7 +39,7 @@ export default defineConfig({
 在 `eslint.config.js` 中添加：
 
 ```javascript
-import wsxPlugin from '@wsxjs/wsx-eslint-plugin';
+import wsxPlugin from '@wsxjs/eslint-plugin-wsx';
 
 export default [
   {
