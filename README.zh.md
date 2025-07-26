@@ -3,7 +3,7 @@
 [![npm version](https://badge.fury.io/js/@wsxjs%2Fwsx-core.svg)](https://badge.fury.io/js/@wsxjs%2Fwsx-core)
 [![npm downloads](https://img.shields.io/npm/dm/@wsxjs/wsx-core.svg)](https://www.npmjs.com/package/@wsxjs/wsx-core)
 [![CI Status](https://github.com/wsxjs/wsxjs/workflows/CI/badge.svg)](https://github.com/wsxjs/wsxjs/actions)
-[![Coverage Status](https://codecov.io/gh/systembugtj/wsx-framework/branch/main/graph/badge.svg)](https://codecov.io/gh/systembugtj/wsx-framework)
+[![Coverage Status](https://codecov.io/gh/wsxjs/wsxjs/branch/main/graph/badge.svg)](https://codecov.io/gh/wsxjs/wsxjs)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 **原生 Web Components 的 JSX 语法糖 - 不是框架，只是更好的开发体验。**
@@ -498,7 +498,7 @@ MIT
 
 - **仓库**：https://github.com/wsxjs/wsxjs
 - **Issues**：https://github.com/wsxjs/wsxjs/issues
-- **NPM 组织**：https://www.npmjs.com/org/systembug
+- **NPM 组织**：https://www.npmjs.com/org/wsxjs
 
 ## 致谢
 

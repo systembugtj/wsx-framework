@@ -3,14 +3,14 @@
 [![npm version](https://badge.fury.io/js/@wsxjs%2Fwsx-core.svg)](https://badge.fury.io/js/@wsxjs%2Fwsx-core)
 [![npm downloads](https://img.shields.io/npm/dm/@wsxjs/wsx-core.svg)](https://www.npmjs.com/package/@wsxjs/wsx-core)
 [![CI Status](https://github.com/wsxjs/wsxjs/workflows/CI/badge.svg)](https://github.com/wsxjs/wsxjs/actions)
-[![Coverage Status](https://codecov.io/gh/systembugtj/wsx-framework/branch/main/graph/badge.svg)](https://codecov.io/gh/systembugtj/wsx-framework)
+[![Coverage Status](https://codecov.io/gh/wsxjs/wsxjs/branch/main/graph/badge.svg)](https://codecov.io/gh/wsxjs/wsxjs)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 **JSX syntax sugar for native Web Components - Not a framework, just better developer experience.**
 
 ## 🚀 Live Demo
 
-**[View Examples on GitHub Pages →](https://systembugtj.github.io/wsx-framework/)**
+**[View Examples on GitHub Pages →](https://www.wsxjs.dev/)**
 
 Experience WSX Framework in action with our interactive examples showcasing:
 - Zero-dependency Web Components with JSX syntax
@@ -510,7 +510,7 @@ All packages are published under the `@wsxjs` npm organization:
 
 - **Repository**: https://github.com/wsxjs/wsxjs
 - **Issues**: https://github.com/wsxjs/wsxjs/issues
-- **NPM Organization**: https://www.npmjs.com/org/systembug
+- **NPM Organization**: https://www.npmjs.com/org/wsxjs
 
 ## Credits
 

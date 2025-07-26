@@ -131,7 +131,7 @@ feature/xyz → develop → main → NPM Release
 ## 🚀 Next Steps
 
 ### 1. Repository Setup
-- ✅ GitHub repository: `systembugtj/wsx-framework`
+- ✅ GitHub repository: `wsxjs/wsxjs`
 - Add NPM_TOKEN secret
 - Configure branch protection rules
 
