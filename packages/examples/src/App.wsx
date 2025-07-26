@@ -22,7 +22,6 @@ import "./components/QuickStartSection.wsx";
 import "./components/ExamplesSection.wsx";
 import "./components/EcosystemSection.wsx";
 import "./components/WsxLogo.wsx";
-import "./editorjs/EditorJSDemo.wsx";
 
 export interface AppConfig {
     title?: string;
@@ -46,7 +45,6 @@ export default class App extends LightComponent {
             <div class="app-container">
                 {/* Navigation */}
                 {this.renderNavigation()}
-                <editorjs-demo></editorjs-demo>
                 {/* Router Container */}
                 <wsx-router>
                     <wsx-view route="/" component="home-section"></wsx-view>

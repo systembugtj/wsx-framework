@@ -1,5 +1,5 @@
 /** @jsxImportSource @wsxjs/wsx-core */
-import { WebComponent, autoRegister, createLogger } from "@wsxjs/wsx-core";
+import { LightComponent, autoRegister, createLogger } from "@wsxjs/wsx-core";
 import styles from "./WsxRouter.css?inline";
 
 const logger = createLogger("WsxRouter");
@@ -23,18 +23,21 @@ const logger = createLogger("WsxRouter");
  * ```
  */
 @autoRegister({ tagName: "wsx-router" })
-export default class WsxRouter extends WebComponent {
+export default class WsxRouter extends LightComponent {
     private views: Map<string, HTMLElement> = new Map();
     private currentView: HTMLElement | null = null;
 
     constructor() {
-        super({ styles });
+        super({
+            styles,
+            styleName: "wsx-router",
+        });
     }
 
     render() {
         return (
             <div class="router-outlet">
-                <slot></slot>
+                {/* In Light DOM, slot is just a placeholder - content is accessed via this.children */}
             </div>
         );
     }
@@ -61,18 +64,10 @@ export default class WsxRouter extends WebComponent {
     }
 
     private collectViews() {
-        // Get the slot element
-        const slot = this.shadowRoot?.querySelector("slot");
-        if (!slot) {
-            logger.error("WsxRouter: No slot found");
-            return;
-        }
-
-        // Get slotted elements (light DOM children)
-        const slottedElements = slot.assignedElements();
-
-        // Filter for wsx-view elements
-        const views = slottedElements.filter((el) => el.tagName.toLowerCase() === "wsx-view");
+        // In Light DOM, directly access child elements
+        const views = Array.from(this.children).filter(
+            (el) => el.tagName.toLowerCase() === "wsx-view"
+        );
         logger.debug("WsxRouter found views:", views.length);
 
         views.forEach((view) => {

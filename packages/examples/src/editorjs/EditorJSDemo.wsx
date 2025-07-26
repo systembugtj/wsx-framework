@@ -28,6 +28,26 @@ export default class EditorJSDemo extends LightComponent {
             <div class="editor-demo-container">
                 <h1 class="demo-title">EditorJS + WSX Framework Demo</h1>
 
+                <div class="editor-container">
+                    <h2 class="editor-title">Try the Editor</h2>
+                    <div
+                        ref={(el: HTMLElement) => {
+                            this.editorContainer = el;
+                        }}
+                        id="editorjs"
+                        class="editor-placeholder"
+                    />
+
+                    <div class="editor-actions">
+                        <button onClick={this.saveData} class="btn">
+                            Save Data
+                        </button>
+
+                        <button onClick={this.loadSampleData} class="btn btn-success">
+                            Load Sample Data
+                        </button>
+                    </div>
+                </div>
                 <div class="benefits-section">
                     <h2 class="benefits-title">🚀 Why WSX for EditorJS Plugin Development?</h2>
                     <ul class="benefits-list">
@@ -54,26 +74,6 @@ export default class EditorJSDemo extends LightComponent {
                             clean code structure
                         </li>
                     </ul>
-                </div>
-                <div class="editor-container">
-                    <h2 class="editor-title">Try the Editor</h2>
-                    <div
-                        ref={(el: HTMLElement) => {
-                            this.editorContainer = el;
-                        }}
-                        id="editorjs"
-                        class="editor-placeholder"
-                    />
-                </div>
-
-                <div class="editor-actions">
-                    <button onClick={this.saveData} class="btn">
-                        Save Data
-                    </button>
-
-                    <button onClick={this.loadSampleData} class="btn btn-success">
-                        Load Sample Data
-                    </button>
                 </div>
 
                 <div class="info-grid">

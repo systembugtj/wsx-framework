@@ -1,6 +1,6 @@
 # RFC 0006: Light DOM Components in WSX Framework
 
-- **Status**: Draft
+- **Status**: Implemented
 - **Type**: Feature
 - **Start Date**: 2025-01-26
 - **Author**: WSX Team  

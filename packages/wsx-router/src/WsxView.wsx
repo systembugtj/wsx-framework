@@ -1,5 +1,5 @@
 /** @jsxImportSource @wsxjs/wsx-core */
-import { WebComponent, autoRegister, createLogger } from "@wsxjs/wsx-core";
+import { LightComponent, autoRegister, createLogger } from "@wsxjs/wsx-core";
 import styles from "./WsxView.css?inline";
 
 const logger = createLogger("WsxView");
@@ -18,7 +18,7 @@ const logger = createLogger("WsxView");
  * ```
  */
 @autoRegister({ tagName: "wsx-view" })
-export default class WsxView extends WebComponent {
+export default class WsxView extends LightComponent {
     static observedAttributes = ["route", "component", "params"];
 
     private component: string | null = null;
@@ -33,7 +33,11 @@ export default class WsxView extends WebComponent {
     }
 
     render() {
-        return <div class="route-view" part="view"></div>;
+        return (
+            <div class="route-view">
+                {/* Light DOM container for dynamically loaded components */}
+            </div>
+        );
     }
 
     protected onConnected() {
@@ -84,7 +88,7 @@ export default class WsxView extends WebComponent {
             });
         }
 
-        const container = this.shadowRoot?.querySelector(".route-view");
+        const container = this.querySelector(".route-view");
         if (container) {
             container.appendChild(this.componentInstance);
         } else {
