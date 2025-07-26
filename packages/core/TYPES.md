@@ -81,7 +81,7 @@ import {
     autoRegister,
     h,
     Fragment 
-} from "@systembug/wsx-core";
+} from "@wsxjs/wsx-core";
 
 @autoRegister({ tagName: "my-component" })
 class MyComponent extends WebComponent {

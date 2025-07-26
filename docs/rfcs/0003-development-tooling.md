@@ -217,7 +217,7 @@ export class WSXLanguageServer {
 
 ```bash
 # CLI工具使用
-npm install -g @systembug/wsx-cli
+npm install -g @wsxjs/wsx-cli
 
 # 创建新项目
 wsx create my-app --template=minimal

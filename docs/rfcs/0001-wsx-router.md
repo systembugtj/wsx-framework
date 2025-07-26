@@ -83,7 +83,7 @@ WSX needs a routing solution that:
 
 #### Programmatic API
 ```typescript
-import { RouterUtils } from '@systembug/wsx-router';
+import { RouterUtils } from '@wsxjs/wsx-router';
 
 // Navigate
 RouterUtils.navigate('/users/123');

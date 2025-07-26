@@ -1,4 +1,4 @@
-# @systembug/wsx-eslint-plugin
+# @wsxjs/wsx-eslint-plugin
 
 ESLint plugin for WSX Framework - enforces best practices and framework-specific rules for Web Components with JSX.
 

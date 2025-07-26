@@ -1,4 +1,4 @@
-# @systembug/wsx-core
+# @wsxjs/wsx-core
 
 ## 0.0.5
 
